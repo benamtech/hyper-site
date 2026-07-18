@@ -56,21 +56,63 @@ consumer
 
 This is functioning prototype behavior. It is not proof of independent package ownership, a polished developer workflow, page usefulness, framework advantage, or production readiness.
 
-## Portable compiler test
+## Official Manjaro external verification
 
-From any Unix-like machine with internet access, Git, Node.js 20+, and npm:
+Requirements: Manjaro or another Arch-derived system with Bash and `pacman`, plus internet access.
+
+Run directly in an XFCE terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/clone-and-test-hyper.sh | bash
+bash <(curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh)
 ```
 
-The script clones the branch, records the exact commit, installs locked dependencies, builds, runs repository tests, generates unique arbitrary structured data, compiles twice, independently verifies hashes and dependencies, runs ten rejection cases, and writes all artifacts to a local report directory.
+The default mode does not modify system packages. When a required package is missing, it prints the exact safe installation command. To explicitly allow dependency installation through a full Manjaro/Arch sync:
 
-Configure the generated workload:
+```bash
+HYPER_INSTALL_DEPS=1 \
+bash <(curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh)
+```
+
+Configure the workload and destination:
 
 ```bash
 HYPER_TEST_PAGES=500 \
-HYPER_TEST_SEED=my-unique-run \
+HYPER_TEST_SEED="manjaro-limit-$(date +%s)" \
+bash <(curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh) \
+  "$HOME/hyper-site-tests/manual-500"
+```
+
+The runner:
+
+- prints live repository, branch, PR and raw-file URLs;
+- verifies the remote branch head before cloning;
+- clones only `agent/glm-blackwell-vertical-slice`;
+- verifies the local commit matches the remote branch head;
+- installs locked npm dependencies;
+- builds and runs the complete repository test suite;
+- runs validation-baseline tests;
+- generates unique arbitrary structured site data;
+- compiles the same input twice;
+- independently verifies page and build hashes;
+- verifies dependency-index, escaping, sitemap and instruction behavior;
+- runs ten invalid-input rejection cases;
+- retains HTML and machine-readable reports.
+
+Official script:
+
+```text
+scripts/manjaro-clone-and-test-hyper.sh
+```
+
+Canonical randomized harness:
+
+```text
+scripts/run-compiler-limit-test-v2.mjs
+```
+
+Cross-platform Unix-like fallback:
+
+```bash
 curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/clone-and-test-hyper.sh | bash
 ```
 
@@ -154,8 +196,10 @@ Synthetic throughput, deterministic hashes, graph metrics, schema validity, and 
 - architecture: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
 - execution plan: `docs/planning/38-four-part-product-workstream-map.md`
 - validation: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+- validation-first baseline: `docs/validation/39-w1-w3-validation-first-execution.md`
 - portable test: `docs/validation/40-portable-compiler-limit-test.md`
 - internal-link research: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`
+- critical claim research: `docs/research/42-critical-compiler-network-and-llm-claims.md`
 - durable state: `memory/MEMORY.md`
 
 ## Governed task surfaces
