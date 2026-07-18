@@ -76,9 +76,17 @@ A downstream contradiction must flow backward. Failed validation updates the pla
 - Research and split rationale: `docs/architecture/29-product-boundary-research-and-root-folder-split.md`
 - Current reality-grounded research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
 - Accepted integration boundary: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- Active three-workstream plan: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- Active four-workstream plan: `docs/planning/38-four-part-product-workstream-map.md`
 - Validation contract: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+- Validation-first W1-W3 baseline: `docs/validation/39-w1-w3-validation-first-execution.md`
+- Official portable compiler test: `docs/validation/40-portable-compiler-limit-test.md`
 - Executable program: `planning/meta-plan-v3.json`, `planning/meta-plan-v3.steps.json`
+
+### Critical research controls
+
+- SDRT and internal-linking disposition: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`
+- Compiler, network and LLM claim dispositions: `docs/research/42-critical-compiler-network-and-llm-claims.md`
+- Advanced graph, vector or discourse methods remain experimental until they beat named simpler controls on held-out decisions.
 
 ### Governed task surfaces
 
@@ -93,14 +101,37 @@ A downstream contradiction must flow backward. Failed validation updates the pla
 - Research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
 - Sources: `docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json`
 - Architecture disposition: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- Plan: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- Plan: `docs/planning/38-four-part-product-workstream-map.md`
 - Validation: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+
+## Official external verification paths
+
+The official Manjaro/Arch verification entrypoint is:
+
+```text
+scripts/manjaro-clone-and-test-hyper.sh
+```
+
+Live branch-specific raw URL:
+
+```text
+https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh
+```
+
+The cross-platform Unix-like wrapper remains:
+
+```text
+scripts/clone-and-test-hyper.sh
+```
+
+Both wrappers must clone the named branch, record the exact remote and local commit, use the actual public compiler entrypoint, run repository tests, run the canonical randomized harness, and retain machine-readable output. A successful generated fixture proves behavior only for that commit, machine and fixture.
 
 ## Current implementation truth
 
 - `hyper-content/src/content-program-adapter.ts` is the first physically owned Hyper Content implementation.
 - `reference/src/content-program-adapter.ts` is a temporary legacy manifest/parity wrapper.
-- Most canonical Hyper Site and Hyper Content implementation still resides under `reference/src` pending P1.4 and P1.5.
+- Most canonical Hyper Site and Hyper Content implementation still resides under `reference/src` pending W1 extraction.
+- `hyper-site/index.mjs` still delegates current compiler behavior to `reference/dist/framework-core.js`.
 - Folder names and facades are not proof of complete extraction.
 - PR #3 remains draft and unmerged.
 
@@ -116,6 +147,8 @@ A downstream contradiction must flow backward. Failed validation updates the pla
 8. Advanced methods require a named simple control and removal path.
 9. Enterprise comparisons must include governance and operating gaps, not only features.
 10. Every active plan must terminate in measurable validation and durable memory.
+11. An external verification script must expose the exact repository, branch, commit, harness and output path.
+12. A wrapper may install dependencies only through an explicit opt-in; Manjaro/Arch installation uses a full `pacman -Syu` transaction rather than a partial upgrade.
 
 ## Agent read order
 
@@ -143,13 +176,13 @@ Before writing:
 
 After writing:
 
-- update `docs/catalog.json`;
+- update `docs/catalog.json` or record an explicit catalog-reconciliation blocker;
 - run `node scripts/check-doc-system.mjs`;
 - update executable plans when dependencies or gates change;
 - run relevant source and package tests;
 - produce a measured report only for completed checks;
 - append an immutable handoff for a coherent validated pass;
-- reconcile `memory/MEMORY.md` and the draft PR body.
+- reconcile `memory/MEMORY.md`, root README and the draft PR body.
 
 ## Documentation freshness rules
 
@@ -171,4 +204,5 @@ The documentation gate verifies or should be extended to verify:
 - active-source registry existence;
 - current implementation-path assertions;
 - explicit controls for advanced methods;
+- exact external verification entrypoints;
 - current PR maturity nonclaims.
