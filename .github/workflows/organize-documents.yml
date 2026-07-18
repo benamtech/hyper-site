@@ -11,7 +11,6 @@ on:
       - "scripts/ensure-doc-index-links.mjs"
       - "scripts/check-doc-system.mjs"
       - "docs/test/doc-system.test.mjs"
-      - "docs/catalog.json"
 
 permissions:
   contents: write
@@ -22,7 +21,6 @@ concurrency:
 
 jobs:
   organize:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
