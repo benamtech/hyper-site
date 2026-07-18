@@ -16,7 +16,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@amtech/hyper-site": "0.1.0"
+    "@amtech/hyper-site": "file:../hyper-site"
   },
   "devDependencies": {
     "typescript": "5.8.3"
