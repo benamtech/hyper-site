@@ -10,7 +10,7 @@ export interface HyperKernelExports {
 export interface HyperKernel {
   dot(left: Float32Array, right: Float32Array, simd?: boolean): number;
   normalize(values: Float32Array): Float32Array;
-  weightedAdd(output: Float32Array, input: Float32Array, weight: number, length?: number): Float32Array;
+  weightedAdd(output: Float32Array, input: Float32Array, weight: number): Float32Array;
   facilityMarginal(weights: Float32Array, best: Float32Array, candidate: Float32Array): number;
 }
 
