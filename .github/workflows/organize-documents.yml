@@ -51,13 +51,29 @@ jobs:
           node scripts/normalize-doc-paths.mjs >/tmp/normalize-result.json
           node scripts/ensure-doc-index-links.mjs >/tmp/link-result.json
       - name: Validate documentation system
-        run: node scripts/check-doc-system.mjs
+        id: validate_docs
+        continue-on-error: true
+        run: node scripts/check-doc-system.mjs > /tmp/doc-validation.json 2>&1
+      - name: Upload document validation failure
+        if: steps.validate_docs.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: document-validation-failure
+          path: /tmp/doc-validation.json
+          if-no-files-found: error
+      - name: Enforce documentation validation
+        if: steps.validate_docs.outcome == 'failure'
+        run: |
+          cat /tmp/doc-validation.json
+          exit 1
       - name: Validate executable plan
+        if: steps.validate_docs.outcome == 'success'
         run: |
           node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
           node --test planning/test/meta-plan.test.mjs docs/test/doc-system.test.mjs
           git diff --check
       - name: Commit organized documentation
+        if: steps.validate_docs.outcome == 'success'
         run: |
           if git diff --quiet && git diff --cached --quiet; then
             echo "No document migration changes remain."
