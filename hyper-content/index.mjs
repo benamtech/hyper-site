@@ -4,7 +4,10 @@
 
 export * from "../hyper-site/index.mjs";
 export { compileSite, compileSite as compileContentSite, packSite } from "../reference/dist/framework.js";
-export * from "../reference/dist/content-program-adapter.js";
+export {
+  adaptContentProgramSiteSource,
+  compileContentProgramManifest,
+} from "../reference/dist/content-program-adapter.js";
 
 export * from "../reference/dist/benchmark.js";
 export * from "../reference/dist/optimizer.js";
