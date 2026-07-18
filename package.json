@@ -1,0 +1,17 @@
+{
+  "name": "@amtech/hyper-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "hyper-site",
+    "hyper-content"
+  ],
+  "scripts": {
+    "legacy:build": "npm --prefix reference run build",
+    "legacy:test": "npm --prefix reference test",
+    "check:boundaries": "node scripts/check-product-boundaries.mjs",
+    "build": "npm run legacy:build && npm run check:boundaries",
+    "test": "npm run build && npm run legacy:test && node --test hyper-site/test/*.test.mjs hyper-content/test/*.test.mjs"
+  }
+}
