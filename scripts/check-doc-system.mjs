@@ -13,32 +13,22 @@ const ALLOWED_KINDS = new Set([
   "memory-index",
   "memory-handoff"
 ]);
+
 const REQUIRED_ROOT_MARKDOWN = ["README.md", "AGENTS.md", "CODEGRAPH.md", "CONTRIBUTING.md", "identity.md"];
-const MOVED_ROOT_DOCUMENTS = [
-  "24-agent-discovered-ontology-and-10k-site-program.md",
-  "25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md",
-  "26-graph-learning-paper-triage-and-promotion-gates.md",
-  "27-near-alpha-framework-validation-and-continuous-agent-workspace.md",
-  "28-agent-first-web-framework-and-llm-backend.md",
-  "29-product-boundary-research-and-root-folder-split.md",
-  "30-meta-plan-v3-executable-program.md"
-];
 const REQUIRED_DOCUMENT_IDS = [
   "docs-system",
-  "architecture-product-boundary",
-  "planning-meta-plan-v3",
-  "intake-task-surfaces",
-  "research-task-surfaces",
-  "architecture-task-surfaces",
-  "validation-task-surfaces",
+  "research-useful-framework",
+  "architecture-useful-framework",
+  "planning-useful-framework",
+  "validation-useful-framework",
   "memory-index"
 ];
-const REQUIRED_PLAN_IDS = {
-  workstreams: ["W7"],
-  researchHypotheses: ["H5", "H6"],
-  planOutcomes: ["O5"]
-};
-const REQUIRED_STEP_IDS = ["P1.6", "P2.5", "P3.4"];
+const REQUIRED_AUTHORITY_PATHS = [
+  "docs/research/43-useful-framework-and-agent-first-pipeline-audit.md",
+  "docs/architecture/44-useful-framework-and-agent-first-target-architecture.md",
+  "docs/planning/45-depth-first-framework-and-agent-recovery-plan.md",
+  "docs/validation/46-useful-framework-and-agent-first-gates.md"
+];
 const TEXT_EXTENSIONS = new Set([".md", ".json", ".mjs", ".ts", ".yml", ".yaml"]);
 const IGNORED_DIRECTORIES = new Set([".git", "node_modules", "dist", "coverage", ".cache"]);
 
@@ -91,14 +81,6 @@ export function validateCatalogShape(catalog) {
   return errors;
 }
 
-function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function staleReferencePattern(filename) {
-  return new RegExp(`(^|[\\s('"\\x60])${escapeRegex(filename)}(?=$|[\\s)'"\\x60,:])`, "m");
-}
-
 export async function validateDocumentationSystem(root) {
   const errors = [];
   const catalogPath = resolve(root, "docs/catalog.json");
@@ -119,15 +101,12 @@ export async function validateDocumentationSystem(root) {
     errors.push(`root Markdown must be exactly ${expectedRoot.join(", ")}; received ${rootMarkdown.join(", ")}`);
   }
   const catalogRoot = [...(catalog.rootAllowlist ?? [])].sort();
-  if (JSON.stringify(catalogRoot) !== JSON.stringify(expectedRoot)) errors.push("catalog.rootAllowlist does not match the enforced root Markdown allowlist");
-
-  for (const filename of MOVED_ROOT_DOCUMENTS) {
-    if (await exists(resolve(root, filename))) errors.push(`moved document still exists at root: ${filename}`);
-  }
+  if (JSON.stringify(catalogRoot) !== JSON.stringify(expectedRoot)) errors.push("catalog.rootAllowlist does not match the root Markdown allowlist");
 
   for (const document of catalog.documents ?? []) {
     if (typeof document?.path === "string" && !(await exists(resolve(root, document.path)))) errors.push(`catalog path does not exist: ${document.path}`);
   }
+  for (const path of REQUIRED_AUTHORITY_PATHS) if (!(await exists(resolve(root, path)))) errors.push(`current authority path is missing: ${path}`);
 
   const requiredBootstrapLinks = ["README.md", "AGENTS.md", "CONTRIBUTING.md"];
   let linkedBootstrapCount = 0;
@@ -137,33 +116,27 @@ export async function validateDocumentationSystem(root) {
   }
   if (linkedBootstrapCount < 2) errors.push("at least two bootstrap documents must link to docs/README.md");
 
-  const sourceRegistryPath = resolve(root, "docs/research/sources/2026-07-18-task-surfaces.sources.json");
-  try {
-    const registry = JSON.parse(await readFile(sourceRegistryPath, "utf8"));
-    if (!Array.isArray(registry.sources) || registry.sources.length < 10) errors.push("task-surface source registry requires at least ten sources");
-    const sourceIds = new Set();
-    for (const source of registry.sources ?? []) {
-      if (!source?.id) errors.push("source registry contains source without id");
-      else if (sourceIds.has(source.id)) errors.push(`source registry duplicates id ${source.id}`);
-      else sourceIds.add(source.id);
-      if (!source?.class || !source?.status) errors.push(`source ${source?.id ?? "<missing>"} requires class and status`);
-    }
-  } catch (error) {
-    errors.push(`cannot parse task-surface source registry: ${error instanceof Error ? error.message : String(error)}`);
+  const sourceRegistry = JSON.parse(await readFile(resolve(root, "docs/research/sources/2026-07-18-framework-agent-architecture.sources.json"), "utf8"));
+  if (!Array.isArray(sourceRegistry.sources) || sourceRegistry.sources.length < 5) errors.push("useful-framework source registry requires at least five official or primary sources");
+  const sourceIds = new Set();
+  for (const source of sourceRegistry.sources ?? []) {
+    if (!source?.id) errors.push("source registry contains source without id");
+    else if (sourceIds.has(source.id)) errors.push(`source registry duplicates id ${source.id}`);
+    else sourceIds.add(source.id);
+    if (!source?.type || !source?.url || !Array.isArray(source?.supports)) errors.push(`source ${source?.id ?? "<missing>"} requires type, url and supports`);
   }
 
-  const plan = JSON.parse(await readFile(resolve(root, "planning/meta-plan-v3.json"), "utf8"));
-  const steps = JSON.parse(await readFile(resolve(root, "planning/meta-plan-v3.steps.json"), "utf8"));
-  for (const [field, ids] of Object.entries(REQUIRED_PLAN_IDS)) {
-    const present = new Set((plan[field] ?? []).map((item) => item.id));
-    for (const id of ids) if (!present.has(id)) errors.push(`plan.${field} missing ${id}`);
+  const bootstrapTexts = await Promise.all(["README.md", "AGENTS.md", "CODEGRAPH.md", "identity.md", "docs/README.md", "memory/MEMORY.md"].map(async (path) => [path, await readFile(resolve(root, path), "utf8")]));
+  for (const [path, text] of bootstrapTexts) {
+    for (const required of ["U1", "U2", "U3", "U4", "U5"]) if (!text.includes(required)) errors.push(`${path} does not mention current gate ${required}`);
+    if (text.includes("R0 truth reconciliation") || text.includes("R5 durable agent wrapper") || text.includes("R6 approved idempotent")) errors.push(`${path} contains stale R0-R6 sequencing`);
   }
-  const stepIds = new Set(steps.map((step) => step.id));
-  for (const id of REQUIRED_STEP_IDS) if (!stepIds.has(id)) errors.push(`plan steps missing ${id}`);
-  if (!(plan.constraints ?? []).includes("zero_ui_logic_in_content_pipeline")) errors.push("plan missing zero_ui_logic_in_content_pipeline constraint");
-  if (!(plan.constraints ?? []).includes("10k_surface_scale_required")) errors.push("plan missing 10k_surface_scale_required constraint");
 
-  if (!(await exists(resolve(root, "memory/MEMORY.md")))) errors.push("memory/MEMORY.md is missing");
+  const currentPlan = await readFile(resolve(root, "docs/planning/45-depth-first-framework-and-agent-recovery-plan.md"), "utf8");
+  if (!currentPlan.includes("Only U1 is currently unblocked")) errors.push("current plan must state that only U1 is unblocked");
+  if (!currentPlan.includes("npm pack")) errors.push("current plan must require packed-package consumers");
+  if (!currentPlan.includes("advance | narrow | stop")) errors.push("current plan must define the U4 decision outcome");
+
   const memoryEntries = (await readdir(resolve(root, "memory"), { withFileTypes: true })).filter((entry) => entry.isFile() && entry.name !== "MEMORY.md");
   const handoffPattern = /^\d{4}-\d{2}-\d{2}-\d{4}-[a-z0-9-]+\.md$/;
   for (const entry of memoryEntries) if (entry.name.endsWith(".md") && !handoffPattern.test(entry.name)) errors.push(`invalid memory handoff filename: ${entry.name}`);
@@ -175,8 +148,6 @@ export async function validateDocumentationSystem(root) {
     for (const prefix of ["docs/research/", "docs/architecture/", "docs/planning/", "docs/validation/", "docs/intake/"]) {
       if (text.includes(`${prefix}${prefix}`)) errors.push(`${relative} contains duplicated documentation prefix ${prefix}${prefix}`);
     }
-    if (relative === "scripts/organize-root-docs.mjs" || relative === "scripts/check-doc-system.mjs") continue;
-    for (const filename of MOVED_ROOT_DOCUMENTS) if (staleReferencePattern(filename).test(text)) errors.push(`${relative} contains stale root document reference ${filename}`);
   }
 
   return [...new Set(errors)].sort();
@@ -201,8 +172,8 @@ if (invoked === import.meta.url) {
       status: "pass",
       rootMarkdown: REQUIRED_ROOT_MARKDOWN.length,
       catalogDocuments: catalog.documents.length,
-      taskSurfaceWorkstream: "W7",
-      requiredScalePages: 10000
+      currentGate: "U1",
+      activeSequence: ["U1", "U2", "U3", "U4", "U5"]
     }));
   }
 }
