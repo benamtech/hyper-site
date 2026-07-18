@@ -1,17 +1,46 @@
 # Hyper Site
 
-Status: standalone vector-native site-generation compiler with an operator CLI, Z.AI GLM structured-generation adapter, independent approval gates, approved design authority, atomic PageDraft-to-PageIR transaction, resumable batches, and bounded local corpus validation. Synthetic 10,000-page full emission passes; real business, provider, hardware, relevance, and field acceptance remain pending.  
+Status: research prototype approaching near-alpha. The repository contains a source-wired agent-first web-framework experiment, not a production product. Synthetic 10,000-page full emission passes; ordinary-framework comparison, real repositories, live providers, real hardware, operator usability, design quality, and field acceptance remain pending.  
 Updated: 2026-07-18
 
-## Product boundary
+## Product identity
 
-Hyper Site turns explicit approved business truth into a finite static site. Model output is proposal state. Deterministic compilers, operator or independent reviewer approval, and local validation decide acceptance.
+Hyper Site is intended to become an **agent-first web framework and experience compiler**.
+
+Large-batch page generation is one workload. The product definition is broader:
+
+```text
+repository understanding
+-> business datasheets and evidence
+-> design systems, typography, layouts, graphics, and starter pages
+-> bounded ontology and page-generation jobs
+-> canonical PageIR/static output
+-> operator review
+-> post-generation editing, restyling, retirement, drift, and maintenance
+-> next checkpointed agent invocation
+```
+
+The framework fails if it can emit 10,000 pages but cannot create, preview, revise, and maintain an attractive five-page site with normal framework ergonomics.
+
+`27-near-alpha-framework-validation-and-continuous-agent-workspace.md` is the current maturity and evaluation authority.
+
+## Maturity boundary
+
+- Current maturity is `research-prototype` / `near-alpha` only.
+- Names containing `production` identify production-boundary experiments, not readiness claims.
+- Model output remains proposal state.
+- Synthetic scale proves bounded software behavior and static emission only.
+- No performance claim is valid until Hyper Site is measured against an ordinary static, SSR, or SPA framework on the same fixture and machine.
+- No usefulness claim is valid until non-synthetic case studies and held-out judgments pass.
+
+## Canonical lifecycle
 
 ```text
 repository + hyper-site.project.yaml
 -> evidence-bound ProjectInput
+-> business/design workspace artifacts
 -> GLM Stage 1 AgentOntologyProposal
--> exact-hash operator/reviewer approval
+-> exact-hash independent approval
 -> ApprovedOntology + typed graph + hard constraints
 -> bounded opportunity selection
 -> SiteGenerationPlan
@@ -19,64 +48,96 @@ repository + hyper-site.project.yaml
 -> external schema/evidence validation + bounded repair
 -> existing PageConceptProposal compiler
 -> atomic SiteSource -> PageIR -> static HTML transaction
+-> shared design-system render
 -> local lexical/semantic/information/crawl validation
 -> noindex review site + reports + resumable checkpoints
+-> post-generation workspace edits and dependency invalidation
 ```
 
-Stage 3 is optional independent review or targeted repair. It produces observations only; it never overrides compiler acceptance.
+Stage 3 is optional independent review or targeted repair. It produces observations only and never overrides compiler acceptance.
 
-## Minimum appliance contract
+## Continuous agent workspace
 
-`reference/src/appliance-contract.ts` defines one optimized target and several explicit compatibility candidates.
+Continuous operation means repeated explicit invocations over an immutable workspace, not an uncontrolled always-on loop.
 
-- optimized: NVIDIA RTX PRO 6000 Blackwell 96 GB;
+`reference/src/agent-workspace.ts` and `reference/scripts/workspace-cli.mjs` provide the first durable boundary:
+
+- every artifact declares kind, phase, producer, sources, dependencies, status, and content hash;
+- each mutation creates a new snapshot linked to the previous snapshot hash;
+- dependency traversal calculates which artifacts must rebuild after a source, design, component, page, or family change;
+- unaffected artifacts remain explicit and must preserve their hashes.
+
+From `reference/`:
+
+```bash
+npm run workspace -- help
+npm run workspace -- init workspace-input.json workspace.json
+npm run workspace -- append workspace.json artifact.json 2 workspace-v2.json
+npm run workspace -- replace workspace-v2.json revised-artifact.json 3 workspace-v3.json
+npm run workspace -- invalidate workspace-v3.json changed-artifacts.json invalidation-plan.json
+npm run workspace -- summary workspace-v3.json
+```
+
+The current workspace CLI is file-based and near-alpha. It is not yet integrated with a visual editor, asset-generation surface, development server, or persistent multi-user service.
+
+## Core-site design before bulk work
+
+`reference/src/design-authoring.ts` requires a source-bound, independently approved design authority.
+
+Before bulk generation, the workspace should contain:
+
+```text
+business datasheet
+evidence ledger
+style guide
+design system
+typography system
+layout system
+graphics briefs and owned/licensed assets
+starter pages and core conversion pages
+```
+
+After generation, one shared static stylesheet can refine the site without regenerating accepted prose. Canonical content hashes and publication state must remain unchanged.
+
+This proves a safe design boundary, not human-perceived design quality. Real creative review is pending.
+
+## Minimum appliance experiment
+
+`reference/src/appliance-contract.ts` defines one optimized experimental target and explicit compatibility candidates.
+
+- optimized target: NVIDIA RTX PRO 6000 Blackwell 96 GB;
 - host floor: 128 GiB RAM and 100 GiB free local NVMe;
 - runtime floor: Linux x64, Node 22, CUDA 12.8;
-- price is observed metadata and a soft budget check, never a capability claim;
-- H200, H100, A100 80 GB, RTX 5090, and RTX 4090 remain compatibility candidates until measured on the same workloads.
+- compatibility candidates: H200, H100, A100 80 GB, RTX 5090, RTX 4090;
+- rental price is observed soft metadata, never capability truth.
 
-The GPU is intended for local corpus processing, embeddings/reranking, specialist validators, asset work, browser/render workloads, and optional local models. GLM generation remains API-side unless another provider adapter is supplied.
+The GPU is intended for local embeddings, reranking, specialist validators, corpus processing, asset work, and browser/render workloads. GLM generation remains API-side unless another provider is supplied.
 
-## Design before and after bulk generation
+No real node has passed the framework workload yet.
 
-`reference/src/design-authoring.ts` prevents the project from becoming a bulk-page compiler with an unattractive core site.
-
-Before generation:
-
-- the operator supplies brand/style sources, palette, typography, visual rules, component rules, and core-page design briefs;
-- homepage and core conversion-page needs are explicit before landing-page expansion;
-- the generator cannot approve its own design;
-- unsafe CSS imports, remote URLs, scriptable URLs, HTML escapes, and oversized custom CSS reject.
-
-After generation:
-
-- one shared static stylesheet renders canonical semantic `PageIR`;
-- design refinement can change CSS and presentation without regenerating accepted prose;
-- content hashes and publication state must remain unchanged.
-
-## Operator workflow
+## Operator experiment
 
 Run from `reference/`.
 
 ```bash
 npm install --no-audit --no-fund --no-package-lock
 
-# 1. Validate the rented machine
+# Diagnose a rented node
 npm run production -- doctor examples/appliance-probe.example.json
 
-# 2. Capture a repository and compile explicit business truth
+# Capture explicit repository truth
 npm run production -- ingest /path/to/business-repo hyper-site.project.yaml generated-operator/repository-ingestion.json
 
-# 3. Verify the provider transport
+# Verify live provider transport
 ZAI_API_KEY=... npm run production -- provider-check glm-5.2
 
-# 4. Produce the Stage-1 ontology proposal
+# Generate Stage-1 proposal
 ZAI_API_KEY=... npm run production:stage1 -- \
   generated-operator/repository-ingestion.json \
   examples/source-excerpts.example.json \
   generated-stage1
 
-# 5. Approve exact proposal and design hashes
+# Independently approve exact hashes
 npm run production:approve -- ontology \
   generated-stage1/ontology-proposal.json \
   examples/ontology-review.example.json \
@@ -87,28 +148,87 @@ npm run production:approve -- design \
   examples/design-review.example.json \
   design-approval.json
 
-# 6. Run approved Stage-2 batches, local validation, and static emission
-ZAI_API_KEY=... npm run production -- run production-run.json generated-production-site
+# Run approved Stage-2 batches and emit a noindex static review site
+ZAI_API_KEY=... npm run production -- run production-run.json generated-near-alpha-site
 ```
 
-The final run requires:
+The scripts retain the `production` prefix because they exercise the production boundary. They are not a production release interface.
 
-- raw approved `ProjectInput` from the ingestion artifact;
-- Stage-1 proposal and exact-hash approval;
-- design draft and exact-hash approval;
-- source excerpts;
-- Z.AI credentials through environment variables;
-- a local OpenAI-compatible embedding endpoint;
-- base URL, run ID, vector identity, and optional compiler policies.
+## Near-alpha validation authority
 
-Accepted Stage-2 batches are written to an immutable checkpoint file after every successful batch. Restarting with unchanged dependencies reuses them. Changing sources, prior accepted batches, design, provider identity, base URL, embedding backend, or validation policy changes checkpoint identity or rejects stale state.
+`reference/src/near-alpha-framework.ts` rejects the framework when any of these conditions hold:
+
+- the workspace is bulk-generation-only;
+- core datasheet/design/typography/layout/graphics/starter-page artifacts are missing or appear after bulk generation;
+- hypotheses lack tests or falsification rules;
+- network-science metrics lack a simpler baseline or held-out outcomes;
+- no complete non-synthetic case study exists;
+- pages lack distinct tasks, information objects, evidence, nearest-neighbor differences, or lifecycle owners;
+- Hyper Site lacks a directly comparable ordinary-framework baseline;
+- 10K scale lacks incremental post-generation edit measurements;
+- claimed scale exceeds the measured full-framework ceiling.
+
+`reference/test/near-alpha-framework.test.mjs` and `reference/test/agent-workspace.test.mjs` exercise those rejection boundaries.
+
+## Required framework comparison
+
+The first serious benchmark must freeze one semantic fixture and run Hyper Site plus at least one ordinary framework on the same machine.
+
+Required metrics include:
+
+- cold build;
+- incremental edit/build;
+- development-server startup and update latency;
+- peak memory;
+- emitted HTML, JavaScript, CSS, asset, and total bytes;
+- validation time;
+- serving and crawl behavior;
+- accessibility;
+- design-system integrity and customization effort;
+- agent retries, approvals, checkpoint recovery, and operator time;
+- source, token, component, page, and page-family maintenance changes.
+
+Planning or generation timing alone is not web-framework performance.
+
+## Scale boundary
+
+Required experimental tiers:
+
+```text
+5 qualitative starter pages
+25 real noindex pages
+100 pages
+500 pages
+10,000 pages
+```
+
+At 10K, the framework must separately measure changes to:
+
+```text
+one page-specific source fact
+one family-wide source fact
+one design token
+one shared component
+one page-specific information object
+one page
+one page family
+one ontology relation
+one evidence source
+one interrupted batch
+```
+
+The result must record invalidated and unchanged artifacts, elapsed time, memory, output churn, crawl effects, review burden, and rollback.
+
+No result beyond 10K may be claimed until this full maintenance experiment and an ordinary-framework comparison pass.
 
 ## Current authorities
 
 | Area | Source |
 |---|---|
+| near-alpha maturity and benchmark gate | `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`, `reference/src/near-alpha-framework.ts` |
+| continuous artifact workspace | `reference/src/agent-workspace.ts`, `reference/scripts/workspace-cli.mjs` |
 | repository capture and ingestion | `reference/src/repository-ingestion.ts`, `reference/scripts/production-cli.mjs` |
-| appliance contract | `reference/src/appliance-contract.ts` |
+| appliance profiles | `reference/src/appliance-contract.ts` |
 | GLM JSON transport and bounded repair | `reference/src/glm-provider.ts` |
 | Stage-1/Stage-2 schemas and approval | `reference/src/generation-schemas.ts` |
 | design authority and static styling | `reference/src/design-authoring.ts` |
@@ -116,51 +236,44 @@ Accepted Stage-2 batches are written to an immutable checkpoint file after every
 | bounded corpus validation | `reference/src/corpus-validation-production.ts` |
 | recovery and physical orchestration | `reference/src/production-orchestrator.ts` |
 | semantic PageIR/static compiler | `reference/src/framework.ts` |
-| production acceptance tests | `reference/test/production-pipeline.test.mjs` |
 
 ## Validation
 
 Two workflows run on pull requests and `agent/**` or `main` pushes:
 
-- `.github/workflows/reference.yml`: existing full compiler, manifest, UI, browser, and R3F suite;
-- `.github/workflows/production-pipeline.yml`: operator command checks plus focused production-boundary tests and retained transcript artifact.
+- `.github/workflows/reference.yml`: full compiler, manifest, UI, browser, and R3F suite;
+- `.github/workflows/production-pipeline.yml`: near-alpha operator checks, production-boundary tests, framework rejection tests, workspace invalidation tests, and retained transcript artifact.
 
-Measured production fixture on branch head `5cfcc85fd6fe6910b9e4a2e366581e5514f08ffa`, workflow run `29635741933`:
+The prior validated synthetic fixture emitted 10,000 complete PageIR/static HTML objects and passed bounded corpus validation. Exact current-head evidence belongs in the newest validation report and memory handoff.
 
-| Cohort | Full synthetic path | Bounded candidate pairs | Rendered HTML |
-|---:|---:|---:|---:|
-| 100 | 2,489.626 ms | 3,675 | recorded in transaction |
-| 500 | 3,142.146 ms | 509 | recorded in transaction |
-| 10,000 | 19,179.290 ms | 12,949 | 54,291,900 bytes |
-
-The focused suite passed 10/10 tests in 32,641.755 ms. It covers appliance classification, GLM external repair, Stage-1 approval/resume, core design and CSS-only refinement, 25-page atomic/noindex emission, near-duplicate rejection, Stage-2 checkpoint recovery, and the same full transaction at 100, 500, and 10,000 synthetic pages.
-
-This is stronger than the prior 10,000-region planning proof, but it is still synthetic. It proves bounded software execution and static emission, not useful or market-worthy pages.
+That proof remains synthetic. It does not show that 10,000 pages deserve to exist or that Hyper Site is better than a conventional framework.
 
 ## Explicit nonclaims
 
 Not proven:
 
-- a real operator-approved business repository has completed the workflow;
-- the live GLM-5.2 endpoint has produced an accepted ontology or PageDraft batch;
-- an RTX PRO 6000 Blackwell or compatibility GPU has run the workload;
-- generated pages are relevant, insightful, factually complete, or commercially useful;
+- a real business repository has completed the workflow;
+- the live GLM endpoint has produced accepted ontology and PageDraft outputs;
+- any target or compatibility GPU has run the full workload;
+- the agent creates consistently attractive starter sites, graphics, typography, or layouts;
+- continuous multi-session operation works outside file-based fixtures;
+- incremental invalidation is faster or smaller than an ordinary framework;
+- generated pages are relevant, insightful, factually complete, accessible, or commercially useful;
+- network science improves page selection or maintenance;
 - indexing, ranking, AI citations, conversion, revenue, or lifecycle return;
-- 10,000 distinct high-quality designs or utilities;
-- GPU, Wasm, Zig, HRR, or ANN superiority over simpler baselines.
+- GPU, HRR, ANN, Wasm, Zig, or other advanced methods beat simpler baselines.
 
-## Next production gate
+## Next near-alpha gate
 
 ```text
-one real business repository
-+ reviewed hyper-site.project.yaml
-+ real Markdown/CSS style authority
-+ owned/licensed assets
-+ live GLM credentials
-+ measured Blackwell-class node
-+ independent acceptance corpus
--> 25 real noindex pages
--> human and held-out evaluation
--> 100, then 500
--> 10,000 only after relevance, information gain, cannibalization, accessibility, crawl, and lifecycle gates pass
+1. Freeze one real five-page starter-site case.
+2. Capture approved business, style, typography, layout, graphics, and asset sources.
+3. Run the live provider and a real rented node.
+4. Complete the same case in Hyper Site and an ordinary framework.
+5. Measure authoring, cold build, incremental edits, output, browser, accessibility, and operator effort.
+6. Extend the real case to 25 noindex pages with page-existence justifications.
+7. Freeze held-out relevance and design judgments.
+8. Scale to 100, then 500.
+9. Run the full 10K maintenance matrix only after those gates pass.
+10. Decide whether the repository has earned an actual alpha milestone.
 ```
