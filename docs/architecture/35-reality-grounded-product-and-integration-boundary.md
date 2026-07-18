@@ -1,193 +1,127 @@
-# Reality-Grounded Product and Integration Boundary
+# Reality-Grounded Product Boundary
 
-Status: accepted architecture addendum  
+Status: accepted architecture correction  
 Updated: 2026-07-18  
 Input: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
 
-## Decision
+## Correction
 
-Hyper is governed as two products plus one optional integration boundary:
+The previous version promoted external systems into architecture before Hyper had demonstrated a requirement for them. Active architecture now includes only capabilities required by the current packages and the next fixture.
+
+## Product path
 
 ```text
-approved evidence and content operations
+approved source material
 -> @amtech/hyper-content
--> portable SiteSource, page contracts, task proposals and validation results
+-> portable content and site contracts
 -> @amtech/hyper-site
--> static artifacts and governed task mounts
--> optional runtime adapter
--> durable workflow or AI Employee system
+-> deterministic static artifacts
 ```
 
-No layer may require the next layer for its core value.
+Neither package requires a broader platform layer.
 
-## Product authority
-
-### Hyper Site owns
+## Hyper Site owns
 
 - content-neutral static compilation;
 - PageIR and deterministic web artifacts;
-- trusted renderer contracts;
-- design, accessibility and browser budgets;
-- static fallback and service mounts;
-- publisher interfaces;
-- protocol-neutral public task-surface contracts.
+- semantic rendering contracts;
+- design, accessibility, and browser budgets;
+- dependency and invalidation metadata;
+- static publisher interfaces;
+- optional local task declarations only after the static fixture passes.
 
-It does not own ontology discovery, evidence ranking, model providers, durable execution, connector catalogs, identity, authorization, experimentation statistics or enterprise workflow administration.
+It does not own content discovery, content generation, general workflow execution, connector catalogs, enterprise identity, editorial platforms, experiment systems, or broad runtime administration.
 
-### Hyper Content owns
+## Hyper Content owns
 
 - source and evidence intake;
 - claim and information-object proposals;
-- ontology and opportunity methods;
-- page-existence and duplicate analysis;
+- page opportunity and page-existence methods;
 - provider dispatch and structured generation;
 - PCN and ArticleIR acceptance;
 - corpus validation and invalidation proposals;
-- optional task-semantic proposals.
+- portable output for Hyper Site.
 
-It does not own HTML rendering, theme components, browser state, runtime effects, credentials or publication authority.
+It does not own HTML rendering, browser state, credentials, external effects, or publication authority.
 
-### Runtime adapters own
+## Dependency admission rule
 
-- authentication and actor identity;
-- policy enforcement;
-- durable state and retries;
-- tools and connectors;
-- external effects;
-- idempotency;
-- receipts and audit;
-- private session state.
+A new dependency may enter an active plan only when:
 
-Hyper may provide a reference runtime adapter but must not make a homegrown durable runtime a prerequisite for the framework or compiler.
+1. a current fixture exposes a concrete requirement;
+2. the requirement belongs to a Hyper-owned invariant;
+3. the simplest local implementation fails a measured criterion;
+4. the candidate improves a named pass metric;
+5. integration cost and removal are documented;
+6. the package remains optional unless the product cannot exist without it.
 
-## Buy, integrate, or build rule
+A package is never adopted merely because it is established or mature.
 
-A capability is built in core only when all are true:
+## Build now
 
-1. it is necessary to preserve a Hyper-owned invariant;
-2. existing software cannot satisfy the invariant through a stable adapter;
-3. the capability is exercised by the first five-page-plus-one-task fixture;
-4. a simpler implementation is included as a control;
-5. removal or replacement remains possible.
+- package-owned TypeScript source;
+- deterministic schemas and contracts;
+- static compilation;
+- explicit validation and rejection;
+- artifact provenance;
+- dependency indexing and invalidation;
+- filesystem/static-host publication;
+- direct test fixtures and comparison harnesses.
 
-Otherwise the default is integration.
+## Do not build or integrate now
 
-### Integrate first
+- general workflow engines;
+- agent orchestration frameworks;
+- connector marketplaces;
+- enterprise authorization products;
+- editorial platforms;
+- experiment platforms;
+- broad observability platforms;
+- enterprise automation suites.
 
-- Temporal or equivalent for durable workflows;
-- LangGraph or equivalent for stateful agent orchestration;
-- n8n, Power Automate or line-of-business systems for connector-rich effects;
-- OpenFeature/GrowthBook/Optimizely for experiment delivery and analysis;
-- OpenTelemetry for observability;
-- OPA, Cedar or host policy systems for authorization;
-- existing CMSs for editorial workflow where required;
-- ordinary frameworks as publisher targets or controls.
+## First task boundary
 
-### Build in core
+If a task surface is tested, use a small local model:
 
-- deterministic Hyper contracts;
-- evidence-to-page adaptation;
-- explicit rejection and provenance boundaries;
-- content-neutral PageIR;
-- static fallback guarantees;
-- author-boundary enforcement;
-- portable task-service declarations;
-- dependency and invalidation metadata unique to the compiler contract.
+```text
+typed intent
+-> schema validation
+-> deterministic transition
+-> append-only local record
+-> public result or rejection
+```
 
-## Baseline-first rule
+The first task is side-effect free. It does not require distributed retries, long-running waits, external connectors, enterprise policy, or multi-agent control.
 
-Every advanced method must compete against a lower-complexity baseline:
+## Baseline rule
 
-| Advanced method | Required control |
+| Candidate method | Direct control |
 |---|---|
 | ontology graph | typed JSON or relational schema |
-| graph database | PostgreSQL tables and indexes |
 | embeddings | lexical retrieval and explicit rules |
-| HRR/HDC or vector packing | ordinary arrays/maps and deterministic IDs |
-| GPU acceleration | CPU implementation |
-| Wasm | native JavaScript or server implementation |
-| generative UI | trusted static/native components |
-| agent workflow | deterministic state machine or workflow engine |
-| autonomous opportunity selection | human-curated page plan |
+| HRR/HDC or packed vectors | arrays, maps, and deterministic IDs |
+| Wasm | direct JavaScript or server implementation |
+| GPU | CPU implementation |
+| generated task surface | ordinary form or trusted static components |
+| autonomous page selection | explicit human-authored page list |
 
-No method becomes architectural authority from novelty, elegance or synthetic scale.
+No method becomes architectural authority from novelty or synthetic scale.
 
-## Initial commercial boundary
-
-The first credible product fixture is:
+## Initial proof boundary
 
 ```text
-one approved business evidence set
+one approved evidence set
 -> five justified pages
--> one bounded task surface
--> one portable static deployment
--> one durable workflow adapter
--> human approval before publication or consequential effect
+-> one static deployment
+-> one measured maintenance event
 ```
 
-Out of scope for this gate:
-
-- autonomous mass publication;
-- enterprise DAM replacement;
-- full CMS replacement;
-- general-purpose BPM/RPA;
-- universal agent platform;
-- proprietary experiment statistics;
-- ten-thousand-page publication claims;
-- browser authorization derived from semantic vectors.
-
-## Portability requirements
-
-1. Hyper Content output is serializable and versioned.
-2. Hyper Site output can be hosted as ordinary static assets.
-3. Task services declare capabilities without embedding runtime credentials.
-4. Runtime adapters can be replaced without regenerating static content unless the public contract changes.
-5. Protocol adapters cannot widen capabilities.
-6. No private session or artifact is indexable by default.
-7. Reference fixtures must run without enterprise software.
-
-## Enterprise gap register
-
-Any enterprise positioning must explicitly account for:
-
-- SSO and identity lifecycle;
-- tenant isolation;
-- fine-grained permissions;
-- audit retention;
-- localization and regional governance;
-- digital asset management;
-- editorial workflow and legal hold;
-- migration and import tooling;
-- integration catalogs;
-- observability and support operations;
-- SLAs, incident response and disaster recovery;
-- accessibility governance;
-- data residency and retention;
-- procurement and partner ecosystem.
-
-These are not secondary polish. They explain much of the cost and defensibility of Adobe, Sitecore, Optimizely, Microsoft, Salesforce and ServiceNow.
-
-## Self-reinforcing documentation chain
-
-```text
-research landscape
--> this architecture boundary
--> executable workstream plan
--> validation matrix
--> implementation and CI
--> measured report
--> immutable memory handoff
--> catalog and bootstrap reconciliation
--> next research update
-```
-
-A downstream contradiction must either update this decision or be recorded as an explicit exception. Historical documents remain preserved but cannot silently override this boundary.
+Only after that passes may one bounded, side-effect-free task be tested against an ordinary form.
 
 ## Consequences
 
-- P1.4 and P1.5 remain the immediate implementation priority.
-- P1.6 begins only after product source ownership is physically credible.
-- P2 uses ordinary frameworks and integrated systems as controls.
-- P3 proves one real provider and runtime path before larger cohorts.
-- Advanced vector, graph, GPU and Wasm work remains experimental until promotion gates pass.
-- Enterprise platform comparisons inform requirements but do not expand the immediate product scope.
+- P1.4 and P1.5 remain the immediate priority.
+- P1.6 must begin with local contracts and negative tests, not integrations.
+- P2 compares equivalent direct implementations.
+- P3 proves real evidence, real pages, and real maintenance before broader scope.
+- External software is absent from the active architecture until a measured requirement exists.
