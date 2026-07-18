@@ -1,149 +1,150 @@
 # CODEGRAPH.md — Hyper Site / Hyper Content Monorepo
 
-Status: two near-alpha package surfaces established; canonical implementation remains under staged extraction in `reference/`.  
+Status: two product boundaries established; physical extraction incomplete  
 Updated: 2026-07-18
 
-## Root graph
+## Root dependency graph
 
 ```text
-hyper-content
-  ontology/evidence/content compiler
-          |
-          | produces approved static-site inputs
-          v
-hyper-site
-  web framework / PageIR / HTML / CSS / publisher target
+approved evidence and project truth
+        |
+        v
+@amtech/hyper-content
+  proposals, generation, validation and maintenance
+        |
+        v
+@amtech/hyper-site
+  content-neutral PageIR, static artifacts and task mounts
+        |
+        v
+optional runtime adapters
+  policy, durable workflows, connectors, effects and receipts
 ```
 
-Hard dependency rule:
+Hard rules:
 
 ```text
 hyper-content -> hyper-site
 hyper-site -X-> hyper-content
+hyper-site -X-> private runtime internals
+protocol adapters -X-> canonical domain authority
 ```
 
-Authority:
+## Current physical ownership
 
-- root workspaces: `package.json`;
-- framework facade: `hyper-site/index.mjs`;
-- content facade: `hyper-content/index.mjs`;
-- boundary gate: `scripts/check-product-boundaries.mjs`;
-- research/falsification record: `docs/architecture/29-product-boundary-research-and-root-folder-split.md`;
-- legacy implementation during extraction: `reference/src/`.
+```text
+hyper-content/src/content-program-adapter.ts
+  canonical geometry-removal adapter
+
+reference/src/content-program-adapter.ts
+  temporary legacy manifest compiler and parity wrapper
+
+reference/src/framework-core.ts
+reference/src/site-manifest.ts
+  current neutral Hyper Site source pending P1.4
+
+reference/src/*
+  most remaining content and framework implementation pending classification and extraction
+```
+
+Folder boundaries are not complete source boundaries. `reference/` is still transitional implementation authority, but its target role is consumer, compatibility suite, fixtures, examples and benchmarks.
+
+## Target repository graph
+
+```text
+hyper-site/
+  src/
+    framework core
+    SiteSource and PageIR
+    renderer and design contracts
+    browser and accessibility policy
+    task-surface contracts
+    publisher interfaces
+  test/
+  dist/
+
+hyper-content/
+  src/
+    intake and evidence
+    ontology and opportunity
+    generation and ArticleIR
+    validation and maintenance
+    task-semantic proposals
+    experimental vectors/Wasm/GPU
+  test/
+  dist/
+
+reference/
+  fixtures/
+  examples/
+  compatibility/
+  benchmarks/
+  scripts/
+```
 
 ## Hyper Content graph
 
 ```text
 repository + explicit project truth
-  repository-ingestion.ts
-  project-input.ts
-        |
-        v
-source / evidence / asset ledgers
-        |
-        v
-ontology proposal + independent approval
-  glm-provider.ts
-  generation-schemas.ts
-  ontology-discovery.ts
-        |
-        v
-ontology graph + constraints
-  ontology-graph.ts
-  typed-graph.ts
-        |
-        v
-bounded opportunity and page selection
-  opportunity-*.ts
-  sparse-lexical.ts
-  context-corpus.ts
-  site-program*.ts
-  page-coordinate.ts
-        |
-        v
-CandidatePageSeed + evidence + design + link plan
-        |
-        v
-PCN deterministic lowering
-  pcn-emitter.ts
-        |
-        v
-LLM prose backend
-  page-backend.ts
-  glm-provider.ts
-        |
-        v
-ArticleIR external acceptance
-  articleir-parser.ts
-        |
-        v
-deterministic unfolding
-  unfolder.ts
-        |
-        v
-hyper-site public API
+-> source, evidence and asset ledgers
+-> claim and information-object proposals
+-> optional ontology and opportunity methods
+-> independently approved page seeds
+-> deterministic PCN
+-> model prose backend
+-> ArticleIR validation
+-> deterministic unfolding
+-> portable Hyper Site inputs
 ```
 
-Content-side post-generation validation and lifecycle:
+Content lifecycle:
 
 ```text
-output cohort
--> exact / lexical / embedding / evidence / information checks
--> checkpoints and recovery
--> noindex review
--> indexing/search/outcome feedback when implemented
--> evidence refresh, repair, retirement
+cohort proposal
+-> page-existence and evidence review
+-> duplicate/cannibalization checks
+-> noindex artifact review
+-> publication decision
+-> evidence refresh and dependency invalidation
+-> repair or retirement
 ```
 
-Current content-owned research arms:
+Experimental arms remain optional:
 
-- HRR/vector packing and compatibility calculations;
-- ontology graph experiments;
-- BM25 and local semantic duplicate detection;
-- current `wasm.ts` and `zig/` vector/facility kernels;
-- GPU appliance and model workflows;
-- RAG/IG/corpus experiments.
+- graph and ontology methods;
+- lexical and embedding retrieval;
+- HRR/HDC and vector packing;
+- current Wasm/Zig kernels;
+- GPU/model acceleration;
+- automated opportunity selection.
 
-These may improve the content compiler. They are not framework runtime claims.
+Each requires a simple control and measured promotion.
 
 ## Hyper Site graph
 
-Target framework graph after extraction:
-
 ```text
-site config + static content objects + design system + assets
-        |
-        v
-SiteSource
-        |
-        v
-PageIR
-        |
-        +-------------------+
-        |                   |
-        v                   v
-semantic HTML          shared CSS/assets
-        |                   |
-        +---------+---------+
-                  v
-          static output directory
-                  |
-                  v
-         publisher/deploy adapter
+site config + portable content objects + design + assets
+-> SiteSource
+-> PageIR
+-> semantic HTML + structured data + shared CSS/assets
+-> static output
+-> publisher adapter
 ```
 
-Framework-owned concerns:
+Optional interaction path:
 
-- components and semantic module contracts;
-- layout, typography, tokens, and themes;
-- static HTML and structured-data emission;
-- browser targets, accessibility, and performance budgets;
-- dev server, incremental builds, cache/invalidation, and build output;
-- static deployment and rollback;
-- optional browser interaction adapters;
-- future browser Wasm only after a measured framework workload exists.
+```text
+static page and fallback
+-> governed task mount
+-> typed intent
+-> runtime adapter policy and execution
+-> ordered public projection
+-> artifact/action/receipt
+```
 
-Framework-forbidden imports/surfaces:
+Hyper Site owns the public contract and trusted renderer. Runtime adapters own identity, authorization, durable state, tools, effects and private session data.
+
+## Forbidden Hyper Site imports
 
 ```text
 ontology*
@@ -156,197 +157,101 @@ glm-provider
 pcn-emitter
 articleir-parser
 unfolder
-current wasm vector kernels
-mixed legacy manifest
+current vector/facility Wasm
+packed content geometry
+private runtime credentials or memory
 ```
 
-## Mixed legacy authorities to split
-
-### `framework.ts`
-
-Current state:
+## External complements
 
 ```text
-static compiler
-+ vector prototype packing
-+ HRR feature compilation
-+ graph/capability packed arrays
+Astro/Hugo/Eleventy/Next.js
+  controls or alternate render targets
+
+headless CMS
+  editorial and structured-content input
+
+Temporal
+  durable workflow and recovery
+
+LangGraph
+  stateful agent orchestration and human review
+
+n8n/Power Automate
+  connectors and deterministic business effects
+
+OpenFeature/GrowthBook/Optimizely
+  experiment delivery and analysis
+
+OpenTelemetry
+  trace and metric correlation
+
+OPA/Cedar/host policy
+  authorization decisions
 ```
 
-Target split:
+Core must not reimplement these categories unless an owned invariant cannot be preserved through an adapter.
+
+## Source extraction order
 
 ```text
-hyper-site static compiler
-+ optional generic extension metadata
-
-hyper-content vector adapter
-+ content geometry packing
+1. inventory every reference/src file
+2. move neutral framework core and manifest to hyper-site/src
+3. make reference consume @amtech/hyper-site
+4. classify and split mixed UI modules
+5. move content clusters to hyper-content/src
+6. replace star exports with explicit surfaces
+7. make reference consume @amtech/hyper-content
+8. add clean tarball consumers
+9. remove product runtime imports into reference
+10. retire duplicate compatibility source
 ```
 
-The static HTML compiler must not require content vectors.
-
-### `manifest.ts`
-
-Current state mixes:
-
-- site metadata and page definitions;
-- vector-space dimensions and nearest-link policy;
-- agent-harness policy;
-- evidence/claims/information objects;
-- coverage contexts and facility/CSI analysis.
-
-Target split:
+## Validation graph
 
 ```text
-hyper-site SiteManifest
-  base URL, pages, layouts, assets, design, output, deploy
-
-hyper-content ContentProgramManifest
-  evidence, ontology, vectors, generation, coverage, publication proposals
+research and alternatives
+-> accepted architecture
+-> executable plan and RED tests
+-> implementation
+-> measured validation report
+-> immutable memory handoff
+-> catalog, README, CODEGRAPH and PR reconciliation
 ```
 
-### `core.ts`
+Current authority chain:
 
-Current state mixes SHA-256/general utilities with vector/facility algorithms.
+- `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
+- `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
+- `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- `docs/validation/37-reality-grounded-product-validation-matrix.md`
 
-Target split:
+## First credible proof graph
 
 ```text
-package-local or shared deterministic utilities
-content-owned numeric/vector algorithms
+one approved evidence set
+-> five justified pages
+-> one bounded task
+-> one static publisher
+-> one durable runtime adapter
+-> ordinary-framework and ordinary-form controls
+-> held-out operator and artifact review
 ```
 
-### UI stack
+Ten thousand pages remains a mandatory software scale tier, not a publication or usefulness claim.
 
-`ui-scaffold.ts`, `ui-renderer.ts`, and `ui-metaprogramming.ts` are framework-oriented but currently consume mixed manifest/vector contracts. Extract a content-neutral UI plan before moving them physically.
+## Maturity boundary
 
-### Validation
+Not yet proven:
 
-`validation-contracts.ts` is generic typed acceptance infrastructure, not merely checkpoint hashing. It may remain package-local or move to a narrow internal shared package after real bidirectional need is demonstrated.
+- complete physical extraction;
+- independent tarball use;
+- standalone scaffold and publisher;
+- ordinary-framework advantage;
+- real five-page acceptance;
+- governed runtime isolation;
+- task completion advantage;
+- graph/vector/Wasm/GPU advantage;
+- enterprise governance or commercial outcomes.
 
-## One publication authority
-
-During migration:
-
-```text
-hyper-content facade
--> hyper-site facade
--> reference/dist/framework.js
-```
-
-This is intentional. Do not duplicate `compileSite`, PageIR, renderer, sitemap, or publisher behavior merely to make the folders look complete.
-
-Physical source moves occur only after dependencies are cut and package tests prove the same output.
-
-## Current package tests
-
-`hyper-site/test/boundary.test.mjs` proves:
-
-- static compiler functions are public;
-- ontology, provider, PCN, ArticleIR, unfolding, and current Wasm functions are absent.
-
-`hyper-content/test/boundary.test.mjs` proves:
-
-- framework compilation remains reachable through the content package;
-- ontology compilation is present;
-- PCN emission is present;
-- ArticleIR parsing is present;
-- unfolding is present;
-- current Wasm and provider functions remain content-owned.
-
-`scripts/check-product-boundaries.mjs` proves:
-
-- both root workspaces exist;
-- dependency direction is one-way;
-- framework facade contains no forbidden content-module references;
-- content facade includes required compiler/backend modules.
-
-## Measurement separation
-
-### Hyper Site metrics
-
-```text
-scaffold/setup effort
-dev-server startup/update
-cold/incremental build
-peak memory
-HTML/CSS/JS/assets/total bytes
-browser/Core Web Vitals/accessibility
-deploy/rollback
-component/theme/plugin ergonomics
-```
-
-### Hyper Content metrics
-
-```text
-evidence fidelity
-contract compliance
-information gain
-duplicate/cannibalization performance
-provider tokens/cost/latency/repair
-content usefulness/indexing/search outcomes
-cohort throughput
-maintenance and retirement cost
-```
-
-Never combine these into one headline benchmark.
-
-## Existing proof boundary
-
-The synthetic 10,000-page run exercised the combined legacy content/compiler/validator path and emitted static HTML. It is content-pipeline and deterministic-output evidence.
-
-It does not establish:
-
-- isolated `hyper-site` build speed;
-- framework advantage over Hugo, Astro, or Eleventy;
-- useful or indexable pages;
-- developer onboarding, HMR, templates, plugins, or deployment quality;
-- current Wasm value for browser interaction;
-- any GPU, graph, HRR, embedding, or ranking advantage.
-
-## Migration order
-
-```text
-1. package facades and dependency gate       [implemented]
-2. split site manifest from content program [pending]
-3. extract content-neutral static compiler  [pending]
-4. extract content-neutral UI contracts     [pending]
-5. add dev/build/deploy framework surface   [pending]
-6. move content modules in dependency order [pending]
-7. move framework modules physically        [pending]
-8. remove reference compatibility layer     [pending]
-9. run isolated framework comparison        [pending]
-10. run real content-to-framework case       [pending]
-```
-
-## Next gate
-
-1. Make `hyper-site` compile a real five-page fixture without ontology/vector imports.
-2. Add one publisher adapter and one-command static deployment.
-3. Build the same frozen fixture in an ordinary framework.
-4. Run a real PCN -> ArticleIR -> unfolder provider pass through `hyper-content` into the same framework target.
-5. Keep PR #3 draft until the physical extraction, CI, real cases, and comparable benchmarks pass.
-
-## Governed task-surface graph
-
-```text
-Hyper Content optional task proposal
-  goal + evidence + inputs + outputs + limits
-              |
-              v
-W7 protocol-neutral TaskServiceManifest / SurfacePlan
-              |
-      +-------+-------+
-      |               |
-      v               v
-static fallback   runtime adapter interface
-      |               |
-      v               v
-PageIR/HTML       intent -> events -> resource/receipt
-      |               |
-      +-------+-------+
-              v
-       governed task page
-```
-
-W7 is permanent. W1 remains static framework and renderer authority, W3 remains the temporary migration bridge, W4 owns observability/recovery/security infrastructure, and W6 owns field and revenue acceptance. Protocol adapters live outside the canonical ABI.
+PR #3 remains draft and unmerged.
