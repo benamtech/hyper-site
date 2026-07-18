@@ -84,6 +84,35 @@ freeze input snapshot
 
 Durability, retries, human interruption, policy, credentials, connectors and effects belong to an established orchestration/runtime category through adapters. They do not belong in the Hyper Site compiler core.
 
+## Low-level runtime disposition
+
+Zig, WebAssembly, CBOR and MessagePack are optional implementation experiments, not the product architecture.
+
+```text
+canonical authoring/interchange: typed SiteSource + deterministic JSON
+optional derived cache/IPC: deterministic CBOR
+LLM prompts: compact text or provider-native structured output
+pure kernels: TypeScript oracle + optional Zig/native/Wasm challenger
+orchestration/policy/effects: external runtime only
+```
+
+Current decisions:
+
+- binary bytes do not imply lower model token cost;
+- CBOR may be tested as a deterministic derived artifact after validation;
+- MessagePack may be a cache/IPC benchmark control but is not an integrity authority without an explicit canonical profile;
+- Zig/Wasm may challenge measured pure kernels only after profiling;
+- HTML rendering, source approval, agent state, authorization and publication stay outside low-level kernels;
+- runtime Zig SSR and binary LLM prompting are outside the current critical path;
+- every challenger must include conversion, cold-start, validation, packaging and fallback costs in its benchmark.
+
+Authorities:
+
+- `docs/research/47-zig-wasm-binary-boundary-audit.md`
+- `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
+- `docs/validation/49-low-level-kernel-promotion-gates.md`
+- `CODEGRAPH-LOW-LEVEL.md`
+
 ## Current work order
 
 ```text
@@ -96,7 +125,7 @@ R0 reconcile repository truth
 -> R6 one approved idempotent publication effect
 ```
 
-Task surfaces, SDRT, GNNs, GPU promotion, browser Wasm promotion and 10K publication remain deferred until the ordinary framework and maintenance gates pass.
+Task surfaces, SDRT, GNNs, GPU promotion, browser Wasm promotion and 10K publication remain deferred until the ordinary framework and maintenance gates pass. Low-level experiments may run only when they are optional and do not delay R1-R4.
 
 ## Test the current compiler
 
@@ -125,7 +154,7 @@ For the current repository tests you need:
 - curl only when downloading a live runner from GitHub;
 - pacman only for the optional Manjaro dependency installer.
 
-No Python, Docker, database, GPU, model API key, Temporal, LangGraph or OpenTelemetry service is required to test the compiler prototype. Those become dependencies only for later, separately gated integrations.
+No Python, Docker, database, GPU, model API key, Zig compiler, Wasm runtime, Temporal, LangGraph or OpenTelemetry service is required to test the compiler prototype. Those become dependencies only for later, separately gated integrations or optional experiments.
 
 ## Local commands
 
@@ -145,13 +174,16 @@ node scripts/check-doc-system.mjs
 - target architecture: `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
 - recovery plan: `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
 - validation gates: `docs/validation/46-useful-framework-and-agent-first-gates.md`
-- code graph: `CODEGRAPH.md`
+- low-level audit: `docs/research/47-zig-wasm-binary-boundary-audit.md`
+- low-level architecture: `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
+- low-level gates: `docs/validation/49-low-level-kernel-promotion-gates.md`
+- code graphs: `CODEGRAPH.md`, `CODEGRAPH-LOW-LEVEL.md`
 - operating contract: `AGENTS.md`
 - durable state: `memory/MEMORY.md`
 
 ## Nonclaims
 
-Passing compiler fixtures, deterministic hashes, schema validity, graph metrics and synthetic page counts are software evidence only. They do not prove a useful framework, correct complete incrementality, a reliable agent pipeline, authorized effects, ranking, conversion, revenue or production readiness.
+Passing compiler fixtures, deterministic hashes, schema validity, graph metrics, binary byte-size reductions, isolated kernel speedups and synthetic page counts are software evidence only. They do not prove a useful framework, lower LLM token cost, correct complete incrementality, a reliable agent pipeline, authorized effects, SEO quality, Lighthouse scores, ranking, conversion, revenue or production readiness.
 
 ## Governed task surfaces
 
