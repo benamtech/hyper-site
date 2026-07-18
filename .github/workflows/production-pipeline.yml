@@ -1,0 +1,25 @@
+name: Hyper Site Production Pipeline
+
+on:
+  pull_request:
+  push:
+    branches: [main, "agent/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  production-pipeline:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reference
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund --no-package-lock
+      - run: npm run build
+      - name: Run production boundary tests
+        run: node --test --test-reporter=spec test/production-pipeline.test.mjs
