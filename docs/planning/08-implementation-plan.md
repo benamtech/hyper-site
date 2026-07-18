@@ -29,7 +29,7 @@ GTM-RESEARCH/website-framework/
 ├── docs/validation/04-feature-validation-vectors.md
 ├── docs/validation/05-pass-fail-vectors.md
 ├── docs/validation/06-experimentation-privacy-operations.md
-├── docs/research/experiments/docs/research/experiments/docs/research/experiments/07-v0.1-request-mirror-lab.md
+├── docs/research/experiments/docs/research/experiments/docs/research/experiments/docs/research/experiments/07-v0.1-request-mirror-lab.md
 ├── docs/planning/08-implementation-plan.md
 ├── docs/intake/RESEARCH-NOTES-2026-07-17.md
 ├── site-manifest.yaml
