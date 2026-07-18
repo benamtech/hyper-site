@@ -2,7 +2,7 @@
 
 Status: agent-discovered ontology front end, sparse 10,000-page site-program planner, existing deterministic compiler, and UI scaffold are source-wired; real providers, content transaction, browser scale, and field acceptance remain pending  
 Updated: 2026-07-17  
-Scope: `GTM-RESEARCH/website-framework/`
+Scope: repository root
 
 ## Product and source graph
 

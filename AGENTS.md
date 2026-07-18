@@ -5,10 +5,9 @@ Updated: 2026-07-17
 
 ## Read first
 
-1. `../../identity.md`
+1. `AMTECH_IDENTITY.md`
 2. `identity.md`
-3. `../../CODEGRAPH.md`
-4. `CODEGRAPH.md`
+3. `CODEGRAPH.md`
 5. `README.md`
 6. `memory/MEMORY.md`
 7. newest immutable file under `memory/`
@@ -25,7 +24,7 @@ Updated: 2026-07-17
 
 ## Scope
 
-This subtree is an agent-operated vector-native website-generation research framework. The groundwork orchestration is source-wired; production acceptance is not.
+This repository is an agent-operated vector-native website-generation research framework. The groundwork orchestration is source-wired; production acceptance is not.
 
 The coding agent is first-class at:
 

@@ -3,6 +3,11 @@
 Status: agent-operated ontology discovery, vector-region planning, 10,000-page site-program compilation, deterministic downstream compiler, and UI scaffold are source-wired; real provider, content, browser, search, and commercial acceptance remain pending  
 Updated: 2026-07-17
 
+
+## Standalone repository boundary
+
+This repository was extracted from `benamtech/ai-employee-v1` branch `agent/ui-metaprogramming-pass-1` at commit `1238678e065e6b46ca9154ff9b93c22b6e042318`. The former `GTM-RESEARCH/website-framework/` directory is now the repository root. `AMTECH_IDENTITY.md` and `docs/AMTECH_WEB_DESIGN_SYSTEM.md` are copied supporting authorities that previously lived outside the folder.
+
 ## Product interface
 
 The intended interface is a repository-aware coding agent such as Codex, Claude Code, Pi, or an equivalent agentic developer.
@@ -288,7 +293,7 @@ Fail:
 
 ## Operator commands
 
-From `GTM-RESEARCH/website-framework/reference`:
+From `reference`:
 
 ```bash
 npm install
@@ -321,7 +326,7 @@ The source fixtures prove the APIs and rejection behavior. Real projects still r
 
 ## Read order
 
-1. root/scoped `identity.md`, `AGENTS.md`, and `CODEGRAPH.md`;
+1. `AMTECH_IDENTITY.md`, `identity.md`, `AGENTS.md`, and `CODEGRAPH.md`;
 2. this README;
 3. `memory/MEMORY.md` and newest immutable handoff;
 4. `24-agent-discovered-ontology-and-10k-site-program.md`;

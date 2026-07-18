@@ -44,7 +44,7 @@ ProjectInput
 -> PageGenerationJobs
 -> bounded provider-neutral agent runner
 -> static framework preview
--> ../../site-manifest.yaml
+-> ../site-manifest.yaml
 -> SiteSource / PageIR / packed artifacts
 -> static HTML, instruction, agent-context, and UI emissions
 ```

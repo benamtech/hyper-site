@@ -1,0 +1,12 @@
+reference/node_modules/
+reference/ui-r3f/node_modules/
+reference/dist/
+reference/ui-r3f/dist/
+reference/generated-manifest/
+reference/generated-ui/
+reference/generated-orchestration/
+reference/generated-framework-preview/
+reference/ci-test.log
+reference/package-lock.json
+reference/ui-r3f/package-lock.json
+*.log
