@@ -4,13 +4,25 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./index.mjs"
+    ".": "./index.mjs",
+    "./content-program-adapter": {
+      "types": "./dist/content-program-adapter.d.ts",
+      "import": "./dist/content-program-adapter.js"
+    }
   },
+  "files": [
+    "dist",
+    "index.mjs",
+    "README.md"
+  ],
   "dependencies": {
     "@amtech/hyper-site": "0.1.0"
   },
+  "devDependencies": {
+    "typescript": "5.8.3"
+  },
   "scripts": {
-    "build": "node --check index.mjs",
-    "test": "node --test test/*.test.mjs"
+    "build": "tsc -p tsconfig.json && node --check index.mjs",
+    "test": "npm run build && node --test test/*.test.mjs"
   }
 }
