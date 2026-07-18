@@ -1,6 +1,6 @@
 # AGENTS.md — Hyper Monorepo Operating Contract
 
-Status: active research and implementation contract  
+Status: active implementation contract  
 Updated: 2026-07-18
 
 ## Read first
@@ -11,108 +11,160 @@ Updated: 2026-07-18
 4. `README.md`
 5. `docs/README.md`
 6. `docs/catalog.json`
-7. `planning/meta-plan-v3.json`
-8. `planning/meta-plan-v3.steps.json`
-9. `memory/MEMORY.md`
-10. newest immutable handoff under `memory/`
-11. newest measured report under `validation/reports/`
-12. current task-specific research -> architecture -> plan -> validation chain
+7. `memory/MEMORY.md`
+8. newest immutable handoff
+9. newest measured validation report
+10. current task-specific research -> architecture -> plan -> validation chain
 
-For current product scope, also read:
+Current authority chain:
 
-- `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
-- `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
-- `docs/validation/37-reality-grounded-product-validation-matrix.md`
+- `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
+- `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
+- `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
+- `docs/validation/46-useful-framework-and-agent-first-gates.md`
 
-## Product boundary
+## Three-layer boundary
 
 ```text
-hyper-content -> hyper-site
-hyper-site -X-> hyper-content
-hyper-site -X-> private runtime internals
-runtime adapters -> public task-surface contracts
+Hyper Content (optional producer) -> Hyper Site
+External agent control plane -> public tools and artifacts
+Hyper Site -X-> Hyper Content
+Package cores -X-> orchestration runtime internals
+Browser surfaces -X-> durable effects
 ```
 
 ### Hyper Site
 
-Owns content-neutral PageIR, deterministic static artifacts, trusted renderer contracts, design, accessibility, static fallback, task mounts and publisher interfaces.
+Owns content-neutral `SiteSource`, `PageIR`, deterministic compilation, rendering, routing, metadata, structured data, sitemap, components, layouts, themes, assets, diagnostics, framework CLI and publisher interfaces.
 
-Must not own ontology, evidence ranking, model providers, PCN, ArticleIR, vector geometry, private memory, credentials, durable effects, connectors, authorization or experiment statistics.
+Must work without Hyper Content, an LLM, an agent runtime or a GPU.
 
 ### Hyper Content
 
-Owns evidence intake, content proposals, ontology and opportunity methods, structured generation, ArticleIR acceptance, validation, maintenance and optional task-semantic proposals.
+Owns evidence intake, claims, page-existence records, content proposals, structured generation, validation, maintenance proposals and portable Hyper Site input.
 
-Must not own web rendering, theme components, browser state, publication authority or consequential effects.
+Experimental graph, vector, retrieval, Wasm and GPU methods remain optional and removable.
 
-### Runtime adapters
+### External agent control plane
 
-Own identity, policy, durable state, tools, connectors, effects, idempotency, receipts and private sessions.
+Owns run state, checkpoints, retries, timeouts, cancellation, human approval, policy, credentials, connectors, idempotency, effects, receipts and telemetry.
+
+Use an established durable runtime category through adapters. Do not hide a custom durable runtime inside Hyper Site or Hyper Content.
 
 ### Reference
 
-`reference/` is transitional implementation and test authority. Its target is consumer, compatibility suite, fixture library, examples and benchmarks.
+`reference/` is transitional implementation authority. Its target role is consumer, compatibility suite, fixture library, examples and benchmarks.
 
-Current physical truth:
+Current truth:
 
-- `hyper-content/src/content-program-adapter.ts` is canonical adaptation source;
-- `reference/src/content-program-adapter.ts` is a legacy manifest/parity wrapper;
-- most other product source still resides under `reference/src` pending P1.4/P1.5.
-
-Do not claim the split is complete from folder names or facades.
+- most canonical source still resides under `reference/src`;
+- `hyper-site/index.mjs` still delegates to `reference/dist/framework-core.js`;
+- package extraction is incomplete;
+- folder names and facades are not proof of ownership.
 
 ## One-authority rule
 
-During extraction, never create a second PageIR, renderer, sitemap, compiler or publisher. Add a compatibility adapter, prove parity, then move ownership.
+During extraction, never create a second compiler, `PageIR`, renderer, sitemap or publisher. Add a compatibility adapter, prove parity, move ownership, then remove the old authority.
+
+## Ordinary framework floor
+
+No framework differentiation claim is allowed until a clean external developer can complete:
+
+```text
+create -> dev -> build -> preview -> inspect -> local publish
+```
+
+for five distinct real pages without Hyper Content or the agent control plane.
+
+The direct control is Astro or another suitable ordinary static framework using the same facts, design, assets and output requirements.
+
+## Agent-first rule
+
+Agent-first means durable and operator-visible, not autonomous by default.
+
+Every run must have:
+
+```text
+run_id
+input snapshot
+bounded plan
+step state
+tool evidence
+checkpoint
+approval state
+artifact manifest
+trace correlation
+final receipt or failure
+```
+
+Workflow/planning logic is side-effect free and replay-safe. Non-deterministic model calls and consequential effects are isolated tasks/activities. Effects require idempotency and commit-time revalidation of approval, branch, artifact, policy and target.
 
 ## Build versus integrate
 
-Build a capability in core only when it preserves a Hyper-owned invariant, is needed by the first five-page-plus-one-task fixture, cannot be satisfied by a stable adapter, includes a simple control and remains replaceable.
+Build only Hyper-owned invariants:
 
-Integrate first for durable workflows, agent orchestration, connector catalogs, policy engines, experimentation statistics, observability, CMS editorial workflow and enterprise identity.
+- compiler and renderer contracts;
+- framework CLI and diagnostics;
+- artifact and dependency manifests;
+- portable content contracts;
+- validation needed by the five-page proof.
 
-## Baseline-first scientific rule
+Integrate first for:
+
+- durable workflow execution;
+- agent checkpointing and human interruption;
+- connectors and business effects;
+- authorization and secret management;
+- telemetry collection/export;
+- experiment statistics;
+- editorial CMS workflow.
+
+## Baseline-first rule
 
 Every advanced method requires a simpler control:
 
-- ontology graph vs typed JSON/relational model;
-- graph database vs PostgreSQL;
+- ontology graph vs typed JSON/relational data;
 - embeddings vs lexical/rule retrieval;
-- HRR/HDC vs ordinary vectors/maps;
-- Wasm vs JavaScript/server implementation;
-- GPU vs CPU;
-- generated UI vs static/trusted native components;
-- agent workflow vs deterministic state machine or established workflow engine;
+- SDRT/GNN linking vs explicit links and entity co-occurrence;
+- HRR/HDC vs ordinary maps/vectors;
+- Wasm vs JavaScript/server code;
+- GPU vs CPU/provider API;
+- generated UI vs trusted static components;
+- agent workflow vs deterministic state machine or established orchestrator;
 - autonomous page plan vs human-curated plan.
 
-Novelty, elegance and synthetic scale do not establish authority.
+Novelty, mathematical validity and synthetic scale do not establish product value.
 
-## Maturity boundary
+## Incremental correctness
 
-- Both products remain research prototypes.
-- `production` in a filename is not production readiness.
-- Synthetic 10K execution is software evidence only.
-- Static HTML emission is not framework differentiation.
-- Evidence IDs do not prove truth.
-- Visible task completion does not prove authorized completion.
-- Enterprise comparables must include governance, operations, integrations and support gaps.
-- PR #3 remains draft and unmerged.
+The dependency index is a hypothesis about affected artifacts. Every maintenance test freezes an expected affected set before execution and records:
+
+```text
+required but missed
+unexpected changed
+unchanged as expected
+partial output after rejection
+```
+
+A graph that only verifies its declared edges cannot prove complete dependency capture.
 
 ## Current execution order
 
-1. Inventory and physically extract package source.
-2. Make `reference/` consume both packages.
-3. Implement the protocol-neutral task-surface ABI with negative tests.
-4. Build one five-page standalone site and publisher.
-5. Freeze an equivalent ordinary-framework control.
-6. Run one real evidence-to-page cohort.
-7. Run one bounded task through a durable runtime adapter and ordinary-form control.
-8. Expand only after held-out review and maintenance pass.
+```text
+R0 truth reconciliation
+-> R1 physical extraction
+-> R2 ordinary framework floor
+-> R3 five-page usefulness comparison
+-> R4 maintenance correctness and value
+-> R5 durable agent wrapper
+-> R6 approved idempotent publication
+```
+
+Task-surface implementation, SDRT, GNNs, GPU promotion, browser Wasm promotion, 10K publication and autonomous effects remain blocked until R4 passes.
 
 ## Required evidence for substantive changes
 
-Every architecture, algorithm, performance or promotion change must name:
+Every architecture, algorithm, performance or promotion change names:
 
 ```text
 hypothesis
@@ -121,27 +173,36 @@ primary metric
 falsification rule
 simple baseline
 negative control
-fixture and machine identity
-pass and fail threshold
+fixture and environment
+pass/fail threshold
 rollback
 measured evidence
 ```
 
-Hard failures stop orchestration. Pending and not-run remain visible.
+Hard failures stop execution. Pending and not-run remain visible.
 
 ## Page-existence boundary
 
-Every accepted page requires a distinct task, distinct information object or utility, evidence IDs, nearest-neighbor comparison, material difference statement, freshness policy and lifecycle owner. Unique routes, titles, embeddings or noun substitutions are insufficient.
+Every accepted page requires a distinct task, information object or utility, evidence references, nearest-neighbor comparison, material-difference statement, freshness policy and lifecycle owner. Unique routes, titles or embeddings are insufficient.
 
-## Governed task boundary
+## Effect boundary
 
-- static fallback is complete;
-- browser surfaces submit typed intents and never mutate canonical runtime state directly;
-- public projections are allowlisted;
-- successful consequential effects require receipts;
-- duplicate intents must not duplicate irreversible effects;
-- growth variants cannot widen capabilities or weaken privacy/safety;
-- A2UI, AG-UI and MCP Apps are adapters, not core authority.
+Compilation is not publication authorization.
+
+A consequential effect requires:
+
+```text
+run_id
+input_snapshot_hash
+compiler_commit
+artifact_manifest_hash
+policy_version
+approval_id and epoch
+target
+idempotency_key
+```
+
+Revalidate immediately before commit. Duplicate or ambiguous retries must produce at most one durable effect.
 
 ## Documentation lifecycle
 
@@ -153,35 +214,19 @@ intake
 -> RED/GREEN/REFACTOR implementation
 -> measured validation report
 -> immutable memory handoff
--> catalog, MEMORY, bootstrap and PR reconciliation
+-> catalog, bootstrap and PR reconciliation
 ```
-
-Historical documents remain preserved. Their catalog status determines authority.
 
 ## Validation commands
 
 ```bash
+npm ci
 npm run build
 npm test
-npm run check:boundaries
+npm run test:validation
+npm run test:compiler-limit
+npm run validate:workstreams
 node scripts/check-doc-system.mjs
-node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
-node --test planning/test/meta-plan.test.mjs
 ```
 
-Commit only coherent work with applicable checks. Never merge PR #3 solely because structural, synthetic or protocol tests pass.
-
-## Governed task-surface boundary
-
-- Hyper Content may propose a task goal, evidence, static examples, input/output classes, limitations, and review triggers. It must not emit UI implementation logic.
-- Hyper Site owns protocol-neutral service, surface, theme, mount, public-projection, and growth-policy contracts. It must not own reasoning, credentials, private memory, connectors, or consequential authorization.
-- Browser surfaces submit typed intents; they never mutate canonical runtime state directly.
-- Public projections are allowlisted and must not include full ontology state, hidden reasoning, private memory, credentials, raw provider payloads, or unrelated tenant resources.
-- Static fallback remains complete. Dynamic native, declarative, and sandboxed tiers are progressive enhancement.
-- A2UI, AG-UI, MCP Apps, and AI Employee integrations are adapters, not internal authority.
-- Growth operators may vary approved presentation, sequencing, allocation, and conversion. They may not widen capabilities, lower safety, alter private-data policy, or index sessions and generated artifacts.
-- Run `node scripts/check-doc-system.mjs` with plan and boundary validation.
-
-## Documentation lifecycle
-
-Documentation lifecycle: `docs/README.md`. Every research or architecture mutation must follow intake -> research -> architecture -> executable plan -> validation report -> immutable memory handoff.
+Existing green compiler fixtures do not satisfy the new framework or agent gates. PR #3 remains draft until the physical package and useful framework gates pass.
