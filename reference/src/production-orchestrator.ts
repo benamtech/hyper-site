@@ -13,12 +13,11 @@ import {
 import type { ZaiGlmProvider } from "./glm-provider.js";
 import {
   commitPageDraftTransaction,
-  validateCorpus,
-  type CorpusValidationPolicy,
   type CorpusValidationResult,
   type LocalEmbeddingBackend,
   type PageDraftTransaction,
 } from "./page-draft-transaction.js";
+import { validateProductionCorpus, type ProductionCorpusValidationPolicy } from "./corpus-validation-production.js";
 import {
   prepareAgentSiteProgram,
   type PreparedAgentSiteProgram,
@@ -233,7 +232,7 @@ export async function generateProductionCohort(input: {
   embeddingBackend: LocalEmbeddingBackend;
   baseUrl: string;
   generatedAt: string;
-  corpusPolicy?: CorpusValidationPolicy;
+  corpusPolicy?: ProductionCorpusValidationPolicy;
 }): Promise<ProductionGenerationResult> {
   assertValidationPass(input.design.validation);
   const outputs: StageTwoBatchOutput[] = [];
@@ -295,7 +294,7 @@ export async function generateProductionCohort(input: {
     buildHash: transaction.site.buildHash,
     renderedSiteHash: transaction.rendered.siteHash,
   }, transaction.transactionHash, transactionDependencies, input.generatedAt));
-  const corpus = await validateCorpus(transaction, input.embeddingBackend, input.corpusPolicy);
+  const corpus = await validateProductionCorpus(transaction, input.embeddingBackend, input.corpusPolicy);
   assertValidationPass(corpus.validation);
   await input.checkpoints.put(createCheckpoint(input.runId, "corpus-validation", {
     validationHash: corpus.validationHash,
