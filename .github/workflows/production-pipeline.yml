@@ -36,6 +36,7 @@ jobs:
           node --test --test-reporter=spec \
             test/production-pipeline.test.mjs \
             test/near-alpha-framework.test.mjs \
+            test/near-alpha-release.test.mjs \
             test/agent-workspace.test.mjs \
             2>&1 | tee near-alpha-test.log
       - name: Upload near-alpha test transcript
