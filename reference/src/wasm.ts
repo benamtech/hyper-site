@@ -1,5 +1,3 @@
-import { createHash } from "node:crypto";
-
 export interface HyperKernelExports {
   memory: WebAssembly.Memory;
   dot_f32_scalar(leftPtr: number, rightPtr: number, length: number): number;
@@ -12,54 +10,13 @@ export interface HyperKernelExports {
 export interface HyperKernel {
   dot(left: Float32Array, right: Float32Array, simd?: boolean): number;
   normalize(values: Float32Array): Float32Array;
-  weightedAdd(output: Float32Array, input: Float32Array, weight: number): Float32Array;
+  weightedAdd(output: Float32Array, input: Float32Array, weight: number, length?: number): Float32Array;
   facilityMarginal(weights: Float32Array, best: Float32Array, candidate: Float32Array): number;
 }
 
-export interface WasmKernelAdmissionPolicy {
-  maximumModuleBytes?: number;
-  allowedSha256?: readonly string[];
-  allowedImports?: readonly string[];
-}
-
-export interface AdmittedWasmModule {
-  module: WebAssembly.Module;
-  sha256: string;
-  byteLength: number;
-  imports: readonly string[];
-}
-
-/**
- * Wasm is not treated as more mysterious than a model response. The module is
- * external bytes and must satisfy an explicit admission policy before its
- * numeric exports can become an accelerator behind the TypeScript oracle.
- */
-export async function admitWasmKernelModule(
-  bytes: BufferSource,
-  policy: WasmKernelAdmissionPolicy = {},
-): Promise<AdmittedWasmModule> {
-  const payload = copyBytes(bytes);
-  const maximumModuleBytes = policy.maximumModuleBytes ?? 8 * 1024 * 1024;
-  if (!Number.isInteger(maximumModuleBytes) || maximumModuleBytes <= 0) throw new Error("Wasm maximumModuleBytes must be a positive integer");
-  if (payload.byteLength > maximumModuleBytes) throw new Error(`Wasm module exceeds ${maximumModuleBytes} byte admission limit`);
-  const digest = createHash("sha256").update(payload).digest("hex");
-  const allowedHashes = policy.allowedSha256?.map((item) => item.trim().toLowerCase()).filter(Boolean);
-  if (allowedHashes && allowedHashes.length > 0 && !allowedHashes.includes(digest)) throw new Error(`Wasm module hash ${digest} is not admitted`);
-  const module = await WebAssembly.compile(payload);
-  const imports = WebAssembly.Module.imports(module).map((item) => `${item.module}.${item.name}`).sort();
-  const allowedImports = new Set(policy.allowedImports ?? []);
-  const rejectedImports = imports.filter((item) => !allowedImports.has(item));
-  if (rejectedImports.length > 0) throw new Error(`Wasm module imports are not admitted: ${rejectedImports.join(", ")}`);
-  return { module, sha256: digest, byteLength: payload.byteLength, imports };
-}
-
-export async function instantiateHyperKernel(
-  bytes: BufferSource,
-  policy: WasmKernelAdmissionPolicy = {},
-): Promise<HyperKernel> {
-  const admitted = await admitWasmKernelModule(bytes, policy);
-  const instantiated = await WebAssembly.instantiate(admitted.module, {});
-  const exports = instantiated.exports as unknown as HyperKernelExports;
+export async function instantiateHyperKernel(bytes: BufferSource): Promise<HyperKernel> {
+  const instantiated = await WebAssembly.instantiate(bytes, {});
+  const exports = instantiated.instance.exports as unknown as HyperKernelExports;
   validateExports(exports);
   return createKernelAdapter(exports);
 }
@@ -131,9 +88,4 @@ export function createTypeScriptKernel(): HyperKernel {
 function validateExports(exports: Partial<HyperKernelExports>): asserts exports is HyperKernelExports {
   const required = ["memory", "dot_f32_scalar", "dot_f32_simd", "normalize_f32", "weighted_add_f32", "facility_marginal_f32"] as const;
   for (const name of required) if (!(name in exports)) throw new Error(`Wasm kernel missing export: ${name}`);
-}
-
-function copyBytes(source: BufferSource): Uint8Array {
-  if (source instanceof ArrayBuffer) return new Uint8Array(source.slice(0));
-  return new Uint8Array(source.buffer.slice(source.byteOffset, source.byteOffset + source.byteLength));
 }
