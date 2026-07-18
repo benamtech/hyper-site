@@ -1,0 +1,12 @@
+[
+  {
+    "sourceId": "source:business-facts",
+    "excerptId": "excerpt:business-facts:1",
+    "content": "Replace this with an exact excerpt from the declared source file. Do not summarize or add unsupported business claims."
+  },
+  {
+    "sourceId": "source:style-guide",
+    "excerptId": "excerpt:style-guide:1",
+    "content": "Replace this with the relevant Markdown or CSS style-guide excerpt."
+  }
+]
