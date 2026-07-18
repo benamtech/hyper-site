@@ -1,0 +1,124 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-07-18",
+  "rootAllowlist": [
+    "README.md",
+    "AGENTS.md",
+    "CODEGRAPH.md",
+    "CONTRIBUTING.md",
+    "identity.md"
+  ],
+  "lifecycle": [
+    "bootstrap",
+    "intake",
+    "research",
+    "architecture",
+    "planning",
+    "validation-contract",
+    "validation-report",
+    "memory-index",
+    "memory-handoff"
+  ],
+  "documents": [
+    {
+      "id": "docs-system",
+      "path": "docs/README.md",
+      "kind": "bootstrap",
+      "status": "active",
+      "authority": "documentation lifecycle and read/write protocol"
+    },
+    {
+      "id": "research-10k-site-program",
+      "path": "docs/research/24-agent-discovered-ontology-and-10k-site-program.md",
+      "kind": "research",
+      "status": "active-experimental",
+      "authority": "10K compiler and maintenance research boundary"
+    },
+    {
+      "id": "research-academic-crosswalk",
+      "path": "docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md",
+      "kind": "research",
+      "status": "active",
+      "authority": "academic method and promotion crosswalk"
+    },
+    {
+      "id": "research-graph-triage",
+      "path": "docs/research/26-graph-learning-paper-triage-and-promotion-gates.md",
+      "kind": "research",
+      "status": "active",
+      "authority": "graph-learning disposition"
+    },
+    {
+      "id": "validation-near-alpha",
+      "path": "docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md",
+      "kind": "validation-contract",
+      "status": "active",
+      "authority": "near-alpha and real-case maturity boundary"
+    },
+    {
+      "id": "architecture-agent-first-backend",
+      "path": "docs/architecture/28-agent-first-web-framework-and-llm-backend.md",
+      "kind": "architecture",
+      "status": "superseded-in-part",
+      "authority": "historical unified-product architecture",
+      "supersededBy": "architecture-product-boundary"
+    },
+    {
+      "id": "architecture-product-boundary",
+      "path": "docs/architecture/29-product-boundary-research-and-root-folder-split.md",
+      "kind": "architecture",
+      "status": "active",
+      "authority": "two-product dependency boundary"
+    },
+    {
+      "id": "planning-meta-plan-v3",
+      "path": "docs/planning/30-meta-plan-v3-executable-program.md",
+      "kind": "planning",
+      "status": "active",
+      "authority": "human-readable executable program rationale",
+      "machineAuthorities": [
+        "planning/meta-plan-v3.json",
+        "planning/meta-plan-v3.steps.json"
+      ]
+    },
+    {
+      "id": "intake-task-surfaces",
+      "path": "docs/intake/2026-07-18-next-generation-task-surfaces.md",
+      "kind": "intake",
+      "status": "preserved",
+      "authority": "supplied thesis and unresolved claims"
+    },
+    {
+      "id": "research-task-surfaces",
+      "path": "docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md",
+      "kind": "research",
+      "status": "active",
+      "authority": "protocol and prior-art disposition",
+      "input": "intake-task-surfaces",
+      "sources": "docs/research/sources/2026-07-18-task-surfaces.sources.json"
+    },
+    {
+      "id": "architecture-task-surfaces",
+      "path": "docs/architecture/32-governed-task-surface-architecture.md",
+      "kind": "architecture",
+      "status": "accepted-target",
+      "authority": "protocol-neutral task-surface boundaries and contracts",
+      "input": "research-task-surfaces"
+    },
+    {
+      "id": "validation-task-surfaces",
+      "path": "docs/validation/33-task-surface-validation-matrix.md",
+      "kind": "validation-contract",
+      "status": "active",
+      "authority": "task-surface TDD and pass/fail gates",
+      "input": "architecture-task-surfaces"
+    },
+    {
+      "id": "memory-index",
+      "path": "memory/MEMORY.md",
+      "kind": "memory-index",
+      "status": "active",
+      "authority": "durable current state and read order"
+    }
+  ]
+}
