@@ -24,141 +24,136 @@ hyper-site -X-> hyper-content
 
 ## Current implementation truth
 
-The split is not complete.
+The package split is incomplete.
 
-- `hyper-content/src/content-program-adapter.ts` is the first canonical Hyper Content implementation physically owned by the package.
-- `reference/src/content-program-adapter.ts` is a temporary legacy manifest compiler and artifact-parity wrapper.
-- Most canonical source still lives under `reference/src` pending P1.4 and P1.5.
-- `hyper-site/index.mjs` currently re-exports the canonical compiler from `reference/dist/framework-core.js`.
+- `hyper-content/src/content-program-adapter.ts` is the first canonical Hyper Content implementation physically owned by that package.
+- most canonical source still lives under `reference/src`.
+- `hyper-site/index.mjs` currently re-exports compiler behavior from `reference/dist/framework-core.js`.
 - `reference/` must become a package consumer, compatibility suite, fixture library, example set, and benchmark harness.
 
-## Verified current compiler capability
+## What works now
 
-The current compiler implementation has been executed against a real one-page `SiteSource` through the present public boundary:
+Given a valid `SiteSource`, the current compiler can:
+
+- validate pages, modules, claims, evidence, information objects, and references;
+- reject claims whose required evidence level is not met;
+- transform `SiteSource` into normalized `PageIR`;
+- emit semantic static HTML;
+- emit canonical metadata, robots directives, and JSON-LD;
+- emit optional Markdown instruction projections;
+- generate sitemap XML;
+- generate a reverse dependency index;
+- compute per-page and whole-build SHA-256 hashes.
+
+The verified path is:
 
 ```text
-consumer build script
+consumer
 -> hyper-site/index.mjs
 -> reference/dist/framework-core.js
 -> compileSite(SiteSource)
 ```
 
-That verified run demonstrated:
+This is functioning prototype behavior. It is not proof of independent package ownership, a polished developer workflow, page usefulness, framework advantage, or production readiness.
 
-- structural `SiteSource` validation;
-- evidence, claim, information-object, module, and page reference resolution;
-- evidence-level rejection for an under-supported claim;
-- deterministic `SiteSource -> PageIR` transformation;
-- neutral semantic HTML emission;
-- canonical URL, description, robots, and JSON-LD output;
-- optional Markdown instruction projection;
-- XML sitemap generation;
-- reverse dependency-index generation;
-- per-page SHA-256 and whole-build hash generation.
+## Portable compiler test
 
-The positive fixture produced one page with `hero`, `workflow`, and `cta` modules. A negative fixture lowered an evidence level below the claim requirement and was rejected with `claim claim-practical exceeds evidence ev-business`.
+From any Unix-like machine with internet access, Git, Node.js 20+, and npm:
 
-This proves that the current compiler implementation works for that fixture. It does not prove independent package installation, clean tarball consumption, a normal repository-external developer workflow, or product usefulness.
-
-### Required language for future demonstrations
-
-Do not describe a copied or behaviorally similar harness as having used the framework.
-
-A valid framework execution claim must record:
-
-1. the exact import entrypoint;
-2. the exact implementation path reached by that entrypoint;
-3. the input fixture;
-4. the emitted artifacts;
-5. at least one independently recomputed output or hash;
-6. at least one relevant rejection test;
-7. all environment limitations.
-
-Until physical extraction is complete, explicitly state that the public Hyper Site boundary delegates to `reference/dist`.
-
-## Hyper Site
-
-Owns deterministic `SiteSource -> PageIR -> static artifacts` compilation, HTML, sitemap, instruction projections, dependency metadata, rendering contracts, accessibility and browser budgets, and static publication.
-
-It does not own ontology, evidence ranking, model providers, PCN, ArticleIR, embeddings, vector packing, GPU work, or content generation.
-
-## Hyper Content
-
-Owns source and evidence intake, claim and information-object proposals, page selection, structured generation, PCN and ArticleIR acceptance, corpus validation, maintenance proposals, and portable output for Hyper Site.
-
-It does not own web rendering, theme components, browser state, or publication authority.
-
-## Current product hypothesis
-
-Typed evidence, explicit rejection, deterministic compilation, and dependency-aware maintenance may reduce defects and lifecycle cost for small static sites. This is unproven.
-
-## Immediate proof target
-
-```text
-one approved evidence set
--> five independently justified pages
--> one static theme
--> one deterministic build
--> one local publisher
--> one measured source-fact change
--> one measured shared-design change
+```bash
+curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/clone-and-test-hyper.sh | bash
 ```
 
-Only after that passes may one bounded, side-effect-free local task be tested against an ordinary form.
+The script clones the branch, records the exact commit, installs locked dependencies, builds, runs repository tests, generates unique arbitrary structured data, compiles twice, independently verifies hashes and dependencies, runs ten rejection cases, and writes all artifacts to a local report directory.
+
+Configure the generated workload:
+
+```bash
+HYPER_TEST_PAGES=500 \
+HYPER_TEST_SEED=my-unique-run \
+curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/clone-and-test-hyper.sh | bash
+```
+
+Authority: `docs/validation/40-portable-compiler-limit-test.md`.
 
 ## Current execution order
 
-1. Complete physical package extraction.
-2. Make `reference/` consume both packages.
-3. Add clean tarball consumers.
-4. Commit a repository-owned verified compiler fixture and execution report.
-5. Build one standalone five-page site.
-6. Add a local publisher.
-7. Run one real evidence-to-five-page noindex cohort.
-8. Measure maintenance changes.
-9. Test one local side-effect-free task against an ordinary form.
+```text
+W1 physical package extraction
+-> W2 standalone five-page static proof
+-> W3 measured maintenance proof
+-> W4 optional local task proof
+```
 
-Detailed authority: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`.
+The repository is in W1.
 
-## Nonclaims
+Immediate slice:
 
-The repository does not yet prove complete physical ownership, independent package consumption, production readiness, framework superiority, useful page generation, task advantage, advanced-method value, indexing, ranking, conversion, revenue, or customer retention.
+```text
+classify every reference/src file
+-> extract the neutral compiler cluster into hyper-site/src
+-> switch the public entrypoint to package-owned output
+-> make reference consume Hyper Site
+-> preserve fixture byte/hash and rejection parity
+-> prove two clean packed-package consumers
+```
 
-The verified one-page execution is implementation evidence, not a completed five-page product gate.
+Authority: `docs/planning/38-four-part-product-workstream-map.md`.
+
+## Research constraint: internal linking
+
+SDRT is not the active internal-linking model. It is a theory of discourse interpretation and rhetorical relations, not a validated site-topology optimizer.
+
+The required first baseline is:
+
+```text
+canonical entities and evidence
+-> page-entity incidence
+-> entity co-occurrence and shared-evidence candidates
+-> route, intent, redundancy, and editorial rules
+-> held-out review
+```
+
+SDRT, dense embeddings, graph neural networks, five-dimensional vectors, or custom graph query languages remain research-only until they beat explicit links and the interpretable baseline on held-out acceptance, direction, coherence, harmful-link rate, reviewer time, and explanation quality.
+
+Authority: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`.
 
 ## Commands
 
 ```bash
+npm ci
 npm run build
 npm test
-npm run check:boundaries
+npm run test:validation
+npm run test:compiler-limit
+npm run validate:workstreams
 ```
+
+The workstream validation commands are expected to remain red while required evidence is absent. Placeholder files cannot make a workstream pass.
+
+## Nonclaims
+
+The repository does not yet prove:
+
+- complete physical source extraction;
+- independent packed-package consumption;
+- a normal install/create/dev/build/deploy workflow;
+- five useful real pages;
+- maintenance advantage over direct controls;
+- internal-linking model advantage;
+- framework superiority;
+- production readiness;
+- indexing, ranking, conversion, revenue, or retention.
+
+Synthetic throughput, deterministic hashes, graph metrics, schema validity, and passing fixtures are software evidence only.
 
 ## Documentation authority
 
 - lifecycle: `docs/README.md`
 - catalog: `docs/catalog.json`
-- research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
 - architecture: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- plan: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- execution plan: `docs/planning/38-four-part-product-workstream-map.md`
 - validation: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+- portable test: `docs/validation/40-portable-compiler-limit-test.md`
+- internal-link research: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`
 - durable state: `memory/MEMORY.md`
-
-Historical documents remain preserved, but `docs/catalog.json` determines current authority.
-
-## Governed task surfaces
-
-Hyper Site's next interaction layer is a protocol-neutral governed task-surface platform. Static pages remain complete and indexable; optional runtime services accept typed intents and return public projections, resources, artifacts, actions, and receipts. Theme developers own trusted renderers, site developers own mounts and fallbacks, and growth operators own bounded experiment and conversion policy. Hyper Content may propose task semantics but contains zero UI implementation logic.
-
-Current authority:
-
-- `docs/intake/2026-07-18-next-generation-task-surfaces.md`
-- `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
-- `docs/architecture/32-governed-task-surface-architecture.md`
-- `docs/validation/33-task-surface-validation-matrix.md`
-
-A2UI, AG-UI, MCP Apps, and AMTECH AI Employee are adapters after the internal ABI passes. Ten-thousand-page surface scale is a mandatory benchmark tier, not a page-usefulness claim.
-
-## Documentation system
-
-Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.
