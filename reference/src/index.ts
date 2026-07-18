@@ -2,8 +2,6 @@ export * from "./core.js";
 export * from "./benchmark.js";
 export * from "./optimizer.js";
 export * from "./csi.js";
-export * from "./framework-core.js";
-export * from "./site-manifest.js";
 export * from "./framework.js";
 export * from "./distribution.js";
 export * from "./generator.js";
