@@ -1,121 +1,117 @@
 # Hyper Monorepo Durable Memory
 
-status: active
-updated_at: 2026-07-18T20:30:00-04:00
+status: active  
+updated_at: 2026-07-18T21:15:00-04:00
 
 ## State
 
-branch: agent/glm-blackwell-vertical-slice
-pr: 3
-draft: true
-merged: false
-maturity: research prototype approaching near-alpha
+branch: agent/glm-blackwell-vertical-slice  
+pr: 3  
+draft: true  
+merged: false  
+maturity: research prototype; useful framework and durable agent pipeline unproven
 
-## Boundary
+## Target boundary
 
-hyper-content -> hyper-site
-hyper-site -X-> hyper-content
+```text
+Hyper Content (optional producer) -> Hyper Site
+external agent control plane -> public package tools and artifacts
+Hyper Site -X-> Hyper Content
+package cores -X-> orchestration runtime internals
+```
 
 ## Physical truth
 
-- `hyper-content/src/content-program-adapter.ts` owns the first extracted content adapter implementation.
-- `reference/src/content-program-adapter.ts` is a temporary compatibility wrapper.
-- most package source still lives under `reference/src`.
-- `hyper-site/index.mjs` currently delegates compiler exports to `reference/dist/framework-core.js`.
-- W1 physical extraction is incomplete.
+- Most canonical implementation still resides under `reference/src`.
+- `hyper-site/index.mjs` delegates current compiler behavior to `reference/dist/framework-core.js`.
+- `hyper-content/src/content-program-adapter.ts` is the first physically extracted stable content adapter.
+- Physical package extraction remains incomplete.
+- `reference/` is still transitional runtime authority, not yet only a consumer.
 
-## Verified execution state
+## Verified current capability
 
-A one-page fixture executed through the current public Hyper Site entrypoint and therefore through the transitional `reference/dist/framework-core.js` implementation.
+The current compiler can validate `SiteSource`, enforce reference and evidence constraints, construct `PageIR`, emit semantic HTML, metadata, JSON-LD, sitemap and instruction projections, generate a reverse dependency index, and compute deterministic page/build hashes.
 
-Verified: SiteSource validation, reference resolution, evidence-threshold rejection, PageIR, semantic HTML, metadata, instruction Markdown, sitemap, dependency index, page hash, and build hash.
+Portable external runners exercise this behavior against generated unique fixtures. A pass proves behavior for the exact commit, machine and fixture only.
 
-Portable randomized verification now has two wrappers:
+## Depth-first audit verdict
 
-- `scripts/manjaro-clone-and-test-hyper.sh` is the official Manjaro/Arch external entrypoint. It checks `pacman`, supports explicit dependency-install opt-in, verifies the live branch head, clones the named branch, records the exact commit and URLs, runs the full test sequence, runs the randomized compiler harness, and retains machine-readable artifacts.
-- `scripts/clone-and-test-hyper.sh` remains the generic Unix-like wrapper for machines that already have Git, Node.js 20+, npm, and curl.
-- `scripts/run-compiler-limit-test-v2.mjs` is the canonical randomized harness. It generates unique arbitrary structured input, compiles twice, independently recomputes hashes, checks dependencies and escaping, and runs ten rejection cases.
-- `test/compiler-limit-harness.test.mjs` exercises multi-page and one-page workloads inside the repository test suite.
-- authority: `docs/validation/40-portable-compiler-limit-test.md`.
+The repository does not yet meet the floor of a useful ordinary framework or a durable agent-first pipeline.
 
-A passing external run proves current compiler behavior for the generated fixture and exact commit only. It does not prove W1 completion, independent package ownership, page usefulness, framework superiority, or production readiness.
+Framework gaps:
 
-## Four-part program
+- no package-owned compiler source;
+- no clean packed-package consumers;
+- no create/dev/build/preview/inspect/publish workflow;
+- no accepted five-page site against an ordinary-framework control;
+- no proven complete incremental maintenance model.
 
-Current authority: `docs/planning/38-four-part-product-workstream-map.md`.
+Agent-pipeline gaps:
 
-```text
-W1 physical package extraction
--> W2 standalone five-page static proof
--> W3 measured maintenance proof
--> W4 optional local task proof
-```
+- no durable external orchestrator;
+- no checkpoint/restart proof;
+- no separation of replay-safe workflow logic from model calls and effects;
+- no approval interrupt proof;
+- no idempotent publication effect;
+- no end-to-end trace correlation or commit-time authorization.
 
-The repository is in W1.
+## Current architecture
 
-Immediate next slice:
+Hyper Site is the deterministic static framework. It must work without Hyper Content, an LLM, an agent runtime or a GPU.
 
-```text
-reference/src ownership inventory
--> neutral compiler-cluster extraction into hyper-site/src
--> public entrypoint switch
--> reference consumer conversion
--> verified one-page byte/hash parity
-```
+Hyper Content is an optional evidence/content producer that emits portable Hyper Site input.
 
-Do not begin W2 until this slice passes. Do not begin W4 until W3 demonstrates that the static product remains justified.
+An external agent control plane owns durable state, retries, cancellation, human approval, policy, credentials, connectors, effects, receipts and telemetry. Use an established runtime category through adapters rather than embedding a custom runtime in package cores.
 
-## SDRT and internal-linking decision
-
-SDRT remains research-only. Its native purpose is discourse interpretation through rhetorical relations, anaphora, ambiguity, and discourse coherence; it has no established advantage for website internal-link decisions.
-
-The required first internal-linking baseline is:
+## Execution order
 
 ```text
-canonical entities and evidence
--> page-entity incidence
--> entity co-occurrence and shared-evidence candidates
--> route, intent, redundancy, and editorial rules
--> held-out review
+R0 truth reconciliation
+-> R1 physical extraction
+-> R2 ordinary framework floor
+-> R3 five-page usefulness comparison
+-> R4 maintenance correctness and value
+-> R5 durable agent wrapper
+-> R6 approved idempotent publication
 ```
 
-SDRT, embeddings, GNNs, five-dimensional vectors, or a custom graph query language may be promoted only after they beat explicit links and the interpretable entity/co-occurrence baseline on held-out acceptance, direction, coherence, harmful-link rate, reviewer time, and explanation quality.
+R0 documentation reconciliation is substantially complete. R1 remains the only valid implementation work.
 
-Authority: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`.
+## Incremental correctness rule
 
-## Rules
+The dependency index is a hypothesis, not proof of completeness. Every maintenance test must freeze an expected affected set and measure both:
 
-- one canonical compiler, renderer, and publisher during migration
-- every `reference/src` file receives exactly one owner and role
-- stable and experimental exports remain separate
-- future framework demonstrations record the public entrypoint, reached implementation, immutable input, artifacts, independent verification, rejection test, and limitations
-- every advanced method has a direct simpler control
-- every page needs independent existence justification
-- new dependencies require a demonstrated fixture need and measured benefit
-- current public delegation to `reference/dist` remains explicit
-- one-page or randomized compiler verification is not completion of W1 or W2
-- synthetic throughput and deterministic hashes are software evidence only
-- the official external runner must print the exact repository, branch, commit, raw script, harness, report, and artifact paths
-- dependency installation is explicit opt-in; Manjaro/Arch installation uses a full `pacman -Syu` transaction
-- PR #3 stays draft
+- required artifacts that failed to change;
+- unexpected artifacts that changed.
 
-## Authorities
+## Deferred work
 
-- README.md
-- docs/README.md
-- docs/catalog.json
-- planning/meta-plan-v3.json
-- planning/meta-plan-v3.steps.json
-- docs/research/34-intellectual-competitive-and-use-case-landscape.md
-- docs/research/41-critical-claims-sdrt-and-internal-linking.md
-- docs/research/42-critical-compiler-network-and-llm-claims.md
-- docs/architecture/35-reality-grounded-product-and-integration-boundary.md
-- docs/planning/38-four-part-product-workstream-map.md
-- docs/planning/36-next-three-workstreams-reality-grounded-plan.md (superseded for execution ordering)
-- docs/validation/37-reality-grounded-product-validation-matrix.md
-- docs/validation/39-w1-w3-validation-first-execution.md
-- docs/validation/40-portable-compiler-limit-test.md
+Until R4 passes, do not place the following on the critical path:
+
+- governed task-surface implementation;
+- SDRT or custom graph query language;
+- GNN internal linking;
+- GPU promotion;
+- browser Wasm promotion;
+- 10K publication programs;
+- autonomous publication;
+- enterprise-readiness claims.
+
+## Current authorities
+
+- `README.md`
+- `identity.md`
+- `AGENTS.md`
+- `CODEGRAPH.md`
+- `docs/README.md`
+- `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
+- `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
+- `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
+- `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
+- `docs/validation/46-useful-framework-and-agent-first-gates.md`
 
 ## Nonclaims
 
-No complete extraction, independent package proof, five-page framework advantage, maintenance advantage, accepted real cohort, internal-linking model advantage, task advantage, production readiness, or business outcome is established.
+No complete extraction, normal framework workflow, five-page advantage, complete incremental correctness, maintenance value, durable agent runtime, authorized idempotent effect, production readiness or business outcome is established.
+
+PR #3 stays draft.
