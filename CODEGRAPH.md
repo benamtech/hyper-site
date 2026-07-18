@@ -1,144 +1,223 @@
-# CODEGRAPH.md — Vector-Native Site Generation Compiler
+# CODEGRAPH.md — Near-Alpha Agent-First Web Framework
 
-Status: standalone root; operator repository ingestion, GLM structured generation, independent approvals, design authority, atomic PageDraft-to-PageIR transaction, resumable batches, static emission, and bounded synthetic 10K corpus validation are implemented. Real repository/provider/hardware/field acceptance remains pending.  
+Status: standalone research prototype approaching near-alpha. Repository ingestion, GLM proposal contracts, independent approvals, design authority, canonical PageDraft-to-PageIR emission, resumable generation, continuous artifact snapshots, bounded invalidation, and synthetic 10K validation are implemented. Real framework baselines, real cases, live providers/hardware, and field acceptance remain pending.  
 Updated: 2026-07-18
 
-## Canonical production graph
+## Canonical lifecycle graph
 
 ```text
-local repository + hyper-site.project.yaml + style/source/assets
-  reference/scripts/production-cli.mjs ingest
-  reference/src/repository-ingestion.ts
+local repository + hyper-site.project.yaml + source/style/assets
+  production-cli.mjs ingest
+  repository-ingestion.ts
         |
         v
 ProjectInput + source/evidence/asset ledgers
-  reference/src/project-input.ts
+  project-input.ts
+        |
+        +-----------------------------------------------+
+        | continuous AgentWorkspaceSnapshot             |
+        | near-alpha-framework.ts + agent-workspace.ts  |
+        | datasheets, design, starter site, batches,    |
+        | maintenance artifacts, hashes, dependencies   |
+        +-----------------------------------------------+
         |
         v
 physical Stage 1: GLM AgentOntologyProposal
-  reference/src/glm-provider.ts
-  reference/src/generation-schemas.ts
+  glm-provider.ts
+  generation-schemas.ts
         |
         v
-exact-hash operator / independent reviewer approval
-  production-approve.mjs ontology
+exact-hash independent approval
+  production-approve.mjs
   applyOntologyApproval
         |
         v
 ApprovedOntology
-  reference/src/ontology-discovery.ts
+  ontology-discovery.ts
         |
         v
 CompiledOntologyGraph
-  reference/src/ontology-graph.ts
+  ontology-graph.ts
   typed sparse edges + separate requires/excludes
         |
         v
-ProductionOpportunitySpace
-  reference/src/opportunity-generation-optimized.ts
-  reference/src/opportunity-space-optimized.ts
-  reference/src/opportunity-space-production.ts
-  bounded expansion + sparse concave selection + HRR structure
+bounded opportunity selection
+  opportunity-generation-optimized.ts
+  opportunity-space-optimized.ts
+  opportunity-space-production.ts
+  sparse concave selection + HRR structure
         |
         v
 SiteGenerationPlan
-  reference/src/site-program-optimized.ts
+  site-program-optimized.ts
         |
-        +-----------------------------+
-        | approved design authority   |
-        | design-authoring.ts         |
-        | core-page briefs + CSS      |
-        +-----------------------------+
+        +------------------------------------------+
+        | approved core-site design authority      |
+        | design-authoring.ts                      |
+        | design system, typography, layouts,      |
+        | graphics briefs, starter-page contracts  |
+        +------------------------------------------+
         |
         v
 physical Stage 2: bounded GLM PageDraft batches
-  generateStageTwoPageBatch
-  JSON object mode + external schema/semantic validation
+  generation-schemas.ts
+  JSON object mode + external validation
   bounded repair or reject
         |
         v
 existing PageConceptProposal compiler
-  reference/src/site-program.ts
+  site-program.ts
         |
         v
 atomic canonical transaction
-  reference/src/page-draft-transaction.ts
+  page-draft-transaction.ts
   PageConcept -> CandidatePageSeed -> SiteSource -> PageIR
-  reference/src/framework.ts
+  framework.ts
         |
         v
 shared static design renderer
-  reference/src/design-authoring.ts
+  design-authoring.ts
         |
         v
 bounded local corpus validator
-  reference/src/corpus-validation-production.ts
-  exact duplicate + sparse lexical + local semantic LSH
-  + evidence/information + static crawl checks
+  corpus-validation-production.ts
+  exact + sparse lexical + local semantic candidates
+  evidence/information/static crawl checks
         |
         v
-noindex static site + validation reports + checkpoints
-  reference/src/production-orchestrator.ts
-  reference/scripts/production-cli.mjs run
+noindex static review site + reports + checkpoints
+  production-orchestrator.ts
+  production-cli.mjs run
+        |
+        v
+post-generation workspace changes
+  workspace-cli.mjs
+  planAgentWorkspaceInvalidation
+  unchanged artifact hashes + bounded rebuild scope
+        |
+        v
+near-alpha framework evaluation
+  near-alpha-framework.ts
+  ordinary-framework baselines + TDD + network studies
+  real case studies + page-existence + scale-transition gates
 ```
 
-There is one canonical publication path. New model output converges into the existing `compilePageConceptProposals` and `compileSite` authorities; it does not create a second manifest or PageIR implementation.
+There is one canonical publication path. New model output converges on the existing `compilePageConceptProposals` and `compileSite` authorities. The workspace and near-alpha evaluator wrap that path; they do not create a second PageIR or publication system.
+
+## Maturity interpretation
+
+```text
+production-boundary source name
+!=
+production-ready product
+```
+
+The repository is near-alpha research. Synthetic full emission can demonstrate deterministic execution, recovery, and bounded complexity. It cannot establish framework superiority, design quality, useful pages, or field readiness.
 
 ## Physical model topology
 
 ```text
 Stage 1: one bounded ontology proposal job per project
-Stage 2: deterministic batches of PageDraft jobs
-Stage 3: optional independent review/repair observations only
+Stage 2: deterministic PageDraft batches
+Stage 3: optional independent observation/repair review
 ```
 
-The older conceptual pass names remain useful compiler concerns, but they are not seven mandatory API calls per page.
+Conceptual compiler passes remain deterministic code and validation concerns. They are not seven mandatory API calls per page.
 
-## Production boundary map
+## Continuous workspace graph
 
-| Boundary | Authority | Implemented state | Remaining real gate |
+`AgentWorkspaceSnapshot` is an immutable artifact graph.
+
+Artifact phases:
+
+```text
+discovery
+datasheet-authoring
+design-authoring
+starter-site
+bulk-generation
+post-generation-maintenance
+case-study-evaluation
+```
+
+Artifact kinds include:
+
+```text
+business-datasheet
+evidence-ledger
+style-guide
+design-system
+typography-system
+layout-system
+graphic-brief
+starter-page
+page-batch
+post-generation-patch
+validation-report
+case-study
+```
+
+Every artifact declares producer, sources, dependencies, status, and content hash. A new snapshot points to the prior snapshot hash.
+
+`planAgentWorkspaceInvalidation` traverses reverse dependencies from changed artifacts and emits:
+
+```text
+changed artifact IDs
+invalidated artifact IDs
+unaffected artifact IDs
+dependency edges
+stable plan hash
+```
+
+This is the first framework-maintenance primitive. It is not yet an incremental compiler or build cache; measured file-level invalidation and rebuild behavior remain pending.
+
+## Near-alpha evaluation graph
+
+`evaluateNearAlphaFramework` validates ten independent boundaries:
+
+| Boundary | Pass vector | Fail vector |
+|---|---|---|
+| maturity | research-prototype/near-alpha language | production claim from synthetic scale |
+| agent continuity | initial authoring + starter site + bulk + maintenance | bulk-only or hidden loop |
+| core framework | approved datasheet/design/type/layout/graphics/starter artifacts before batches | corpus compiler without useful core site |
+| TDD | hypotheses map to tests and falsification rules | architecture claim without executable failure test |
+| scientific protocol | frozen fixtures, commands, machines, metrics, baselines | post-hoc or self-only benchmark |
+| network science | simpler baseline + held-out outcomes + action policy | decorative graph metrics |
+| real use | non-synthetic revisioned case study | testimonial or synthetic-only case |
+| page existence | task + information + evidence + neighbor difference + owner | unique route/title/vector only |
+| framework baseline | direct ordinary-framework comparison | planning/generation timing only |
+| scale transition | 25/100/500/10K full metrics and incremental edits | cold-build-only 10K or claim beyond measured ceiling |
+
+## Near-alpha boundary map
+
+| Boundary | Authority | Implemented state | Remaining gate |
 |---|---|---|---|
-| appliance | `appliance-contract.ts` | Blackwell optimized target + compatibility profiles | benchmark real rented nodes |
-| repository truth | `repository-ingestion.ts` | bytes, revision, paths, field evidence, no inference | one operator-approved business repo |
-| provider transport | `glm-provider.ts` | Z.AI chat completions, JSON mode, timeout, bounded repair | live GLM request/evaluation |
-| Stage 1 | `generation-schemas.ts` | external schema/ledger validation | real proposal quality |
-| ontology approval | `generation-schemas.ts`, `production-approve.mjs` | exact-hash human/independent approval | real reviewer observations |
-| graph/opportunity | existing ontology/opportunity modules | same deterministic compiler | held-out real contexts |
-| design | `design-authoring.ts` | core-page briefs, approval, safe shared CSS, restyle invariant | real creative review and assets |
-| Stage 2 | `generation-schemas.ts` | complete PageDraft batch schema and validation | live generated prose/utility quality |
-| transaction | `page-draft-transaction.ts` | atomic canonical SiteSource/PageIR/static build | real accepted batch |
-| recovery | `production-orchestrator.ts` | immutable payload/dependency checkpoints | interruption test on persistent rented node |
-| corpus validation | `corpus-validation-production.ts` | bounded exact/lexical/local-semantic/evidence/render checks | real embedding model and relevance set |
-| operator experience | production CLI scripts | doctor, ingest, provider check, Stage 1, approval, run, emit | packaged installer/UI and usability test |
-| publication | `framework.ts` | noindex static output | accessibility/browser/crawler review on real pages |
-
-## Appliance profiles
-
-Optimized:
-
-- `rtx-pro-6000-blackwell-96gb`.
-
-Compatibility candidates, not equivalent guarantees:
-
-- `h200-141gb`;
-- `h100-80gb`;
-- `a100-80gb`;
-- `rtx-5090-32gb`;
-- `rtx-4090-24gb`.
-
-Hardware price is a time-stamped observation and soft economic vector. It does not determine feature acceptance.
+| maturity and scientific rejection | `near-alpha-framework.ts`, doc 27 | executable pass/fail vector | real baseline and case inputs |
+| continuous workspace | `agent-workspace.ts`, `workspace-cli.mjs` | immutable snapshots and transitive invalidation | connect actual compiler outputs and file rebuilds |
+| repository truth | `repository-ingestion.ts` | bytes, revision, field evidence, no inference | one real approved repository |
+| core authoring | `design-authoring.ts` | design authority, core-page briefs, safe shared CSS | real typography/layout/graphics/starter-site quality |
+| appliance | `appliance-contract.ts` | Blackwell target + compatibility profiles | benchmark rented nodes |
+| provider | `glm-provider.ts` | Z.AI JSON transport and bounded repair | live latency/token/schema/evidence measurements |
+| ontology/graph | existing discovery and graph modules | deterministic governed compiler | real observations and held-out judgments |
+| Stage 2 | `generation-schemas.ts` | complete PageDraft batch contract | real prose, utilities, and design integration |
+| canonical transaction | `page-draft-transaction.ts` | atomic SiteSource/PageIR/static build | real accepted batch |
+| recovery | `production-orchestrator.ts` | dependency-bound checkpoints | persistent interruption/restart on rented node |
+| corpus validator | `corpus-validation-production.ts` | bounded exact/lexical/local semantic/evidence/render checks | real embedding and relevance corpus |
+| ordinary framework comparison | `near-alpha-framework.ts` contract only | schema and rejection vector | benchmark harness and frozen fixture |
+| publication | `framework.ts` | noindex static output | real accessibility/browser/crawler/operator acceptance |
 
 ## Design invariants
 
 - The core site is designed before bulk landing-page generation.
+- Design system, typography, layout, graphics, and starter-page artifacts are workspace state.
 - Design source IDs and exact approval hashes are preserved.
 - The design generator cannot self-approve.
-- CSS is one shared static artifact, not regenerated for each page.
+- CSS is one shared static artifact, not regenerated for every page.
 - Unsafe or remote CSS constructs reject.
-- Post-generation design refinement must preserve canonical content hashes and index state.
-- Attractive rendering cannot change evidence, claims, route identity, or publication authority.
+- Post-generation design refinement preserves canonical content hashes and index state.
+- Human-perceived design quality is pending until real review.
 
-## Checkpoint dependency graph
+## Generation checkpoint graph
 
 ```text
 Stage 1 checkpoint
@@ -146,60 +225,93 @@ Stage 1 checkpoint
 
 Stage 2 checkpoint
   project + ontology + plan + batch + design + provider
-  + source excerpt hash + hashes of prior accepted batches
+  + source excerpt hash + prior accepted batch hashes
 
 transaction checkpoint
-  project + ontology + plan + design + base URL + all draft hashes
+  project + ontology + plan + design + base URL + draft hashes
 
 corpus checkpoint
   transaction + embedding backend identity + validation policy hash
 ```
 
-Checkpoint payload bytes have their own hash. Artifact hashes such as `transactionHash` remain separate semantic identities.
+Checkpoint payload bytes have their own hash. Semantic artifact identities remain separate.
 
-## Validation proof
+## Framework comparison fixture
 
-Focused production workflow run `29635741933` on branch head `5cfcc85fd6fe6910b9e4a2e366581e5514f08ffa` passed:
-
-- 10/10 production tests;
-- operator command syntax/help;
-- 25-page atomic/noindex/design/recovery gates;
-- near-duplicate rejection;
-- full synthetic 100, 500, and 10,000 PageDraft -> PageIR -> HTML -> corpus-validation path.
-
-Measured 10,000 fixture:
+The pending benchmark harness must compare Hyper Site and at least one ordinary static, SSR, or SPA framework on the same:
 
 ```text
-pages: 10,000
-elapsed: 19,179.290 ms
-rendered HTML: 54,291,900 bytes
-bounded candidate pairs: 12,949
-transaction: 481a1adc00ebc860f6f3c276c16978c7e28c3cfa62a39114d1bdb8e0cf013d72
-corpus: 67fe904020a2d0ca573790d135037515e200938ae4c7803c67e27a9ea47182b2
+business/source fixture
+visible page semantics
+assets
+routes and page families
+machine profile
+runtime
+build mode
+cache policy
 ```
 
-The existing full reference workflow also passed through test, manifest, UI, orchestration, framework, browser, and R3F validation on the same code/example head before documentation reconciliation.
+Metrics:
 
-## Explicit nonproof
+```text
+cold build
+incremental edit/build
+dev server startup/update
+peak memory
+HTML/JS/CSS/assets/total output
+validation time
+static serving/crawl
+browser and accessibility
+agent/operator effort
+recovery and rollback
+```
 
-Synthetic full emission does not prove:
+## 10K maintenance matrix
 
-- real relevance, insight, factual completeness, usefulness, or search demand;
-- live GLM structured-output reliability or cost;
-- Blackwell, A100, H100, H200, 5090, or 4090 runtime performance;
-- indexability, rankings, citations, conversion, revenue, or lifecycle return;
-- that every one of 10,000 pages deserves to exist;
-- GPU, HRR, ANN, Zig, or Wasm advantage.
+The next 10K claim requires more than full emission. Independently change:
+
+```text
+one page-specific source fact
+one family-wide fact
+one design token
+one shared component
+one information object
+one page
+one page family
+one evidence source
+one ontology relation
+one interrupted batch
+```
+
+Record invalidated, rebuilt, and unchanged artifacts, time, memory, output churn, crawl changes, review burden, and rollback.
+
+## Existing synthetic proof
+
+A prior exact-head run emitted and validated 10,000 synthetic PageIR/static HTML pages with bounded candidate comparison. That remains useful software proof.
+
+It does not prove:
+
+- an attractive starter site;
+- ordinary-framework performance advantage;
+- incremental invalidation or maintenance advantage;
+- real agent workspace continuity;
+- real relevance, information gain, accessibility, or usefulness;
+- any network-science, GPU, HRR, ANN, Wasm, or Zig advantage;
+- indexing, ranking, citations, conversion, revenue, or lifecycle return.
+
+The newest validation report and memory handoff contain exact current-head CI evidence.
 
 ## Next gate
 
 ```text
-one real repository + approved business facts + real style authority
--> live Stage 1 proposal
--> independent approval
--> 25 real noindex PageDrafts
--> local semantic/evidence/render checks
--> human and held-out relevance review
--> 100, then 500
--> 10,000 only after field gates pass
+1. Freeze one real five-page starter-site case.
+2. Implement workspace linkage to actual compiler/design/asset outputs.
+3. Build an ordinary-framework benchmark harness.
+4. Run live provider and rented-node experiments.
+5. Compare authoring, cold build, incremental edits, output, browser, accessibility, and operator work.
+6. Extend the case to 25 real noindex pages with page-existence justifications.
+7. Freeze held-out relevance, design, and graph judgments.
+8. Scale 100 -> 500.
+9. Run the full 10K maintenance matrix.
+10. Decide whether the evidence earns an alpha milestone.
 ```
