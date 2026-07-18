@@ -7,6 +7,8 @@ test("hyper-content targets hyper-site and exposes the content compiler backend"
   for (const required of [
     "compileSite",
     "compileContentSite",
+    "compileContentProgramManifest",
+    "adaptContentProgramSiteSource",
     "packSite",
     "compileApprovedOntology",
     "emitPageContract",

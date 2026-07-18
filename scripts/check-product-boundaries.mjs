@@ -6,7 +6,7 @@ const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const readText = (path) => readFile(resolve(root, path), "utf8");
 const readJson = async (path) => JSON.parse(await readText(path));
 
-const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex, frameworkCore, siteManifest, frameworkAdapter] = await Promise.all([
+const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex, frameworkCore, siteManifest, frameworkAdapter, contentProgramAdapter] = await Promise.all([
   readJson("package.json"),
   readJson("hyper-site/package.json"),
   readJson("hyper-content/package.json"),
@@ -15,6 +15,7 @@ const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex, framew
   readText("reference/src/framework-core.ts"),
   readText("reference/src/site-manifest.ts"),
   readText("reference/src/framework.ts"),
+  readText("reference/src/content-program-adapter.ts"),
 ]);
 
 const errors = [];
@@ -33,8 +34,8 @@ if ("@amtech/hyper-content" in siteDependencies) errors.push("hyper-site must no
 
 const forbiddenSiteSurface = [
   "ontology", "context-corpus", "sparse-lexical", "opportunity", "site-program", "page-generation",
-  "glm-provider", "pcn-emitter", "articleir-parser", "unfolder", "wasm", "../reference/dist/manifest.js",
-  "../reference/dist/framework.js",
+  "glm-provider", "pcn-emitter", "articleir-parser", "unfolder", "wasm", "content-program-adapter",
+  "../reference/dist/manifest.js", "../reference/dist/framework.js",
 ];
 for (const token of forbiddenSiteSurface) if (siteIndex.includes(token)) errors.push(`hyper-site public facade leaks forbidden content token: ${token}`);
 for (const required of ["framework-core", "site-manifest", "browser-targets", "css-modern"]) {
@@ -51,8 +52,14 @@ for (const token of ["vector_space", "agent_harness", "coverage_policy", "profil
 }
 if (!frameworkAdapter.includes('from "./framework-core.js"')) errors.push("legacy framework adapter must delegate to framework-core");
 if (!frameworkAdapter.includes("compileFrameworkCore")) errors.push("legacy framework adapter does not call the neutral compiler");
+if (!contentProgramAdapter.includes('from "./framework-core.js"')) errors.push("content program adapter must target the neutral Hyper Site contract");
+if (!contentProgramAdapter.includes("adaptContentProgramSiteSource")) errors.push("content program adapter must expose an explicit SiteSource adaptation");
+if (contentProgramAdapter.includes('from "../hyper-content')) errors.push("content program adapter must not depend on the package that owns it");
 
-const requiredContentSurface = ["hyper-site", "compileContentSite", "packSite", "pcn-emitter", "articleir-parser", "unfolder", "ontology-graph", "wasm", "manifest"];
+const requiredContentSurface = [
+  "hyper-site", "compileContentSite", "compileContentProgramManifest", "content-program-adapter",
+  "packSite", "pcn-emitter", "articleir-parser", "unfolder", "ontology-graph", "wasm", "manifest",
+];
 for (const token of requiredContentSurface) if (!contentIndex.includes(token)) errors.push(`hyper-content public facade is missing required token: ${token}`);
 
 if (errors.length > 0) {
@@ -65,6 +72,7 @@ if (errors.length > 0) {
     dependencyDirection: "hyper-content -> hyper-site",
     neutralFrameworkSource: "reference/src/framework-core.ts",
     neutralManifestSource: "reference/src/site-manifest.ts",
+    contentProgramAdapter: "reference/src/content-program-adapter.ts",
     siteSurfaceForbiddenTokens: forbiddenSiteSurface.length,
     contentSurfaceRequiredTokens: requiredContentSurface.length,
   }));
