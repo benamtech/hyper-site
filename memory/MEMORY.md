@@ -3,31 +3,33 @@
 format: TOON-oriented Markdown  
 status: active  
 scope: standalone repository root  
-updated_at: 2026-07-18T05:30:00-04:00
+updated_at: 2026-07-18T06:10:00-04:00
 
 ## protocol
 
 memory_model{index,handoffs,mutation}:
   "memory/MEMORY.md","memory/YYYY-MM-DD-HHMM-<slug>.md","append immutable handoff; reconcile index; never overwrite timestamped files"
 
-rules[12]:
+rules[14]:
   read-MEMORY-first
   read-newest-handoff-next
   timestamped-handoffs-immutable
   source-tests-artifacts-over-docs
   two-products-one-publication-target
   hyper-content-depends-on-hyper-site-only
+  one-web-artifact-authority-during-migration
+  plan-steps-require-TDD-effects-rollback-and-metrics
   no-invented-business-truth
   no-same-model-self-acceptance
   bounded-repair-or-reject
   synthetic-scale-is-not-framework-quality
   content-pipeline-timing-is-not-framework-timing
-  ordinary-framework-and-real-case-gates-before-alpha
+  ordinary-framework-real-case-and-revenue-gates-before-alpha
 
 ## current
 
-state{branch,pr,status,maturity,merge}:
-  agent/glm-blackwell-vertical-slice,3,"root hyper-site/hyper-content package boundaries plus PCN/ArticleIR backend implemented; exact CI green; physical source extraction and real cases pending","research prototype approaching near-alpha","keep draft; do not merge"
+state{branch,pr,head,status,maturity,merge}:
+  agent/glm-blackwell-vertical-slice,3,c7b56bfe20dcd404aa77683b4f0789d50ce04d00,"META-PLAN-V3 installed; neutral framework compiler and SiteManifest extracted; exact CI green; physical package migration and real outcomes pending","research prototype approaching near-alpha","keep draft; do not merge"
 
 product_identity:
   "two products in one monorepo: hyper-site static web framework; hyper-content ontology/evidence/content compiler targeting hyper-site"
@@ -35,21 +37,23 @@ product_identity:
 dependency_direction:
   "hyper-content -> hyper-site; reverse dependency prohibited"
 
-compatibility_path:
-  "hyper-content facade -> hyper-site facade -> reference/dist/framework.js; one canonical publication authority during migration"
+current_compile_paths:
+  "hyper-site -> reference/dist/framework-core.js -> content-neutral static artifacts"
+  "hyper-content -> reference/dist/framework.js compatibility adapter -> framework-core -> vector prototypes and packed IR"
+
+program_authority:
+  "planning/meta-plan-v3.json + planning/meta-plan-v3.steps.json; 7 workstreams, 6 phases, 22 steps, 22 preserved technologies, 4 outcomes, 4 hypotheses"
 
 content_backend:
-  "approved compiler state -> deterministic PCN -> LLM prose backend -> external ArticleIR acceptance -> deterministic unfolder -> hyper-site"
-
-continuous_agent:
-  "repeated explicit checkpointed invocations over versioned artifacts; never opaque perpetual loop or automatic publication"
+  "approved compiler state -> deterministic PCN -> provider -> external ArticleIR acceptance -> deterministic unfolder -> hyper-site"
 
 ## newest handoffs
 
-handoffs[7]{at,file,status,scope}:
-  2026-07-18T05:30:00-04:00,2026-07-18-0530-product-boundary-folder-split.md,current,"research-supported two-product decision, root folders, boundary tests, PCN backend classification, exact CI"
+handoffs[8]{at,file,status,scope}:
+  2026-07-18T06:10:00-04:00,2026-07-18-0610-meta-plan-v3-framework-core-extraction.md,current,"executable program authority, neutral compiler and SiteManifest, compatibility adapter, exact CI"
+  2026-07-18T05:30:00-04:00,2026-07-18-0530-product-boundary-folder-split.md,foundation,"research-supported two-product decision, root folders, boundary tests, PCN backend classification"
   2026-07-18T04:00:00-04:00,2026-07-18-0400-near-alpha-framework-reframe.md,superseded-product-framing,"maturity reset, continuous workspace, strict release gate, ordinary-framework and 10K maintenance requirements"
-  2026-07-18T03:30:00-04:00,2026-07-18-0330-glm-blackwell-production-vertical-slice.md,historical-foundation,"provider/appliance/design/transaction/recovery and synthetic full emission; production maturity framing superseded"
+  2026-07-18T03:30:00-04:00,2026-07-18-0330-glm-blackwell-production-vertical-slice.md,historical-foundation,"provider/appliance/design/transaction/recovery and synthetic full emission"
   2026-07-18T02:05:00-04:00,2026-07-18-0205-repository-ingestion-boundary.md,foundation,"standalone repository ingestion"
   2026-07-18T01:15:00-04:00,2026-07-18-0115-graph-triage-ci-closure.md,foundation,"graph research disposition"
   2026-07-18T01:05:00-04:00,2026-07-18-0105-graph-learning-paper-triage.md,foundation,"learned graph promotion gates"
@@ -57,139 +61,106 @@ handoffs[7]{at,file,status,scope}:
 
 ## authority
 
-read_order[17]{order,file,role}:
+read_order[15]{order,file,role}:
   1,../identity.md,"two-product architect identity"
   2,../AGENTS.md,"product boundary and scientific operating contract"
-  3,../CODEGRAPH.md,"separate framework/content code graphs and migration map"
-  4,../README.md,"current monorepo product, maturity, and gates"
-  5,../29-product-boundary-research-and-root-folder-split.md,"research, falsification, classification, and folder decision"
-  6,MEMORY.md,"durable current state"
-  7,2026-07-18-0530-product-boundary-folder-split.md,"latest immutable handoff"
-  8,../validation/reports/2026-07-18-product-boundary-folder-split.md,"exact boundary and regression proof"
-  9,../hyper-site/README.md,"framework public ownership"
-  10,../hyper-content/README.md,"content compiler public ownership"
-  11,../27-near-alpha-framework-validation-and-continuous-agent-workspace.md,"inherited maturity and real-case gate"
-  12,../28-agent-first-web-framework-and-llm-backend.md,"PCN/ArticleIR backend rationale; now hyper-content-owned"
-  13,2026-07-18-0400-near-alpha-framework-reframe.md,"prior one-product framing; retain maturity evidence only"
-  14,../26-graph-learning-paper-triage-and-promotion-gates.md,"content graph/network promotion gates"
-  15,../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md,"research crosswalk"
-  16,../24-agent-discovered-ontology-and-10k-site-program.md,"content compiler and 10K experiment"
-  17,../validation/reports/,"measured reports"
-
-Standalone rule: former parent/subtree/source-repository paths are historical only, never live targets.
+  3,../CODEGRAPH.md,"framework/content code graphs and migration map"
+  4,../README.md,"current monorepo product and maturity"
+  5,../30-meta-plan-v3-executable-program.md,"current executable program rationale and phase authority"
+  6,../planning/meta-plan-v3.json,"machine program, workstreams, outcomes, hypotheses"
+  7,../planning/meta-plan-v3.steps.json,"machine TODO DAG, TDD, effects, rollback and pass metrics"
+  8,MEMORY.md,"durable current state"
+  9,2026-07-18-0610-meta-plan-v3-framework-core-extraction.md,"latest immutable handoff"
+  10,../validation/reports/2026-07-18-meta-plan-v3-framework-core-extraction.md,"exact current validation proof"
+  11,../29-product-boundary-research-and-root-folder-split.md,"research and folder decision"
+  12,../hyper-site/README.md,"framework ownership"
+  13,../hyper-content/README.md,"content compiler ownership"
+  14,../27-near-alpha-framework-validation-and-continuous-agent-workspace.md,"inherited maturity and real-case gate"
+  15,../validation/reports/,"measured reports"
 
 ## source state
 
-layers[25]{layer,file,state}:
-  root-workspaces,../package.json,"hyper-site and hyper-content npm workspaces"
-  boundary-gate,../scripts/check-product-boundaries.mjs,"one-way dependency and facade-surface assertions"
-  hyper-site-facade,../hyper-site/index.mjs,"static compiler/browser/CSS public surface; compatibility delegation"
-  hyper-site-test,../hyper-site/test/boundary.test.mjs,"content authority absent from framework surface"
-  hyper-content-facade,../hyper-content/index.mjs,"framework target plus ontology/provider/PCN/ArticleIR/content public surface"
-  hyper-content-test,../hyper-content/test/boundary.test.mjs,"content backend and framework target present"
-  pcn,../reference/src/pcn-emitter.ts,"deterministic approved compiler state to Page Contract Notation"
-  articleir,../reference/src/articleir-parser.ts,"strict external section/word/evidence/schema/link/pattern acceptance"
+layers[20]{layer,file,state}:
+  program-index,../planning/meta-plan-v3.json,"workstreams, phases, placements, outcomes, hypotheses and draft branch policy"
+  program-steps,../planning/meta-plan-v3.steps.json,"22 dependency-checked TODO steps with TDD, metrics, effects and rollback"
+  plan-validator,../scripts/check-meta-plan.mjs,"DAG, metrics, preservation, outcome and revenue assertions"
+  contribution-standard,../CONTRIBUTING.md,"branch, TDD, evidence, failure and claim rules"
+  neutral-framework,../reference/src/framework-core.ts,"content-neutral SiteSource to PageIR/static HTML/sitemap"
+  neutral-manifest,../reference/src/site-manifest.ts,"content-neutral SiteManifest"
+  content-adapter,../reference/src/framework.ts,"legacy vector prototypes and packed IR added after neutral compile"
+  boundary-gate,../scripts/check-product-boundaries.mjs,"one-way package and source import assertions"
+  hyper-site-facade,../hyper-site/index.mjs,"neutral compiler/manifest/browser/CSS public surface"
+  hyper-content-facade,../hyper-content/index.mjs,"neutral target plus explicit content-aware compile/packing and content pipeline"
+  parity-test,../reference/test/framework-core-boundary.test.mjs,"exact web artifact parity and deterministic neutral compilation"
+  pcn,../reference/src/pcn-emitter.ts,"approved compiler state to Page Contract Notation"
+  articleir,../reference/src/articleir-parser.ts,"strict external output acceptance"
   unfolder,../reference/src/unfolder.ts,"deterministic Markdown/JSON-LD/HTML/sitemap lowering"
-  page-backend,../reference/src/page-backend.ts,"provider batch dispatch over PCN and ArticleIR"
-  maturity-evaluator,../reference/src/near-alpha-framework.ts,"legacy combined maturity and real-case validation"
-  release-gate,../reference/src/near-alpha-release.ts,"complete non-synthetic case plus zero fail/pending required"
-  workspace,../reference/src/agent-workspace.ts,"immutable snapshots, cycles, lifecycle, transitive invalidation"
-  provider,../reference/src/glm-provider.ts,"Z.AI JSON mode + external validation + bounded repair"
-  design,../reference/src/design-authoring.ts,"core briefs, design tokens, safe shared CSS, restyle invariant"
-  repository-ingestion,../reference/src/repository-ingestion.ts,"explicit bytes/config/evidence; real operator snapshot pending"
-  ontology-graph-opportunity,../reference/src/agent-site-orchestrator.ts,"hyper-content-owned governed compiler"
-  transaction,../reference/src/page-draft-transaction.ts,"content drafts converge toward canonical SiteSource/PageIR"
-  corpus,../reference/src/corpus-validation-production.ts,"hyper-content exact/lexical/local-semantic/evidence/render validation"
-  recovery,../reference/src/production-orchestrator.ts,"dependency-bound generation checkpoints"
-  publication,../reference/src/framework.ts,"legacy canonical static compiler; still mixed with vector packing"
-  mixed-manifest,../reference/src/manifest.ts,"must split SiteManifest from ContentProgramManifest"
-  current-wasm,../reference/src/wasm.ts,"vector/facility kernels; hyper-content-owned, not browser runtime"
-  focused-ci,../.github/workflows/production-pipeline.yml,"product boundary, backend, operator, near-alpha tests"
-  full-ci,../.github/workflows/reference.yml,"legacy full build/manifest/UI/browser/R3F suite"
+  provider,../reference/src/glm-provider.ts,"JSON transport plus external validation and bounded repair"
+  workspace,../reference/src/agent-workspace.ts,"immutable snapshots, cycles and invalidation"
+  current-wasm,../reference/src/wasm.ts,"content vector/facility kernels; not browser runtime"
+  focused-ci,../.github/workflows/production-pipeline.yml,"plan, boundary, operator and focused regression gates"
+  full-ci,../.github/workflows/reference.yml,"full tests, emission, orchestration, preview, browser and R3F"
+  validation,../validation/reports/2026-07-18-meta-plan-v3-framework-core-extraction.md,"exact head proof and nonclaims"
 
 ## decisions
 
-decisions[25]{id,decision,ref}:
-  D01,"maturity is research prototype approaching near-alpha, not production",../AGENTS.md
-  D02,"repository contains hyper-site and hyper-content as separate products",../29-product-boundary-research-and-root-folder-split.md
-  D03,"hyper-content may depend on hyper-site; reverse dependency is forbidden",../scripts/check-product-boundaries.mjs
-  D04,"root folders are public package boundaries while physical migration is staged",../README.md
-  D05,"one canonical PageIR/renderer/publication path remains during migration",../CODEGRAPH.md
-  D06,"current framework.ts vector packing is legacy coupling to extract",../29-product-boundary-research-and-root-folder-split.md
-  D07,"current manifest.ts is primarily mixed content program state and must split",../29-product-boundary-research-and-root-folder-split.md
-  D08,"current Wasm is content vector/facility math, not browser interactivity",../reference/src/wasm.ts
-  D09,"validation-contracts is generic typed acceptance infrastructure",../reference/src/validation-contracts.ts
-  D10,"exact competitor build constants require frozen local reproduction",../validation/reports/2026-07-18-product-boundary-folder-split.md
-  D11,"PCN/ArticleIR/unfolder is hyper-content backend, not framework onboarding",../hyper-content/README.md
-  D12,"content-pipeline timing is not hyper-site framework timing",../README.md
-  D13,"10K is a hyper-content scale tier unless rendering is isolated",../AGENTS.md
-  D14,"continuous agent means checkpointed workspace invocations",../reference/src/agent-workspace.ts
-  D15,"strict release requires a complete real case and zero pending",../reference/src/near-alpha-release.ts
-  D16,"ordinary framework baseline is mandatory for hyper-site",../AGENTS.md
-  D17,"every generated page requires task, information/utility, evidence, neighbor difference, and owner",../reference/src/near-alpha-framework.ts
-  D18,"network science is hyper-content research and requires held-out outcomes",../AGENTS.md
-  D19,"repository config is explicit truth, not extraction",../reference/src/repository-ingestion.ts
-  D20,"GLM JSON mode is transport structure, not semantic authority",../reference/src/glm-provider.ts
-  D21,"same generator cannot approve ontology or design",../reference/src/generation-schemas.ts
-  D22,"PageDrafts converge on the existing static compiler authority",../reference/src/page-draft-transaction.ts
-  D23,"hardware price is soft observed metadata",../reference/src/appliance-contract.ts
-  D24,"synthetic full emission is not relevance, framework, or commercial proof",../validation/reports/2026-07-18-near-alpha-framework-reframe.md
-  D25,"PR #3 stays draft through physical extraction, publisher, real cases, and comparisons",../README.md
+decisions[12]{id,decision,ref}:
+  D01,"maturity remains research prototype approaching near-alpha",../AGENTS.md
+  D02,"hyper-content may depend on hyper-site; reverse dependency is forbidden",../scripts/check-product-boundaries.mjs
+  D03,"all existing technologies are preserved but activation is evidence-gated",../planning/meta-plan-v3.json
+  D04,"revenue validation is an independent W6 authority, not an inference from technical tests",../30-meta-plan-v3-executable-program.md
+  D05,"neutral web compilation precedes content geometry in the compatibility path",../reference/src/framework.ts
+  D06,"Hyper Site public compile returns no packed content geometry",../hyper-site/test/boundary.test.mjs
+  D07,"legacy web artifacts must remain exactly equal during extraction",../reference/test/framework-core-boundary.test.mjs
+  D08,"legacy mixed manifest remains preserved until explicit adapter enumeration",../30-meta-plan-v3-executable-program.md
+  D09,"current Wasm remains content/research infrastructure",../reference/src/wasm.ts
+  D10,"nominal model memory and token pricing are hypotheses or formulas, not workload proof",../30-meta-plan-v3-executable-program.md
+  D11,"ordinary-framework, real-provider, field and revenue evidence remain mandatory",../planning/meta-plan-v3.steps.json
+  D12,"PR #3 stays draft until all release outcomes pass",../planning/meta-plan-v3.json
 
 ## proof
 
-product_boundary_run{workflow,run,job,head,result,artifact_digest}:
-  "Hyper Site Near-Alpha Pipeline",29639039474,88066298004,d2d5f2266198aa0e697e0ec480d4b971ef0c8169,success,"sha256:382db7d285b55ac6e4952234a4b3a7e5e5c60713231d17354a8b4b03b5636378"
+focused_run{workflow,run,job,head,result,artifact,digest}:
+  "Hyper Site Near-Alpha Pipeline",29640302422,88069605262,c7b56bfe20dcd404aa77683b4f0789d50ce04d00,success,8428400516,"sha256:7ec84641887dbf92d39341313fdf013869b4f1d54e09f3260abbf92554400387"
 
-product_boundary_steps:
-  "reference TypeScript build; static dependency gate; hyper-site and hyper-content facade tests; operator checks; PCN backend tests; near-alpha and workspace suites"
+focused_steps:
+  "TypeScript build; executable-plan validator and negative tests; product boundary gate; package tests; operator checks; framework-core parity; backend/near-alpha/release/workspace tests"
 
 reference_run{workflow,run,job,head,result}:
-  "Hyper Site Reference",29639039488,88066297939,d2d5f2266198aa0e697e0ec480d4b971ef0c8169,success
+  "Hyper Site Reference",29640302427,88069605330,c7b56bfe20dcd404aa77683b4f0789d50ce04d00,success
 
 reference_steps:
-  "full tests; manifest; UI; orchestration; framework validate/preview; browser; R3F"
-
-legacy_scale[3]{pages,elapsed_ms,candidates,html_bytes}:
-  100,2724.549,3675,"recorded"
-  500,3425.700,509,"recorded"
-  10000,21867.767,12949,54291900
+  "full npm test; manifest; UI; orchestration; framework validate/preview; browser; R3F"
 
 proof_interpretation:
-  "root API/dependency separation and no legacy regression; synthetic legacy scale remains hyper-content plus deterministic-output evidence, not isolated framework proof"
+  "P0.2, P1.1 and P1.2 pass; public Hyper Site is vector-free while legacy content geometry is preserved; independent ship, field and commercial outcomes remain unproven"
 
 ## not proven
 
-not_proven[18]:
-  physical-source-extraction
-  site-manifest-content-program-manifest-split
-  vector-free-hyper-site-compiler
+not_proven[14]:
+  physical-source-ownership-in-hyper-site-src
+  explicit-content-program-adapter-through-package
   create-project-command
   dev-server-or-hmr
   publisher-or-deploy-command
   real-five-page-hyper-site-case
   ordinary-framework-comparison
   live-pcn-articleir-provider-case
-  real-gpu-throughput
-  browser-wasm-value
-  real-design-typography-layout-graphics-quality
-  continuous-operation-beyond-file-snapshots
-  real-page-relevance-information-gain-accessibility
-  useful-indexable-content-cohort
-  indexing-ranking-citations
-  conversion-revenue-lifecycle-return
+  accepted-25-page-cohort
+  checkpoint-fault-matrix-on-real-provider
+  real-gpu-throughput-or-concurrent-fit
+  client-acceptance-or-positive-margin
+  indexing-ranking-citations-or-conversion
   actual-near-alpha-release
 
 ## next
 
-next[10]{order,task,gate}:
-  1,"split SiteManifest from ContentProgramManifest","no site package content-vector/provider fields"
-  2,"remove vector/prototype packing from hyper-site compileSite","same static HTML and sitemap with no content imports"
-  3,"extract content-neutral UI contracts","framework scaffold/renderer no mixed manifest dependency"
-  4,"add create/dev/build/deploy framework surface","ordinary developer can build a small site without content concepts"
-  5,"add one static publisher adapter","repeatable deploy and rollback"
-  6,"build real five-page hyper-site-only fixture","approved design/assets/accessibility and operator record"
-  7,"run ordinary-framework comparison","same pages/assets/machine/cache/output"
-  8,"run live hyper-content PCN/ArticleIR case into same target","tokens/cost/latency/repair/evidence report"
-  9,"extend to 25 real noindex pages","page-existence records and held-out judgments"
-  10,"complete physical migration and decide alpha","remove reference compatibility layer; real cases; zero hard pending"
+next[8]{order,step,task,gate}:
+  1,P1.3,"build explicit ContentProgramManifest-to-public-SiteSource adapter","one publication authority; zero reverse dependency"
+  2,P1.4,"move clean W1 source into hyper-site/src and make reference consume package","zero runtime reference imports from Hyper Site"
+  3,P1.5,"move vector packing/prototypes/current Wasm physically behind Hyper Content","zero vector exports from Hyper Site; packed regressions green"
+  4,P2.1,"create five-page standalone scaffold","three or fewer commands; no content concepts"
+  5,P2.2-P2.4,"dev/preview/publisher and frozen ordinary-framework comparison","correctness, repeatability and identical fixture"
+  6,P3.1-P3.3,"real provider cohort and recovery proof","25 accepted noindex pages; zero unsupported claims"
+  7,P4.1-P4.3,"paid or signed client delivery","acceptance, positive gross margin and substantiated claims"
+  8,P5.1-P5.5,"preregistered calibration and scale decisions","100 outcomes; held-out promotion or negative result"
