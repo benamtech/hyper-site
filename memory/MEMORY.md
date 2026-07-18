@@ -3,7 +3,7 @@
 format: TOON-oriented Markdown  
 status: active  
 scope: standalone repository root  
-updated_at: 2026-07-18T08:05:00-04:00
+updated_at: 2026-07-18T08:10:00-04:00
 
 ## protocol
 
@@ -32,8 +32,8 @@ rules[18]:
 
 ## current
 
-state{branch,pr,evidence_head,validated_implementation_head,status,maturity,merge}:
-  agent/glm-blackwell-vertical-slice,3,95e45bcadcb668c78d6bdb01e13f01488551456f,05d8961791c6451e480a6be453351b8722bca81f,"documentation system organized and idempotent; task-surface research/architecture and META-PLAN mutation exact-CI green; physical source extraction and runtime implementation pending","research prototype approaching near-alpha","keep draft; do not merge"
+state{branch,pr,validated_implementation_head,latest_closure_handoff,status,maturity,merge}:
+  agent/glm-blackwell-vertical-slice,3,05d8961791c6451e480a6be453351b8722bca81f,"memory/2026-07-18-0805-task-surface-doc-system-ci-closure.md","documentation system organized and idempotent; task-surface research/architecture and META-PLAN mutation exact-CI green; physical source extraction and runtime implementation pending","research prototype approaching near-alpha","keep draft; do not merge"
 
 product_identity:
   "two products plus one permanent shared task-surface workstream: hyper-site static web framework; hyper-content ontology/evidence/content compiler targeting hyper-site; W7 protocol-neutral governed task surfaces"
