@@ -255,3 +255,27 @@ Not yet proven:
 - enterprise governance or commercial outcomes.
 
 PR #3 remains draft and unmerged.
+
+## Governed task-surface graph
+
+```text
+Hyper Content optional task proposal
+  goal + evidence + inputs + outputs + limits
+              |
+              v
+W7 protocol-neutral TaskServiceManifest / SurfacePlan
+              |
+      +-------+-------+
+      |               |
+      v               v
+static fallback   runtime adapter interface
+      |               |
+      v               v
+PageIR/HTML       intent -> events -> resource/receipt
+      |               |
+      +-------+-------+
+              v
+       governed task page
+```
+
+W7 is permanent. W1 remains static framework and renderer authority, W3 remains the temporary migration bridge, W4 owns observability/recovery/security infrastructure, and W6 owns field and revenue acceptance. Protocol adapters live outside the canonical ABI.
