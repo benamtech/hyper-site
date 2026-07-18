@@ -1,317 +1,328 @@
-# CODEGRAPH.md — Near-Alpha Agent-First Web Framework
+# CODEGRAPH.md — Hyper Site / Hyper Content Monorepo
 
-Status: standalone research prototype approaching near-alpha. Repository ingestion, GLM proposal contracts, independent approvals, design authority, canonical PageDraft-to-PageIR emission, resumable generation, continuous artifact snapshots, bounded invalidation, and synthetic 10K validation are implemented. Real framework baselines, real cases, live providers/hardware, and field acceptance remain pending.  
+Status: two near-alpha package surfaces established; canonical implementation remains under staged extraction in `reference/`.  
 Updated: 2026-07-18
 
-## Canonical lifecycle graph
+## Root graph
 
 ```text
-local repository + hyper-site.project.yaml + source/style/assets
-  production-cli.mjs ingest
+hyper-content
+  ontology/evidence/content compiler
+          |
+          | produces approved static-site inputs
+          v
+hyper-site
+  web framework / PageIR / HTML / CSS / publisher target
+```
+
+Hard dependency rule:
+
+```text
+hyper-content -> hyper-site
+hyper-site -X-> hyper-content
+```
+
+Authority:
+
+- root workspaces: `package.json`;
+- framework facade: `hyper-site/index.mjs`;
+- content facade: `hyper-content/index.mjs`;
+- boundary gate: `scripts/check-product-boundaries.mjs`;
+- research/falsification record: `29-product-boundary-research-and-root-folder-split.md`;
+- legacy implementation during extraction: `reference/src/`.
+
+## Hyper Content graph
+
+```text
+repository + explicit project truth
   repository-ingestion.ts
-        |
-        v
-ProjectInput + source/evidence/asset ledgers
   project-input.ts
         |
-        +-----------------------------------------------+
-        | continuous AgentWorkspaceSnapshot             |
-        | near-alpha-framework.ts + agent-workspace.ts  |
-        | datasheets, design, starter site, batches,    |
-        | maintenance artifacts, hashes, dependencies   |
-        +-----------------------------------------------+
+        v
+source / evidence / asset ledgers
         |
         v
-physical Stage 1: GLM AgentOntologyProposal
+ontology proposal + independent approval
   glm-provider.ts
   generation-schemas.ts
-        |
-        v
-exact-hash independent approval
-  production-approve.mjs
-  applyOntologyApproval
-        |
-        v
-ApprovedOntology
   ontology-discovery.ts
         |
         v
-CompiledOntologyGraph
+ontology graph + constraints
   ontology-graph.ts
-  typed sparse edges + separate requires/excludes
+  typed-graph.ts
         |
         v
-bounded opportunity selection
-  opportunity-generation-optimized.ts
-  opportunity-space-optimized.ts
-  opportunity-space-production.ts
-  sparse concave selection + HRR structure
+bounded opportunity and page selection
+  opportunity-*.ts
+  sparse-lexical.ts
+  context-corpus.ts
+  site-program*.ts
+  page-coordinate.ts
         |
         v
-SiteGenerationPlan
-  site-program-optimized.ts
-        |
-        +------------------------------------------+
-        | approved core-site design authority      |
-        | design-authoring.ts                      |
-        | design system, typography, layouts,      |
-        | graphics briefs, starter-page contracts  |
-        +------------------------------------------+
+CandidatePageSeed + evidence + design + link plan
         |
         v
-physical Stage 2: bounded GLM PageDraft batches
-  generation-schemas.ts
-  JSON object mode + external validation
-  bounded repair or reject
+PCN deterministic lowering
+  pcn-emitter.ts
         |
         v
-existing PageConceptProposal compiler
-  site-program.ts
+LLM prose backend
+  page-backend.ts
+  glm-provider.ts
         |
         v
-atomic canonical transaction
-  page-draft-transaction.ts
-  PageConcept -> CandidatePageSeed -> SiteSource -> PageIR
-  framework.ts
+ArticleIR external acceptance
+  articleir-parser.ts
         |
         v
-shared static design renderer
-  design-authoring.ts
+deterministic unfolding
+  unfolder.ts
         |
         v
-bounded local corpus validator
-  corpus-validation-production.ts
-  exact + sparse lexical + local semantic candidates
-  evidence/information/static crawl checks
-        |
-        v
-noindex static review site + reports + checkpoints
-  production-orchestrator.ts
-  production-cli.mjs run
-        |
-        v
-post-generation workspace changes
-  workspace-cli.mjs
-  planAgentWorkspaceInvalidation
-  unchanged artifact hashes + bounded rebuild scope
-        |
-        v
-near-alpha framework evaluation
-  near-alpha-framework.ts
-  ordinary-framework baselines + TDD + network studies
-  real case studies + page-existence + scale-transition gates
+hyper-site public API
 ```
 
-There is one canonical publication path. New model output converges on the existing `compilePageConceptProposals` and `compileSite` authorities. The workspace and near-alpha evaluator wrap that path; they do not create a second PageIR or publication system.
-
-## Maturity interpretation
+Content-side post-generation validation and lifecycle:
 
 ```text
-production-boundary source name
-!=
-production-ready product
+output cohort
+-> exact / lexical / embedding / evidence / information checks
+-> checkpoints and recovery
+-> noindex review
+-> indexing/search/outcome feedback when implemented
+-> evidence refresh, repair, retirement
 ```
 
-The repository is near-alpha research. Synthetic full emission can demonstrate deterministic execution, recovery, and bounded complexity. It cannot establish framework superiority, design quality, useful pages, or field readiness.
+Current content-owned research arms:
 
-## Physical model topology
+- HRR/vector packing and compatibility calculations;
+- ontology graph experiments;
+- BM25 and local semantic duplicate detection;
+- current `wasm.ts` and `zig/` vector/facility kernels;
+- GPU appliance and model workflows;
+- RAG/IG/corpus experiments.
+
+These may improve the content compiler. They are not framework runtime claims.
+
+## Hyper Site graph
+
+Target framework graph after extraction:
 
 ```text
-Stage 1: one bounded ontology proposal job per project
-Stage 2: deterministic PageDraft batches
-Stage 3: optional independent observation/repair review
+site config + static content objects + design system + assets
+        |
+        v
+SiteSource
+        |
+        v
+PageIR
+        |
+        +-------------------+
+        |                   |
+        v                   v
+semantic HTML          shared CSS/assets
+        |                   |
+        +---------+---------+
+                  v
+          static output directory
+                  |
+                  v
+         publisher/deploy adapter
 ```
 
-Conceptual compiler passes remain deterministic code and validation concerns. They are not seven mandatory API calls per page.
+Framework-owned concerns:
 
-## Continuous workspace graph
+- components and semantic module contracts;
+- layout, typography, tokens, and themes;
+- static HTML and structured-data emission;
+- browser targets, accessibility, and performance budgets;
+- dev server, incremental builds, cache/invalidation, and build output;
+- static deployment and rollback;
+- optional browser interaction adapters;
+- future browser Wasm only after a measured framework workload exists.
 
-`AgentWorkspaceSnapshot` is an immutable artifact graph.
-
-Artifact phases:
+Framework-forbidden imports/surfaces:
 
 ```text
-discovery
-datasheet-authoring
-design-authoring
-starter-site
-bulk-generation
-post-generation-maintenance
-case-study-evaluation
+ontology*
+context-corpus
+sparse-lexical
+opportunity*
+site-program*
+page-generation
+glm-provider
+pcn-emitter
+articleir-parser
+unfolder
+current wasm vector kernels
+mixed legacy manifest
 ```
 
-Artifact kinds include:
+## Mixed legacy authorities to split
+
+### `framework.ts`
+
+Current state:
 
 ```text
-business-datasheet
-evidence-ledger
-style-guide
-design-system
-typography-system
-layout-system
-graphic-brief
-starter-page
-page-batch
-post-generation-patch
-validation-report
-case-study
+static compiler
++ vector prototype packing
++ HRR feature compilation
++ graph/capability packed arrays
 ```
 
-Every artifact declares producer, sources, dependencies, status, and content hash. A new snapshot points to the prior snapshot hash.
-
-`planAgentWorkspaceInvalidation` traverses reverse dependencies from changed artifacts and emits:
+Target split:
 
 ```text
-changed artifact IDs
-invalidated artifact IDs
-unaffected artifact IDs
-dependency edges
-stable plan hash
+hyper-site static compiler
++ optional generic extension metadata
+
+hyper-content vector adapter
++ content geometry packing
 ```
 
-This is the first framework-maintenance primitive. It is not yet an incremental compiler or build cache; measured file-level invalidation and rebuild behavior remain pending.
+The static HTML compiler must not require content vectors.
 
-## Near-alpha evaluation graph
+### `manifest.ts`
 
-`evaluateNearAlphaFramework` validates ten independent boundaries:
+Current state mixes:
 
-| Boundary | Pass vector | Fail vector |
-|---|---|---|
-| maturity | research-prototype/near-alpha language | production claim from synthetic scale |
-| agent continuity | initial authoring + starter site + bulk + maintenance | bulk-only or hidden loop |
-| core framework | approved datasheet/design/type/layout/graphics/starter artifacts before batches | corpus compiler without useful core site |
-| TDD | hypotheses map to tests and falsification rules | architecture claim without executable failure test |
-| scientific protocol | frozen fixtures, commands, machines, metrics, baselines | post-hoc or self-only benchmark |
-| network science | simpler baseline + held-out outcomes + action policy | decorative graph metrics |
-| real use | non-synthetic revisioned case study | testimonial or synthetic-only case |
-| page existence | task + information + evidence + neighbor difference + owner | unique route/title/vector only |
-| framework baseline | direct ordinary-framework comparison | planning/generation timing only |
-| scale transition | 25/100/500/10K full metrics and incremental edits | cold-build-only 10K or claim beyond measured ceiling |
+- site metadata and page definitions;
+- vector-space dimensions and nearest-link policy;
+- agent-harness policy;
+- evidence/claims/information objects;
+- coverage contexts and facility/CSI analysis.
 
-## Near-alpha boundary map
-
-| Boundary | Authority | Implemented state | Remaining gate |
-|---|---|---|---|
-| maturity and scientific rejection | `near-alpha-framework.ts`, doc 27 | executable pass/fail vector | real baseline and case inputs |
-| continuous workspace | `agent-workspace.ts`, `workspace-cli.mjs` | immutable snapshots and transitive invalidation | connect actual compiler outputs and file rebuilds |
-| repository truth | `repository-ingestion.ts` | bytes, revision, field evidence, no inference | one real approved repository |
-| core authoring | `design-authoring.ts` | design authority, core-page briefs, safe shared CSS | real typography/layout/graphics/starter-site quality |
-| appliance | `appliance-contract.ts` | Blackwell target + compatibility profiles | benchmark rented nodes |
-| provider | `glm-provider.ts` | Z.AI JSON transport and bounded repair | live latency/token/schema/evidence measurements |
-| ontology/graph | existing discovery and graph modules | deterministic governed compiler | real observations and held-out judgments |
-| Stage 2 | `generation-schemas.ts` | complete PageDraft batch contract | real prose, utilities, and design integration |
-| canonical transaction | `page-draft-transaction.ts` | atomic SiteSource/PageIR/static build | real accepted batch |
-| recovery | `production-orchestrator.ts` | dependency-bound checkpoints | persistent interruption/restart on rented node |
-| corpus validator | `corpus-validation-production.ts` | bounded exact/lexical/local semantic/evidence/render checks | real embedding and relevance corpus |
-| ordinary framework comparison | `near-alpha-framework.ts` contract only | schema and rejection vector | benchmark harness and frozen fixture |
-| publication | `framework.ts` | noindex static output | real accessibility/browser/crawler/operator acceptance |
-
-## Design invariants
-
-- The core site is designed before bulk landing-page generation.
-- Design system, typography, layout, graphics, and starter-page artifacts are workspace state.
-- Design source IDs and exact approval hashes are preserved.
-- The design generator cannot self-approve.
-- CSS is one shared static artifact, not regenerated for every page.
-- Unsafe or remote CSS constructs reject.
-- Post-generation design refinement preserves canonical content hashes and index state.
-- Human-perceived design quality is pending until real review.
-
-## Generation checkpoint graph
+Target split:
 
 ```text
-Stage 1 checkpoint
-  project hash + source excerpt hash + provider identity
+hyper-site SiteManifest
+  base URL, pages, layouts, assets, design, output, deploy
 
-Stage 2 checkpoint
-  project + ontology + plan + batch + design + provider
-  + source excerpt hash + prior accepted batch hashes
-
-transaction checkpoint
-  project + ontology + plan + design + base URL + draft hashes
-
-corpus checkpoint
-  transaction + embedding backend identity + validation policy hash
+hyper-content ContentProgramManifest
+  evidence, ontology, vectors, generation, coverage, publication proposals
 ```
 
-Checkpoint payload bytes have their own hash. Semantic artifact identities remain separate.
+### `core.ts`
 
-## Framework comparison fixture
+Current state mixes SHA-256/general utilities with vector/facility algorithms.
 
-The pending benchmark harness must compare Hyper Site and at least one ordinary static, SSR, or SPA framework on the same:
+Target split:
 
 ```text
-business/source fixture
-visible page semantics
-assets
-routes and page families
-machine profile
-runtime
-build mode
-cache policy
+package-local or shared deterministic utilities
+content-owned numeric/vector algorithms
 ```
 
-Metrics:
+### UI stack
+
+`ui-scaffold.ts`, `ui-renderer.ts`, and `ui-metaprogramming.ts` are framework-oriented but currently consume mixed manifest/vector contracts. Extract a content-neutral UI plan before moving them physically.
+
+### Validation
+
+`validation-contracts.ts` is generic typed acceptance infrastructure, not merely checkpoint hashing. It may remain package-local or move to a narrow internal shared package after real bidirectional need is demonstrated.
+
+## One publication authority
+
+During migration:
 
 ```text
-cold build
-incremental edit/build
-dev server startup/update
+hyper-content facade
+-> hyper-site facade
+-> reference/dist/framework.js
+```
+
+This is intentional. Do not duplicate `compileSite`, PageIR, renderer, sitemap, or publisher behavior merely to make the folders look complete.
+
+Physical source moves occur only after dependencies are cut and package tests prove the same output.
+
+## Current package tests
+
+`hyper-site/test/boundary.test.mjs` proves:
+
+- static compiler functions are public;
+- ontology, provider, PCN, ArticleIR, unfolding, and current Wasm functions are absent.
+
+`hyper-content/test/boundary.test.mjs` proves:
+
+- framework compilation remains reachable through the content package;
+- ontology compilation is present;
+- PCN emission is present;
+- ArticleIR parsing is present;
+- unfolding is present;
+- current Wasm and provider functions remain content-owned.
+
+`scripts/check-product-boundaries.mjs` proves:
+
+- both root workspaces exist;
+- dependency direction is one-way;
+- framework facade contains no forbidden content-module references;
+- content facade includes required compiler/backend modules.
+
+## Measurement separation
+
+### Hyper Site metrics
+
+```text
+scaffold/setup effort
+dev-server startup/update
+cold/incremental build
 peak memory
-HTML/JS/CSS/assets/total output
-validation time
-static serving/crawl
-browser and accessibility
-agent/operator effort
-recovery and rollback
+HTML/CSS/JS/assets/total bytes
+browser/Core Web Vitals/accessibility
+deploy/rollback
+component/theme/plugin ergonomics
 ```
 
-## 10K maintenance matrix
-
-The next 10K claim requires more than full emission. Independently change:
+### Hyper Content metrics
 
 ```text
-one page-specific source fact
-one family-wide fact
-one design token
-one shared component
-one information object
-one page
-one page family
-one evidence source
-one ontology relation
-one interrupted batch
+evidence fidelity
+contract compliance
+information gain
+duplicate/cannibalization performance
+provider tokens/cost/latency/repair
+content usefulness/indexing/search outcomes
+cohort throughput
+maintenance and retirement cost
 ```
 
-Record invalidated, rebuilt, and unchanged artifacts, time, memory, output churn, crawl changes, review burden, and rollback.
+Never combine these into one headline benchmark.
 
-## Existing synthetic proof
+## Existing proof boundary
 
-A prior exact-head run emitted and validated 10,000 synthetic PageIR/static HTML pages with bounded candidate comparison. That remains useful software proof.
+The synthetic 10,000-page run exercised the combined legacy content/compiler/validator path and emitted static HTML. It is content-pipeline and deterministic-output evidence.
 
-It does not prove:
+It does not establish:
 
-- an attractive starter site;
-- ordinary-framework performance advantage;
-- incremental invalidation or maintenance advantage;
-- real agent workspace continuity;
-- real relevance, information gain, accessibility, or usefulness;
-- any network-science, GPU, HRR, ANN, Wasm, or Zig advantage;
-- indexing, ranking, citations, conversion, revenue, or lifecycle return.
+- isolated `hyper-site` build speed;
+- framework advantage over Hugo, Astro, or Eleventy;
+- useful or indexable pages;
+- developer onboarding, HMR, templates, plugins, or deployment quality;
+- current Wasm value for browser interaction;
+- any GPU, graph, HRR, embedding, or ranking advantage.
 
-The newest validation report and memory handoff contain exact current-head CI evidence.
+## Migration order
+
+```text
+1. package facades and dependency gate       [implemented]
+2. split site manifest from content program [pending]
+3. extract content-neutral static compiler  [pending]
+4. extract content-neutral UI contracts     [pending]
+5. add dev/build/deploy framework surface   [pending]
+6. move content modules in dependency order [pending]
+7. move framework modules physically        [pending]
+8. remove reference compatibility layer     [pending]
+9. run isolated framework comparison        [pending]
+10. run real content-to-framework case       [pending]
+```
 
 ## Next gate
 
-```text
-1. Freeze one real five-page starter-site case.
-2. Implement workspace linkage to actual compiler/design/asset outputs.
-3. Build an ordinary-framework benchmark harness.
-4. Run live provider and rented-node experiments.
-5. Compare authoring, cold build, incremental edits, output, browser, accessibility, and operator work.
-6. Extend the case to 25 real noindex pages with page-existence justifications.
-7. Freeze held-out relevance, design, and graph judgments.
-8. Scale 100 -> 500.
-9. Run the full 10K maintenance matrix.
-10. Decide whether the evidence earns an alpha milestone.
-```
+1. Make `hyper-site` compile a real five-page fixture without ontology/vector imports.
+2. Add one publisher adapter and one-command static deployment.
+3. Build the same frozen fixture in an ordinary framework.
+4. Run a real PCN -> ArticleIR -> unfolder provider pass through `hyper-content` into the same framework target.
+5. Keep PR #3 draft until the physical extraction, CI, real cases, and comparable benchmarks pass.
