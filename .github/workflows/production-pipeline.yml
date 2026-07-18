@@ -21,6 +21,12 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund --no-package-lock
       - run: npm run build
+      - name: Validate operator commands
+        run: |
+          node --check scripts/production-cli.mjs
+          node --check scripts/production-stage1.mjs
+          node --check scripts/production-approve.mjs
+          node scripts/production-cli.mjs help
       - name: Run production boundary tests
         shell: bash
         run: |
