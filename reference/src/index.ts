@@ -47,4 +47,3 @@ export * from "./production-orchestrator.js";
 export * from "./near-alpha-framework.js";
 export * from "./agent-workspace.js";
 export * from "./near-alpha-release.js";
-export * from "./trust-boundary.js";
