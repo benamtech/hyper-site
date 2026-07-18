@@ -17,7 +17,7 @@
     "validate:w2": "node scripts/validate-workstreams.mjs w2 --out validation/reports/w2-status.json",
     "validate:w3": "node scripts/validate-workstreams.mjs w3 --out validation/reports/w3-status.json",
     "test:validation": "node --test test/workstream-validation.test.mjs",
-    "test:compiler-limit": "node scripts/run-compiler-limit-test.mjs --pages 100",
+    "test:compiler-limit": "node scripts/run-compiler-limit-test-v2.mjs --pages 100",
     "build": "npm run content:build && npm run legacy:build && npm run check:boundaries",
     "test": "npm run build && npm run legacy:test && node --test hyper-site/test/*.test.mjs hyper-content/test/*.test.mjs test/*.test.mjs"
   }
