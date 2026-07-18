@@ -1,386 +1,409 @@
-# 25 — Academic Crosswalk: Agent Harness, Structured Generation, Vector Space, and Acceleration
+# 25 — Academic Crosswalk: Agent Harness, Structured Generation, Vector Space, Acceleration, and Framework Validation
 
-Status: verified research crosswalk; implementation authority remains source + validation reports  
+Status: verified research crosswalk; source, tests, real baselines, and validation reports remain implementation authority  
 Updated: 2026-07-18  
-Scope: `GTM-RESEARCH/website-framework/`
+Scope: standalone repository root  
+Maturity authority: `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
 
 ## 1. Purpose
 
-This document records which external research actually supports the framework, which conclusions remain inferences, and which implementation choices are only comparison arms.
+This document records which external research supports individual parts of Hyper Site, what remains inference, and which methods remain comparison arms.
 
-The framework's canonical product model is:
+No single paper validates the full system.
 
 ```text
-business/brand/source truth
--> Stage-1 agent proposes ontology, relations, and observations
--> deterministic compiler approves/rejects ontology state
--> sparse lexical + typed graph + constraints organize the space
--> bounded conjunction expansion creates candidate regions
--> sparse coverage and nonredundancy select a finite site corpus
--> HRR/HDC/VSA encodes approved region structure
--> Stage-2 agent maps each selected region to a page concept
--> deterministic compiler validates expression, evidence, utility, graph, and UI contracts
--> existing PageCoordinate/PageGenerationJob/PageIR/static renderer emits the site
+business/source truth
+-> agent proposes ontology
+-> external compiler/reviewer approves or rejects
+-> typed sparse graph + hard constraints
+-> bounded candidate selection
+-> agent proposes PageDraft batches
+-> external compiler validates evidence and structure
+-> canonical PageIR/static renderer
+-> continuous workspace and post-generation maintenance
+-> ordinary-framework, held-out, and real-case evaluation
 ```
 
-No single paper validates that full system. The architecture is a synthesis whose components require independent pass/fail evidence.
+The architecture is a synthesis. Every component needs an independent pass/fail vector.
 
 ## 2. Research-intake rule
 
 Externally generated bibliographies are lead lists, not authority.
 
-A citation may influence canonical architecture only when all of the following hold:
+A source may influence canonical architecture only when:
 
 ```text
-exact paper/title/author identity verified
-primary source or publisher page available
-claimed result is actually present in the source
-result applies to the same problem class
-implementation has a named simpler baseline
-framework validation/pass/fail vectors are updated
-source code or field evidence demonstrates the claimed effect
+exact identity verified
+primary source or publisher available
+claimed result appears in the source
+problem class matches
+simpler baseline named
+validation vector updated
+negative control identified
+source code or field evidence demonstrates the effect
+maintenance and full-framework cost considered
 ```
 
-Unverified titles, costs, throughput, hardware claims, crate names, and proposed action items remain notes only.
+Unverified titles, throughput, rental prices, model sizes, hardware claims, package names, and proposed actions remain notes only.
 
-## 3. Verified primary research and exact applicability
+## 3. Verified research and applicability
 
 ### 3.1 HDC/VSA and HRR
 
 Denis Kleyko, Dmitri A. Rachkovskij, Evgeny Osipov, and Abbas Rahimi:
 
-- Part I, models and data transformations: https://arxiv.org/abs/2111.06077
-- Part II, applications, cognitive models, and challenges: https://arxiv.org/abs/2112.15424
+- Part I: `https://arxiv.org/abs/2111.06077`
+- Part II: `https://arxiv.org/abs/2112.15424`
 
 Established:
 
 - high-dimensional distributed representations are a legitimate representation family;
-- binding, bundling/superposition, permutation, associative retrieval, and role-filler composition are established operations;
-- HRR is one member of the HDC/VSA family;
+- binding, bundling, permutation, associative retrieval, and role-filler composition are established operations;
 - fixed-width compositional state and hardware-oriented implementations are valid research directions.
 
 Not established:
 
-- page eligibility;
-- search demand;
-- content quality;
-- Google/Bing indexing or ranking advantage;
-- conversion or revenue lift;
-- that HRR should replace typed constraints, evidence, lexical baselines, or graph structure.
+- page eligibility or usefulness;
+- search demand, indexing, ranking, conversion, or revenue;
+- web-framework performance;
+- incremental maintenance benefit;
+- replacement of typed evidence, constraints, lexical baselines, or graphs.
 
-Framework decision:
+Decision:
 
 ```text
-retain HRR after ontology safety/materiality/evidence/graph eligibility
-retain typed attribute sets as inspectable authority
-require packed-vector parity and versioned symbol namespace
-never treat vector similarity alone as page-publication authority
+retain inspectable typed attributes as authority
+retain HRR after eligibility
+require namespace/version/parity
+benchmark against simpler structures
+never use vector similarity alone as publication authority
 ```
 
 ### 3.2 Context-document compatibility
 
-Deguang Kong, Daniel Zhou, Zhiheng Huang, and Steph Sigalas, “Personalized Search Via Neural Contextual Semantic Relevance Ranking”:
-
-https://arxiv.org/abs/2309.05113
+Kong et al., “Personalized Search Via Neural Contextual Semantic Relevance Ranking”: `https://arxiv.org/abs/2309.05113`
 
 Established:
 
-- query/document relevance and document/context compatibility are distinguishable signals;
+- document/query relevance and document/context compatibility are distinct signals;
 - lexical and semantic context signals can be combined and ablated;
-- held-out and out-of-domain evaluation are appropriate controls.
+- held-out and out-of-domain evaluation are appropriate.
 
 Not established:
 
-- construction of a public website corpus;
+- construction of a public site corpus;
 - demographic page generation;
 - HRR as the representation;
-- SEO lift;
-- zero-volume page strategy.
+- SEO or conversion lift;
+- that a compatible context justifies a page.
 
-Framework decision:
+Decision:
 
-- preserve the independent `ContextCorpus`, frozen splits, scorer identity, and held-out calibration path;
-- treat context compatibility as an evaluation layer over proposed pages, not evidence that a page should exist;
-- do not call an isotonic mapping a production probability without representative independent labels.
+- preserve an independent `ContextCorpus`, frozen splits, assessor identity, and calibration path;
+- treat compatibility as evaluation over proposed pages, not page-existence evidence;
+- require held-out real judgments before any relevance claim.
 
 ### 3.3 Submodular coverage and CSI
 
-Rishabh Iyer et al., “Submodular Combinatorial Information Measures with Applications in Machine Learning”:
+Iyer et al., “Submodular Combinatorial Information Measures with Applications in Machine Learning”: `https://arxiv.org/abs/2006.15412`
 
-https://arxiv.org/abs/2006.15412
-
-Rishabh Iyer, “Complement Submodular Information Measures for Balanced and Robust Data Selection”:
-
-https://arxiv.org/abs/2605.24779
+Iyer, “Complement Submodular Information Measures for Balanced and Robust Data Selection”: `https://arxiv.org/abs/2605.24779`
 
 Established:
 
-- facility-location, set-cover, graph-cut, saturated-coverage, and related objectives are legitimate tools for finite representative selection;
-- concave-over-modular feature coverage has diminishing returns;
-- complement-aware CSI objectives are relevant to hidden-slice balance and suppressing isolated outliers in the reported selection settings.
+- facility-location, set-cover, graph-cut, saturated-coverage, and related finite-selection objectives are legitimate;
+- concave-over-modular coverage provides diminishing returns;
+- complement-aware objectives can be relevant to balanced hidden-slice selection.
 
 Not established:
 
-- a selected region deserves a landing page;
-- the framework's composite objective inherits every guarantee of an individual monotone submodular objective;
-- CSI improves this website corpus without a representative hidden-slice benchmark.
+- selected regions deserve pages;
+- the framework’s composite objective inherits every guarantee of one submodular objective;
+- CSI improves this site corpus without a frozen representative benchmark.
 
-Framework decision:
+Decision:
 
-- retain sparse concave feature coverage as the scalable production baseline;
-- retain exact/small-instance controls and rare-tail/noise fixtures;
-- keep CSI as a comparison arm for train/validation/test construction and publication-cohort selection;
-- do not claim CSI superiority until it beats the current objective on frozen real hidden slices and does not increase isolated/noisy page admission.
+- sparse concave coverage remains the deterministic scalable baseline;
+- exact controls and tail/noise fixtures remain required;
+- CSI remains a comparison arm for split or publication-cohort selection;
+- every page still requires a task, information object, evidence, difference statement, and lifecycle owner.
 
 ### 3.4 Graph community detection
 
-Vincent Traag, Ludo Waltman, and Nees Jan van Eck, “From Louvain to Leiden: guaranteeing well-connected communities”:
-
-https://doi.org/10.1038/s41598-019-41695-z
+Traag, Waltman, and van Eck, “From Louvain to Leiden: guaranteeing well-connected communities”: `https://doi.org/10.1038/s41598-019-41695-z`
 
 Established:
 
-- Leiden improves graph-partition quality and provides connectivity-related guarantees compared with Louvain for its graph objectives.
+- Leiden improves graph partition quality and connectivity properties for its graph objectives.
 
 Not established:
 
-- a community is a coherent customer segment;
-- a community corresponds to one search intent or page family;
-- modularity or CPM is a publication objective.
+- communities are coherent customer segments, intents, page families, or routes;
+- modularity or CPM is a publication objective;
+- community detection improves maintenance or cannibalization decisions.
 
-Framework decision:
+Decision:
 
-- deterministic connected components remain the current descriptive macro-region baseline;
-- Leiden may be benchmarked as an exploratory partitioner;
-- no community ID may become page, market, or semantic truth without independent materiality/evidence/context validation.
+- deterministic connected components remain the transparent descriptive baseline;
+- Leiden may be tested against held-out family coherence, relevance, or maintenance outcomes;
+- no community identifier becomes business or publication truth.
 
-### 3.5 Deterministic harnesses and external verification
+### 3.5 External harnesses and self-verification limits
 
-Fan Huang, “ReFlect: An Effective Harness System for Complex Long-Horizon LLM Reasoning”:
+Huang, “ReFlect”: `https://arxiv.org/abs/2605.05737`
 
-https://arxiv.org/abs/2605.05737
+Zhou et al., “Externalization in LLM Agents”: `https://arxiv.org/abs/2604.08224`
 
-Chenyu Zhou et al., “Externalization in LLM Agents: A Unified Review of Memory, Skills, Protocols and Harness Engineering”:
-
-https://arxiv.org/abs/2604.08224
-
-Kaya Stechly, Karthik Valmeekam, and Subbarao Kambhampati, “On the Self-Verification Limitations of Large Language Models on Reasoning and Planning Tasks”:
-
-https://arxiv.org/abs/2402.08115
+Stechly, Valmeekam, and Kambhampati, “On the Self-Verification Limitations of Large Language Models”: `https://arxiv.org/abs/2402.08115`
 
 Established or strongly supported:
 
-- externalized state, skills, protocols, and deterministic harness logic can reduce reliance on a model reconstructing system state internally;
-- self-critique by the same model is not a sound correctness oracle;
-- sound external verification can materially outperform prompt-only self-correction in the studied tasks.
+- externalized state, skills, protocols, and deterministic harness logic reduce dependence on model-internal reconstruction;
+- same-model self-critique is not a sound correctness oracle;
+- sound external verification can outperform prompt-only correction in studied tasks.
 
-Framework decision:
+Decision:
 
 ```text
 agent proposes
--> compiler validates schema, provenance, safety, graph constraints, evidence, and corpus state
--> failed output receives explicit repair findings
+-> compiler validates schema, provenance, safety, evidence, graph, design, and workspace state
+-> explicit findings drive bounded repair
+-> independent approval remains separate
 -> publication remains separate
 ```
 
-The framework must not mark a page, ontology, or repair as correct because the producing model says it is correct.
+Near-alpha extension:
+
+- externalized state must include initial authoring artifacts and post-generation maintenance, not only generation checkpoints;
+- “continuous agent” means versioned workspace snapshots and dependency graphs, not a hidden perpetual process.
 
 ### 3.6 Structured generation
 
-Saibo Geng et al., “Generating Structured Outputs from Language Models: Benchmark and Studies” / JSONSchemaBench:
-
-https://arxiv.org/abs/2501.10868
+Geng et al., JSONSchemaBench: `https://arxiv.org/abs/2501.10868`
 
 Established:
 
-- JSON-Schema-constrained generation is an important implementation approach;
-- schema coverage, constraint compliance, generation quality, and efficiency are separate evaluation dimensions;
-- structured decoding frameworks differ materially across real-world schemas.
+- schema-constrained generation is a legitimate implementation approach;
+- schema coverage, compliance, output quality, and efficiency are separate dimensions;
+- implementations differ across real schemas.
 
-Framework decision:
+Decision:
 
-- Stage-1 and Stage-2 provider adapters should emit typed schema-bound proposals;
-- successful parsing is necessary but not sufficient;
-- provider acceptance must measure schema coverage, invalid-output rate, repair rate, semantic drift, evidence-reference integrity, latency, and token use;
-- `AgentOntologyProposal`, `PageConceptProposal`, pass artifacts, and future `PageIR` transactions remain compiler-validated after decoding.
+- Stage-1 and Stage-2 providers emit typed proposals;
+- successful JSON parsing is necessary but insufficient;
+- measure invalid-output rate, repair rate, semantic drift, evidence integrity, latency, tokens, and cost;
+- server JSON mode does not replace external schema and semantic validation.
 
 ### 3.7 Agent-system ontology
 
-Andreas Ekelhart, Kabul Kurniawan, Fajar J. Ekaputra, and Elmar Kiesling, “AgentO: An Ontology for Modeling Agentic AI Systems,” ESWC 2026:
-
-https://eprints.cs.univie.ac.at/8749/
+Ekelhart et al., “AgentO: An Ontology for Modeling Agentic AI Systems”: `https://eprints.cs.univie.ac.at/8749/`
 
 Established:
 
-- agents, tasks, workflows, and resource dependencies can be represented with a formal ontology for reconstruction, reuse, and auditing.
+- agents, tasks, workflows, resources, and dependencies can be represented for reconstruction, reuse, and audit.
 
-Framework decision:
+Decision:
 
-- use AgentO as a vocabulary/interoperability comparison for agent, task, workflow, resource, dependency, and audit entities;
-- do not replace the website's business/prospect ontology with AgentO;
-- add an adapter only after the internal Stage-1/Stage-2 contracts stabilize and an interoperability use case exists.
+- retain AgentO as an interoperability comparison;
+- do not replace the business/site ontology;
+- internal workspace artifacts already require task/resource/dependency/audit identity;
+- add an adapter only for a real interoperability use case.
 
-### 3.8 Structured language-model execution
+### 3.8 Structured model execution
 
-Lianmin Zheng et al., “SGLang: Efficient Execution of Structured Language Model Programs”:
-
-https://arxiv.org/abs/2312.07104
+Zheng et al., “SGLang”: `https://arxiv.org/abs/2312.07104`
 
 Established:
 
-- structured multi-call model programs can benefit from execution runtimes, parallelism controls, constrained decoding, and KV-cache reuse;
-- repeated shared prefixes can be exploited by the provider/runtime layer.
+- structured multi-call model programs can benefit from execution runtimes, constrained decoding, parallelism, and shared-prefix cache reuse.
 
-Framework decision:
+Decision:
 
-- SGLang or an equivalent runtime may become a Stage-1/Stage-2 execution provider;
-- it is not a compiler, ontology, evidence, page-selection, or publication authority;
-- compare it only after real provider adapters exist, using complete site-run cost, throughput, failure recovery, cache hit rate, and output-quality metrics.
+- SGLang or an equivalent may become a provider runtime;
+- it is not ontology, evidence, page-selection, design, workspace, or publication authority;
+- compare complete site-run cost, recovery, cache hits, quality, and maintenance behavior after real provider adapters exist.
 
 ### 3.9 WebAssembly
 
-Official WebAssembly specifications:
-
-https://webassembly.org/specs/
+Official specifications: `https://webassembly.org/specs/`
 
 Established:
 
-- WebAssembly supplies a portable execution format and JavaScript/Web/WASI embedding interfaces;
-- SIMD and typed numeric kernels are valid implementation targets.
+- Wasm is a portable execution format with JavaScript/Web/WASI embedding and SIMD-capable numeric paths.
 
 Not established:
 
-- automatic speedup over current JavaScript/V8;
+- automatic speedup over JavaScript/V8;
 - benefit for map/set/string/hash/heap-heavy compiler work;
-- acceptable bridge, copy, startup, toolchain, and fallback cost.
+- acceptable bridge, startup, copy, toolchain, and fallback cost;
+- web-framework improvement.
 
-Framework decision:
+Decision:
 
-- TypeScript remains the semantic and production oracle;
-- benchmark Wasm only for an isolated, contiguous, sufficiently expensive numeric kernel;
-- include bridge/copy/startup time and full-build savings;
-- require exact selection-hash parity and vector cosine parity;
-- retain complete TypeScript fallback.
+- TypeScript remains the semantic oracle;
+- isolate only contiguous expensive numeric kernels;
+- include bridge/copy/startup and full-build effects;
+- require exact output parity and complete fallback;
+- include incremental maintenance, not only cold generation, in promotion evidence.
 
-## 4. Validation-vector crosswalk
+## 4. New near-alpha framework crosswalk
+
+The reviewed research supports external verification, structured proposals, sparse representations, bounded selection, and experimental acceleration. It does not validate Hyper Site as a web framework.
+
+That requires separate software-engineering and empirical evidence.
+
+### 4.1 Test-driven development
+
+Every promotion requires:
+
+```text
+failing or negative-control test first
+hypothesis and primary metric
+falsification rule
+simpler baseline
+frozen fixture
+machine/runtime identity
+reproducible commands
+result hash
+```
+
+A benchmark result without a prior failure boundary is descriptive, not scientific promotion evidence.
+
+### 4.2 Continuous workspace
+
+Externalization research is applied to the full lifecycle:
+
+```text
+business datasheets
+evidence ledgers
+design and typography systems
+layout and graphics briefs
+starter pages
+bulk page batches
+maintenance patches
+case-study artifacts
+```
+
+Every artifact has producer, source, dependencies, status, and content hash. Workspace snapshots are immutable and linked.
+
+### 4.3 Ordinary-framework baselines
+
+Advanced compiler and vector concepts must be compared with ordinary static, SSR, or SPA frameworks on the same semantic fixture and machine.
+
+Required metrics:
+
+- cold build;
+- incremental edit/build;
+- development startup/update;
+- peak memory;
+- output HTML/JS/CSS/assets;
+- validation and crawl;
+- browser and accessibility;
+- operator effort, recovery, and rollback.
+
+Generation planning time alone is not framework performance.
+
+### 4.4 Post-10K maintenance
+
+A 10K result must measure source, design-token, shared-component, page, page-family, ontology, evidence, and interruption changes. It must identify invalidated, rebuilt, and unchanged artifacts.
+
+### 4.5 Real cases
+
+A case study is a versioned replayable artifact with repository revision, operators, sources, initial goals, assigned jobs, maintenance tasks, failures, baseline workflow, and held-out judgments.
+
+Synthetic fixtures cannot satisfy this gate.
+
+## 5. Validation-vector crosswalk
 
 | Feature/workflow | Validation vector | Pass vector | Fail vector | Current status |
 |---|---|---|---|---|
-| Stage-1 ontology agent | source IDs, evidence IDs, dimensions, confidence, material effects, sensitivity, reviewer state | proposal is explicit; compiler approves/rejects; rejected ledger preserved | prompt-only ontology becomes truth | source-wired; real provider/reviewer pending |
-| Lexical ontology baseline | tokenization, TF-IDF, BM25, label overlap, source-order determinism | related concepts exposed; exact/near duplicates require label evidence | boilerplate descriptions collapse distinct concepts | pass on adversarial fixture |
-| Typed graph | relation type, endpoints, weight, provenance, constraints, core number | explicit/co-occurrence/lexical channels; requires/excludes separate | similarity overrides hard constraint | pass on synthetic fixtures |
-| Opportunity expansion | observed seeds, graph neighbors, dimension uniqueness, constraint checks, candidate cap | bounded connected expansions | unrestricted Cartesian product | pass on 15k-candidate fixture |
-| Region eligibility | anchor, evidence, material effects, coherence, safety | all hard gates pass before vectors/pages | mathematically possible point becomes page | pass on synthetic fixtures |
-| HRR/VSA | namespace/version, role-filler atoms, dimensions, finite values, packed parity | one deterministic vector per accepted region | vectors replace evidence/constraints or drift under packing | pass on synthetic fixtures |
-| Corpus selection | sparse coverage keys, marginal gain, tail/noise controls, determinism | minimum/maximum respected; nonredundant selected set | dense quadratic matrix or quota admits noise | pass for synthetic 10k planning; external usefulness pending |
-| Stage-2 page concept | exact region expression, bounded evidence, route/question, information object/task, graph/UI contracts | one validated proposal per selected region | generic or noun-swapped page; undeclared attributes/evidence | source-wired; real model output pending |
-| Harness/repair | external findings, bounded attempts, immutable checkpoints, artifact schema | deterministic verifier controls retries | self-critique is sole acceptance | groundwork pass; provider integration pending |
-| Structured decoding | schema coverage, valid-output rate, repair rate, semantic/evidence fidelity, latency/tokens | provider emits typed proposals and compiler accepts | JSON parses but semantic/evidence contract fails | not run |
-| Agent execution runtime | shared-prefix cache, throughput, total site cost, failure recovery, quality | execution provider improves full-run metrics without semantic drift | microbenchmark only or provider becomes authority | not run |
-| Wasm acceleration | stage profile, kernel share, contiguous bytes, repeated bridge-inclusive runs, parity, full-build savings | policy thresholds met; TypeScript fallback identical | native port encodes wrong complexity or changes hashes | keep TypeScript; native/Wasm acceptance not run |
-| Publication/search | complete static HTML, crawler/browser/accessibility, indexability, independent field cohort | materially distinct pages and measured outcomes | synthetic region count described as SEO proof | not run |
+| Stage-1 ontology | IDs, sources, evidence, material effects, sensitivity, reviewer state | explicit proposal; compiler/reviewer controls approval | prompt output becomes truth | source-wired; live quality pending |
+| lexical baseline | tokenization, TF-IDF/BM25, order determinism | related concepts and duplicates exposed | boilerplate collapses distinct concepts | synthetic pass |
+| typed graph | channels, endpoints, provenance, constraints, pruning | constraints remain separate | similarity overrides exclusions | synthetic pass |
+| opportunity expansion | seeds, neighbors, dimension uniqueness, candidate cap | bounded compatible expansions | Cartesian explosion | synthetic pass |
+| eligibility | anchors, evidence, material effects, coherence, safety | hard gates before selection | mathematical point becomes page | synthetic pass |
+| HRR/VSA | namespace, atoms, parity | deterministic structural vector | vector replaces evidence | synthetic pass |
+| corpus selection | sparse coverage, tail/noise, determinism | finite nonredundant set | dense matrix or quota admits noise | synthetic planning pass |
+| Stage-2 PageDraft | job identity, evidence, claims, objects, utilities, modules | complete evidence-bound draft | generic/noun-swapped or unsupported output | synthetic full emission pass; live pending |
+| harness/repair | external findings, bounded attempts, checkpoints | verifier controls retries | self-critique accepts | source-wired |
+| structured provider | schema, drift, evidence, latency, tokens | live provider passes | JSON-only semantic failure | not run live |
+| core design | style/type/layout/graphics/starter artifacts, approval, content-hash restyle | coherent core before bulk | bulk-only unattractive site | source contract pass; human review pending |
+| continuous workspace | producer/source/dependency/status/hash, invalidation | both lifecycle ends represented | detached or hidden state | source and synthetic tests pass |
+| ordinary framework | shared fixture/machine/tiers and full metrics | direct comparison | self-only or planning-only timing | contract only; benchmark pending |
+| network science | simpler baseline, held-out outcome, action | measured decision improvement | decorative graph metric | contract only; real study pending |
+| page existence | task, object, evidence, neighbor difference, owner | one justification per page | unique route/vector only | contract only; real pages pending |
+| real use | revision, operators, jobs, maintenance, held-out judgments | complete non-synthetic case | testimonial/synthetic only | pending |
+| 10K transition | cold + incremental + invalidation + output + recovery | claimed ceiling <= measured full path | cold-only or overclaim | synthetic cold/full emission only |
+| Wasm/native | kernel profile, repeated parity, bridge-inclusive benefit | full-framework gain and fallback | novelty or microbenchmark only | TypeScript retained |
+| publication/search | static HTML, browser, crawler, accessibility, held-out field cohort | useful distinct pages and outcomes | synthetic count described as SEO proof | not run |
 
-## 5. Implementation decisions after research review
+## 6. Canonical implementation decisions
 
-Retain as canonical now:
+Retain now:
 
 ```text
 external compiler/harness authority
-schema-bearing Stage-1 and Stage-2 contracts
+schema-bearing Stage-1 and Stage-2 proposals
+explicit provenance and evidence
 TF-IDF/BM25 baseline
-explicit typed graph and hard constraints
-weighted observations and bounded closed conjunctions
-k-core pruning with anchor retention
+typed graph and hard constraints
 bounded graph expansion
-sparse concave coverage selection
+sparse concave coverage
 HRR after eligibility
 TypeScript semantic oracle
-static-first emission
+canonical static PageIR
+immutable workspace snapshots and explicit invalidation
 ```
 
-Retain as later provider/benchmark arms:
+Retain as later comparison/provider arms:
 
 ```text
-JSON-schema constrained decoding framework comparisons
-SGLang or equivalent cache-aware model runtime
-AgentO interoperability adapter
-CSI hidden-slice publication-cohort selector
-Leiden exploratory macro-partitions
-learned embeddings and ANN after sparse pruning
-native/Wasm HRR kernels after the acceleration gate
+structured-decoding framework comparisons
+SGLang or equivalent provider runtime
+AgentO interoperability
+CSI hidden-slice cohort selection
+Leiden exploratory partitions
+learned embeddings and ANN
+learned graph methods
+native/Wasm kernels
+local specialist GPU models
 ```
 
-Do not implement as authority from the supplied bibliography:
+Do not promote from bibliography alone:
 
 ```text
 same-model self-verification
-hypergraph convolution for synthetic profiles without a labeled benchmark
-reasoning-trace storage in PageIR
-CoT compression as a page-quality mechanism
-RadixAttention inside the static UI compiler
-GPU/Blackwell dependency for vector construction
-unverified 2026 paper titles, costs, TPS, or crate recommendations
+learned graph authority without real labels
+community/page equivalence
+unbounded agent loops
+GPU or native optimization without full-framework evidence
+synthetic 10K described as useful web-framework success
 ```
 
-## 6. Current measured acceleration decision
+## 7. Current evidence boundary
 
-Recorded source proof:
+Source and synthetic tests establish increasingly complete wiring, deterministic rejection, recovery, canonical static emission, workspace invalidation, and scale execution.
+
+They do not establish:
+
+- real design quality;
+- real continuous agent operation;
+- ordinary-framework advantage;
+- live model reliability or economics;
+- real network-science benefit;
+- real page usefulness, accessibility, or relevance;
+- search or commercial outcomes.
+
+## 8. Next research and engineering gates
 
 ```text
-15,000 candidate regions
-10,000 selected page regions
-400 Stage-2 batches
-2,560,000 packed-vector bytes
-5,284.510 ms total recorded CI planning time
-```
-
-The original transparent implementation recorded approximately 29 seconds on the same workflow class. The performance gain came primarily from algorithm and data-structure changes, not a language/runtime port.
-
-The current `acceleration-decision.ts` policy requires:
-
-```text
-isolated contiguous numeric kernel
-20+ repeated JavaScript/Wasm measurements
-bridge/copy/startup included
-exact selection-hash parity
-vector cosine >= 0.999999
->= 1.25x kernel speedup
->= 500 ms full-build savings
-complete TypeScript fallback
-```
-
-The current measured HRR share does not pass the kernel-size promotion gate. Therefore the correct disposition remains:
-
-```text
-keep TypeScript
-retain Zig/Wasm source as research
-profile 50k/100k builds before reconsidering
-benchmark only the exact production kernel
-```
-
-## 7. Research leads retained but not promoted
-
-The externally supplied bibliography includes additional 2024–2026 titles concerning harness engineering, token efficiency, constrained decoding, ontology orchestration, hypergraphs, self-correction, sparse retrieval, and inference runtimes.
-
-Those entries are retained as research leads. They must not be cited as framework authority until their exact publication identity, methodology, results, and applicability are verified. In particular:
-
-- a paper title or arXiv identifier generated by another model is not proof that the paper exists;
-- a paper's existence is not proof that its recommendation applies to this compiler;
-- an action-item list generated from a bibliography is not an implementation plan;
-- implementation still requires a simpler baseline and pass/fail acceptance.
-
-## 8. Next evidence gates
-
-```text
-1. real repository/business/source ingestion
-2. real Stage-1 provider with schema-constrained output
-3. reviewer workflow and independently grounded observations
-4. frozen real context/assessment corpus
-5. 100-500 noindex Stage-2 page-concept and page-generation jobs
-6. canonical successful-output transaction into evidence/modules/tasks/PageIR
-7. global contradiction, information-gain, and cannibalization evaluation
-8. browser/accessibility/crawler/performance acceptance
-9. 10,000 complete static pages, not only page-region jobs
-10. matched publication cohorts and search/commercial measurement
-11. 50k/100k build profile before reconsidering ANN/native/Wasm/GPU layers
-```
+1. Freeze one real five-page starter-site fixture and judgments.
+2. Run the live provider and rented-node experiments.
+3. Connect actual generated artifacts to the continuous workspace.
+4. Implement the same fixture in an ordinary framework.
+5. Compare authoring, build, incremental edits, output, browser, accessibility, and operator effort.
+6. Extend to 25 real noindex pages with page-existence justifications.
+7. Freeze graph/relevance/design held-out judgments.
+8. Scale 100 -> 500.
+9. Run 10K emission plus the complete maintenance matrix.
+10. Promote advanced methods only when predefined hypotheses pass.
