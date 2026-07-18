@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active
-updated_at: 2026-07-18T19:55:00-04:00
+updated_at: 2026-07-18T20:05:00-04:00
 
 ## State
 
@@ -33,8 +33,8 @@ Verified: SiteSource validation, reference resolution, evidence-threshold reject
 A portable randomized limit harness now exists:
 
 - `scripts/clone-and-test-hyper.sh` clones and tests the selected branch from an internet-connected Unix-like machine with Git, Node.js 20+, and npm.
-- `scripts/run-compiler-limit-test.mjs` generates unique arbitrary structured input, compiles twice, independently recomputes hashes, checks dependencies and escaping, and runs ten rejection cases.
-- `test/compiler-limit-harness.test.mjs` exercises the harness inside the repository test suite.
+- `scripts/run-compiler-limit-test-v2.mjs` generates unique arbitrary structured input, compiles twice, independently recomputes hashes, checks dependencies and escaping, and runs ten rejection cases.
+- `test/compiler-limit-harness.test.mjs` exercises both multi-page and one-page workloads inside the repository test suite.
 - authority: `docs/validation/40-portable-compiler-limit-test.md`.
 
 A passing portable run proves current compiler behavior for the generated fixture and exact commit only. It does not prove W1 completion, independent package ownership, page usefulness, framework superiority, or production readiness.
