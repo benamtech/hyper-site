@@ -27,8 +27,6 @@ The hypothesis is that typed evidence, explicit rejection, deterministic compila
 4. Produce noindex review artifacts with traceable sources.
 5. Rebuild only affected pages after a fact, component, or design change.
 
-These cases require no external orchestration, editorial platform, connector catalog, policy product, or enterprise runtime.
-
 ## First optional task
 
 Only after the static pipeline passes, test one side-effect-free local task such as project intake, estimate preparation, document preflight, or a requirements checklist.
@@ -40,7 +38,7 @@ typed input
 -> public result or rejection
 ```
 
-The task must not require distributed durability, external effects, enterprise identity, or multi-agent execution.
+The first task is intentionally limited to requirements already visible in the fixture.
 
 ## Direct controls
 
