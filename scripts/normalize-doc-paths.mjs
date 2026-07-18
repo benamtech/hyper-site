@@ -17,7 +17,8 @@ const prefixes = [
   "docs/architecture/",
   "docs/planning/",
   "docs/validation/",
-  "docs/intake/"
+  "docs/intake/",
+  "docs/archive/"
 ];
 
 async function walk(directory) {
