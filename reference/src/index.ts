@@ -18,6 +18,7 @@ export * from "./ui-metaprogramming.js";
 export * from "./ui-renderer.js";
 export * from "./validation-contracts.js";
 export * from "./project-input.js";
+export * from "./repository-ingestion.js";
 export * from "./context-corpus.js";
 export * from "./typed-graph.js";
 export * from "./page-coordinate.js";
