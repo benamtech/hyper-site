@@ -1,13 +1,11 @@
 // Hyper Content owns the content compiler and targets the public Hyper Site
-// contract. The explicit legacy compile export remains the compatibility adapter
-// until content geometry is physically moved out of reference/.
+// contract. The remaining reference/dist exports are an explicit compatibility
+// bridge until P1.5 physically migrates the legacy content compiler.
 
 export * from "../hyper-site/index.mjs";
+export { adaptContentProgramSiteSource } from "./dist/content-program-adapter.js";
 export { compileSite, compileSite as compileContentSite, packSite } from "../reference/dist/framework.js";
-export {
-  adaptContentProgramSiteSource,
-  compileContentProgramManifest,
-} from "../reference/dist/content-program-adapter.js";
+export { compileContentProgramManifest } from "../reference/dist/content-program-adapter.js";
 
 export * from "../reference/dist/benchmark.js";
 export * from "../reference/dist/optimizer.js";
