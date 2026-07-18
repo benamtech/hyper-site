@@ -11,6 +11,31 @@ Every product claim must name a direct control, metric, failure threshold, and e
 
 Pass only when canonical source lives under the owning package, public exports are explicit, clean package consumers work, dependency direction is one-way, and `reference/` consumes the packages rather than implementing them.
 
+## Framework execution evidence
+
+A statement that a site was built "with Hyper Site" is valid only when the evidence records:
+
+1. exact public import entrypoint;
+2. exact implementation path reached by that entrypoint;
+3. immutable input fixture;
+4. emitted HTML and companion artifacts;
+5. independently recomputed hash or byte comparison;
+6. at least one relevant rejection test;
+7. environment and packaging limitations.
+
+A copied, reconstructed, or behaviorally similar harness is not framework execution evidence.
+
+Current verified state:
+
+```text
+consumer
+-> hyper-site/index.mjs
+-> reference/dist/framework-core.js
+-> compileSite(SiteSource)
+```
+
+The verified one-page fixture demonstrated structural validation, evidence-threshold rejection, PageIR construction, HTML, instruction Markdown, sitemap, dependency index, page hash, and build hash. It does not satisfy source ownership, clean package consumption, five-page usefulness, publisher, or real-cohort gates.
+
 ## Hyper Site comparison
 
 Freeze the same routes, content, assets, structured data, accessibility requirements, deployment target, and change scenarios.
@@ -51,16 +76,18 @@ Promotion requires a dated validation report. Otherwise the method remains exper
 
 ## Real-use ladder
 
-1. Five-page internal fixture.
-2. Independent rebuild.
-3. One noindex real-business cohort.
-4. One measured maintenance event.
-5. One bounded local task with form control.
-6. Paid pilot with explicit success criteria.
-7. Repeatable second site.
+1. Verified one-page compiler execution.
+2. Clean package consumer and tarball proof.
+3. Five-page internal fixture.
+4. Independent rebuild.
+5. One noindex real-business cohort.
+6. One measured maintenance event.
+7. One bounded local task with form control.
+8. Paid pilot with explicit success criteria.
+9. Repeatable second site.
 
 ## Documentation integrity
 
 Research must point to architecture or rejection. Architecture must point to an active plan. Plans must point to validation. Passing claims must point to an exact-head report and immutable handoff.
 
-Fail when active docs name noncanonical code, historical docs appear current, completion lacks a report, current CI evidence points to an older head, or PR nonclaims contradict repository state.
+Fail when active docs name noncanonical code, a compatibility harness is presented as framework execution, historical docs appear current, completion lacks a report, current CI evidence points to an older head, or PR nonclaims contradict repository state.
