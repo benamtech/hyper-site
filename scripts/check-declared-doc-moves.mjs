@@ -6,6 +6,12 @@ const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const moves = JSON.parse(await readFile(resolve(root, "docs/legacy-root-moves.json"), "utf8"));
 const ignored = new Set([".git", "node_modules", "dist", "coverage", ".cache"]);
 const extensions = new Set([".md", ".json", ".mjs", ".ts", ".yml", ".yaml"]);
+const provenanceFiles = new Set([
+  "scripts/apply-doc-moves.mjs",
+  "scripts/check-declared-doc-moves.mjs",
+  "docs/legacy-root-moves.json",
+  "docs/catalog.json"
+]);
 
 async function exists(path) {
   try {
@@ -36,7 +42,7 @@ for (const [from, to] of Object.entries(moves)) {
 for (const path of await walk(root)) {
   if (!extensions.has(extname(path))) continue;
   const relative = path.slice(root.length + 1);
-  if (["scripts/apply-doc-moves.mjs", "scripts/check-declared-doc-moves.mjs", "docs/legacy-root-moves.json"].includes(relative)) continue;
+  if (provenanceFiles.has(relative)) continue;
   const text = await readFile(path, "utf8");
   for (const from of Object.keys(moves)) {
     const pattern = new RegExp(`(^|[\\s('"\\x60])${from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?=$|[\\s)'"\\x60,:])`, "m");
