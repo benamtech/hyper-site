@@ -3,7 +3,7 @@
 format: TOON-oriented Markdown  
 status: active  
 scope: standalone repository root  
-updated_at: 2026-07-18T07:45:00-04:00
+updated_at: 2026-07-18T08:05:00-04:00
 
 ## protocol
 
@@ -32,8 +32,8 @@ rules[18]:
 
 ## current
 
-state{branch,pr,current_head,validated_migration_head,status,maturity,merge}:
-  agent/glm-blackwell-vertical-slice,3,5530da8cb137d55822727d1dfd79fcb7f007e7a4,d9ba0e36191c3d977a711740b21899d75cc4f3a5,"documentation system organized; task-surface research/architecture and META-PLAN mutation recorded; exact inherited CI for the evidence head pending","research prototype approaching near-alpha","keep draft; do not merge"
+state{branch,pr,evidence_head,validated_implementation_head,status,maturity,merge}:
+  agent/glm-blackwell-vertical-slice,3,95e45bcadcb668c78d6bdb01e13f01488551456f,05d8961791c6451e480a6be453351b8722bca81f,"documentation system organized and idempotent; task-surface research/architecture and META-PLAN mutation exact-CI green; physical source extraction and runtime implementation pending","research prototype approaching near-alpha","keep draft; do not merge"
 
 product_identity:
   "two products plus one permanent shared task-surface workstream: hyper-site static web framework; hyper-content ontology/evidence/content compiler targeting hyper-site; W7 protocol-neutral governed task surfaces"
@@ -57,8 +57,9 @@ content_backend:
 
 ## newest handoffs
 
-handoffs[10]{at,file,status,scope}:
-  2026-07-18T07:45:00-04:00,2026-07-18-0745-task-surface-research-doc-system.md,current,"complete document organization; protocol research; W7 architecture; 10K surface gates; plan mutation"
+handoffs[11]{at,file,status,scope}:
+  2026-07-18T08:05:00-04:00,2026-07-18-0805-task-surface-doc-system-ci-closure.md,current,"idempotency fixes, permanent focused-CI docs gate, exact strengthened proof"
+  2026-07-18T07:45:00-04:00,2026-07-18-0745-task-surface-research-doc-system.md,foundation,"complete document organization; protocol research; W7 architecture; 10K surface gates; plan mutation"
   2026-07-18T06:30:00-04:00,2026-07-18-0630-content-program-adapter.md,foundation,"P1.3 explicit geometry-free SiteSource adapter, parity gate, exact CI"
   2026-07-18T06:10:00-04:00,2026-07-18-0610-meta-plan-v3-framework-core-extraction.md,foundation,"executable program authority, neutral compiler and SiteManifest, compatibility adapter"
   2026-07-18T05:30:00-04:00,2026-07-18-0530-product-boundary-folder-split.md,foundation,"research-supported two-product decision, root folders, boundary tests, PCN backend classification"
@@ -81,26 +82,27 @@ read_order[20]{order,file,role}:
   7,../planning/meta-plan-v3.json,"machine program, workstreams, outcomes, hypotheses"
   8,../planning/meta-plan-v3.steps.json,"machine TODO DAG, TDD, effects, rollback and pass metrics"
   9,MEMORY.md,"durable current state"
-  10,2026-07-18-0745-task-surface-research-doc-system.md,"latest immutable handoff"
+  10,2026-07-18-0805-task-surface-doc-system-ci-closure.md,"latest immutable handoff"
   11,../validation/reports/2026-07-18-task-surface-research-and-document-system.md,"current research/document/plan validation report"
   12,../docs/intake/2026-07-18-next-generation-task-surfaces.md,"preserved supplied thesis and corrections"
   13,../docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md,"primary-source protocol and prior-art disposition"
   14,../docs/research/sources/2026-07-18-task-surfaces.sources.json,"machine source registry"
   15,../docs/architecture/32-governed-task-surface-architecture.md,"accepted protocol-neutral target architecture"
   16,../docs/validation/33-task-surface-validation-matrix.md,"TDD, security, accessibility, recovery, adapter, and 10K gates"
-  17,2026-07-18-0630-content-program-adapter.md,"P1.3 handoff"
+  17,2026-07-18-0745-task-surface-research-doc-system.md,"research and organization foundation"
   18,../docs/architecture/29-product-boundary-research-and-root-folder-split.md,"two-product decision"
   19,../hyper-site/README.md,"framework ownership"
   20,../hyper-content/README.md,"content compiler ownership"
 
 ## source state
 
-layers[30]{layer,file,state}:
+layers[31]{layer,file,state}:
   docs-index,../docs/README.md,"lifecycle, root allowlist, read/write protocol and validation hooks"
   docs-catalog,../docs/catalog.json,"machine registry for current, historical and superseded documents"
   docs-migration,../docs/legacy-root-moves.json,"34-root-document migration provenance"
   docs-gate,../scripts/check-doc-system.mjs,"root, catalog, path, memory, source-registry and plan assertions"
   declared-move-gate,../scripts/check-declared-doc-moves.mjs,"old path absence, destination existence and stale live-link assertions"
+  docs-ci,../.github/workflows/production-pipeline.yml,"documentation validation runs on ordinary focused CI"
   task-intake,../docs/intake/2026-07-18-next-generation-task-surfaces.md,"supplied concept preserved and corrected"
   task-research,../docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md,"WebDriver/model-based UI/A2UI/AG-UI/MCP/schema/event/provenance crosswalk"
   task-sources,../docs/research/sources/2026-07-18-task-surfaces.sources.json,"primary and official source registry"
@@ -125,7 +127,7 @@ layers[30]{layer,file,state}:
   provider,../reference/src/glm-provider.ts,"JSON transport plus external validation and bounded repair"
   workspace,../reference/src/agent-workspace.ts,"immutable snapshots, cycles and invalidation"
   current-wasm,../reference/src/wasm.ts,"content vector/facility kernels; not browser runtime"
-  current-validation,../validation/reports/2026-07-18-task-surface-research-and-document-system.md,"organization, research, plan mutation, proof and nonclaims"
+  current-validation,../validation/reports/2026-07-18-task-surface-research-and-document-system.md,"organization, research, plan mutation, strengthened proof and nonclaims"
 
 ## decisions
 
@@ -154,17 +156,20 @@ decisions[21]{id,decision,ref}:
 
 ## proof
 
-organization_run{workflow,run,job,input_head,result,organized_head}:
-  "Organize Repository Documents",29642918708,88076295118,e93ea60592722c00152bbb11b4c9117c1d78d29a,success,d9ba0e36191c3d977a711740b21899d75cc4f3a5
+validated_head{sha,status}:
+  05d8961791c6451e480a6be453351b8722bca81f,"documentation organization, idempotency, plan, package boundaries, operator checks and all inherited regressions pass"
 
-focused_run{workflow,run,head,result,artifact,digest}:
-  "Hyper Site Near-Alpha Pipeline",29642918710,e93ea60592722c00152bbb11b4c9117c1d78d29a,success,8429164477,"sha256:1875d102673c7fae78e874968e880b051f456e58d5dac6fee7365683a53b0c04"
+organization_run{workflow,run,job,head,result}:
+  "Organize Repository Documents",29643257965,88077138733,05d8961791c6451e480a6be453351b8722bca81f,success
+
+focused_run{workflow,run,job,head,result,artifact,digest}:
+  "Hyper Site Near-Alpha Pipeline",29643257962,88077138692,05d8961791c6451e480a6be453351b8722bca81f,success,8429258946,"sha256:0f87a20a3e581573fdbba759e1fe1e31ec362bebfdce47bf3de990a60a837694"
 
 reference_run{workflow,run,job,head,result}:
-  "Hyper Site Reference",29642918717,88076281437,e93ea60592722c00152bbb11b4c9117c1d78d29a,success
+  "Hyper Site Reference",29643257988,88077138720,05d8961791c6451e480a6be453351b8722bca81f,success
 
 proof_interpretation:
-  "document migration, source registry, research disposition, accepted target architecture, plan mutation, and inherited pre-migration source regressions pass; exact inherited CI for the current evidence head remains pending"
+  "document migration and repeated synchronization are idempotent; research disposition, accepted target architecture, plan mutation, documentation gates, product boundaries and inherited source/UI regressions pass; runtime, adapter, field and 10K surface outcomes remain unimplemented"
 
 ## not proven
 
