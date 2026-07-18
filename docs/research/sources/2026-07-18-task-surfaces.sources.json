@@ -1,0 +1,158 @@
+{
+  "id": "task-surfaces-2026-07-18",
+  "checkedAt": "2026-07-18",
+  "policy": "Primary specifications, official project documentation, repository source, and original research outrank summaries. Preview protocols remain adapters until conformance and stability tests pass.",
+  "sources": [
+    {
+      "id": "w3c-webdriver2",
+      "class": "primary-standard",
+      "url": "https://www.w3.org/TR/webdriver2/",
+      "status": "verified",
+      "supports": ["wire-protocol separation between local and remote ends", "session identity and remote control"],
+      "doesNotSupport": ["ontology as browser state machine", "UI generation architecture"]
+    },
+    {
+      "id": "w3c-model-based-ui",
+      "class": "primary-standards-report",
+      "url": "https://www.w3.org/2007/uwa/editors-drafts/mbui/latest/Model-Based-UI-XG-FinalReport.html",
+      "status": "verified",
+      "supports": ["task and concept model", "abstract UI", "concrete UI", "final UI separation"]
+    },
+    {
+      "id": "google-a2ui",
+      "class": "official-preview-project",
+      "url": "https://github.com/google/A2UI",
+      "status": "verified-public-preview",
+      "supports": ["declarative updateable UI intent", "host-owned component registry", "multiple renderers", "transport independence"],
+      "constraint": "v0.8 public preview; not stable internal authority"
+    },
+    {
+      "id": "ag-ui",
+      "class": "official-protocol-docs",
+      "url": "https://docs.ag-ui.com/",
+      "status": "verified",
+      "supports": ["bidirectional event transport", "run lifecycle", "state snapshots and JSON Patch deltas", "interrupts and human approval", "serialization and resume"]
+    },
+    {
+      "id": "mcp-apps",
+      "class": "official-protocol-extension",
+      "url": "https://modelcontextprotocol.io/extensions/apps/overview",
+      "status": "verified",
+      "supports": ["tool-linked UI resources", "sandboxed iframe", "host-mediated capabilities", "postMessage and JSON-RPC bridge", "CSP declarations"]
+    },
+    {
+      "id": "json-schema-2020-12",
+      "class": "primary-specification",
+      "url": "https://json-schema.org/draft/2020-12",
+      "status": "verified",
+      "supports": ["versioned structural validation", "compound schema documents", "annotations useful for UI generation"]
+    },
+    {
+      "id": "json-forms",
+      "class": "official-open-source-docs",
+      "url": "https://jsonforms.io/docs/architecture/",
+      "status": "verified",
+      "supports": ["UI-framework-neutral form core", "renderer sets", "JSON Schema plus UI schema separation"]
+    },
+    {
+      "id": "rdf-1-2",
+      "class": "w3c-working-draft",
+      "url": "https://www.w3.org/groups/wg/rdf-star/publications/",
+      "status": "verified-working-draft",
+      "supports": ["quoted triples", "statements about statements", "line-based graph serializations"]
+    },
+    {
+      "id": "shacl",
+      "class": "w3c-recommendation",
+      "url": "https://www.w3.org/TR/shacl/",
+      "status": "verified",
+      "supports": ["graph shapes", "constraint validation", "machine-readable validation reports"]
+    },
+    {
+      "id": "prov-o",
+      "class": "w3c-recommendation",
+      "url": "https://www.w3.org/TR/prov-o/",
+      "status": "verified",
+      "supports": ["entities", "activities", "agents", "portable provenance relationships"]
+    },
+    {
+      "id": "cloudevents",
+      "class": "cncf-specification",
+      "url": "https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md",
+      "status": "verified",
+      "supports": ["event identity", "source plus id duplicate recognition", "type and schema metadata", "protocol-neutral event envelope"]
+    },
+    {
+      "id": "rfc6902",
+      "class": "ietf-standard",
+      "url": "https://www.rfc-editor.org/rfc/rfc6902",
+      "status": "verified",
+      "supports": ["ordered JSON Patch deltas"]
+    },
+    {
+      "id": "w3c-trace-context",
+      "class": "w3c-recommendation",
+      "url": "https://www.w3.org/TR/trace-context/",
+      "status": "verified",
+      "supports": ["cross-service trace propagation", "portable trace identity", "privacy constraints"]
+    },
+    {
+      "id": "opentelemetry",
+      "class": "official-open-source-standard",
+      "url": "https://opentelemetry.io/docs/concepts/signals/",
+      "status": "verified",
+      "supports": ["traces", "metrics", "logs", "baggage", "cross-component observability"]
+    },
+    {
+      "id": "openfeature",
+      "class": "cncf-incubating-standard",
+      "url": "https://openfeature.dev/specification/sections/flag-evaluation/",
+      "status": "verified",
+      "supports": ["vendor-neutral feature flag evaluation", "evaluation context and hooks"],
+      "constraint": "does not itself define a universal experiment or flag-definition control plane"
+    },
+    {
+      "id": "wcag-2-2",
+      "class": "w3c-recommendation",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "status": "verified",
+      "supports": ["testable accessibility requirements for full pages and interactions"]
+    },
+    {
+      "id": "mdn-content-visibility",
+      "class": "web-platform-reference",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility",
+      "status": "verified",
+      "supports": ["browser skipping of offscreen layout and paint work"]
+    },
+    {
+      "id": "sdrt-discourse-theory",
+      "class": "original-academic-work",
+      "url": "https://homepages.inf.ed.ac.uk/alex/pubs/iwcs4.html",
+      "status": "verified",
+      "supports": ["SDRT acronym already denotes Segmented Discourse Representation Theory"],
+      "effect": "do not publish the proposed relationship tensor format as SDRT"
+    },
+    {
+      "id": "hyper-site-source",
+      "class": "repository-primary-evidence",
+      "path": "reference/src/",
+      "status": "verified-at-3536e619",
+      "supports": ["current static compiler and mixed UI dependencies", "P1.4 and P1.5 extraction constraints"]
+    },
+    {
+      "id": "ai-employee-materialization",
+      "class": "repository-primary-evidence",
+      "repository": "benamtech/ai-employee-v1",
+      "ref": "employee-production-tuesday",
+      "paths": [
+        "mvp-build/packages/shared/src/materialization.ts",
+        "mvp-build/packages/shared/src/preview-links.ts",
+        "mvp-build/apps/web/app/free-estimator/FreeEstimatorClient.tsx"
+      ],
+      "status": "verified-source-fixture",
+      "supports": ["surface envelopes", "owner-safe resources", "actions", "safety", "proof", "public estimator behavior"],
+      "constraint": "not live acceptance and not canonical Hyper Site architecture"
+    }
+  ]
+}
