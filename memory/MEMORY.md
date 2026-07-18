@@ -132,7 +132,7 @@ Until R4 passes, do not place the following on the critical path:
 - `identity.md`
 - `AGENTS.md`
 - `CODEGRAPH.md`
-- `CODEGRAPH-LOW-LEVEL.md`
+- `docs/architecture/CODEGRAPH-LOW-LEVEL.md`
 - `docs/README.md`
 - `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
 - `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
