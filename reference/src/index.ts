@@ -45,3 +45,4 @@ export * from "./page-draft-transaction.js";
 export * from "./corpus-validation-production.js";
 export * from "./production-orchestrator.js";
 export * from "./near-alpha-framework.js";
+export * from "./agent-workspace.js";
