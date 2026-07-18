@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "accessedAt": "2026-07-18",
-  "scope": "intellectual, competitive, complementary, substitute, and enterprise landscape for Hyper Site, Hyper Content, and governed task surfaces",
+  "scope": "direct framework baselines for Hyper Site",
   "sources": [
     {
       "id": "astro-islands",
@@ -10,7 +10,7 @@
       "title": "Astro Islands Architecture",
       "publisher": "Astro",
       "url": "https://docs.astro.build/en/concepts/islands/",
-      "supports": ["static HTML with selectively hydrated interactive regions", "ordinary-framework comparison baseline"]
+      "supports": ["static HTML with selective interactivity", "ordinary static framework control"]
     },
     {
       "id": "astro-content-collections",
@@ -19,7 +19,7 @@
       "title": "Astro Content Collections",
       "publisher": "Astro",
       "url": "https://docs.astro.build/en/guides/content-collections/",
-      "supports": ["typed structured content baseline", "replacement threat for simple Hyper Content workflows"]
+      "supports": ["typed structured content control"]
     },
     {
       "id": "next-static-export",
@@ -28,7 +28,7 @@
       "title": "Next.js Static Exports",
       "publisher": "Vercel",
       "url": "https://nextjs.org/docs/app/guides/static-exports",
-      "supports": ["static HTML per route", "hybrid React ecosystem comparison"]
+      "supports": ["static HTML per route control"]
     },
     {
       "id": "hugo-introduction",
@@ -37,97 +37,7 @@
       "title": "Hugo Introduction",
       "publisher": "Hugo",
       "url": "https://gohugo.io/about/introduction/",
-      "supports": ["mature static-site baseline", "large-site content management and build comparison"]
-    },
-    {
-      "id": "adobe-aem-content-ai",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "AEM Content AI Overview",
-      "publisher": "Adobe",
-      "url": "https://experienceleague.adobe.com/en/docs/experience-manager-content-ai/using/introduction",
-      "supports": ["approved content sources", "semantic enrichment", "grounded generation", "agentic content orchestration", "enterprise upper-bound comparison"]
-    },
-    {
-      "id": "adobe-aem-agentic",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "AI in AEM as a Cloud Service",
-      "publisher": "Adobe",
-      "url": "https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/overview",
-      "supports": ["agentic content operations", "brand-aware generation", "governance gap analysis"]
-    },
-    {
-      "id": "sitecore-xm-cloud",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "Sitecore XM Cloud Product Overview",
-      "publisher": "Sitecore",
-      "url": "https://developers.sitecore.com/products/xm-cloud",
-      "supports": ["headless enterprise CMS and DXP comparison", "editorial and delivery ecosystem gap"]
-    },
-    {
-      "id": "optimizely-personalization",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "Optimizely Personalization Overview",
-      "publisher": "Optimizely",
-      "url": "https://support.optimizely.com/hc/en-us/articles/27294865902733-Optimizely-Personalization-overview",
-      "supports": ["audience targeting", "visual editing", "measurement", "growth-operator comparison"]
-    },
-    {
-      "id": "optimizely-experimentation-api",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "Optimizely Experimentation REST API Documentation",
-      "publisher": "Optimizely",
-      "url": "https://support.optimizely.com/hc/en-us/articles/4410282924685-Optimizely-Experimentation-REST-API-Documentation",
-      "supports": ["experiment and feature-management integration", "reason to avoid rebuilding statistics early"]
-    },
-    {
-      "id": "langgraph-overview",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "LangGraph Overview",
-      "publisher": "LangChain",
-      "url": "https://docs.langchain.com/oss/python/langgraph/overview",
-      "supports": ["durable agent execution", "streaming", "persistence", "human review"]
-    },
-    {
-      "id": "langgraph-hitl",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "LangChain Human-in-the-loop",
-      "publisher": "LangChain",
-      "url": "https://docs.langchain.com/oss/python/langchain/human-in-the-loop",
-      "supports": ["approval, edit and rejection controls", "runtime complement"]
-    },
-    {
-      "id": "temporal-docs",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "Temporal Platform Documentation",
-      "publisher": "Temporal",
-      "url": "https://docs.temporal.io/",
-      "supports": ["durable long-running workflow execution", "recovery and retry complement"]
-    },
-    {
-      "id": "copilot-studio-docs",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "Microsoft Copilot Studio Documentation",
-      "publisher": "Microsoft",
-      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/",
-      "supports": ["enterprise agents", "connectors", "MCP", "evaluation", "governance", "publishing channels"]
-    },
-    {
-      "id": "copilot-studio-overview",
-      "class": "official-documentation",
-      "status": "current",
-      "title": "Copilot Studio Overview",
-      "publisher": "Microsoft",
-      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio",
-      "supports": ["low-code agent and workflow platform", "enterprise replacement and upper-bound comparison"]
+      "supports": ["mature static-site control", "large-site build comparison"]
     }
   ]
 }
