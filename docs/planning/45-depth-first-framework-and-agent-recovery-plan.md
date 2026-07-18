@@ -1,203 +1,217 @@
-# Depth-First Framework and Agent Recovery Plan
+# Useful Repository Execution Plan
 
 Status: active execution plan  
 Updated: 2026-07-18
 
 ## Objective
 
-Reach one useful framework proof before expanding agent, graph, UI or scale research.
+Produce one externally installable static framework, one accepted five-page site, and one measured maintenance decision before resuming content-generation or agent work.
 
-## Workstream order
-
-```text
-R0 reconcile truth and remove sequencing conflicts
--> R1 finish physical package extraction
--> R2 establish ordinary framework floor
--> R3 prove five-page site against direct control
--> R4 prove maintenance correctness and value
--> R5 wrap the proven tools in one durable agent workflow
--> R6 test one approved idempotent publish effect
-```
-
-## R0 — Truth reconciliation
-
-Deliverables:
-
-- root README, identity, AGENTS and CODEGRAPH agree on the three-layer target;
-- `docs/README.md`, memory and PR point to this plan;
-- task-surface and advanced-method work is explicitly blocked behind R4;
-- current delegation to `reference/dist` remains visible.
-
-Exit:
-
-- no active bootstrap document presents the task layer as the immediate next implementation;
-- no active document calls the current repository a normal framework or durable agent system.
-
-## R1 — Physical package extraction
-
-Deliverables:
-
-- complete `reference/src` ownership inventory;
-- compiler cluster physically owned by `hyper-site/src`;
-- explicit public exports from package-owned build output;
-- Hyper Content stable source physically owned by `hyper-content/src`;
-- `reference/` imports packages as a consumer;
-- two isolated `npm pack` consumers;
-- legacy artifact and rejection parity.
-
-Exit:
-
-- Hyper Site runtime has no import from `reference/`;
-- Hyper Content runtime has no import from `reference/`;
-- packed consumers build outside the workspace;
-- parity report identifies exact inputs, artifacts and hashes.
-
-## R2 — Ordinary framework floor
-
-Deliverables:
+## Execution order
 
 ```text
-create
- dev
- build
- preview
- inspect
- local publish
+U1 package ownership and isolated consumption
+-> U2 ordinary CLI and starter
+-> U3 five-page browser-accepted proof
+-> U4 maintenance comparison and decision
+-> U5 optional minimal Hyper Content adapter
 ```
 
-Plus:
+Only U1 is currently unblocked.
 
-- five-page starter fixture;
-- one minimal theme;
-- components, layouts and assets;
-- route and metadata diagnostics;
-- useful error messages;
-- zero required Hyper Content or agent dependency.
+## U1 — Package ownership and isolated consumption
 
-Direct control:
+### U1.1 Inventory
 
-- the same frozen site in Astro or an equally suitable ordinary static framework.
+For every file under `reference/src`, record:
 
-Exit:
+- path;
+- owner: `hyper-site`, `hyper-content`, `reference-only` or `research`;
+- role;
+- direct imports;
+- public consumers;
+- tests;
+- migration order.
 
-- a new developer can follow one documented path from clone or package to preview;
-- both implementations emit complete static sites;
-- setup and operator friction are recorded.
+No file may have multiple owners.
 
-## R3 — Five-page usefulness proof
+### U1.2 Extract the compiler cluster
 
-The five pages must have distinct purposes, accepted business facts, real design authority and page-existence records.
+Move, without semantic redesign:
+
+- `SiteSource` and `PageIR` contracts;
+- validation and reference resolution;
+- evidence-threshold checks;
+- normalization;
+- HTML and instruction rendering;
+- metadata, JSON-LD and sitemap;
+- dependency index;
+- page and build hashing;
+- content-neutral manifest behavior.
+
+### U1.3 Build package-owned output
+
+Required package changes:
+
+- add `hyper-site/src` build input;
+- emit `hyper-site/dist`;
+- define explicit package exports;
+- remove `private: true` only when tarball tests pass;
+- ensure runtime code imports no file under `reference/`.
+
+### U1.4 Reverse the compatibility dependency
+
+```text
+before: hyper-site -> reference
+
+after:  reference -> @amtech/hyper-site
+```
+
+### U1.5 Isolated consumers
+
+Create two temporary consumers from `npm pack` output:
+
+1. valid fixture compiles and emitted artifacts match frozen legacy output;
+2. invalid fixtures reject with equivalent codes or documented messages.
+
+### U1 exit
+
+- complete ownership inventory;
+- no package runtime imports from `reference/`;
+- tarball installs without the monorepo;
+- positive artifact parity;
+- negative rejection parity;
+- exact command and hash report.
+
+## U2 — Ordinary CLI and starter
+
+Implement the smallest conventional workflow:
+
+```text
+hyper-site create
+hyper-site dev
+hyper-site build
+hyper-site preview
+hyper-site inspect
+hyper-site publish --local <directory>
+```
+
+Requirements:
+
+- Node 20+ only;
+- no Hyper Content, LLM, GPU, database or external service;
+- one starter with facts, pages, design tokens, layouts, components and assets;
+- file watching for authoring changes;
+- atomic build directory replacement;
+- diagnostics in text and JSON;
+- preview serves the built output, not a separate renderer;
+- local publish only copies an already accepted build.
+
+U2 exit:
+
+- clean-machine transcript from install to preview;
+- all commands have help and nonzero failure codes;
+- starter can be edited without repository knowledge;
+- pack consumer tests remain green.
+
+## U3 — Five-page browser-accepted proof
+
+Freeze one real, operator-approved business fixture with:
+
+- five distinct page purposes;
+- approved facts and evidence;
+- real copy and assets;
+- one minimal responsive theme;
+- explicit metadata and route requirements;
+- no generated placeholder variants.
+
+Build the same site with:
+
+1. Hyper Site;
+2. typed JSON plus direct templates;
+3. Astro using the same inputs and acceptance criteria.
 
 Measure:
 
-- authoring time;
+- setup and authoring steps;
 - build and preview behavior;
-- output correctness;
-- accessibility findings;
-- browser behavior;
-- generated bytes and client JavaScript;
-- diagnostics quality;
-- deployment steps;
-- reviewer acceptance.
+- route/link correctness;
+- HTML and metadata correctness;
+- client JavaScript and asset bytes;
+- automated accessibility findings;
+- browser assertions on user-visible behavior;
+- manual review findings;
+- diagnostics quality.
 
-Exit:
+U3 exit:
 
-- Hyper Site either demonstrates a required invariant or a meaningful advantage, or the product is narrowed/stopped.
+- all five pages accepted by a held-out reviewer;
+- no broken internal links or duplicate routes;
+- no automatically detectable critical accessibility violation;
+- complete static output can be served from a basic file server;
+- no superiority claim exceeds measured evidence.
 
-## R4 — Maintenance correctness and value
+## U4 — Maintenance comparison and decision
 
-Frozen changes:
+Freeze these changes before execution:
 
-1. shared fact;
+1. shared business fact;
 2. page-specific fact;
-3. shared design token/component;
-4. page retirement/indexability;
-5. invalid unsupported change.
+3. shared design token or component;
+4. page retirement or indexability change;
+5. invalid unsupported claim or broken reference.
 
 For each implementation record:
 
-- expected affected set before execution;
+- expected affected artifact set;
 - actual changed set;
-- required-but-missed set;
-- unexpected changed set;
-- elapsed operator time;
+- required but missed;
+- unexpected changed;
+- operator time;
+- review time;
 - build time;
+- diagnostics;
 - rollback steps;
-- review burden.
+- partial output after failure.
 
-Exit:
-
-- zero missed required changes;
-- invalid change is atomic and leaves no accepted partial output;
-- explicit `advance`, `narrow` or `stop` decision.
-
-## R5 — Durable agent wrapper
-
-Do not build a custom durable runtime.
-
-Implement one adapter using an established orchestration category. The workflow may:
-
-- freeze a repository/input snapshot;
-- request or generate a bounded proposal;
-- invoke Hyper Content optionally;
-- invoke Hyper Site through public commands;
-- collect reports and artifacts;
-- pause for operator approval;
-- resume from a durable checkpoint.
-
-It may not publish yet.
-
-Exit:
-
-- failure and restart preserve state;
-- repeated execution does not duplicate completed deterministic work;
-- approval state is visible and resumable;
-- trace IDs correlate run, tool, compiler and artifact records.
-
-## R6 — Approved idempotent publication
-
-Test one local or disposable target.
-
-Required effect envelope:
+U4 exit:
 
 ```text
-run_id
-artifact_manifest_hash
-approval_id
-policy_version
-publisher_target
-idempotency_key
+required_but_missed = 0
+invalid_change_accepted = false
+partial_accepted_output_after_failure = false
+decision = advance | narrow | stop
 ```
 
-Negative tests:
+`advance` additionally requires a meaningful maintenance advantage or a required invariant absent from the direct controls.
 
-- retry after ambiguous success;
-- stale approval;
-- changed branch head;
-- changed artifact hash;
-- duplicate request;
-- cancellation before commit;
-- publisher timeout.
+## U5 — Optional minimal Hyper Content adapter
 
-Exit:
+Starts only after `decision = advance`.
 
-- at most one durable effect;
-- stale or mismatched authority fails closed;
-- receipt and rollback evidence exist.
+First scope:
+
+```text
+approved facts and evidence
+-> validated claims and page records
+-> portable SiteSource
+```
+
+No model provider, ontology discovery, vector selection, agent runtime or 10K generation is required for this gate.
 
 ## Explicitly deferred
 
-Until R4 passes:
+Until U4 advances:
 
-- SDRT or custom graph query language;
-- GNN-based internal linking;
-- GPU promotion;
-- browser Wasm promotion;
-- generated task surfaces;
-- 10K publication programs;
-- autonomous publication;
+- model-backed bulk generation;
+- durable agent orchestration;
+- task surfaces;
+- remote publication;
+- SDRT and custom graph languages;
+- GNN, GPU, Zig and Wasm promotion;
+- 10K-page cohorts;
 - enterprise claims.
 
 ## Immediate next action
 
-Complete R0 with bootstrap and authority reconciliation, then execute only R1.
+Complete U1.1 and U1.2 under frozen compiler fixtures. Do not add features while moving ownership.
