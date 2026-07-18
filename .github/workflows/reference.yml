@@ -1,0 +1,30 @@
+name: Hyper Site Reference
+
+on:
+  pull_request:
+  push:
+    branches: [main, "agent/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reference
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund --no-package-lock
+      - run: npm test
+      - run: npm run manifest:emit
+      - run: npm run ui:emit
+      - run: npm run orchestration:check
+      - run: npm run framework:validate
+      - run: npm run framework:preview
+      - run: npm run browser:check
+      - run: npm run ui:r3f:build
