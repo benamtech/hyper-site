@@ -1,92 +1,166 @@
 # Hyper Site
 
-Status: standalone vector-native site-generation compiler; synthetic 10k planning is source-wired; evidence-gated repository ingestion is implemented; real provider, reviewer, content, browser, search, and commercial acceptance remain pending  
+Status: standalone vector-native site-generation compiler with an operator CLI, Z.AI GLM structured-generation adapter, independent approval gates, approved design authority, atomic PageDraft-to-PageIR transaction, resumable batches, and bounded local corpus validation. Synthetic 10,000-page full emission passes; real business, provider, hardware, relevance, and field acceptance remain pending.  
 Updated: 2026-07-18
 
 ## Product boundary
 
-Hyper Site compiles explicit approved business truth into a finite static site program. The intended operator is a repository-aware coding agent, but agents propose; typed compiler and independent review gates accept or reject.
+Hyper Site turns explicit approved business truth into a finite static site. Model output is proposal state. Deterministic compilers, operator or independent reviewer approval, and local validation decide acceptance.
 
 ```text
-repository snapshot + hyper-site.project.yaml
--> ProjectInput
--> AgentOntologyProposal
--> ApprovedOntology
--> typed sparse graph + constraints
--> bounded opportunity regions
--> sparse concave selection
--> HRR structure
+repository + hyper-site.project.yaml
+-> evidence-bound ProjectInput
+-> GLM Stage 1 AgentOntologyProposal
+-> exact-hash operator/reviewer approval
+-> ApprovedOntology + typed graph + hard constraints
+-> bounded opportunity selection
 -> SiteGenerationPlan
--> PageConceptProposal
--> CandidatePageSeed
--> PageCoordinate / CorpusPlan / PageGenerationJob
--> manifest / PageIR / static UI
+-> GLM Stage 2 PageDraft batches
+-> external schema/evidence validation + bounded repair
+-> existing PageConceptProposal compiler
+-> atomic SiteSource -> PageIR -> static HTML transaction
+-> local lexical/semantic/information/crawl validation
+-> noindex review site + reports + resumable checkpoints
 ```
 
-One job is one finite site-generation run. Canonical HTML is static-first and does not require request-time generation, a vector database, or an always-on serving process.
+Stage 3 is optional independent review or targeted repair. It produces observations only; it never overrides compiler acceptance.
 
-## Real repository ingestion
+## Minimum appliance contract
 
-`reference/src/repository-ingestion.ts` is the first production-boundary adapter beyond synthetic fixtures. It accepts:
+`reference/src/appliance-contract.ts` defines one optimized target and several explicit compatibility candidates.
 
-- a captured repository revision and root-relative file snapshot;
-- an explicit `hyper-site.project.yaml` declaration;
-- declared repository source and asset paths;
-- field-level evidence mapping for business, brand, technical, and goal truth.
+- optimized: NVIDIA RTX PRO 6000 Blackwell 96 GB;
+- host floor: 128 GiB RAM and 100 GiB free local NVMe;
+- runtime floor: Linux x64, Node 22, CUDA 12.8;
+- price is observed metadata and a soft budget check, never a capability claim;
+- H200, H100, A100 80 GB, RTX 5090, and RTX 4090 remain compatibility candidates until measured on the same workloads.
 
-It verifies bytes, hashes files deterministically, binds evidence to known source IDs, normalizes into the existing `ProjectInput`, and rejects missing truth, missing files, duplicate paths, unknown evidence IDs, or path traversal. It does not infer services, audiences, pricing, proof, brand, goals, or publication claims from repository prose.
+The GPU is intended for local corpus processing, embeddings/reranking, specialist validators, asset work, browser/render workloads, and optional local models. GLM generation remains API-side unless another provider adapter is supplied.
 
-This is ingestion infrastructure, not proof that a real business declaration is complete or that generated pages are useful.
+## Design before and after bulk generation
+
+`reference/src/design-authoring.ts` prevents the project from becoming a bulk-page compiler with an unattractive core site.
+
+Before generation:
+
+- the operator supplies brand/style sources, palette, typography, visual rules, component rules, and core-page design briefs;
+- homepage and core conversion-page needs are explicit before landing-page expansion;
+- the generator cannot approve its own design;
+- unsafe CSS imports, remote URLs, scriptable URLs, HTML escapes, and oversized custom CSS reject.
+
+After generation:
+
+- one shared static stylesheet renders canonical semantic `PageIR`;
+- design refinement can change CSS and presentation without regenerating accepted prose;
+- content hashes and publication state must remain unchanged.
+
+## Operator workflow
+
+Run from `reference/`.
+
+```bash
+npm install --no-audit --no-fund --no-package-lock
+
+# 1. Validate the rented machine
+npm run production -- doctor examples/appliance-probe.example.json
+
+# 2. Capture a repository and compile explicit business truth
+npm run production -- ingest /path/to/business-repo hyper-site.project.yaml generated-operator/repository-ingestion.json
+
+# 3. Verify the provider transport
+ZAI_API_KEY=... npm run production -- provider-check glm-5.2
+
+# 4. Produce the Stage-1 ontology proposal
+ZAI_API_KEY=... npm run production:stage1 -- \
+  generated-operator/repository-ingestion.json \
+  examples/source-excerpts.example.json \
+  generated-stage1
+
+# 5. Approve exact proposal and design hashes
+npm run production:approve -- ontology \
+  generated-stage1/ontology-proposal.json \
+  examples/ontology-review.example.json \
+  generated-stage1/ontology-approval.json
+
+npm run production:approve -- design \
+  design-draft.json \
+  examples/design-review.example.json \
+  design-approval.json
+
+# 6. Run approved Stage-2 batches, local validation, and static emission
+ZAI_API_KEY=... npm run production -- run production-run.json generated-production-site
+```
+
+The final run requires:
+
+- raw approved `ProjectInput` from the ingestion artifact;
+- Stage-1 proposal and exact-hash approval;
+- design draft and exact-hash approval;
+- source excerpts;
+- Z.AI credentials through environment variables;
+- a local OpenAI-compatible embedding endpoint;
+- base URL, run ID, vector identity, and optional compiler policies.
+
+Accepted Stage-2 batches are written to an immutable checkpoint file after every successful batch. Restarting with unchanged dependencies reuses them. Changing sources, prior accepted batches, design, provider identity, base URL, embedding backend, or validation policy changes checkpoint identity or rejects stale state.
 
 ## Current authorities
 
 | Area | Source |
 |---|---|
-| repository ingestion | `reference/src/repository-ingestion.ts` |
-| project truth | `reference/src/project-input.ts` |
-| validation | `reference/src/validation-contracts.ts` |
-| Stage 1 ontology | `reference/src/ontology-discovery.ts` |
-| graph and constraints | `reference/src/ontology-graph.ts` |
-| opportunity generation/selection | `reference/src/opportunity-*.ts` |
-| Stage 2 contracts | `reference/src/site-program*.ts` |
-| generation runner | `reference/src/page-generation.ts` |
-| manifest/PageIR/static output | `reference/src/manifest.ts`, `reference/src/framework.ts` |
+| repository capture and ingestion | `reference/src/repository-ingestion.ts`, `reference/scripts/production-cli.mjs` |
+| appliance contract | `reference/src/appliance-contract.ts` |
+| GLM JSON transport and bounded repair | `reference/src/glm-provider.ts` |
+| Stage-1/Stage-2 schemas and approval | `reference/src/generation-schemas.ts` |
+| design authority and static styling | `reference/src/design-authoring.ts` |
+| atomic canonical transaction | `reference/src/page-draft-transaction.ts` |
+| bounded corpus validation | `reference/src/corpus-validation-production.ts` |
+| recovery and physical orchestration | `reference/src/production-orchestrator.ts` |
+| semantic PageIR/static compiler | `reference/src/framework.ts` |
+| production acceptance tests | `reference/test/production-pipeline.test.mjs` |
 
 ## Validation
 
-From `reference/`:
+Two workflows run on pull requests and `agent/**` or `main` pushes:
 
-```bash
-npm install --no-audit --no-fund --no-package-lock
-npm test
-npm run manifest:emit
-npm run ui:emit
-npm run orchestration:check
-npm run framework:validate
-npm run framework:preview
-npm run browser:check
-npm run ui:r3f:build
+- `.github/workflows/reference.yml`: existing full compiler, manifest, UI, browser, and R3F suite;
+- `.github/workflows/production-pipeline.yml`: operator command checks plus focused production-boundary tests and retained transcript artifact.
+
+Measured production fixture on branch head `5cfcc85fd6fe6910b9e4a2e366581e5514f08ffa`, workflow run `29635741933`:
+
+| Cohort | Full synthetic path | Bounded candidate pairs | Rendered HTML |
+|---:|---:|---:|---:|
+| 100 | 2,489.626 ms | 3,675 | recorded in transaction |
+| 500 | 3,142.146 ms | 509 | recorded in transaction |
+| 10,000 | 19,179.290 ms | 12,949 | 54,291,900 bytes |
+
+The focused suite passed 10/10 tests in 32,641.755 ms. It covers appliance classification, GLM external repair, Stage-1 approval/resume, core design and CSS-only refinement, 25-page atomic/noindex emission, near-duplicate rejection, Stage-2 checkpoint recovery, and the same full transaction at 100, 500, and 10,000 synthetic pages.
+
+This is stronger than the prior 10,000-region planning proof, but it is still synthetic. It proves bounded software execution and static emission, not useful or market-worthy pages.
+
+## Explicit nonclaims
+
+Not proven:
+
+- a real operator-approved business repository has completed the workflow;
+- the live GLM-5.2 endpoint has produced an accepted ontology or PageDraft batch;
+- an RTX PRO 6000 Blackwell or compatibility GPU has run the workload;
+- generated pages are relevant, insightful, factually complete, or commercially useful;
+- indexing, ranking, AI citations, conversion, revenue, or lifecycle return;
+- 10,000 distinct high-quality designs or utilities;
+- GPU, Wasm, Zig, HRR, or ANN superiority over simpler baselines.
+
+## Next production gate
+
+```text
+one real business repository
++ reviewed hyper-site.project.yaml
++ real Markdown/CSS style authority
++ owned/licensed assets
++ live GLM credentials
++ measured Blackwell-class node
++ independent acceptance corpus
+-> 25 real noindex pages
+-> human and held-out evaluation
+-> 100, then 500
+-> 10,000 only after relevance, information gain, cannibalization, accessibility, crawl, and lifecycle gates pass
 ```
-
-The standalone workflow is `.github/workflows/reference.yml` and runs on `main`, `agent/**`, and pull requests.
-
-## Research disposition
-
-Canonical: deterministic lexical baseline, typed graph, separate hard constraints, bounded graph expansion, sparse concave selection, HRR after eligibility, two compiler-bounded agent stages, TypeScript oracle, static output.
-
-Comparison-only: Leiden, graph learning, learned embeddings, HNSW/ANN, GPU provider optimization, Zig/Wasm. Mathematical or paper fit does not establish implementation fit.
-
-## Proof boundary
-
-Inherited source proof recorded 46/46 tests and a synthetic planning run of 15,000 candidates -> 10,000 selected regions -> 400 Stage-2 batches in 5,284.510 ms. That is compiler plumbing and scale evidence only.
-
-Not proven: real relevance, useful page bodies, indexing, ranking, citations, conversion, revenue, complete 10k UI emission, or native/Wasm advantage.
-
-## Next gate
-
-1. Capture one real repository and operator-approved `hyper-site.project.yaml` without invented truth.
-2. Add a JSON-schema-constrained Stage-1 provider adapter.
-3. Add independent reviewer and observation approval.
-4. Freeze a real ContextCorpus with held-out judgments.
-5. Run 100–500 noindex Stage-2 jobs and atomically transact accepted outputs into canonical pages.
-6. Validate information gain, cannibalization, browser, crawler, accessibility, and static delivery before scaling.
