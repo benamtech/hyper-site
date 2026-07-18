@@ -1,6 +1,6 @@
 {
   "name": "@amtech/hyper-targeted-framework-reference",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,6 +15,8 @@
     "framework:plan": "npm run build && node scripts/framework-cli.mjs plan ../site-manifest.yaml fixtures/orchestration-fixture.mjs",
     "framework:validate": "npm run build && node scripts/framework-cli.mjs validate ../site-manifest.yaml fixtures/orchestration-fixture.mjs",
     "framework:preview": "npm run build && node scripts/framework-cli.mjs preview ../site-manifest.yaml fixtures/orchestration-fixture.mjs generated-framework-preview",
+    "production": "npm run build && node scripts/production-cli.mjs",
+    "production:help": "npm run build && node scripts/production-cli.mjs help",
     "browser:check": "browserslist",
     "ui:r3f:build": "npm --prefix ui-r3f install --no-audit --no-fund && npm --prefix ui-r3f test",
     "manifest:check": "npm run test && npm run manifest:emit && npm run ui:emit && npm run orchestration:check && npm run framework:validate && npm run browser:check"
