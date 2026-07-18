@@ -1,0 +1,54 @@
+{
+  "updatedAt": "2026-07-18",
+  "scope": "useful framework floor, durable agent orchestration, dependency correctness and observability",
+  "sources": [
+    {
+      "id": "astro-content-collections",
+      "type": "official-documentation",
+      "url": "https://docs.astro.build/en/guides/content-collections/",
+      "supports": ["schema-validated content collections", "static-site developer workflow baseline"]
+    },
+    {
+      "id": "temporal-docs",
+      "type": "official-documentation",
+      "url": "https://docs.temporal.io/",
+      "supports": ["durable execution", "failure recovery", "workflow/activity separation"]
+    },
+    {
+      "id": "temporal-architecture",
+      "type": "primary-project-documentation",
+      "url": "https://github.com/temporalio/temporal/blob/main/docs/architecture/README.md",
+      "supports": ["deterministic workflow code", "idempotent or non-retryable activities", "durable state"]
+    },
+    {
+      "id": "langgraph-overview",
+      "type": "official-documentation",
+      "url": "https://langchain-ai.github.io/langgraph/index.html",
+      "supports": ["stateful agent orchestration", "persistence", "human-in-the-loop"]
+    },
+    {
+      "id": "langgraph-interrupts",
+      "type": "official-documentation",
+      "url": "https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/breakpoints/",
+      "supports": ["checkpointed approval interrupts", "resume semantics"]
+    },
+    {
+      "id": "opentelemetry-docs",
+      "type": "official-documentation",
+      "url": "https://opentelemetry.io/docs/",
+      "supports": ["vendor-neutral traces", "metrics", "logs"]
+    },
+    {
+      "id": "bazel-dependencies",
+      "type": "official-documentation",
+      "url": "https://bazel.build/versions/6.0.0/concepts/dependencies",
+      "supports": ["complete dependency capture required for correct incremental rebuilds"]
+    },
+    {
+      "id": "bazel-ci-study",
+      "type": "peer-reviewed-preprint",
+      "url": "https://arxiv.org/abs/2405.00796",
+      "supports": ["incremental and parallel build benefits are empirical and workload-dependent"]
+    }
+  ]
+}
