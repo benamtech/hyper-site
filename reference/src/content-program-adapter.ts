@@ -1,9 +1,12 @@
 import {
+  adaptContentProgramSiteSource as adaptOwnedContentProgramSiteSource,
+  type ContentProgramSiteSource,
+} from "../../hyper-content/dist/content-program-adapter.js";
+import {
   compileSite as compileHyperSite,
   type CompiledSite as CompiledHyperSite,
   type SiteSource as HyperSiteSource,
 } from "./framework-core.js";
-import type { SiteSource as ContentSiteSource } from "./framework.js";
 import {
   compileFrameworkManifest,
   type CompiledFrameworkManifest,
@@ -16,41 +19,17 @@ export interface CompiledContentProgramManifest extends CompiledFrameworkManifes
 }
 
 /**
- * Removes Hyper Content geometry from the legacy compatibility source and
- * returns the content-neutral contract accepted by Hyper Site.
+ * Compatibility re-export. Canonical geometry removal now lives in
+ * @amtech/hyper-content; reference/ retains only the legacy compiler wrapper.
  */
-export function adaptContentProgramSiteSource(source: ContentSiteSource): HyperSiteSource {
-  return {
-    baseUrl: source.baseUrl,
-    evidence: source.evidence.map((item) => ({ ...item })),
-    claims: source.claims.map((item) => ({ ...item, evidenceIds: [...item.evidenceIds] })),
-    informationObjects: source.informationObjects.map((item) => ({ ...item, evidenceIds: [...item.evidenceIds] })),
-    modules: source.modules.map((module) => ({
-      ...module,
-      claimIds: [...module.claimIds],
-      informationObjectIds: [...module.informationObjectIds],
-      requiredCapabilities: [...module.requiredCapabilities],
-      sourceIds: [...module.sourceIds],
-    })),
-    pages: source.pages.map((page) => ({
-      id: page.id,
-      route: page.route,
-      canonicalQuestion: page.canonicalQuestion,
-      title: page.title,
-      description: page.description,
-      moduleIds: [...page.moduleIds],
-      internalPageIds: [...page.internalPageIds],
-      requiredCapabilities: [...page.requiredCapabilities],
-      ...(page.instructionPointers ? { instructionPointers: [...page.instructionPointers] } : {}),
-      indexable: page.indexable,
-    })),
-  };
+export function adaptContentProgramSiteSource(source: ContentProgramSiteSource): HyperSiteSource {
+  return adaptOwnedContentProgramSiteSource(source) as HyperSiteSource;
 }
 
 /**
- * Transitional public compiler for the mixed legacy Content Program manifest.
- * It preserves the content-aware result and independently verifies that the
- * same adapted input produces identical web artifacts through Hyper Site.
+ * Transitional compiler for the mixed legacy Content Program manifest.
+ * It verifies that the Hyper Content adapter produces the same web artifacts
+ * through the neutral compiler. This wrapper is removed after P1.5.
  */
 export function compileContentProgramManifest(
   textOrManifest: string | FrameworkManifest,
