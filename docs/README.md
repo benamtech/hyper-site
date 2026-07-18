@@ -1,12 +1,24 @@
 # Hyper Monorepo Documentation System
 
 Status: active documentation authority  
-Updated: 2026-07-18  
-Scope: repository documentation, research, architecture, planning, validation and durable state
+Updated: 2026-07-18
 
 ## Purpose
 
-The documentation system separates proposals, external evidence, accepted decisions, executable plans, pass/fail contracts, measured proof and durable handoffs. Documentation maps authority; source, tests, emitted artifacts, CI and field records remain proof.
+Documentation separates supplied ideas, external evidence, accepted architecture, executable work, prospective gates, measured reports and durable handoffs. Source, tests, emitted artifacts, CI and field evidence remain proof.
+
+## Current authority chain
+
+```text
+docs/research/43-useful-framework-and-agent-first-pipeline-audit.md
+-> docs/architecture/44-useful-framework-and-agent-first-target-architecture.md
+-> docs/planning/45-depth-first-framework-and-agent-recovery-plan.md
+-> docs/validation/46-useful-framework-and-agent-first-gates.md
+-> measured report
+-> immutable memory handoff
+```
+
+Earlier documents remain historical, supporting or superseded authorities. When they conflict with the chain above, the newer chain controls current execution order and product boundaries.
 
 ## Root allowlist
 
@@ -18,137 +30,119 @@ Only bootstrap documents remain at repository root:
 - `CONTRIBUTING.md`
 - `identity.md`
 
-New research, architecture, planning or validation documents belong under `docs/`.
-
 ## Directory model
 
 ```text
 docs/
-  README.md                 lifecycle and read/write protocol
-  catalog.json              machine-readable authority and supersession registry
-  intake/                   supplied notes and unresolved claims
-  research/                 source-backed investigation and dispositions
-    sources/                machine-readable source registries
-    experiments/            bounded research fixtures
-  architecture/             accepted product and system decisions
-  planning/                 explanatory plans; executable JSON stays in /planning
-  validation/               prospective pass/fail contracts
-  archive/                  retained noncurrent material
+  README.md
+  catalog.json
+  intake/
+  research/
+    sources/
+    experiments/
+  architecture/
+  planning/
+  validation/
+  archive/
 
-planning/                    executable plans and plan tests
-validation/reports/          immutable measured reports tied to exact commits
-memory/                      current index and immutable handoffs
+planning/
+  machine-readable executable plans and tests
+validation/reports/
+  measured reports tied to exact commits
+memory/
+  current index and immutable handoffs
 ```
 
-## Self-reinforcing lifecycle
+## Lifecycle
 
 ```text
 intake
--> external source verification
--> critical research and alternatives
+-> primary and official source verification
+-> critical research and direct controls
 -> architecture disposition
--> executable plan mutation
+-> executable plan
 -> RED/GREEN/REFACTOR implementation
 -> measured validation report
 -> immutable memory handoff
--> MEMORY.md and catalog reconciliation
--> next research or implementation gate
+-> catalog, MEMORY, bootstrap and PR reconciliation
 ```
 
-A downstream contradiction must flow backward. Failed validation updates the plan and may reverse architecture. New research does not become architecture until explicitly accepted. Historical documents cannot silently override current authorities.
+A downstream contradiction flows backward. Failed validation changes the plan and may reverse architecture. Historical confidence never overrides current catalog status or physical source truth.
+
+## Current product truth
+
+```text
+Hyper Content (optional producer) -> Hyper Site
+external agent control plane -> public tools and artifacts
+Hyper Site -X-> Hyper Content
+package cores -X-> runtime internals
+```
+
+- The compiler prototype works for bounded fixtures.
+- Most canonical source remains under `reference/src`.
+- `hyper-site/index.mjs` still delegates to `reference/dist/framework-core.js`.
+- The ordinary framework workflow is not built.
+- The five-page usefulness and maintenance comparisons are not run.
+- A durable agent runtime and idempotent effect path are not implemented.
+- PR #3 remains draft and unmerged.
 
 ## Authority by stage
 
 | Stage | May contain | Must not claim |
 |---|---|---|
-| intake | hypotheses, supplied notes, candidate formats | verified architecture or measured superiority |
-| research | primary sources, competitors, complements, controls, falsification | implementation completion |
-| architecture | accepted boundaries, ownership, build/integrate decisions | measured performance or field value |
-| planning | dependencies, tests, effects, gates and rollback | completed outcomes without evidence |
-| validation contract | fixtures, controls, metrics and thresholds | a passing result |
-| validation report | exact commit, commands, artifacts and measured outcomes | unrun checks or broader claims |
+| intake | supplied ideas and unresolved claims | verified architecture |
+| research | primary sources, controls, alternatives and falsification | implementation completion |
+| architecture | accepted ownership and build/integrate decisions | measured value |
+| planning | dependencies, effects, tests and rollback | completed outcomes |
+| validation contract | fixtures, metrics and thresholds | a passing result |
+| validation report | exact commit, commands, artifacts and outcomes | unrun checks |
 | memory handoff | durable state and next gate | replacement of source or CI authority |
 
-## Current authority chain
+## Current implementation order
 
-### Product and package boundary
+```text
+R0 truth reconciliation
+-> R1 physical extraction
+-> R2 ordinary framework floor
+-> R3 five-page comparison
+-> R4 maintenance correctness and value
+-> R5 durable agent wrapper
+-> R6 approved idempotent publication
+```
 
-- Research and split rationale: `docs/architecture/29-product-boundary-research-and-root-folder-split.md`
-- Current reality-grounded research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
-- Accepted integration boundary: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- Active four-workstream plan: `docs/planning/38-four-part-product-workstream-map.md`
-- Validation contract: `docs/validation/37-reality-grounded-product-validation-matrix.md`
-- Validation-first W1-W3 baseline: `docs/validation/39-w1-w3-validation-first-execution.md`
-- Official portable compiler test: `docs/validation/40-portable-compiler-limit-test.md`
-- Executable program: `planning/meta-plan-v3.json`, `planning/meta-plan-v3.steps.json`
+Task surfaces, SDRT, GNNs, GPU promotion, browser Wasm and 10K publication are not current implementation work.
 
-### Critical research controls
+## Official external verification
 
-- SDRT and internal-linking disposition: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`
-- Compiler, network and LLM claim dispositions: `docs/research/42-critical-compiler-network-and-llm-claims.md`
-- Advanced graph, vector or discourse methods remain experimental until they beat named simpler controls on held-out decisions.
-
-### Governed task surfaces
-
-- Intake: `docs/intake/2026-07-18-next-generation-task-surfaces.md`
-- Research: `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
-- Architecture: `docs/architecture/32-governed-task-surface-architecture.md`
-- Validation: `docs/validation/33-task-surface-validation-matrix.md`
-- Sources: `docs/research/sources/2026-07-18-task-surfaces.sources.json`
-
-### Competitive and intellectual grounding
-
-- Research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
-- Sources: `docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json`
-- Architecture disposition: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- Plan: `docs/planning/38-four-part-product-workstream-map.md`
-- Validation: `docs/validation/37-reality-grounded-product-validation-matrix.md`
-
-## Official external verification paths
-
-The official Manjaro/Arch verification entrypoint is:
+Manjaro/Arch:
 
 ```text
 scripts/manjaro-clone-and-test-hyper.sh
 ```
 
-Live branch-specific raw URL:
-
-```text
-https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh
-```
-
-The cross-platform Unix-like wrapper remains:
+Generic Unix-like:
 
 ```text
 scripts/clone-and-test-hyper.sh
 ```
 
-Both wrappers must clone the named branch, record the exact remote and local commit, use the actual public compiler entrypoint, run repository tests, run the canonical randomized harness, and retain machine-readable output. A successful generated fixture proves behavior only for that commit, machine and fixture.
+Both verify only the current compiler behavior for an exact commit, machine and generated fixture. They do not satisfy the framework or agent gates.
 
-## Current implementation truth
+## Research-source requirements
 
-- `hyper-content/src/content-program-adapter.ts` is the first physically owned Hyper Content implementation.
-- `reference/src/content-program-adapter.ts` is a temporary legacy manifest/parity wrapper.
-- Most canonical Hyper Site and Hyper Content implementation still resides under `reference/src` pending W1 extraction.
-- `hyper-site/index.mjs` still delegates current compiler behavior to `reference/dist/framework-core.js`.
-- Folder names and facades are not proof of complete extraction.
-- PR #3 remains draft and unmerged.
+An active research claim records:
 
-## Mutation rules
+- primary or official source URL;
+- access date;
+- source class;
+- exact claim supported;
+- limitation or unresolved inference;
+- simpler control;
+- downstream architecture or gate affected.
 
-1. Current architecture, plan, bootstrap and catalog documents are updated in place.
-2. Timestamped handoffs under `memory/` are immutable after commit.
-3. Validation reports are immutable for their named implementation head; corrections use a new report.
-4. Raw intake remains preserved even when rejected or narrowed.
-5. Superseded documents remain cataloged with replacements.
-6. Model output, preview protocols, synthetic scale and schema validity cannot be promoted into product proof.
-7. External sources require a registry entry with access date, source class, status and supported claims.
-8. Advanced methods require a named simple control and removal path.
-9. Enterprise comparisons must include governance and operating gaps, not only features.
-10. Every active plan must terminate in measurable validation and durable memory.
-11. An external verification script must expose the exact repository, branch, commit, harness and output path.
-12. A wrapper may install dependencies only through an explicit opt-in; Manjaro/Arch installation uses a full `pacman -Syu` transaction rather than a partial upgrade.
+Current source registry:
+
+- `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
 
 ## Agent read order
 
@@ -158,51 +152,54 @@ Both wrappers must clone the named branch, record the exact remote and local com
 4. `README.md`
 5. `docs/README.md`
 6. `docs/catalog.json`
-7. `planning/meta-plan-v3.json`
-8. `planning/meta-plan-v3.steps.json`
-9. `memory/MEMORY.md`
-10. newest immutable handoff
-11. newest measured report
-12. task-specific research, architecture, plan and validation chain
+7. `memory/MEMORY.md`
+8. newest immutable handoff
+9. newest measured report
+10. current task-specific authority chain
 
-## Agent write protocol
+## Write protocol
 
 Before writing:
 
 - identify the lifecycle stage;
-- read the catalog and replacement chain;
-- state whether the material is evidence, inference, proposal or decision;
-- identify controls, alternatives, affected plan steps and downstream documents.
+- read the current authority chain and replacement relationships;
+- distinguish evidence, inference, proposal and decision;
+- name the direct control and falsification condition;
+- identify affected root guides, plans, validation and memory.
 
 After writing:
 
+- update current bootstrap surfaces when product truth changes;
 - update `docs/catalog.json` or record an explicit catalog-reconciliation blocker;
 - run `node scripts/check-doc-system.mjs`;
-- update executable plans when dependencies or gates change;
-- run relevant source and package tests;
-- produce a measured report only for completed checks;
-- append an immutable handoff for a coherent validated pass;
-- reconcile `memory/MEMORY.md`, root README and the draft PR body.
+- run applicable package and validation tests;
+- create a measured report only for checks actually run;
+- append an immutable handoff for a coherent completed pass;
+- reconcile `memory/MEMORY.md` and the draft PR body.
 
-## Documentation freshness rules
+## Freshness rules
 
-An active document is stale when it names a noncanonical implementation as current, cites an older CI head as current proof, conflicts with the executable plan, omits its downstream validation contract, or makes a claim invalidated by newer research.
+An active document is stale when it:
 
-Historical documents remain useful intellectual record. Their status in `docs/catalog.json`, not their confident language, determines authority.
+- calls a facade or folder a completed package boundary;
+- presents `reference/` as only a consumer while runtime imports remain;
+- presents compiler behavior as a normal framework workflow;
+- presents an LLM loop as durable agent orchestration;
+- puts task surfaces or advanced methods before the five-page maintenance proof;
+- treats a dependency index as complete incremental correctness;
+- claims publication from compilation without approval and effect evidence;
+- cites an older execution order as current.
 
 ## Permanent validation hooks
 
-The documentation gate verifies or should be extended to verify:
+The documentation gate should verify:
 
 - root Markdown allowlist;
 - catalog uniqueness and path existence;
-- no stale references to moved root documents;
-- required research, architecture, planning and validation relationships;
-- executable plan and memory paths;
+- current authority-chain paths;
+- no active sequencing conflict with the recovery plan;
+- explicit current `reference/dist` delegation;
+- ordinary framework and agent-runtime nonclaims;
+- direct controls for advanced methods;
 - immutable handoff naming;
-- bootstrap links to this index;
-- active-source registry existence;
-- current implementation-path assertions;
-- explicit controls for advanced methods;
-- exact external verification entrypoints;
-- current PR maturity nonclaims.
+- current PR draft posture.
