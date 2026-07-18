@@ -37,7 +37,7 @@ echo "Running validation-baseline tests..."
 npm run test:validation
 
 echo "Running unique compiler limit test: pages=$PAGES seed=$SEED"
-node scripts/run-compiler-limit-test.mjs \
+node scripts/run-compiler-limit-test-v2.mjs \
   --pages "$PAGES" \
   --seed "$SEED" \
   --output "validation/reports/portable-${SEED}"
@@ -50,7 +50,8 @@ cat > "validation/reports/portable-${SEED}/clone-context.json" <<JSON
   "node": "$(node --version)",
   "npm": "$(npm --version)",
   "pages": $PAGES,
-  "seed": "$SEED"
+  "seed": "$SEED",
+  "harness": "scripts/run-compiler-limit-test-v2.mjs"
 }
 JSON
 
