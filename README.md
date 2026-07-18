@@ -198,3 +198,7 @@ Durable state:
 - newest measured report under `validation/reports/`
 
 Historical documents remain preserved for intellectual provenance. Their status in `docs/catalog.json`, not their wording, determines current authority.
+
+## Documentation system
+
+Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.
