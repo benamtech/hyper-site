@@ -136,6 +136,7 @@ node scripts/check-doc-system.mjs
 - gates: `docs/validation/46-useful-framework-and-agent-first-gates.md`
 - code graph: `CODEGRAPH.md`
 - operating contract: `AGENTS.md`
+- documentation system: `docs/README.md`
 - durable state: `memory/MEMORY.md`
 
 Low-level Zig/Wasm/binary documents remain optional research and cannot reorder U1-U5.
@@ -143,20 +144,3 @@ Low-level Zig/Wasm/binary documents remain optional research and cannot reorder 
 ## Nonclaims
 
 Passing compiler fixtures, hashes, schema checks, graph metrics, synthetic scale and isolated kernel benchmarks do not prove a useful framework, complete incrementality, page usefulness, SEO quality, ranking, conversion, revenue or production readiness.
-
-## Governed task surfaces
-
-Hyper Site's next interaction layer is a protocol-neutral governed task-surface platform. Static pages remain complete and indexable; optional runtime services accept typed intents and return public projections, resources, artifacts, actions, and receipts. Theme developers own trusted renderers, site developers own mounts and fallbacks, and growth operators own bounded experiment and conversion policy. Hyper Content may propose task semantics but contains zero UI implementation logic.
-
-Current authority:
-
-- `docs/intake/2026-07-18-next-generation-task-surfaces.md`
-- `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
-- `docs/architecture/32-governed-task-surface-architecture.md`
-- `docs/validation/33-task-surface-validation-matrix.md`
-
-A2UI, AG-UI, MCP Apps, and AMTECH AI Employee are adapters after the internal ABI passes. Ten-thousand-page surface scale is a mandatory benchmark tier, not a page-usefulness claim.
-
-## Documentation system
-
-Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.
