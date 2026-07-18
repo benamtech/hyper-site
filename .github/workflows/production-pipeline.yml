@@ -40,6 +40,7 @@ jobs:
             test/near-alpha-framework.test.mjs \
             test/near-alpha-release.test.mjs \
             test/agent-workspace.test.mjs \
+            test/agent-workspace-cardinality.test.mjs \
             2>&1 | tee near-alpha-test.log
       - name: Upload near-alpha test transcript
         if: always()
