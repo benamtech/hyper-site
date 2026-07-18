@@ -1,313 +1,57 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "updatedAt": "2026-07-18",
-  "rootAllowlist": [
-    "README.md",
-    "AGENTS.md",
-    "CODEGRAPH.md",
-    "CONTRIBUTING.md",
-    "identity.md"
-  ],
-  "lifecycle": [
-    "bootstrap",
-    "intake",
-    "research",
-    "architecture",
-    "planning",
-    "validation-contract",
-    "validation-report",
-    "memory-index",
-    "memory-handoff"
-  ],
+  "rootAllowlist": ["README.md", "AGENTS.md", "CODEGRAPH.md", "CONTRIBUTING.md", "identity.md"],
+  "lifecycle": ["bootstrap", "intake", "research", "architecture", "planning", "validation-contract", "validation-report", "memory-index", "memory-handoff"],
   "documents": [
-    {
-      "id": "legacy-architecture-01-system-architecture",
-      "path": "docs/architecture/01-system-architecture.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 01-system-architecture.md"
-    },
-    {
-      "id": "legacy-architecture-11-hyper-distributed-content-generative-ui-and-design-collaboration",
-      "path": "docs/architecture/11-hyper-distributed-content-generative-ui-and-design-collaboration.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 11-hyper-distributed-content-generative-ui-and-design-collaboration.md"
-    },
-    {
-      "id": "legacy-architecture-12-compiler-design-and-autonomy-validation-addendum",
-      "path": "docs/architecture/12-compiler-design-and-autonomy-validation-addendum.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 12-compiler-design-and-autonomy-validation-addendum.md"
-    },
-    {
-      "id": "legacy-architecture-16-unified-hypervector-manifest-agent-harness",
-      "path": "docs/architecture/16-unified-hypervector-manifest-agent-harness.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 16-unified-hypervector-manifest-agent-harness.md"
-    },
-    {
-      "id": "legacy-architecture-17-agentic-ui-metaprogramming-standard",
-      "path": "docs/architecture/17-agentic-ui-metaprogramming-standard.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 17-agentic-ui-metaprogramming-standard.md"
-    },
-    {
-      "id": "legacy-architecture-18-vector-node-path-web-framework-model",
-      "path": "docs/architecture/18-vector-node-path-web-framework-model.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 18-vector-node-path-web-framework-model.md"
-    },
-    {
-      "id": "legacy-architecture-20-agent-operated-vector-site-generation-and-wasm",
-      "path": "docs/architecture/20-agent-operated-vector-site-generation-and-wasm.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 20-agent-operated-vector-site-generation-and-wasm.md"
-    },
-    {
-      "id": "legacy-architecture-21-vector-to-generation-job-compiler",
-      "path": "docs/architecture/21-vector-to-generation-job-compiler.md",
-      "kind": "architecture",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 21-vector-to-generation-job-compiler.md"
-    },
-    {
-      "id": "architecture-agent-first-backend",
-      "path": "docs/architecture/28-agent-first-web-framework-and-llm-backend.md",
-      "kind": "architecture",
-      "status": "superseded-in-part",
-      "authority": "historical unified-product architecture",
-      "supersededBy": "architecture-product-boundary"
-    },
-    {
-      "id": "architecture-product-boundary",
-      "path": "docs/architecture/29-product-boundary-research-and-root-folder-split.md",
-      "kind": "architecture",
-      "status": "active",
-      "authority": "two-product dependency boundary"
-    },
-    {
-      "id": "architecture-task-surfaces",
-      "path": "docs/architecture/32-governed-task-surface-architecture.md",
-      "kind": "architecture",
-      "status": "accepted-target",
-      "authority": "protocol-neutral task-surface boundaries and contracts",
-      "input": "research-task-surfaces"
-    },
-    {
-      "id": "legacy-archive-handoff-landing-pages",
-      "path": "docs/archive/HANDOFF-LANDING-PAGES.md",
-      "kind": "bootstrap",
-      "status": "archived",
-      "authority": "historical repository document moved from HANDOFF-LANDING-PAGES.md"
-    },
-    {
-      "id": "intake-task-surfaces",
-      "path": "docs/intake/2026-07-18-next-generation-task-surfaces.md",
-      "kind": "intake",
-      "status": "preserved",
-      "authority": "supplied thesis and unresolved claims"
-    },
-    {
-      "id": "legacy-intake-research-notes-2026-07-17",
-      "path": "docs/intake/RESEARCH-NOTES-2026-07-17.md",
-      "kind": "intake",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from RESEARCH-NOTES-2026-07-17.md"
-    },
-    {
-      "id": "legacy-intake-research-notes-current",
-      "path": "docs/intake/RESEARCH-NOTES-CURRENT.md",
-      "kind": "intake",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from RESEARCH-NOTES-CURRENT.md"
-    },
-    {
-      "id": "legacy-planning-08-implementation-plan",
-      "path": "docs/planning/08-implementation-plan.md",
-      "kind": "planning",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 08-implementation-plan.md"
-    },
-    {
-      "id": "legacy-planning-14-phase-2-experience-materialization-engine-plan",
-      "path": "docs/planning/14-phase-2-experience-materialization-engine-plan.md",
-      "kind": "planning",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 14-phase-2-experience-materialization-engine-plan.md"
-    },
-    {
-      "id": "legacy-planning-15-hyper-targeted-search-distribution-workstreams",
-      "path": "docs/planning/15-hyper-targeted-search-distribution-workstreams.md",
-      "kind": "planning",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 15-hyper-targeted-search-distribution-workstreams.md"
-    },
-    {
-      "id": "legacy-planning-23-groundwork-orchestration-implementation",
-      "path": "docs/planning/23-groundwork-orchestration-implementation.md",
-      "kind": "planning",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 23-groundwork-orchestration-implementation.md"
-    },
-    {
-      "id": "planning-meta-plan-v3",
-      "path": "docs/planning/30-meta-plan-v3-executable-program.md",
-      "kind": "planning",
-      "status": "active",
-      "authority": "human-readable executable program rationale",
-      "machineAuthorities": [
-        "planning/meta-plan-v3.json",
-        "planning/meta-plan-v3.steps.json"
-      ]
-    },
-    {
-      "id": "docs-system",
-      "path": "docs/README.md",
-      "kind": "bootstrap",
-      "status": "active",
-      "authority": "documentation lifecycle and read/write protocol"
-    },
-    {
-      "id": "legacy-research-02-shape-model-and-hrr-core",
-      "path": "docs/research/02-shape-model-and-hrr-core.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 02-shape-model-and-hrr-core.md"
-    },
-    {
-      "id": "legacy-research-03-agentic-seo-system",
-      "path": "docs/research/03-agentic-seo-system.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 03-agentic-seo-system.md"
-    },
-    {
-      "id": "legacy-research-09-phase-1-synthesis-competitive-and-systems-positioning",
-      "path": "docs/research/09-phase-1-synthesis-competitive-and-systems-positioning.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 09-phase-1-synthesis-competitive-and-systems-positioning.md"
-    },
-    {
-      "id": "legacy-research-10-software-category-and-commercial-use-cases",
-      "path": "docs/research/10-software-category-and-commercial-use-cases.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 10-software-category-and-commercial-use-cases.md"
-    },
-    {
-      "id": "legacy-research-13-academic-and-normative-basis-for-validation-vectors",
-      "path": "docs/research/13-academic-and-normative-basis-for-validation-vectors.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 13-academic-and-normative-basis-for-validation-vectors.md"
-    },
-    {
-      "id": "legacy-research-19-vector-native-corrections-and-csi-validation",
-      "path": "docs/research/19-vector-native-corrections-and-csi-validation.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 19-vector-native-corrections-and-csi-validation.md"
-    },
-    {
-      "id": "research-10k-site-program",
-      "path": "docs/research/24-agent-discovered-ontology-and-10k-site-program.md",
-      "kind": "research",
-      "status": "active-experimental",
-      "authority": "10K compiler and maintenance research boundary"
-    },
-    {
-      "id": "research-academic-crosswalk",
-      "path": "docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md",
-      "kind": "research",
-      "status": "active",
-      "authority": "academic method and promotion crosswalk"
-    },
-    {
-      "id": "research-graph-triage",
-      "path": "docs/research/26-graph-learning-paper-triage-and-promotion-gates.md",
-      "kind": "research",
-      "status": "active",
-      "authority": "graph-learning disposition"
-    },
-    {
-      "id": "research-task-surfaces",
-      "path": "docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md",
-      "kind": "research",
-      "status": "active",
-      "authority": "protocol and prior-art disposition",
-      "input": "intake-task-surfaces",
-      "sources": "docs/research/sources/2026-07-18-task-surfaces.sources.json"
-    },
-    {
-      "id": "legacy-research-experiments-07-v0-1-request-mirror-lab",
-      "path": "docs/research/experiments/07-v0.1-request-mirror-lab.md",
-      "kind": "research",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 07-v0.1-request-mirror-lab.md"
-    },
-    {
-      "id": "legacy-validation-00-scientific-and-feasibility-validation",
-      "path": "docs/validation/00-scientific-and-feasibility-validation.md",
-      "kind": "validation-contract",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 00-scientific-and-feasibility-validation.md"
-    },
-    {
-      "id": "legacy-validation-04-feature-validation-vectors",
-      "path": "docs/validation/04-feature-validation-vectors.md",
-      "kind": "validation-contract",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 04-feature-validation-vectors.md"
-    },
-    {
-      "id": "legacy-validation-05-pass-fail-vectors",
-      "path": "docs/validation/05-pass-fail-vectors.md",
-      "kind": "validation-contract",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 05-pass-fail-vectors.md"
-    },
-    {
-      "id": "legacy-validation-06-experimentation-privacy-operations",
-      "path": "docs/validation/06-experimentation-privacy-operations.md",
-      "kind": "validation-contract",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 06-experimentation-privacy-operations.md"
-    },
-    {
-      "id": "legacy-validation-22-agent-operated-framework-workflow-validation-matrix",
-      "path": "docs/validation/22-agent-operated-framework-workflow-validation-matrix.md",
-      "kind": "validation-contract",
-      "status": "historical-foundation",
-      "authority": "historical repository document moved from 22-agent-operated-framework-workflow-validation-matrix.md"
-    },
-    {
-      "id": "validation-near-alpha",
-      "path": "docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md",
-      "kind": "validation-contract",
-      "status": "active",
-      "authority": "near-alpha and real-case maturity boundary"
-    },
-    {
-      "id": "validation-task-surfaces",
-      "path": "docs/validation/33-task-surface-validation-matrix.md",
-      "kind": "validation-contract",
-      "status": "active",
-      "authority": "task-surface TDD and pass/fail gates",
-      "input": "architecture-task-surfaces"
-    },
-    {
-      "id": "memory-index",
-      "path": "memory/MEMORY.md",
-      "kind": "memory-index",
-      "status": "active",
-      "authority": "durable current state and read order"
-    }
+    {"id":"docs-system","path":"docs/README.md","kind":"bootstrap","status":"active","authority":"documentation lifecycle, read order, freshness and write protocol"},
+    {"id":"intake-task-surfaces","path":"docs/intake/2026-07-18-next-generation-task-surfaces.md","kind":"intake","status":"preserved","authority":"supplied task-surface thesis and unresolved claims"},
+    {"id":"legacy-intake-2026-07-17","path":"docs/intake/RESEARCH-NOTES-2026-07-17.md","kind":"intake","status":"historical-foundation","authority":"preserved pre-standard research notes"},
+    {"id":"legacy-intake-current","path":"docs/intake/RESEARCH-NOTES-CURRENT.md","kind":"intake","status":"historical-foundation","authority":"preserved pre-standard current notes; not current architecture"},
+
+    {"id":"legacy-research-shape-hrr","path":"docs/research/02-shape-model-and-hrr-core.md","kind":"research","status":"historical-foundation","authority":"historical shape and HRR thesis; advanced methods remain experimental"},
+    {"id":"legacy-research-agentic-seo","path":"docs/research/03-agentic-seo-system.md","kind":"research","status":"historical-foundation","authority":"historical agentic SEO thesis"},
+    {"id":"legacy-research-positioning","path":"docs/research/09-phase-1-synthesis-competitive-and-systems-positioning.md","kind":"research","status":"superseded-in-part","authority":"early competitive synthesis","supersededBy":"research-competitive-landscape"},
+    {"id":"legacy-research-commercial-use","path":"docs/research/10-software-category-and-commercial-use-cases.md","kind":"research","status":"superseded-in-part","authority":"early category and use-case analysis","supersededBy":"research-competitive-landscape"},
+    {"id":"legacy-research-validation-vectors","path":"docs/research/13-academic-and-normative-basis-for-validation-vectors.md","kind":"research","status":"historical-foundation","authority":"historical academic validation-vector basis"},
+    {"id":"legacy-research-vector-corrections","path":"docs/research/19-vector-native-corrections-and-csi-validation.md","kind":"research","status":"historical-foundation","authority":"historical vector-native corrections"},
+    {"id":"research-10k-site-program","path":"docs/research/24-agent-discovered-ontology-and-10k-site-program.md","kind":"research","status":"active-experimental","authority":"10K compiler and maintenance research; not publication value"},
+    {"id":"research-academic-crosswalk","path":"docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md","kind":"research","status":"active-experimental","authority":"method crosswalk and promotion hypotheses"},
+    {"id":"research-graph-triage","path":"docs/research/26-graph-learning-paper-triage-and-promotion-gates.md","kind":"research","status":"active-experimental","authority":"graph-learning disposition and controls"},
+    {"id":"research-task-surfaces","path":"docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md","kind":"research","status":"active","authority":"protocol and prior-art disposition","input":"intake-task-surfaces","sources":"docs/research/sources/2026-07-18-task-surfaces.sources.json"},
+    {"id":"research-competitive-landscape","path":"docs/research/34-intellectual-competitive-and-use-case-landscape.md","kind":"research","status":"active","authority":"current intellectual, competitor, complement, substitute and use-case landscape","sources":"docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json"},
+    {"id":"research-experiment-request-mirror","path":"docs/research/experiments/07-v0.1-request-mirror-lab.md","kind":"research","status":"historical-foundation","authority":"historical bounded experiment"},
+
+    {"id":"legacy-architecture-system","path":"docs/architecture/01-system-architecture.md","kind":"architecture","status":"historical-foundation","authority":"early unified-system architecture"},
+    {"id":"legacy-architecture-distributed-ui","path":"docs/architecture/11-hyper-distributed-content-generative-ui-and-design-collaboration.md","kind":"architecture","status":"historical-foundation","authority":"early distributed content and UI architecture"},
+    {"id":"legacy-architecture-compiler-addendum","path":"docs/architecture/12-compiler-design-and-autonomy-validation-addendum.md","kind":"architecture","status":"historical-foundation","authority":"early compiler and autonomy addendum"},
+    {"id":"legacy-architecture-vector-manifest","path":"docs/architecture/16-unified-hypervector-manifest-agent-harness.md","kind":"architecture","status":"historical-foundation","authority":"historical unified vector manifest architecture"},
+    {"id":"legacy-architecture-agentic-ui","path":"docs/architecture/17-agentic-ui-metaprogramming-standard.md","kind":"architecture","status":"superseded-in-part","authority":"historical agentic UI proposal","supersededBy":"architecture-task-surfaces"},
+    {"id":"legacy-architecture-vector-node","path":"docs/architecture/18-vector-node-path-web-framework-model.md","kind":"architecture","status":"historical-foundation","authority":"historical vector-native web model"},
+    {"id":"legacy-architecture-wasm","path":"docs/architecture/20-agent-operated-vector-site-generation-and-wasm.md","kind":"architecture","status":"historical-foundation","authority":"historical agent-operated Wasm architecture"},
+    {"id":"legacy-architecture-generation-job","path":"docs/architecture/21-vector-to-generation-job-compiler.md","kind":"architecture","status":"historical-foundation","authority":"historical generation-job compiler architecture"},
+    {"id":"architecture-agent-first-backend","path":"docs/architecture/28-agent-first-web-framework-and-llm-backend.md","kind":"architecture","status":"superseded-in-part","authority":"historical unified-product architecture","supersededBy":"architecture-product-boundary"},
+    {"id":"architecture-product-boundary","path":"docs/architecture/29-product-boundary-research-and-root-folder-split.md","kind":"architecture","status":"active","authority":"two-product dependency and migration boundary"},
+    {"id":"architecture-task-surfaces","path":"docs/architecture/32-governed-task-surface-architecture.md","kind":"architecture","status":"accepted-target","authority":"protocol-neutral task-surface boundaries and contracts","input":"research-task-surfaces"},
+    {"id":"architecture-reality-boundary","path":"docs/architecture/35-reality-grounded-product-and-integration-boundary.md","kind":"architecture","status":"active","authority":"current build-versus-integrate, product scope and baseline-first boundary","input":"research-competitive-landscape"},
+
+    {"id":"legacy-planning-implementation","path":"docs/planning/08-implementation-plan.md","kind":"planning","status":"historical-foundation","authority":"historical implementation plan"},
+    {"id":"legacy-planning-experience-engine","path":"docs/planning/14-phase-2-experience-materialization-engine-plan.md","kind":"planning","status":"historical-foundation","authority":"historical experience materialization plan"},
+    {"id":"legacy-planning-search-distribution","path":"docs/planning/15-hyper-targeted-search-distribution-workstreams.md","kind":"planning","status":"historical-foundation","authority":"historical search and distribution plan"},
+    {"id":"legacy-planning-groundwork","path":"docs/planning/23-groundwork-orchestration-implementation.md","kind":"planning","status":"historical-foundation","authority":"historical groundwork orchestration plan"},
+    {"id":"planning-meta-plan-v3","path":"docs/planning/30-meta-plan-v3-executable-program.md","kind":"planning","status":"active","authority":"human-readable executable program rationale","machineAuthorities":["planning/meta-plan-v3.json","planning/meta-plan-v3.steps.json"]},
+    {"id":"planning-next-three-workstreams","path":"docs/planning/36-next-three-workstreams-reality-grounded-plan.md","kind":"planning","status":"active","authority":"current detailed P1.4/P1.5/P1.6-to-P3 execution sequence","input":"architecture-reality-boundary"},
+
+    {"id":"legacy-validation-scientific","path":"docs/validation/00-scientific-and-feasibility-validation.md","kind":"validation-contract","status":"historical-foundation","authority":"historical scientific validation contract"},
+    {"id":"legacy-validation-feature-vectors","path":"docs/validation/04-feature-validation-vectors.md","kind":"validation-contract","status":"historical-foundation","authority":"historical feature validation vectors"},
+    {"id":"legacy-validation-pass-fail","path":"docs/validation/05-pass-fail-vectors.md","kind":"validation-contract","status":"historical-foundation","authority":"historical pass/fail vectors"},
+    {"id":"legacy-validation-privacy","path":"docs/validation/06-experimentation-privacy-operations.md","kind":"validation-contract","status":"historical-foundation","authority":"historical experimentation and privacy contract"},
+    {"id":"legacy-validation-workflow","path":"docs/validation/22-agent-operated-framework-workflow-validation-matrix.md","kind":"validation-contract","status":"historical-foundation","authority":"historical agent-operated workflow matrix"},
+    {"id":"validation-near-alpha","path":"docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md","kind":"validation-contract","status":"active","authority":"near-alpha and real-case maturity boundary"},
+    {"id":"validation-task-surfaces","path":"docs/validation/33-task-surface-validation-matrix.md","kind":"validation-contract","status":"active","authority":"task-surface TDD and pass/fail gates","input":"architecture-task-surfaces"},
+    {"id":"validation-reality-grounded","path":"docs/validation/37-reality-grounded-product-validation-matrix.md","kind":"validation-contract","status":"active","authority":"current control-arm, product-value, enterprise-gap and promotion matrix","input":"planning-next-three-workstreams"},
+
+    {"id":"legacy-archive-landing-pages","path":"docs/archive/HANDOFF-LANDING-PAGES.md","kind":"bootstrap","status":"archived","authority":"historical landing-page handoff"},
+    {"id":"memory-index","path":"memory/MEMORY.md","kind":"memory-index","status":"active","authority":"durable current state and read order"}
   ]
 }
