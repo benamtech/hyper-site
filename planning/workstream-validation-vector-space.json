@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "status": "active-validation-contract",
+  "principle": "No workstream passes from documentation or placeholder artifacts. Every automated assertion must inspect repository state or a measured evidence record.",
+  "business_goal": "Determine whether Hyper can produce and maintain a small evidence-grounded static site with fewer defects or lower lifecycle cost than a direct typed-content and template implementation.",
+  "workstreams": {
+    "W1": {
+      "goal": "Establish honest package ownership and independent consumption before product proof.",
+      "entry": [],
+      "exit": [
+        "all_reference_source_files_classified",
+        "single_owner_per_reference_source_file",
+        "hyper_site_owns_compiler_source",
+        "hyper_content_owns_stable_source",
+        "reference_not_runtime_authority",
+        "two_packed_consumers_pass",
+        "legacy_artifact_parity_intact"
+      ],
+      "failure_vectors": [
+        {"id":"W1-F01","severity":"critical","vector":"Unclassified reference source silently remains canonical","attack":"Add a new reference/src file without inventory entry","assertion":"inventory coverage equals filesystem coverage"},
+        {"id":"W1-F02","severity":"critical","vector":"One source file is assigned to multiple owners","attack":"Duplicate path across ownership records","assertion":"every path has exactly one owner"},
+        {"id":"W1-F03","severity":"critical","vector":"Hyper Site public entrypoint still reaches reference runtime code","attack":"Re-export or dynamic import from reference/dist or reference/src","assertion":"runtime dependency scan contains zero Hyper Site to reference edges"},
+        {"id":"W1-F04","severity":"critical","vector":"Hyper Content stable exports still reach reference runtime code","attack":"Compatibility export is mislabeled stable","assertion":"stable dependency scan contains zero Hyper Content to reference edges"},
+        {"id":"W1-F05","severity":"high","vector":"Duplicate canonical compiler implementations drift","attack":"Copy compiler while retaining executable legacy implementation","assertion":"one canonical implementation and reference consumes package output"},
+        {"id":"W1-F06","severity":"critical","vector":"Packed package succeeds only inside monorepo","attack":"Consumer resolves workspace-relative files or undeclared dependencies","assertion":"two consumers install tarballs in isolated temporary directories"},
+        {"id":"W1-F07","severity":"critical","vector":"Extraction changes generated artifacts or rejection behavior","attack":"Route, escaping, ordering, metadata, hash, or error-text drift","assertion":"fixture HTML, Markdown, sitemap, dependency index, page hash, build hash, and negative test match approved baseline"},
+        {"id":"W1-F08","severity":"high","vector":"Generated dist is committed but source owner is false","attack":"Public entrypoint targets copied dist with no package-owned source","assertion":"entrypoint target is produced from owning package src and source manifest records provenance"},
+        {"id":"W1-F09","severity":"high","vector":"Experimental code leaks into stable API","attack":"Star export exposes ontology, vector, Wasm, GPU, or acceleration modules","assertion":"stable exports are explicit and experimental exports are separately named"},
+        {"id":"W1-F10","severity":"medium","vector":"Inventory becomes stale after rename or deletion","attack":"Inventory contains paths absent from filesystem","assertion":"orphan inventory entries equal zero"}
+      ]
+    },
+    "W2": {
+      "goal": "Prove a clean consumer can build five distinct static pages and compare honestly with a direct control.",
+      "entry": ["W1_passed"],
+      "exit": [
+        "clean_package_consumer",
+        "five_distinct_pages",
+        "minimal_theme",
+        "dev_build_preview_inspect",
+        "deterministic_static_output",
+        "direct_control_equivalent",
+        "accessibility_gate",
+        "operator_time_and_cost_recorded"
+      ],
+      "failure_vectors": [
+        {"id":"W2-F01","severity":"critical","vector":"W2 starts before W1 passes","attack":"Five-page fixture imports repository internals","assertion":"W2 runner refuses execution unless signed W1 report is green for current commit"},
+        {"id":"W2-F02","severity":"critical","vector":"Five routes are aliases or duplicated content","attack":"Different paths render the same canonical question and module graph","assertion":"routes, canonical questions, titles, and page-purpose fingerprints are distinct"},
+        {"id":"W2-F03","severity":"critical","vector":"Consumer relies on undeclared monorepo paths","attack":"Relative imports escape consumer root","assertion":"isolated packed consumer has zero imports outside its root except installed packages"},
+        {"id":"W2-F04","severity":"high","vector":"Determinism is cosmetic","attack":"Hashes exclude sitemap, instructions, assets, or generated metadata","assertion":"two clean builds are byte-identical across the declared artifact manifest"},
+        {"id":"W2-F05","severity":"high","vector":"Theme hides semantic or accessibility defects","attack":"Visual CSS passes while heading order, landmarks, focus, contrast, or reduced motion fails","assertion":"critical accessibility findings equal zero and static HTML remains complete"},
+        {"id":"W2-F06","severity":"critical","vector":"Direct control is intentionally weaker","attack":"Control lacks equivalent routes, content, metadata, assets, validation, or output requirements","assertion":"frozen equivalence manifest matches both implementations"},
+        {"id":"W2-F07","severity":"high","vector":"Inspect command reports declared rather than emitted state","attack":"Manifest says five pages while dist contains fewer or stale pages","assertion":"inspection derives results from emitted artifact bytes"},
+        {"id":"W2-F08","severity":"high","vector":"Retired or noindex pages leak into sitemap","attack":"Indexability metadata and sitemap diverge","assertion":"sitemap set equals emitted indexable canonical URL set"},
+        {"id":"W2-F09","severity":"medium","vector":"Developer workflow only works on one machine","attack":"Implicit shell tools, global packages, locale, timezone, or path assumptions","assertion":"environment record and portable Node commands are required"},
+        {"id":"W2-F10","severity":"critical","vector":"Useful-page claim is inferred from successful rendering","attack":"Five syntactically valid but unjustified pages pass","assertion":"each page has a distinct user task, approved evidence, supported claim, and acceptance decision"}
+      ]
+    },
+    "W3": {
+      "goal": "Measure whether Hyper reduces maintenance defects or effort versus the equivalent direct control.",
+      "entry": ["W2_passed"],
+      "exit": [
+        "all_five_change_scenarios_measured",
+        "unexpected_changed_pages_zero",
+        "invalid_change_rejected",
+        "control_comparison_complete",
+        "advantage_or_required_invariant_identified"
+      ],
+      "failure_vectors": [
+        {"id":"W3-F01","severity":"critical","vector":"Expected affected-page set is defined after seeing output","attack":"Move goalposts to make dependency index appear correct","assertion":"scenario manifest is frozen before execution"},
+        {"id":"W3-F02","severity":"critical","vector":"Hash-only comparison misses semantic defects","attack":"Changed output has expected hash set but wrong facts or links","assertion":"byte diff, semantic assertions, and affected-page set all pass"},
+        {"id":"W3-F03","severity":"critical","vector":"Shared fact fails to propagate everywhere","attack":"One duplicated literal remains stale","assertion":"all declared dependents contain the new fact and no nondependents change"},
+        {"id":"W3-F04","severity":"high","vector":"Page-specific change causes broad rebuild or content drift","attack":"Global ordering or nondeterminism touches unrelated pages","assertion":"actual changed pages equal frozen expected set"},
+        {"id":"W3-F05","severity":"high","vector":"Shared design change corrupts content or metadata","attack":"Renderer change modifies claims, canonicals, or indexability","assertion":"design scenario changes only declared presentation bytes"},
+        {"id":"W3-F06","severity":"critical","vector":"Retired page remains discoverable","attack":"HTML removed but sitemap, internal link, instruction file, or dependency entry remains","assertion":"retirement removes every declared discovery surface"},
+        {"id":"W3-F07","severity":"critical","vector":"Invalid change partially writes output","attack":"Compiler emits some files before rejection","assertion":"failed build leaves prior artifact manifest unchanged and emits no mixed state"},
+        {"id":"W3-F08","severity":"critical","vector":"Operator time excludes repair or setup","attack":"Measure only successful command duration","assertion":"clock includes edit, run, diagnosis, correction, rerun, and rollback"},
+        {"id":"W3-F09","severity":"high","vector":"Framework advantage is claimed from an invariant the control was not allowed to implement","attack":"Asymmetric validation requirements","assertion":"control may implement equivalent direct checks and comparison records their cost"},
+        {"id":"W3-F10","severity":"critical","vector":"No advantage is found but expansion continues","attack":"Treat neutral or losing result as roadmap success","assertion":"failed advantage gate produces stop-or-narrow decision"}
+      ]
+    }
+  },
+  "evidence_policy": {
+    "current_commit_required": true,
+    "placeholder_evidence_rejected": true,
+    "manual_claims_require_artifact": true,
+    "green_requires_all_critical_assertions": true,
+    "later_workstream_execution_requires_prior_signed_report": true
+  }
+}
