@@ -25,6 +25,11 @@ jobs:
         run: |
           node ../scripts/check-meta-plan.mjs ../planning/meta-plan-v3.json
           node --test ../planning/test/meta-plan.test.mjs
+      - name: Validate documentation system
+        run: |
+          node ../scripts/check-declared-doc-moves.mjs
+          node ../scripts/check-doc-system.mjs
+          node --test ../docs/test/doc-system.test.mjs
       - name: Validate product boundaries
         run: |
           node ../scripts/check-product-boundaries.mjs
