@@ -1,366 +1,339 @@
-# 24 — Agent-Discovered Ontology and 10,000-Page Site Program
+# 24 — Agent-Discovered Ontology and 10,000-Page Framework Experiment
 
-Status: source-wired and synthetic-scale validated; real source ingestion, model providers, page-content transactions, browser acceptance, and search/commercial field evidence remain pending  
-Updated: 2026-07-17  
-Controlling implementation: `reference/src/agent-site-orchestrator.ts`
+Status: source-wired and synthetic-scale validated; 10K is an experimental tier, not a minimum product contract. Real starter-site, framework baseline, maintenance, provider, hardware, and field evidence remain pending.  
+Updated: 2026-07-18  
+Controlling implementation: `reference/src/agent-site-orchestrator.ts`  
+Maturity authority: `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
 
 ## 1. Corrected workload definition
 
-A framework **job** is one bounded site-creation run:
+A framework **job** is one bounded site-creation or maintenance run over a versioned workspace.
 
 ```text
-one ProjectInput
--> one agent-discovered ontology proposal
--> one approved ontology/graph/opportunity space
--> one finite site-generation plan
--> at least the declared minimum page count
--> batched agent/API generation work
--> deterministic static/compiler artifacts
+approved repository/source truth
+-> business/design workspace artifacts
+-> one ontology proposal and approval boundary
+-> one finite graph/opportunity/site plan
+-> a declared page cohort appropriate to the experiment
+-> bounded generation batches
+-> deterministic PageIR/static artifacts
+-> validation, review, and checkpoint state
+-> optional post-generation maintenance run
 ```
 
-For the current target, one job contains at least **10,000 canonical page-region jobs**.
-
-This is not:
+A job is not:
 
 - 10,000 concurrent visitors;
 - an always-on vector database;
-- a request-time page generator;
-- an always-on VPS serving personalized pages;
-- a claim that all 10,000 pages are automatically indexable or useful.
+- a request-time prose generator;
+- an opaque perpetual agent loop;
+- a guarantee that every selected region deserves a page;
+- a production-readiness claim.
 
-Serving is a later delivery concern. The current work optimizes the one-shot compiler and generation plan.
+The current experimental tiers are:
 
-## 2. Research verdict
+```text
+5 qualitative starter pages
+25 real noindex pages
+100 pages
+500 pages
+10,000 pages
+```
 
-### Retain
+The synthetic 10K fixture remains useful for compiler and static-emission evidence. It is no longer the minimum definition of a framework job.
+
+## 2. Product correction
+
+Hyper Site is intended to become an agent-first web framework and experience compiler, not a data pipeline or slop generator.
+
+The agent should be able to work at both ends:
+
+```text
+initial authoring
+  business datasheets
+  evidence
+  information architecture
+  design system
+  typography
+  layouts
+  graphics briefs/assets
+  starter pages
+
+assigned corpus work
+  ontology and page batches
+  validation and canonical transaction
+
+post-generation work
+  source refresh
+  design/component changes
+  page edits and retirement
+  drift, accessibility, and broken-link repair
+  case-study and outcome review
+```
+
+A 10K corpus is a failure if the same framework cannot create and maintain a coherent small site.
+
+## 3. Research verdict
+
+### Retain as current deterministic architecture
 
 | Method | Retained role | Boundary |
 |---|---|---|
-| TF-IDF/BM25 | deterministic lexical baseline and duplicate/related-concept inspection | not semantic truth |
+| TF-IDF/BM25 | lexical baseline and duplicate/related-concept inspection | not semantic truth |
 | typed evidence graph | compatibility, requires, excludes, hierarchy, offer/topic/workflow support | edge provenance required |
-| weighted object-attribute observations | co-occurrence and closed-conjunction seeds | no unrestricted Cartesian product |
-| bounded frequent closed itemsets | observed conjunction seeds | maximum width and support floor |
-| k-core pruning | remove isolated non-anchor proposals | anchors survive and all pruning is reported |
-| connected components | deterministic macro-regions | descriptive only, not market truth |
-| graph-constrained best-first expansion | explore reasonable unobserved conjunctions | one value per dimension, hard constraints, candidate cap |
-| concave-over-modular sparse coverage | finite corpus coverage over nodes, pairs, communities, anchors, and material effects | no dense candidate-by-context matrix at 10k |
-| HRR/HDC/VSA | fixed-width structural representation after eligibility/pruning | not the source of evidence or eligibility |
-| bounded local neighbor retrieval | page-agent cannibalization context | advisory, finite, and not publication authority |
-| two agent stages | ontology discovery first; page-concept generation second | compiler validates both stages |
+| weighted object-attribute observations | co-occurrence and bounded conjunction seeds | no unrestricted Cartesian product |
+| bounded frequent closed itemsets | observed conjunction seeds | width and support floors |
+| k-core pruning | remove isolated non-anchor proposals | anchors survive; pruning reported |
+| connected components | deterministic descriptive macro-regions | not market or page truth |
+| graph-constrained best-first expansion | bounded exploration of compatible conjunctions | hard constraints and candidate cap |
+| sparse concave coverage | finite representative selection | does not establish page usefulness |
+| HRR/HDC/VSA | fixed-width structural representation after eligibility | not evidence or publication authority |
+| bounded local neighbors | cannibalization/review context | advisory and finite |
+| two physical agent stages | ontology proposal, then PageDraft batches | compiler validates both |
+| semantic PageIR/static output | canonical web artifact path | must pass real framework and browser tests |
 
-### Demote to comparison/research arms
+### Retain as comparison or provider arms
 
-| Method | Reason |
+| Method | Promotion gate |
 |---|---|
-| Leiden | useful for exploratory graph partitioning and guarantees connected communities, but modularity/CPM communities do not establish page usefulness, intent, evidence, or commercial materiality |
-| sparse K-means / DBI-SC / HDBSCAN | relevant when the project has actual customer-row observations and a validated distance/clustering objective; the current ontology is a typed discrete constraint/evidence system, not a Euclidean consumer table |
-| learned embeddings | useful after lexical/graph pruning for held-out semantic recall tests; not required for current bounded 15,000-candidate build |
-| HNSW/ANN | useful only when exact sparse candidate retrieval stops meeting measured build budgets |
-| GNN/link prediction | potential ontology-completion proposal arm; never direct approval authority |
-| GraphRAG | possible research/source synthesis arm; not the canonical page compiler |
-| Blackwell/local GPU inference | possible execution provider for bounded generation bursts; not a dependency of ontology, selection, or serving |
+| Leiden | real graph fixture, simpler baseline, held-out family/relevance judgment |
+| sparse clustering | real row-level observations and validated clustering objective |
+| learned embeddings | gain after lexical/graph pruning on frozen held-out judgments |
+| HNSW/ANN | exact or bounded sparse retrieval misses measured budgets |
+| GNN/link prediction | many independently reviewed graphs and explicit task |
+| GraphRAG | source/research synthesis comparison only |
+| Blackwell/local inference | measured full-framework workload, quality, recovery, and cost |
+| SGLang/provider runtimes | full site-run throughput/cost without semantic drift |
+| Wasm/Zig/native kernels | isolated kernel, parity, repeated bridge-inclusive full-run benefit |
 
-### Reject as current canonical claims
+### Reject as current authority
 
-- dense ML or clustering as the first ontology authority;
-- community membership as proof of page eligibility;
-- unrestricted demographic or protected/private targeting;
-- arbitrary hidden visitor profiling;
+- dense ML or clustering as first ontology authority;
+- community membership as page eligibility;
+- unrestricted demographic, protected, private, or hidden visitor targeting;
 - full Cartesian page matrices;
-- runtime prose generation;
-- `5 cents per article`, `$2–3/hour`, or Blackwell throughput claims without a specific model, hardware, quantization, batch, token, energy, and provider benchmark;
-- unverified Rust/HDC/search crates as production dependencies;
-- Wasm or Rust adoption because it sounds advanced.
+- runtime canonical prose generation;
+- price or throughput claims without exact provider/model/hardware/runtime measurements;
+- advanced methods promoted because they sound high-performance;
+- unique routes, vectors, or graph regions as sufficient page-existence proof;
+- 10K generation throughput described as web-framework superiority.
 
-## 3. Verified research interpretation
+## 4. Verified research interpretation
 
 ### HDC/VSA and HRR
 
-Kleyko et al., Parts I and II, support high-dimensional distributed representations, binding, bundling, and compositional structure. They do **not** prove SEO, page usefulness, or commercial lift. The framework therefore uses HRR after evidence, safety, graph, materiality, and eligibility gates.
+The reviewed HDC/VSA literature supports binding, bundling, permutation, associative retrieval, and fixed-width compositional representation. It does not establish page eligibility, usefulness, ranking, conversion, or framework performance.
+
+Decision:
+
+```text
+evidence + safety + materiality + graph eligibility first
+-> HRR structure afterward
+-> typed inspectable attributes remain authority
+```
 
 ### LLM-assisted ontology engineering
 
-The research and industry methodologies consistently support a modular workflow:
+The supported pattern remains:
 
 ```text
-LLM/agent proposes
+agent proposes
 -> typed schema and provenance
--> compiler validation
--> anti-pattern and conformance checks
--> test harness
--> human/reviewer boundary where required
+-> external compiler validation
+-> anti-pattern and conformance tests
+-> independent approval where required
 ```
 
-The implementation follows this separation. The agent is a proposal engine, not ontology authority.
+Same-model self-verification is not acceptance.
 
-### Leiden/community detection
+### Community and clustering methods
 
-Leiden improves on Louvain by guaranteeing connected communities and optimizing a graph quality function. That is useful for descriptive macro-regions. It does not prove that a community corresponds to a coherent search intent, useful page, or market segment. The production compiler therefore retains deterministic connected components and explicit constraints; Leiden is an optional benchmark.
+Connected components remain a transparent descriptive baseline. Leiden, learned clustering, and graph representations remain experiments until they improve held-out real outcomes without evidence, safety, stability, cost, or maintenance regression.
 
-### Sparse customer clustering
+### Sparse coverage
 
-The verified sparse-market-segmentation papers address high-dimensional customer rows, RFM/behavior features, mixed variables, and clustering objectives. Those methods become relevant only when a project supplies comparable row-level evidence and the clusters are evaluated externally. They are not substituted for the current typed ontology graph.
+The sparse concave-over-modular objective remains the scalable selection baseline because it provides diminishing returns without a dense candidate-by-context matrix. Selection is not page-existence authority; every page still requires a task, information object, evidence, difference statement, and lifecycle owner.
 
-### Submodular coverage
+### WebAssembly and acceleration
 
-The selected objective is a sparse sum of concave functions over modular feature counts. This supplies diminishing returns across page-region coverage. The original global-revision implementation was correct on fixtures but slow; the production implementation uses lazy upper bounds and discriminative sparse features.
+Execution target and algorithm choice are separate. TypeScript remains the semantic oracle. Native acceleration requires parity and end-to-end benefit, including bridge, startup, copy, fallback, and maintenance cost.
 
-### WebAssembly
-
-Wasm is portable and SIMD-capable. It is not an automatic speedup. A useful Wasm boundary requires a large isolated numeric kernel, contiguous typed-array inputs, parity, repeated measurements, and bridge-inclusive end-to-end savings.
-
-The measured 10,000-page profile does not meet that promotion gate.
-
-## 4. Implemented pipeline
+## 5. Implemented generation path
 
 ```text
 ProjectInput
-  minimumInitialPages / maximumInitialPages
   business + brand + technical + goals
   sources + evidence + assets
         |
         v
-Stage 1 ontology agent
-  AgentOntologyProposal
-  attributes + dimension hints
-  typed relations
-  object-attribute observations
+Stage 1 ontology proposal
+  attributes + dimensions + relations + observations
         |
         v
 compileApprovedOntology
-  provenance resolution
-  confidence/materiality gates
-  protected/private/inferred-sensitive rejection
-  demographic/lifestyle reviewer gate
-  strongest-supported exact duplicate retention
-  label-gated lexical duplicate rejection
-  rejected attribute/relation/observation ledgers
+  provenance, confidence, materiality, safety, duplicate gates
         |
         v
 compileOntologyGraph
   explicit + co-occurrence + lexical channels
-  requires/excludes plane
-  k-core pruning with anchor retention
-  deterministic connected macro-regions
+  separate requires/excludes
+  pruning + descriptive macro-regions
         |
         v
 compileProductionOpportunitySpace
-  bounded frequent closed itemsets
-  cached constrained best-first expansion
+  bounded observed conjunctions
+  constrained expansion
   hard eligibility
-  incremental sparse concave coverage
+  sparse coverage
   local duplicate screen
-  packed HRR region vectors
+  HRR structure
         |
         v
 compileSparseSiteGenerationPlan
   one PageConceptJob per selected region
-  bounded nearby-region context
+  bounded nearby context
   deterministic batches
         |
         v
-Stage 2 page-concept agent
-  canonical question + intent + route
-  information object + utility/task
-  graph role + conversion path
-  semantic modules + UI capabilities
+Stage 2 PageDraft proposal
+  question, intent, route
+  evidence-bound claims
+  information objects and utilities
+  semantic modules and design capabilities
         |
         v
 compilePageConceptProposals
-  complete region-expression check
-  source/evidence bounds
-  distinct route/question/object/task
-  deterministic CandidatePageSeed
+  complete expression and source/evidence checks
         |
         v
-existing PageCoordinate / corpus / job / manifest / PageIR / UI compiler
+atomic SiteSource -> PageIR -> static HTML
 ```
 
-The user does not author dimensions, vectors, page coordinates, page matrices, or generation jobs.
+The user does not author vectors, coordinates, page matrices, or generation jobs. The user or reviewer does control business truth, design authority, sensitive targeting approval, and publication.
 
-## 5. Source map
+## 6. Framework lifecycle extensions implemented after the original design
 
-| Source | Role |
-|---|---|
-| `reference/src/project-input.ts` | project truth, minimum/maximum site page contract |
-| `reference/src/sparse-lexical.ts` | TF-IDF/BM25 baseline |
-| `reference/src/ontology-discovery.ts` | governed agent ontology proposal compiler |
-| `reference/src/ontology-graph.ts` | sparse graph, constraints, pruning, macro-regions |
-| `reference/src/opportunity-space.ts` | transparent original/reference implementation |
-| `reference/src/opportunity-generation-optimized.ts` | cached production candidate generator |
-| `reference/src/opportunity-space-optimized.ts` | incremental sparse selector and packed HRR vectors |
-| `reference/src/opportunity-space-production.ts` | production opportunity compiler |
-| `reference/src/site-program.ts` | typed Stage-2 job/proposal contracts and seed compiler |
-| `reference/src/site-program-optimized.ts` | bounded sparse page-neighbor and batch planner |
-| `reference/src/agent-site-orchestrator.ts` | hard-gated two-stage entrypoint |
-| `reference/src/acceleration-decision.ts` | evidence-gated TypeScript/Wasm decision contract |
-| `reference/fixtures/agent-site-fixture.mjs` | adversarial and 10k synthetic fixtures |
-| `reference/test/agent-site-program.test.mjs` | ontology/graph/region/site/scale proof |
-| `reference/test/acceleration-decision.test.mjs` | Wasm keep/promote gates |
+The current branch adds:
 
-## 6. Validation vectors added
+```text
+repository capture and explicit config ingestion
+Z.AI JSON transport and bounded repair
+exact-hash ontology/design approvals
+core-page design authority and CSS-only refinement
+complete PageDraft transaction into canonical PageIR
+bounded local corpus validation
+persistent generation checkpoints
+continuous AgentWorkspaceSnapshot artifact graph
+transitive dependency invalidation
+near-alpha framework evaluation and rejection contract
+```
 
-### Project
+These extensions do not yet establish a complete incremental compiler, visual editor, asset system, or multi-user service.
 
-- explicit minimum and maximum one-shot page counts;
-- minimum must be positive and not exceed maximum;
-- page count is an output contract, not the only quality goal.
+## 7. Validation vectors
 
-### Ontology
+### Project and ontology
 
-- proposal identity, generator, source/evidence references;
-- discovered dimensions and business anchors;
+- explicit truth and field evidence;
+- proposal identity and provenance;
 - material page effects;
-- targeting safety and reviewer approval;
+- sensitivity and reviewer approval;
 - deterministic lexical baseline;
-- typed relations and rejected-edge ledger;
-- weighted observations and rejected-observation ledger.
+- typed relations and observations;
+- rejected ledgers.
 
-### Graph
+### Graph and opportunity
 
 - explicit/co-occurrence/lexical channels;
 - separate hard constraints;
-- k-core pruning and anchor retention;
-- deterministic connected macro-regions.
+- pruning and anchor retention;
+- bounded expansion;
+- sparse coverage;
+- HRR parity;
+- local nonredundancy.
 
-### Opportunity space
+### Page program and transaction
 
-- observed conjunction seeds;
-- constrained bounded expansion;
-- anchor/materiality/evidence/coherence eligibility;
-- packed HRR parity;
-- local nonredundancy;
-- sparse concave coverage selection;
-- one-site 10k planning scale.
-
-### Site program
-
-- one Stage-2 job per selected region;
-- bounded local corpus context;
-- exact batch coverage;
+- one proposal per planned job;
 - complete region expression;
-- route/question/information/utility distinctness;
-- deterministic CandidatePageSeed output.
+- bounded sources and evidence;
+- distinct task/information/utility;
+- canonical PageConcept/SiteSource/PageIR convergence;
+- atomic noindex static output;
+- recovery checkpoints.
 
-### Acceleration
+### Core web framework
 
-- stage-level profile;
-- algorithm-before-runtime gate;
-- isolated dense-kernel gate;
-- bridge-inclusive repeated Wasm benefit;
-- numeric/selection parity;
-- complete TypeScript fallback.
+- approved datasheet/design/type/layout/graphics/starter artifacts before bulk work;
+- one shared design system;
+- accessible static rendering;
+- post-generation edit and invalidation scope;
+- ordinary-framework cold/incremental/dev/output/browser comparison;
+- real operator effort and recovery.
 
-## 7. Exact synthetic scale proof
+### Scientific and network validation
 
-GitHub Actions source run before documentation:
+- named hypotheses and falsification rules;
+- negative controls;
+- frozen fixtures and machine identity;
+- simpler baselines;
+- held-out graph/relevance/design judgments;
+- non-synthetic case studies;
+- reproducible commands and result hashes.
+
+## 8. Synthetic proof boundary
+
+Recorded historical proof includes:
 
 ```text
-run: 29628832989
-head: dcc8beded51290f8084a421996c51c18b2afed83
-46 tests
-46 pass
-0 fail
-all emission/build steps pass
+15,000 candidate regions
+10,000 selected regions
+400 Stage-2 planning batches
+5,284.510 ms synthetic planning profile
 ```
 
-Final 10,000-page fixture profile from that run:
+A later branch emitted 10,000 complete synthetic PageIR/static HTML artifacts and ran bounded corpus validation.
+
+These results prove increasingly complete source wiring and bounded execution. They do not prove:
+
+- that 10,000 pages deserve to exist;
+- starter-site design quality;
+- incremental maintenance behavior;
+- superiority to ordinary frameworks;
+- real provider or GPU economics;
+- relevance, accessibility, indexing, ranking, citations, conversion, or revenue.
+
+## 9. Mandatory 10K maintenance experiment
+
+A future 10K framework result must separately change:
 
 ```text
-project normalization       0.126 ms
-ontology compilation       20.363 ms
-graph compilation          36.644 ms
-closed itemsets           202.478 ms
-candidate generation     2218.216 ms
-sparse selection         1784.044 ms
-site-program planning     973.168 ms
------------------------------------
-total                    5284.510 ms
-
-candidate regions          15,000
-selected page regions      10,000
-agent batches                 400
-packed HRR vectors       2,560,000 bytes
+one page fact
+one family-wide fact
+one design token
+one shared component
+one information object
+one page
+one page family
+one evidence source
+one ontology relation
+one interrupted batch
 ```
 
-Original pre-optimization profile was approximately 29 seconds. The production sparse/algorithmic path is therefore about 5.5× faster on the recorded CI runs. Timing varies by runner; the acceptance fact is that both paths were measured on the same workflow class and the production path remains far below the 30-second fixture budget.
+Record invalidated, rebuilt, and unchanged artifacts, time, memory, output churn, crawl effects, review burden, and rollback.
 
-The 1,000-region HRR sample took 49.358 ms in the final run. A linear 10,000-region extrapolation is about 0.49 seconds. This is an estimate, not a direct standalone 10,000-kernel benchmark.
-
-## 8. Wasm decision
-
-Current disposition: **keep TypeScript as production oracle; do not promote Wasm yet**.
-
-Reasons:
-
-1. algorithmic changes already reduced the full 10k plan below six seconds in the final recorded run;
-2. the dominant stages are sparse candidate construction, selection state, and job planning;
-3. the isolated HRR numeric share is below the current 25% / 1.5-second promotion floor;
-4. no compiled bridge-inclusive Wasm benchmark has established accepted parity and at least 1.25× / 500 ms end-to-end savings;
-5. the existing Zig/Wasm source remains a research arm, not production authority.
-
-Promotion requires:
+## 10. Next gates
 
 ```text
-isolated exact production kernel
-+ contiguous typed-array boundary
-+ 20+ repeated JS/Wasm runs
-+ bridge/copy/startup included
-+ exact selection-hash parity
-+ vector cosine >= 0.999999
-+ >= 1.25x speedup
-+ >= 500 ms absolute full-build savings
-+ TypeScript fallback retained
-```
-
-## 9. Pass/fail boundary
-
-Pass:
-
-- the first agent discovers dimensions and relationships from project truth;
-- every accepted attribute is provenance-bearing and materially page-changing;
-- protected/private/inferred-sensitive axes are rejected;
-- demographic/lifestyle axes require explicit public-targeting approval, reviewer approval, and stronger materiality;
-- candidate conjunctions originate in observations or bounded graph expansion;
-- all selected regions have anchors, evidence, material effects, coherence, and no hard-constraint violation;
-- the 10,000-page minimum is satisfied before Stage-2 API generation;
-- each Stage-2 job expresses one exact selected region;
-- candidate and job planning remain one-shot and runtime-independent;
-- acceleration decisions are benchmark-gated.
-
-Fail:
-
-- the user must invent vector axes or page coordinates;
-- an agent suggestion becomes an ontology node without provenance/materiality/safety checks;
-- community detection becomes semantic or publication authority;
-- demographics are cosmetic stereotype variables;
-- a full Cartesian matrix is emitted;
-- dense embeddings, clustering, HNSW, GPU, Rust, or Wasm are mandatory before simpler baselines fail;
-- 10,000 means live sessions or always-on serving;
-- synthetic scale timing is described as search, ranking, content, conversion, or revenue proof.
-
-## 10. Still not accepted
-
-- arbitrary repository/site/business-source ingestion into `ProjectInput` and `AgentOntologyProposal`;
-- a real provider adapter for Stage 1 or Stage 2;
-- real independent customer/search observations and assessors;
-- successful Stage-2 outputs transacted into canonical evidence/modules/tasks/pages;
-- 10,000 generated page bodies or UIs;
-- browser screenshot, accessibility, Core Web Vitals, and crawler acceptance at 10k;
-- native Zig or Wasm compilation/parity/performance in CI;
-- Leiden, sparse clustering, learned semantic, HNSW, or GPU arms beating the production baseline;
-- indexing, ranking, AI citation, conversion, gross profit, revenue, or customer outcomes.
-
-## 11. Next gate
-
-```text
-real source/repository ingestion
--> Stage-1 provider adapter
--> reviewed real ontology proposal
--> 100–500 real noindex PageConceptJobs
--> Stage-2 provider adapter and canonical transaction
--> content/information-gain/cannibalization evaluation
--> browser/accessibility/performance validation
--> expand to 10,000 generated static pages
--> separate field publication and commercial measurement
+1. Freeze one real five-page starter-site case.
+2. Capture approved business/design/type/layout/graphics/assets.
+3. Link real compiler outputs into the continuous workspace.
+4. Run live provider and rented-node experiments.
+5. Implement the same fixture in an ordinary web framework.
+6. Compare authoring, cold build, incremental edit, output, browser, accessibility, and operator work.
+7. Extend to 25 real noindex pages with page-existence justifications.
+8. Freeze held-out relevance, design, and graph judgments.
+9. Scale 100 -> 500.
+10. Run 10K emission plus the maintenance matrix.
+11. Decide whether evidence earns an alpha milestone.
 ```
