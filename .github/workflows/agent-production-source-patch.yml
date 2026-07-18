@@ -1,0 +1,47 @@
+name: Agent production source patch
+
+on:
+  push:
+    branches: [agent/glm-blackwell-vertical-slice]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/glm-blackwell-vertical-slice
+      - name: Patch canonical production validator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('reference/src/production-orchestrator.ts')
+          text = path.read_text()
+          replacements = {
+              '  validateCorpus,\n': '',
+              '  type CorpusValidationPolicy,\n': '',
+              '  corpusPolicy?: CorpusValidationPolicy;': '  corpusPolicy?: ProductionCorpusValidationPolicy;',
+              '  const corpus = await validateCorpus(transaction, input.embeddingBackend, input.corpusPolicy);': '  const corpus = await validateProductionCorpus(transaction, input.embeddingBackend, input.corpusPolicy);',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'missing expected source fragment: {old!r}')
+              text = text.replace(old, new, 1)
+          marker = '} from "./page-draft-transaction.js";\n'
+          addition = 'import { validateProductionCorpus, type ProductionCorpusValidationPolicy } from "./corpus-validation-production.js";\n'
+          if addition not in text:
+              text = text.replace(marker, marker + addition, 1)
+          path.write_text(text)
+          PY
+          rm .github/workflows/agent-production-source-patch.yml
+      - name: Commit source patch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add reference/src/production-orchestrator.ts .github/workflows/agent-production-source-patch.yml
+          git commit -m "Use bounded production corpus validation"
+          git push origin HEAD:agent/glm-blackwell-vertical-slice
