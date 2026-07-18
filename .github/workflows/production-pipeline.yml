@@ -1,4 +1,4 @@
-name: Hyper Site Production Pipeline
+name: Hyper Site Near-Alpha Pipeline
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  production-pipeline:
+  near-alpha-pipeline:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -27,15 +27,18 @@ jobs:
           node --check scripts/production-stage1.mjs
           node --check scripts/production-approve.mjs
           node scripts/production-cli.mjs help
-      - name: Run production boundary tests
+      - name: Run near-alpha boundary tests
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-reporter=spec test/production-pipeline.test.mjs 2>&1 | tee production-test.log
-      - name: Upload production test transcript
+          node --test --test-reporter=spec \
+            test/production-pipeline.test.mjs \
+            test/near-alpha-framework.test.mjs \
+            2>&1 | tee near-alpha-test.log
+      - name: Upload near-alpha test transcript
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: production-test-log-${{ github.run_id }}
-          path: reference/production-test.log
+          name: near-alpha-test-log-${{ github.run_id }}
+          path: reference/near-alpha-test.log
           if-no-files-found: error
