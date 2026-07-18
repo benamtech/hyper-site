@@ -1,43 +1,43 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
   "accessedAt": "2026-07-18",
-  "scope": "direct framework baselines for Hyper Site",
+  "scope": "neutral standards relevant to deterministic static web output",
   "sources": [
     {
-      "id": "astro-islands",
-      "class": "official-documentation",
+      "id": "whatwg-html",
+      "class": "standard",
       "status": "current",
-      "title": "Astro Islands Architecture",
-      "publisher": "Astro",
-      "url": "https://docs.astro.build/en/concepts/islands/",
-      "supports": ["static HTML with selective interactivity", "ordinary static framework control"]
+      "title": "HTML Living Standard",
+      "publisher": "WHATWG",
+      "url": "https://html.spec.whatwg.org/",
+      "supports": ["semantic HTML and document conformance"]
     },
     {
-      "id": "astro-content-collections",
-      "class": "official-documentation",
+      "id": "wcag-22",
+      "class": "standard",
       "status": "current",
-      "title": "Astro Content Collections",
-      "publisher": "Astro",
-      "url": "https://docs.astro.build/en/guides/content-collections/",
-      "supports": ["typed structured content control"]
+      "title": "Web Content Accessibility Guidelines 2.2",
+      "publisher": "W3C",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "supports": ["accessibility acceptance criteria"]
     },
     {
-      "id": "next-static-export",
-      "class": "official-documentation",
+      "id": "sitemaps-protocol",
+      "class": "standard",
       "status": "current",
-      "title": "Next.js Static Exports",
-      "publisher": "Vercel",
-      "url": "https://nextjs.org/docs/app/guides/static-exports",
-      "supports": ["static HTML per route control"]
+      "title": "Sitemaps XML Format",
+      "publisher": "Sitemaps.org",
+      "url": "https://www.sitemaps.org/protocol.html",
+      "supports": ["sitemap output requirements"]
     },
     {
-      "id": "hugo-introduction",
-      "class": "official-documentation",
+      "id": "json-schema-2020-12",
+      "class": "standard",
       "status": "current",
-      "title": "Hugo Introduction",
-      "publisher": "Hugo",
-      "url": "https://gohugo.io/about/introduction/",
-      "supports": ["mature static-site control", "large-site build comparison"]
+      "title": "JSON Schema Draft 2020-12",
+      "publisher": "JSON Schema",
+      "url": "https://json-schema.org/draft/2020-12",
+      "supports": ["typed contract validation baseline"]
     }
   ]
 }
