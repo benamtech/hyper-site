@@ -27,8 +27,10 @@ jobs:
           node --check scripts/production-stage1.mjs
           node --check scripts/production-approve.mjs
           node --check scripts/workspace-cli.mjs
+          node --check scripts/near-alpha-cli.mjs
           node scripts/production-cli.mjs help
           node scripts/workspace-cli.mjs help
+          node scripts/near-alpha-cli.mjs help
       - name: Run near-alpha boundary tests
         shell: bash
         run: |
