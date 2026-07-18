@@ -21,6 +21,10 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund --no-package-lock
       - run: npm run build
+      - name: Validate executable plan
+        run: |
+          node ../scripts/check-meta-plan.mjs ../planning/meta-plan-v3.json
+          node --test ../planning/test/meta-plan.test.mjs
       - name: Validate product boundaries
         run: |
           node ../scripts/check-product-boundaries.mjs
@@ -40,6 +44,7 @@ jobs:
         run: |
           set -o pipefail
           node --test --test-reporter=spec \
+            test/framework-core-boundary.test.mjs \
             test/production-pipeline.test.mjs \
             test/page-backend-pass.test.mjs \
             test/near-alpha-framework.test.mjs \

@@ -6,6 +6,8 @@ import * as hyperContent from "../index.mjs";
 test("hyper-content targets hyper-site and exposes the content compiler backend", () => {
   for (const required of [
     "compileSite",
+    "compileContentSite",
+    "packSite",
     "compileApprovedOntology",
     "emitPageContract",
     "emitPageContractFromCompilerState",

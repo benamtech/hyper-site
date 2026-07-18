@@ -1,7 +1,9 @@
-// Transitional content-compiler boundary over the canonical implementation in
-// reference/. hyper-content may consume hyper-site; the inverse is forbidden.
+// Hyper Content owns the content compiler and targets the public Hyper Site
+// contract. The explicit legacy compile export remains the compatibility adapter
+// until content geometry is physically moved out of reference/.
 
 export * from "../hyper-site/index.mjs";
+export { compileSite, compileSite as compileContentSite, packSite } from "../reference/dist/framework.js";
 
 export * from "../reference/dist/benchmark.js";
 export * from "../reference/dist/optimizer.js";

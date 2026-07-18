@@ -6,12 +6,15 @@ const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const readText = (path) => readFile(resolve(root, path), "utf8");
 const readJson = async (path) => JSON.parse(await readText(path));
 
-const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex] = await Promise.all([
+const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex, frameworkCore, siteManifest, frameworkAdapter] = await Promise.all([
   readJson("package.json"),
   readJson("hyper-site/package.json"),
   readJson("hyper-content/package.json"),
   readText("hyper-site/index.mjs"),
   readText("hyper-content/index.mjs"),
+  readText("reference/src/framework-core.ts"),
+  readText("reference/src/site-manifest.ts"),
+  readText("reference/src/framework.ts"),
 ]);
 
 const errors = [];
@@ -20,54 +23,37 @@ const actualWorkspaces = [...(rootPackage.workspaces ?? [])].sort();
 if (JSON.stringify(actualWorkspaces) !== JSON.stringify(expectedWorkspaces)) {
   errors.push(`root workspaces must be exactly ${expectedWorkspaces.join(", ")}; received ${actualWorkspaces.join(", ")}`);
 }
-
 if (sitePackage.name !== "@amtech/hyper-site") errors.push("hyper-site package name is incorrect");
 if (contentPackage.name !== "@amtech/hyper-content") errors.push("hyper-content package name is incorrect");
 
-const contentDependencies = {
-  ...(contentPackage.dependencies ?? {}),
-  ...(contentPackage.peerDependencies ?? {}),
-  ...(contentPackage.devDependencies ?? {}),
-};
+const contentDependencies = { ...(contentPackage.dependencies ?? {}), ...(contentPackage.peerDependencies ?? {}), ...(contentPackage.devDependencies ?? {}) };
 if (!("@amtech/hyper-site" in contentDependencies)) errors.push("hyper-content must depend on hyper-site");
-
-const siteDependencies = {
-  ...(sitePackage.dependencies ?? {}),
-  ...(sitePackage.peerDependencies ?? {}),
-  ...(sitePackage.devDependencies ?? {}),
-};
+const siteDependencies = { ...(sitePackage.dependencies ?? {}), ...(sitePackage.peerDependencies ?? {}), ...(sitePackage.devDependencies ?? {}) };
 if ("@amtech/hyper-content" in siteDependencies) errors.push("hyper-site must not depend on hyper-content");
 
 const forbiddenSiteSurface = [
-  "ontology",
-  "context-corpus",
-  "sparse-lexical",
-  "opportunity",
-  "site-program",
-  "page-generation",
-  "glm-provider",
-  "pcn-emitter",
-  "articleir-parser",
-  "unfolder",
-  "wasm",
-  "manifest",
+  "ontology", "context-corpus", "sparse-lexical", "opportunity", "site-program", "page-generation",
+  "glm-provider", "pcn-emitter", "articleir-parser", "unfolder", "wasm", "../reference/dist/manifest.js",
+  "../reference/dist/framework.js",
 ];
-for (const token of forbiddenSiteSurface) {
-  if (siteIndex.includes(token)) errors.push(`hyper-site public facade leaks forbidden content module token: ${token}`);
+for (const token of forbiddenSiteSurface) if (siteIndex.includes(token)) errors.push(`hyper-site public facade leaks forbidden content token: ${token}`);
+for (const required of ["framework-core", "site-manifest", "browser-targets", "css-modern"]) {
+  if (!siteIndex.includes(required)) errors.push(`hyper-site public facade is missing ${required}`);
 }
 
-const requiredContentSurface = [
-  "hyper-site",
-  "pcn-emitter",
-  "articleir-parser",
-  "unfolder",
-  "ontology-graph",
-  "wasm",
-  "manifest",
+const forbiddenCoreImports = [
+  'from "./benchmark.js"', 'from "./core.js"', 'from "./manifest.js"', 'from "./wasm.js"',
+  "ontology", "provider", "vectorIdentity", "vectorPrototypes", "packSite",
 ];
-for (const token of requiredContentSurface) {
-  if (!contentIndex.includes(token)) errors.push(`hyper-content public facade is missing required token: ${token}`);
+for (const token of forbiddenCoreImports) if (frameworkCore.includes(token)) errors.push(`framework core contains forbidden content dependency or field: ${token}`);
+for (const token of ["vector_space", "agent_harness", "coverage_policy", "profiles", "feature_atoms", "prototypes", "provider"]) {
+  if (siteManifest.includes(token)) errors.push(`site manifest contains content-program field: ${token}`);
 }
+if (!frameworkAdapter.includes('from "./framework-core.js"')) errors.push("legacy framework adapter must delegate to framework-core");
+if (!frameworkAdapter.includes("compileFrameworkCore")) errors.push("legacy framework adapter does not call the neutral compiler");
+
+const requiredContentSurface = ["hyper-site", "compileContentSite", "packSite", "pcn-emitter", "articleir-parser", "unfolder", "ontology-graph", "wasm", "manifest"];
+for (const token of requiredContentSurface) if (!contentIndex.includes(token)) errors.push(`hyper-content public facade is missing required token: ${token}`);
 
 if (errors.length > 0) {
   console.error(JSON.stringify({ status: "fail", errors }, null, 2));
@@ -77,6 +63,8 @@ if (errors.length > 0) {
     status: "pass",
     workspaces: actualWorkspaces,
     dependencyDirection: "hyper-content -> hyper-site",
+    neutralFrameworkSource: "reference/src/framework-core.ts",
+    neutralManifestSource: "reference/src/site-manifest.ts",
     siteSurfaceForbiddenTokens: forbiddenSiteSurface.length,
     contentSurfaceRequiredTokens: requiredContentSurface.length,
   }));
