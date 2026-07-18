@@ -1,279 +1,231 @@
-# Hyper Site
+# Hyper Monorepo
 
-Status: research prototype approaching near-alpha. The repository contains a source-wired agent-first web-framework experiment, not a production product. Synthetic 10,000-page full emission passes; ordinary-framework comparison, real repositories, live providers, real hardware, operator usability, design quality, and field acceptance remain pending.  
+Status: research prototype approaching near-alpha. The repository now has two explicit product surfaces. Neither is production-ready.  
 Updated: 2026-07-18
 
-## Product identity
-
-Hyper Site is intended to become an **agent-first web framework and experience compiler**.
-
-Large-batch page generation is one workload. The product definition is broader:
+## Products
 
 ```text
-repository understanding
--> business datasheets and evidence
--> design systems, typography, layouts, graphics, and starter pages
--> bounded ontology and page-generation jobs
--> canonical PageIR/static output
--> operator review
--> post-generation editing, restyling, retirement, drift, and maintenance
--> next checkpointed agent invocation
+hyper-content
+  ontology + evidence + content compiler
+            |
+            v
+hyper-site
+  static web framework + UI + publisher target
 ```
 
-The framework fails if it can emit 10,000 pages but cannot create, preview, revise, and maintain an attractive five-page site with normal framework ergonomics.
+Dependency direction is one-way:
 
-`27-near-alpha-framework-validation-and-continuous-agent-workspace.md` is the current maturity and evaluation authority.
+```text
+hyper-content -> hyper-site
+hyper-site -X-> hyper-content
+```
+
+### `hyper-site/`
+
+`@amtech/hyper-site` is the web-framework package under extraction.
+
+It owns:
+
+- deterministic `SiteSource -> PageIR -> static HTML` compilation;
+- components, layouts, typography, design tokens, and shared CSS;
+- browser targets, accessibility, and web-performance budgets;
+- development, build, and publisher/deployment ergonomics;
+- optional browser interaction adapters.
+
+It does not expose ontology discovery, BM25, embeddings, LLM providers, PCN, ArticleIR, corpus planning, GPU orchestration, or the current vector/facility Wasm kernels.
+
+### `hyper-content/`
+
+`@amtech/hyper-content` is the ontology- and evidence-driven content compiler.
+
+It owns:
+
+- repository/business/source/evidence intake;
+- ontology discovery, typed graphs, opportunity selection, and page coordinates;
+- lexical, embedding, information-gain, duplicate, and corpus validation;
+- LLM provider dispatch, bounded repair, and checkpoints;
+- deterministic PCN emission;
+- ArticleIR parsing and rejection;
+- deterministic unfolding to Markdown, JSON-LD, links, sitemap state, and framework inputs;
+- current Wasm/Zig vector kernels and GPU/model workflows.
+
+Its backend path is:
+
+```text
+approved compiler state
+-> PCN
+-> LLM prose backend
+-> validated ArticleIR
+-> deterministic unfolder
+-> @amtech/hyper-site
+-> static web artifacts
+```
+
+### `reference/`
+
+`reference/` remains the canonical legacy implementation while physical source migration proceeds. The root folders are real public package boundaries, not a claim that every implementation file has already moved.
+
+The migration preserves one publication authority. `hyper-content` targets `hyper-site`; it must not create a second renderer or deployment pipeline.
+
+## Why the split exists
+
+The repository had conflated three different measures:
+
+1. **browser/runtime impact**: TTFB, LCP, CLS, INP, transferred bytes, and JavaScript cost;
+2. **build-path impact**: work performed while compiling a site;
+3. **product-surface impact**: concepts a developer must understand to use the framework.
+
+Ontology graphs, BM25, HRR, embeddings, model orchestration, and information-gain validation may be valuable to the content product. They do not become web-framework value merely because the old package invoked them during a build.
+
+The current static compiler still performs legacy vector packing internally. That coupling must be removed before `hyper-site` can be benchmarked honestly against Hugo, Astro, Eleventy, or another ordinary framework.
+
+The full repo and external-source analysis, hypotheses, falsification rules, corrected classifications, and migration plan are recorded in:
+
+- `29-product-boundary-research-and-root-folder-split.md`.
+
+## Corrections to the initial criticism
+
+The product-separation diagnosis was materially correct, but four claims did not survive source inspection:
+
+- current `wasm.ts` accelerates vector/facility math; it is not a browser-interactivity runtime;
+- `validation-contracts.ts` is generic typed acceptance infrastructure, not merely checkpoint hashing;
+- several content modules currently affect build time because the dependency graph is mixed, not because they belong in the framework;
+- exact claims such as “Hugo builds 10K pages in one second” or “Astro builds 10K pages in three seconds” are not accepted without one frozen comparable fixture.
+
+## Workspace commands
+
+The root is an npm workspace:
+
+```bash
+npm run build
+npm test
+npm run check:boundaries
+```
+
+During migration, these commands build and test the canonical implementation under `reference/`, then test both package facades and dependency direction.
+
+Direct package surfaces:
+
+```js
+import { compileSite } from "@amtech/hyper-site";
+
+import {
+  compileApprovedOntology,
+  emitPageContractFromCompilerState,
+  parseArticleIR,
+  unfoldArticleIR,
+} from "@amtech/hyper-content";
+```
 
 ## Maturity boundary
 
-- Current maturity is `research-prototype` / `near-alpha` only.
-- Names containing `production` identify production-boundary experiments, not readiness claims.
-- Model output remains proposal state.
-- Synthetic scale proves bounded software behavior and static emission only.
-- No performance claim is valid until Hyper Site is measured against an ordinary static, SSR, or SPA framework on the same fixture and machine.
-- No usefulness claim is valid until non-synthetic case studies and held-out judgments pass.
+- Both products remain research prototypes approaching near-alpha.
+- Names containing `production` identify production-boundary experiments, not readiness.
+- Model output is proposal state.
+- Synthetic scale proves bounded software behavior only.
+- Content-pipeline timing is not web-framework timing.
+- No usefulness claim is valid until non-synthetic cases and held-out judgments pass.
+- No framework-performance claim is valid until `hyper-site` alone is compared against ordinary frameworks on the same fixture, machine, cache state, assets, and output requirements.
 
-## Canonical lifecycle
-
-```text
-repository + hyper-site.project.yaml
--> evidence-bound ProjectInput
--> business/design workspace artifacts
--> GLM Stage 1 AgentOntologyProposal
--> exact-hash independent approval
--> ApprovedOntology + typed graph + hard constraints
--> bounded opportunity selection
--> SiteGenerationPlan
--> GLM Stage 2 PageDraft batches
--> external schema/evidence validation + bounded repair
--> existing PageConceptProposal compiler
--> atomic SiteSource -> PageIR -> static HTML transaction
--> shared design-system render
--> local lexical/semantic/information/crawl validation
--> noindex review site + reports + resumable checkpoints
--> post-generation workspace edits and dependency invalidation
-```
-
-Stage 3 is optional independent review or targeted repair. It produces observations only and never overrides compiler acceptance.
-
-## Continuous agent workspace
-
-Continuous operation means repeated explicit invocations over an immutable workspace, not an uncontrolled always-on loop.
-
-`reference/src/agent-workspace.ts` and `reference/scripts/workspace-cli.mjs` provide the first durable boundary:
-
-- every artifact declares kind, phase, producer, sources, dependencies, status, and content hash;
-- each mutation creates a new snapshot linked to the previous snapshot hash;
-- dependency traversal calculates which artifacts must rebuild after a source, design, component, page, or family change;
-- unaffected artifacts remain explicit and must preserve their hashes.
-
-From `reference/`:
-
-```bash
-npm run workspace -- help
-npm run workspace -- init workspace-input.json workspace.json
-npm run workspace -- append workspace.json artifact.json 2 workspace-v2.json
-npm run workspace -- replace workspace-v2.json revised-artifact.json 3 workspace-v3.json
-npm run workspace -- invalidate workspace-v3.json changed-artifacts.json invalidation-plan.json
-npm run workspace -- summary workspace-v3.json
-```
-
-The current workspace CLI is file-based and near-alpha. It is not yet integrated with a visual editor, asset-generation surface, development server, or persistent multi-user service.
-
-## Core-site design before bulk work
-
-`reference/src/design-authoring.ts` requires a source-bound, independently approved design authority.
-
-Before bulk generation, the workspace should contain:
+## Current canonical path
 
 ```text
-business datasheet
-evidence ledger
-style guide
-design system
-typography system
-layout system
-graphics briefs and owned/licensed assets
-starter pages and core conversion pages
+repository + explicit project truth
+-> hyper-content evidence and ontology compiler
+-> approved opportunity/page contracts
+-> deterministic PCN
+-> LLM backend
+-> validated ArticleIR
+-> deterministic unfolder
+-> hyper-site SiteSource/PageIR/static renderer
+-> noindex review artifacts
+-> corpus, browser, accessibility, and operator validation
+-> explicit publication decision
 ```
 
-After generation, one shared static stylesheet can refine the site without regenerating accepted prose. Canonical content hashes and publication state must remain unchanged.
+## Current proof
 
-This proves a safe design boundary, not human-perceived design quality. Real creative review is pending.
+The prior synthetic 10,000-page fixture exercised the combined content/compiler/validation path and emitted complete static HTML. It is useful evidence for bounded content-pipeline execution, recovery, and deterministic output.
 
-## Minimum appliance experiment
+It is not evidence that:
 
-`reference/src/appliance-contract.ts` defines one optimized experimental target and explicit compatibility candidates.
+- `hyper-site` is faster than Hugo, Astro, or Eleventy;
+- 10,000 pages deserve to exist;
+- pages index, rank, convert, or generate revenue;
+- the GPU, HRR, embeddings, Wasm, or graph methods beat simpler alternatives;
+- the framework has acceptable onboarding, HMR, components, themes, plugins, or deployment UX.
 
-- optimized target: NVIDIA RTX PRO 6000 Blackwell 96 GB;
-- host floor: 128 GiB RAM and 100 GiB free local NVMe;
-- runtime floor: Linux x64, Node 22, CUDA 12.8;
-- compatibility candidates: H200, H100, A100 80 GB, RTX 5090, RTX 4090;
-- rental price is observed soft metadata, never capability truth.
+## Required framework benchmark
 
-The GPU is intended for local embeddings, reranking, specialist validators, corpus processing, asset work, and browser/render workloads. GLM generation remains API-side unless another provider is supplied.
+The first serious framework comparison must isolate `hyper-site` and freeze:
 
-No real node has passed the framework workload yet.
-
-## Operator experiment
-
-Run from `reference/`.
-
-```bash
-npm install --no-audit --no-fund --no-package-lock
-
-# Diagnose a rented node
-npm run production -- doctor examples/appliance-probe.example.json
-
-# Capture explicit repository truth
-npm run production -- ingest /path/to/business-repo hyper-site.project.yaml generated-operator/repository-ingestion.json
-
-# Verify live provider transport
-ZAI_API_KEY=... npm run production -- provider-check glm-5.2
-
-# Generate Stage-1 proposal
-ZAI_API_KEY=... npm run production:stage1 -- \
-  generated-operator/repository-ingestion.json \
-  examples/source-excerpts.example.json \
-  generated-stage1
-
-# Independently approve exact hashes
-npm run production:approve -- ontology \
-  generated-stage1/ontology-proposal.json \
-  examples/ontology-review.example.json \
-  generated-stage1/ontology-approval.json
-
-npm run production:approve -- design \
-  design-draft.json \
-  examples/design-review.example.json \
-  design-approval.json
-
-# Run approved Stage-2 batches and emit a noindex static review site
-ZAI_API_KEY=... npm run production -- run production-run.json generated-near-alpha-site
+```text
+same visible pages
+same routes
+same assets
+same content bytes
+same structured data
+same machine and runtime
+same cold/warm cache policy
+same minification and image policy
+same output requirements
 ```
 
-The scripts retain the `production` prefix because they exercise the production boundary. They are not a production release interface.
+Measure:
 
-## Near-alpha validation authority
-
-`reference/src/near-alpha-framework.ts` rejects the framework when any of these conditions hold:
-
-- the workspace is bulk-generation-only;
-- core datasheet/design/typography/layout/graphics/starter-page artifacts are missing or appear after bulk generation;
-- hypotheses lack tests or falsification rules;
-- network-science metrics lack a simpler baseline or held-out outcomes;
-- no complete non-synthetic case study exists;
-- pages lack distinct tasks, information objects, evidence, nearest-neighbor differences, or lifecycle owners;
-- Hyper Site lacks a directly comparable ordinary-framework baseline;
-- 10K scale lacks incremental post-generation edit measurements;
-- claimed scale exceeds the measured full-framework ceiling.
-
-`reference/test/near-alpha-framework.test.mjs` and `reference/test/agent-workspace.test.mjs` exercise those rejection boundaries.
-
-## Required framework comparison
-
-The first serious benchmark must freeze one semantic fixture and run Hyper Site plus at least one ordinary framework on the same machine.
-
-Required metrics include:
-
-- cold build;
-- incremental edit/build;
-- development-server startup and update latency;
+- scaffold and setup effort;
+- dev-server startup and update latency;
+- cold and incremental build time;
 - peak memory;
-- emitted HTML, JavaScript, CSS, asset, and total bytes;
-- validation time;
-- serving and crawl behavior;
-- accessibility;
-- design-system integrity and customization effort;
-- agent retries, approvals, checkpoint recovery, and operator time;
-- source, token, component, page, and page-family maintenance changes.
+- HTML, CSS, JavaScript, asset, and total bytes;
+- accessibility and browser results;
+- deploy command and rollback effort;
+- component/theme customization effort.
 
-Planning or generation timing alone is not web-framework performance.
+Content research, model latency, embedding time, and corpus validation must be reported separately as `hyper-content` metrics.
 
-## Scale boundary
+## Required content-product validation
 
-Required experimental tiers:
+`hyper-content` must prove:
 
-```text
-5 qualitative starter pages
-25 real noindex pages
-100 pages
-500 pages
-10,000 pages
-```
+- evidence fidelity and citation correctness;
+- distinct page tasks and information objects;
+- measured information gain against explicit controls;
+- duplicate/cannibalization rejection quality;
+- provider cost, latency, repair, and failure rates;
+- indexing and search outcomes on approved real cohorts;
+- lifecycle cost for evidence refresh, page repair, and retirement;
+- value over simpler RAG/prompting and human/agency baselines.
 
-At 10K, the framework must separately measure changes to:
+## Near-alpha gates
 
 ```text
-one page-specific source fact
-one family-wide source fact
-one design token
-one shared component
-one page-specific information object
-one page
-one page family
-one ontology relation
-one evidence source
-one interrupted batch
+1. Complete the physical package extraction without a reverse dependency.
+2. Build one real five-page site using hyper-site alone.
+3. Add a practical dev/build/deploy surface and a static publisher adapter.
+4. Compare the same site with at least one ordinary framework.
+5. Run a real hyper-content provider pass into the same hyper-site target.
+6. Extend to 25 noindex content pages with page-existence justifications.
+7. Freeze held-out relevance, design, accessibility, and operator judgments.
+8. Scale content cohorts only after small real cases pass.
+9. Benchmark current Wasm only against its actual vector/facility workload.
+10. Promote browser Wasm only after a separate measured interaction workload exists.
 ```
-
-The result must record invalidated and unchanged artifacts, elapsed time, memory, output churn, crawl effects, review burden, and rollback.
-
-No result beyond 10K may be claimed until this full maintenance experiment and an ordinary-framework comparison pass.
 
 ## Current authorities
 
 | Area | Source |
 |---|---|
-| near-alpha maturity and benchmark gate | `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`, `reference/src/near-alpha-framework.ts` |
-| continuous artifact workspace | `reference/src/agent-workspace.ts`, `reference/scripts/workspace-cli.mjs` |
-| repository capture and ingestion | `reference/src/repository-ingestion.ts`, `reference/scripts/production-cli.mjs` |
-| appliance profiles | `reference/src/appliance-contract.ts` |
-| GLM JSON transport and bounded repair | `reference/src/glm-provider.ts` |
-| Stage-1/Stage-2 schemas and approval | `reference/src/generation-schemas.ts` |
-| design authority and static styling | `reference/src/design-authoring.ts` |
-| atomic canonical transaction | `reference/src/page-draft-transaction.ts` |
-| bounded corpus validation | `reference/src/corpus-validation-production.ts` |
-| recovery and physical orchestration | `reference/src/production-orchestrator.ts` |
-| semantic PageIR/static compiler | `reference/src/framework.ts` |
+| product-boundary research and migration | `29-product-boundary-research-and-root-folder-split.md` |
+| web-framework public surface | `hyper-site/` |
+| content-compiler public surface | `hyper-content/` |
+| dependency enforcement | `scripts/check-product-boundaries.mjs` |
+| canonical legacy implementation | `reference/src/` |
+| PCN backend contract | `reference/src/pcn-emitter.ts` |
+| ArticleIR acceptance | `reference/src/articleir-parser.ts` |
+| deterministic unfolding | `reference/src/unfolder.ts` |
+| static compiler | `reference/src/framework.ts` |
+| maturity and real-use gates | `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`, `reference/src/near-alpha-framework.ts` |
 
-## Validation
-
-Two workflows run on pull requests and `agent/**` or `main` pushes:
-
-- `.github/workflows/reference.yml`: full compiler, manifest, UI, browser, and R3F suite;
-- `.github/workflows/production-pipeline.yml`: near-alpha operator checks, production-boundary tests, framework rejection tests, workspace invalidation tests, and retained transcript artifact.
-
-The prior validated synthetic fixture emitted 10,000 complete PageIR/static HTML objects and passed bounded corpus validation. Exact current-head evidence belongs in the newest validation report and memory handoff.
-
-That proof remains synthetic. It does not show that 10,000 pages deserve to exist or that Hyper Site is better than a conventional framework.
-
-## Explicit nonclaims
-
-Not proven:
-
-- a real business repository has completed the workflow;
-- the live GLM endpoint has produced accepted ontology and PageDraft outputs;
-- any target or compatibility GPU has run the full workload;
-- the agent creates consistently attractive starter sites, graphics, typography, or layouts;
-- continuous multi-session operation works outside file-based fixtures;
-- incremental invalidation is faster or smaller than an ordinary framework;
-- generated pages are relevant, insightful, factually complete, accessible, or commercially useful;
-- network science improves page selection or maintenance;
-- indexing, ranking, AI citations, conversion, revenue, or lifecycle return;
-- GPU, HRR, ANN, Wasm, Zig, or other advanced methods beat simpler baselines.
-
-## Next near-alpha gate
-
-```text
-1. Freeze one real five-page starter-site case.
-2. Capture approved business, style, typography, layout, graphics, and asset sources.
-3. Run the live provider and a real rented node.
-4. Complete the same case in Hyper Site and an ordinary framework.
-5. Measure authoring, cold build, incremental edits, output, browser, accessibility, and operator effort.
-6. Extend the real case to 25 noindex pages with page-existence justifications.
-7. Freeze held-out relevance and design judgments.
-8. Scale to 100, then 500.
-9. Run the full 10K maintenance matrix only after those gates pass.
-10. Decide whether the repository has earned an actual alpha milestone.
-```
+PR #3 remains draft while the physical extraction, real framework fixture, live provider, publisher, and comparable benchmarks are pending.
