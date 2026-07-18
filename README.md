@@ -1,101 +1,123 @@
 # Hyper Monorepo
 
-Status: research prototype approaching near-alpha. The repository now has two explicit product surfaces. Neither is production-ready.  
-Updated: 2026-07-18
+Status: research prototype approaching near-alpha  
+Updated: 2026-07-18  
+PR: #3 remains draft and unmerged
 
-## Products
+## Products and dependency direction
 
 ```text
-hyper-content
-  ontology + evidence + content compiler
-            |
-            v
-hyper-site
-  static web framework + UI + publisher target
+@amtech/hyper-content
+  evidence, ontology, opportunity, generation and validation
+        |
+        v
+@amtech/hyper-site
+  content-neutral static framework and governed task mounts
+        |
+        v
+optional runtime adapters
+  durable workflows, connectors, effects and receipts
 ```
 
-Dependency direction is one-way:
+Allowed dependency direction:
 
 ```text
 hyper-content -> hyper-site
 hyper-site -X-> hyper-content
+hyper-site -X-> private AI Employee/runtime internals
+runtime adapters -> public task-surface contracts
 ```
 
-### `hyper-site/`
+## Current implementation truth
 
-`@amtech/hyper-site` is the web-framework package under extraction.
+The package split is in progress, not complete.
 
-It owns:
+- `hyper-content/src/content-program-adapter.ts` is the first physically owned Hyper Content implementation.
+- `reference/src/content-program-adapter.ts` is now a temporary legacy manifest compiler and artifact-parity wrapper.
+- Most canonical Hyper Site and Hyper Content source still resides under `reference/src` pending P1.4 and P1.5.
+- `reference/` remains a transitional implementation and test authority, but its target role is compatibility suite, fixture library, example consumer and benchmark harness.
+- Folder names and package facades do not prove source ownership.
 
-- deterministic `SiteSource -> PageIR -> static HTML` compilation;
-- components, layouts, typography, design tokens, and shared CSS;
-- browser targets, accessibility, and web-performance budgets;
-- development, build, and publisher/deployment ergonomics;
-- optional browser interaction adapters.
+## Hyper Site
 
-It does not expose ontology discovery, BM25, embeddings, LLM providers, PCN, ArticleIR, corpus planning, GPU orchestration, or the current vector/facility Wasm kernels.
+`@amtech/hyper-site` owns:
 
-### `hyper-content/`
+- deterministic `SiteSource -> PageIR -> static artifacts` compilation;
+- content-neutral contracts;
+- HTML, sitemap, instruction projections and dependency metadata;
+- trusted renderer, design, accessibility and browser contracts;
+- static fallback and optional governed task mounts;
+- future development, build, preview and publisher ergonomics.
 
-`@amtech/hyper-content` is the ontology- and evidence-driven content compiler.
+It does not own ontology discovery, evidence ranking, model providers, PCN, ArticleIR, embeddings, vector packing, GPU workflows, durable effects, connectors, identity, authorization or experimentation statistics.
 
-It owns:
+## Hyper Content
 
-- repository/business/source/evidence intake;
-- ontology discovery, typed graphs, opportunity selection, and page coordinates;
-- lexical, embedding, information-gain, duplicate, and corpus validation;
-- LLM provider dispatch, bounded repair, and checkpoints;
-- deterministic PCN emission;
-- ArticleIR parsing and rejection;
-- deterministic unfolding to Markdown, JSON-LD, links, sitemap state, and framework inputs;
-- current Wasm/Zig vector kernels and GPU/model workflows.
+`@amtech/hyper-content` owns:
 
-Its backend path is:
+- source and evidence intake;
+- claim and information-object proposals;
+- ontology and opportunity methods;
+- page-existence, duplicate and corpus analysis;
+- provider dispatch and structured generation;
+- PCN and ArticleIR acceptance;
+- deterministic adaptation to Hyper Site inputs;
+- validation, invalidation and maintenance proposals;
+- experimental graph, vector, Wasm and acceleration methods behind promotion gates.
 
-```text
-approved compiler state
--> PCN
--> LLM prose backend
--> validated ArticleIR
--> deterministic unfolder
--> @amtech/hyper-site
--> static web artifacts
-```
+It does not own web rendering, theme components, browser state, credentials, runtime effects or publication authority.
 
-### `reference/`
+## Governed task surfaces
 
-`reference/` remains the canonical legacy implementation while physical source migration proceeds. The root folders are real public package boundaries, not a claim that every implementation file has already moved.
+Static pages explain and prove. Optional task surfaces submit typed intents to a runtime adapter and receive ordered public projections, resources, artifacts, actions and receipts.
 
-The migration preserves one publication authority. `hyper-content` targets `hyper-site`; it must not create a second renderer or deployment pipeline.
+Theme developers own trusted components and accessibility. Site developers own routes, mounts, fallback and deployment. Growth operators own bounded approved variants and outcomes. None may widen capabilities, expose private state or weaken safety policy.
 
-## Why the split exists
+A2UI, AG-UI, MCP Apps and AI Employee runtimes are adapters after the protocol-neutral internal ABI passes.
 
-The repository had conflated three different measures:
+## Reality-grounded product position
 
-1. **browser/runtime impact**: TTFB, LCP, CLS, INP, transferred bytes, and JavaScript cost;
-2. **build-path impact**: work performed while compiling a site;
-3. **product-surface impact**: concepts a developer must understand to use the framework.
+Hyper overlaps several mature categories: static frameworks, headless CMSs, content intelligence, digital experience platforms, agent orchestration, workflow automation, generative UI and experimentation.
 
-Ontology graphs, BM25, HRR, embeddings, model orchestration, and information-gain validation may be valuable to the content product. They do not become web-framework value merely because the old package invoked them during a build.
+The closest credible wedge is deliberately narrow:
 
-The current static compiler still performs legacy vector packing internally. That coupling must be removed before `hyper-site` can be benchmarked honestly against Hugo, Astro, Eleventy, or another ordinary framework.
+> Compile approved business evidence into a small, maintainable static site and one bounded task surface, with deterministic artifacts, explicit rejection, human approval and portable deployment.
 
-The full repo and external-source analysis, hypotheses, falsification rules, corrected classifications, and migration plan are recorded in:
+The furthest thesis is an enterprise content-and-action operating layer. That outcome overlaps Adobe AEM, Sitecore, Optimizely, Microsoft, Salesforce, ServiceNow, UiPath and other mature platforms. It is a long-horizon hypothesis and must not cause premature reimplementation of CMS, DAM, identity, workflow, policy, experimentation or connector infrastructure.
 
-- `docs/architecture/29-product-boundary-research-and-root-folder-split.md`.
+Strong complements and controls include Astro, Hugo, Eleventy, Next.js, headless CMSs, Temporal, LangGraph, n8n, OpenFeature, GrowthBook, OpenTelemetry, policy engines, PostgreSQL and ordinary form/workflow products.
 
-## Corrections to the initial criticism
+## Critical nonclaims
 
-The product-separation diagnosis was materially correct, but four claims did not survive source inspection:
+The repository does not yet prove:
 
-- current `wasm.ts` accelerates vector/facility math; it is not a browser-interactivity runtime;
-- `validation-contracts.ts` is generic typed acceptance infrastructure, not merely checkpoint hashing;
-- several content modules currently affect build time because the dependency graph is mixed, not because they belong in the framework;
-- exact claims such as “Hugo builds 10K pages in one second” or “Astro builds 10K pages in three seconds” are not accepted without one frozen comparable fixture.
+- complete physical source ownership under both packages;
+- independent package/tarball consumption;
+- a production-ready framework or content compiler;
+- a useful developer scaffold, HMR or publisher;
+- superiority to Astro, Hugo, Eleventy, Next.js or a CMS-based stack;
+- that ontology, graph, embeddings, HRR/HDC, Wasm, GPU or model methods beat simpler controls;
+- that 10,000 pages deserve publication;
+- indexing, ranking, citation, conversion, revenue or customer retention;
+- production-safe public runtime isolation;
+- A2UI, AG-UI, MCP Apps or enterprise-agent conformance;
+- enterprise readiness, tenancy, governance, integrations, SLAs or support.
+
+Synthetic scale proves bounded software behavior only. Schema validity does not prove content quality. Visible agent completion does not prove authorized completion.
+
+## Current execution order
+
+1. Complete physical package extraction and make `reference/` consume the packages.
+2. Implement the protocol-neutral governed task-surface ABI with negative tests.
+3. Build one standalone five-page site and publisher.
+4. Freeze an equivalent ordinary-framework comparison.
+5. Run one real evidence-to-five-page provider cohort.
+6. Run one bounded task through a durable runtime adapter and compare it with an ordinary form or workflow product.
+7. Expand only after held-out review and maintenance events pass.
+
+Detailed authority: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`.
 
 ## Workspace commands
-
-The root is an npm workspace:
 
 ```bash
 npm run build
@@ -103,146 +125,76 @@ npm test
 npm run check:boundaries
 ```
 
-During migration, these commands build and test the canonical implementation under `reference/`, then test both package facades and dependency direction.
+During migration, root workflows build owned package source where present, build and test the transitional reference implementation, and enforce dependency boundaries.
 
-Direct package surfaces:
+## Required controls
 
-```js
-import { compileSite } from "@amtech/hyper-site";
+Every advanced method must compete against a simpler baseline:
 
-import {
-  compileApprovedOntology,
-  emitPageContractFromCompilerState,
-  parseArticleIR,
-  unfoldArticleIR,
-} from "@amtech/hyper-content";
-```
-
-## Maturity boundary
-
-- Both products remain research prototypes approaching near-alpha.
-- Names containing `production` identify production-boundary experiments, not readiness.
-- Model output is proposal state.
-- Synthetic scale proves bounded software behavior only.
-- Content-pipeline timing is not web-framework timing.
-- No usefulness claim is valid until non-synthetic cases and held-out judgments pass.
-- No framework-performance claim is valid until `hyper-site` alone is compared against ordinary frameworks on the same fixture, machine, cache state, assets, and output requirements.
-
-## Current canonical path
-
-```text
-repository + explicit project truth
--> hyper-content evidence and ontology compiler
--> approved opportunity/page contracts
--> deterministic PCN
--> LLM backend
--> validated ArticleIR
--> deterministic unfolder
--> hyper-site SiteSource/PageIR/static renderer
--> noindex review artifacts
--> corpus, browser, accessibility, and operator validation
--> explicit publication decision
-```
-
-## Current proof
-
-The prior synthetic 10,000-page fixture exercised the combined content/compiler/validation path and emitted complete static HTML. It is useful evidence for bounded content-pipeline execution, recovery, and deterministic output.
-
-It is not evidence that:
-
-- `hyper-site` is faster than Hugo, Astro, or Eleventy;
-- 10,000 pages deserve to exist;
-- pages index, rank, convert, or generate revenue;
-- the GPU, HRR, embeddings, Wasm, or graph methods beat simpler alternatives;
-- the framework has acceptable onboarding, HMR, components, themes, plugins, or deployment UX.
-
-## Required framework benchmark
-
-The first serious framework comparison must isolate `hyper-site` and freeze:
-
-```text
-same visible pages
-same routes
-same assets
-same content bytes
-same structured data
-same machine and runtime
-same cold/warm cache policy
-same minification and image policy
-same output requirements
-```
-
-Measure:
-
-- scaffold and setup effort;
-- dev-server startup and update latency;
-- cold and incremental build time;
-- peak memory;
-- HTML, CSS, JavaScript, asset, and total bytes;
-- accessibility and browser results;
-- deploy command and rollback effort;
-- component/theme customization effort.
-
-Content research, model latency, embedding time, and corpus validation must be reported separately as `hyper-content` metrics.
-
-## Required content-product validation
-
-`hyper-content` must prove:
-
-- evidence fidelity and citation correctness;
-- distinct page tasks and information objects;
-- measured information gain against explicit controls;
-- duplicate/cannibalization rejection quality;
-- provider cost, latency, repair, and failure rates;
-- indexing and search outcomes on approved real cohorts;
-- lifecycle cost for evidence refresh, page repair, and retirement;
-- value over simpler RAG/prompting and human/agency baselines.
-
-## Near-alpha gates
-
-```text
-1. Complete the physical package extraction without a reverse dependency.
-2. Build one real five-page site using hyper-site alone.
-3. Add a practical dev/build/deploy surface and a static publisher adapter.
-4. Compare the same site with at least one ordinary framework.
-5. Run a real hyper-content provider pass into the same hyper-site target.
-6. Extend to 25 noindex content pages with page-existence justifications.
-7. Freeze held-out relevance, design, accessibility, and operator judgments.
-8. Scale content cohorts only after small real cases pass.
-9. Benchmark current Wasm only against its actual vector/facility workload.
-10. Promote browser Wasm only after a separate measured interaction workload exists.
-```
-
-## Current authorities
-
-| Area | Source |
+| Candidate | Control |
 |---|---|
-| product-boundary research and migration | `docs/architecture/29-product-boundary-research-and-root-folder-split.md` |
-| web-framework public surface | `hyper-site/` |
-| content-compiler public surface | `hyper-content/` |
-| dependency enforcement | `scripts/check-product-boundaries.mjs` |
-| canonical legacy implementation | `reference/src/` |
-| PCN backend contract | `reference/src/pcn-emitter.ts` |
-| ArticleIR acceptance | `reference/src/articleir-parser.ts` |
-| deterministic unfolding | `reference/src/unfolder.ts` |
-| static compiler | `reference/src/framework.ts` |
-| maturity and real-use gates | `docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md`, `reference/src/near-alpha-framework.ts` |
+| ontology graph | typed JSON or relational schema |
+| graph database | PostgreSQL |
+| embeddings | lexical retrieval and explicit rules |
+| HRR/HDC and vector packing | ordinary vectors, arrays and maps |
+| Wasm | JavaScript or server implementation |
+| GPU | CPU baseline |
+| generated UI | static or trusted native components |
+| autonomous workflow | deterministic state machine or established workflow engine |
+| autonomous page selection | human-curated page plan |
 
-PR #3 remains draft while the physical extraction, real framework fixture, live provider, publisher, and comparable benchmarks are pending.
+No method is promoted because it is novel, theoretically elegant or successful on a synthetic fixture.
 
-## Governed task surfaces
+## First credible validation fixture
 
-Hyper Site's next interaction layer is a protocol-neutral governed task-surface platform. Static pages remain complete and indexable; optional runtime services accept typed intents and return public projections, resources, artifacts, actions, and receipts. Theme developers own trusted renderers, site developers own mounts and fallbacks, and growth operators own bounded experiment and conversion policy. Hyper Content may propose task semantics but contains zero UI implementation logic.
+```text
+one approved business evidence set
+-> five independently justified pages
+-> one bounded public task
+-> one static deployment
+-> one durable workflow adapter
+-> human approval before publication or consequential effect
+```
 
-Current authority:
+Compare against:
+
+- a skilled operator using Astro and structured Markdown;
+- a headless CMS plus Astro or Next.js;
+- an SEO/content tool plus human production;
+- an ordinary site with an embedded form or workflow service.
+
+Measure operator time, defects, evidence fidelity, maintenance cost, page acceptance, task completion, artifact quality, latency, model/runtime cost, recovery, idempotency and receipts.
+
+## Documentation authority
+
+Documentation lifecycle and current read order: `docs/README.md`.
+
+Current reality-grounded chain:
+
+- Research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
+- Source registry: `docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json`
+- Architecture: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
+- Plan: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- Validation: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+
+Governed task-surface chain:
 
 - `docs/intake/2026-07-18-next-generation-task-surfaces.md`
 - `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
 - `docs/architecture/32-governed-task-surface-architecture.md`
 - `docs/validation/33-task-surface-validation-matrix.md`
 
-A2UI, AG-UI, MCP Apps, and AMTECH AI Employee are adapters after the internal ABI passes. Ten-thousand-page surface scale is a mandatory benchmark tier, not a page-usefulness claim.
+Executable authority:
 
-## Documentation system
+- `planning/meta-plan-v3.json`
+- `planning/meta-plan-v3.steps.json`
+- `scripts/check-meta-plan.mjs`
+- `scripts/check-product-boundaries.mjs`
 
-Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.
+Durable state:
+
+- `memory/MEMORY.md`
+- newest immutable handoff under `memory/`
+- newest measured report under `validation/reports/`
+
+Historical documents remain preserved for intellectual provenance. Their status in `docs/catalog.json`, not their wording, determines current authority.
