@@ -6,7 +6,19 @@ const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const ignoredDirectories = new Set([".git", "node_modules", "dist", "coverage", ".cache"]);
 const extensions = new Set([".md", ".json", ".mjs", ".ts", ".yml", ".yaml"]);
 const selfPath = resolve(root, "scripts/normalize-doc-paths.mjs");
-const prefixes = ["docs/research/", "docs/architecture/", "docs/planning/", "docs/validation/", "docs/intake/"];
+
+// Keep the most specific prefixes first. The root-document migration rewrites legacy
+// basenames inside already-canonical paths, so the post-pass must collapse any repeated
+// canonical directory prefix and make the complete workflow idempotent.
+const prefixes = [
+  "docs/research/experiments/",
+  "docs/research/sources/",
+  "docs/research/",
+  "docs/architecture/",
+  "docs/planning/",
+  "docs/validation/",
+  "docs/intake/"
+];
 
 async function walk(directory) {
   const output = [];
