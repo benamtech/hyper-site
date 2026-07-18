@@ -45,7 +45,8 @@ jobs:
           ref: agent/glm-blackwell-vertical-slice
           fetch-depth: 1
           show-progress: false
-      - name: Validate migration scripts
+
+      - name: Validate documentation scripts
         run: |
           node --check scripts/apply-doc-moves.mjs
           node --check scripts/check-declared-doc-moves.mjs
@@ -54,65 +55,31 @@ jobs:
           node --check scripts/normalize-doc-paths.mjs
           node --check scripts/ensure-doc-index-links.mjs
           node --check scripts/check-doc-system.mjs
-      - name: Organize and reconcile documents
+
+      - name: Organize documents without roadmap mutation
         run: |
-          cp scripts/check-doc-system.mjs /tmp/check-doc-system.mjs
           node scripts/apply-doc-moves.mjs docs/legacy-root-moves.json >/tmp/legacy-root-result.json
           node scripts/organize-legacy-memory.mjs >/tmp/legacy-memory-result.json
           node scripts/organize-root-docs.mjs >/tmp/organize-result.json
-          cp /tmp/check-doc-system.mjs scripts/check-doc-system.mjs
           node scripts/normalize-doc-paths.mjs >/tmp/normalize-result.json
           node scripts/ensure-doc-index-links.mjs >/tmp/link-result.json
           node scripts/normalize-doc-paths.mjs >/tmp/final-normalize-result.json
+
       - name: Validate documentation system
-        id: validate_docs
-        continue-on-error: true
         run: |
-          node scripts/check-declared-doc-moves.mjs > /tmp/doc-validation.json 2>&1
-          node scripts/check-doc-system.mjs >> /tmp/doc-validation.json 2>&1
-      - name: Upload document validation failure
-        if: steps.validate_docs.outcome == 'failure'
-        uses: actions/upload-artifact@v4
-        with:
-          name: document-validation-failure
-          path: /tmp/doc-validation.json
-          if-no-files-found: error
-      - name: Enforce documentation validation
-        if: steps.validate_docs.outcome == 'failure'
-        run: |
-          cat /tmp/doc-validation.json
-          exit 1
-      - name: Validate executable plan and diff
-        id: validate_plan
-        if: steps.validate_docs.outcome == 'success'
-        continue-on-error: true
-        run: |
-          {
-            node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
-            node --test planning/test/meta-plan.test.mjs docs/test/doc-system.test.mjs
-            git diff --check
-          } > /tmp/plan-validation.txt 2>&1
-      - name: Upload plan validation failure
-        if: steps.validate_plan.outcome == 'failure'
-        uses: actions/upload-artifact@v4
-        with:
-          name: synchronization-plan-failure
-          path: /tmp/plan-validation.txt
-          if-no-files-found: error
-      - name: Enforce plan validation
-        if: steps.validate_plan.outcome == 'failure'
-        run: |
-          cat /tmp/plan-validation.txt
-          exit 1
-      - name: Commit organized documentation
-        if: steps.validate_docs.outcome == 'success' && steps.validate_plan.outcome == 'success'
+          node scripts/check-declared-doc-moves.mjs
+          node scripts/check-doc-system.mjs
+          node --test docs/test/doc-system.test.mjs
+          git diff --check
+
+      - name: Commit organization-only changes
         run: |
           if git diff --quiet && git diff --cached --quiet; then
-            echo "No document migration changes remain."
+            echo "No document organization changes remain."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Organize documentation and expand task-surface program"
+          git commit -m "Organize repository documents"
           git push origin HEAD:agent/glm-blackwell-vertical-slice
