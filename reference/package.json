@@ -21,6 +21,8 @@
     "production:approve": "npm run build && node scripts/production-approve.mjs",
     "workspace": "npm run build && node scripts/workspace-cli.mjs",
     "workspace:help": "npm run build && node scripts/workspace-cli.mjs help",
+    "near-alpha": "npm run build && node scripts/near-alpha-cli.mjs",
+    "near-alpha:help": "npm run build && node scripts/near-alpha-cli.mjs help",
     "browser:check": "browserslist",
     "ui:r3f:build": "npm --prefix ui-r3f install --no-audit --no-fund && npm --prefix ui-r3f test",
     "manifest:check": "npm run test && npm run manifest:emit && npm run ui:emit && npm run orchestration:check && npm run framework:validate && npm run browser:check"
