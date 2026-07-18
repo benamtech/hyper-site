@@ -148,3 +148,7 @@ Passing compiler fixtures, hashes, schema checks, graph metrics, synthetic scale
 ## Documentation system
 
 Documentation lifecycle and machine-readable authority are in `docs/README.md` and `docs/catalog.json`.
+
+## Documentation system
+
+Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.
