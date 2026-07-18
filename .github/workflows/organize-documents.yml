@@ -81,14 +81,30 @@ jobs:
         run: |
           cat /tmp/doc-validation.json
           exit 1
-      - name: Validate executable plan
+      - name: Validate executable plan and diff
+        id: validate_plan
         if: steps.validate_docs.outcome == 'success'
+        continue-on-error: true
         run: |
-          node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
-          node --test planning/test/meta-plan.test.mjs docs/test/doc-system.test.mjs
-          git diff --check
+          {
+            node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
+            node --test planning/test/meta-plan.test.mjs docs/test/doc-system.test.mjs
+            git diff --check
+          } > /tmp/plan-validation.txt 2>&1
+      - name: Upload plan validation failure
+        if: steps.validate_plan.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: synchronization-plan-failure
+          path: /tmp/plan-validation.txt
+          if-no-files-found: error
+      - name: Enforce plan validation
+        if: steps.validate_plan.outcome == 'failure'
+        run: |
+          cat /tmp/plan-validation.txt
+          exit 1
       - name: Commit organized documentation
-        if: steps.validate_docs.outcome == 'success'
+        if: steps.validate_docs.outcome == 'success' && steps.validate_plan.outcome == 'success'
         run: |
           if git diff --quiet && git diff --cached --quiet; then
             echo "No document migration changes remain."
