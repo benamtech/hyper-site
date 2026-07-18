@@ -1,11 +1,12 @@
 # Validation Report — Task-Surface Research and Documentation System
 
-Status: documentation, research, architecture, and executable-plan mutation complete; exact final inherited CI pending this report commit  
+Status: documentation, research, architecture, executable-plan mutation, idempotent organization, and strengthened inherited CI complete  
 Date: 2026-07-18  
 Branch: `agent/glm-blackwell-vertical-slice`  
 PR: `#3` draft  
 Validated migration input head: `e93ea60592722c00152bbb11b4c9117c1d78d29a`  
-Organized repository head: `d9ba0e36191c3d977a711740b21899d75cc4f3a5`
+Organized repository head: `d9ba0e36191c3d977a711740b21899d75cc4f3a5`  
+Validated strengthened CI head: `05d8961791c6451e480a6be453351b8722bca81f`
 
 ## Scope
 
@@ -18,7 +19,8 @@ This pass did not implement the task-surface runtime. It:
 - made 10,000-page surface scale a mandatory performance and maintenance tier;
 - modified P1.4, P1.5, P2, and P3 and added P1.6, P2.5, and P3.4;
 - organized all repository-root documents into lifecycle folders;
-- installed a stateful writing, catalog, validation, and durable-memory workflow.
+- installed a stateful writing, catalog, validation, and durable-memory workflow;
+- made documentation-system validation a permanent focused-CI gate.
 
 ## Research inputs
 
@@ -171,7 +173,8 @@ Added:
 - `scripts/ensure-doc-index-links.mjs`;
 - `scripts/check-doc-system.mjs`;
 - `docs/test/doc-system.test.mjs`;
-- `.github/workflows/organize-documents.yml`.
+- `.github/workflows/organize-documents.yml`;
+- a permanent `Validate documentation system` stage in `.github/workflows/production-pipeline.yml`.
 
 Lifecycle:
 
@@ -197,6 +200,8 @@ RED findings caught and repaired:
 2. Three historical memory files predated the HHMM naming convention.
 3. The move runner rewrote its own manifest and produced false duplicated paths.
 4. The stale-reference checker treated catalog provenance (`moved from`) as a live stale link.
+5. A global basename rewrite repeatedly prefixed one historical `docs/research/experiments/` path on synchronization reruns.
+6. The normalizer rewrote its own negative-control fixture, invalidating the test instead of the repository path.
 
 Repairs:
 
@@ -204,7 +209,10 @@ Repairs:
 - `memory/legacy/` preservation;
 - move-manifest exclusion from rewriting;
 - provenance-file exclusion from live-link scanning;
-- permanent root allowlist, path existence, catalog, plan, and memory gates.
+- boundary-aware replacement of unqualified legacy paths;
+- protected migration scripts, manifests, and test fixtures during normalization;
+- an explicit idempotency regression test;
+- permanent root allowlist, path existence, catalog, plan, memory, and focused-CI gates.
 
 ## Migration proof
 
@@ -227,21 +235,57 @@ Passed:
 - `git diff --check`;
 - atomic commit of the organized tree.
 
-Pre-migration-script regression proof:
+## Exact strengthened CI proof
+
+Validated head:
 
 ```text
-Hyper Site Near-Alpha Pipeline
-run 29642918710
-success
-artifact 8429164477
-sha256:1875d102673c7fae78e874968e880b051f456e58d5dac6fee7365683a53b0c04
+05d8961791c6451e480a6be453351b8722bca81f
+```
 
-Hyper Site Reference
-run 29642918717
+Documentation synchronization:
+
+```text
+Organize Repository Documents
+run 29643257965
+job 88077138733
 success
 ```
 
-These inherited runs validated the source/research head used by the migration job. Exact inherited workflow proof for the organized tree will be appended after this report and memory update produce the final evidence head.
+The synchronization workflow completed with no follow-up mutation, proving the organizer is idempotent on the validated head.
+
+Focused pipeline:
+
+```text
+Hyper Site Near-Alpha Pipeline
+run 29643257962
+job 88077138692
+success
+artifact 8429258946
+sha256:0f87a20a3e581573fdbba759e1fe1e31ec362bebfdce47bf3de990a60a837694
+```
+
+Passed:
+
+- TypeScript build;
+- executable-plan validation and negative tests;
+- declared-document-move validation;
+- documentation-system validation and negative tests;
+- product-boundary and package tests;
+- operator command checks;
+- framework/content adapter parity;
+- backend, near-alpha, release, and workspace suites.
+
+Full reference pipeline:
+
+```text
+Hyper Site Reference
+run 29643257988
+job 88077138720
+success
+```
+
+Passed full `npm test`, manifest and UI emission, orchestration, framework validation and preview, browser validation, and R3F build.
 
 ## Explicit nonclaims
 
