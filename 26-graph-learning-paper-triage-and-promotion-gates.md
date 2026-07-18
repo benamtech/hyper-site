@@ -1,228 +1,245 @@
-# 26 — Graph-Learning Paper Triage and Promotion Gates
+# 26 — Graph-Learning Paper Triage and Near-Alpha Promotion Gates
 
-Status: verified research triage; no learned graph method promoted to framework authority  
+Status: verified research triage; no learned graph method is framework authority  
 Updated: 2026-07-18  
-Scope: `GTM-RESEARCH/website-framework/`
+Scope: standalone repository root  
+Maturity authority: `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
 
 ## 1. Why this document exists
 
-The framework uses a graph, but that does not make every graph-learning paper applicable.
+Hyper Site uses graphs and network-science concepts. That does not make every graph-learning paper relevant.
 
-The current problem is:
+The current problem includes more than initial page selection:
 
 ```text
-small agent-generated ontology proposal
--> evidence/safety/materiality approval
+approved business/design workspace
+-> evidence-bound ontology proposal
 -> typed sparse graph + hard constraints
--> bounded conjunction expansion
--> finite nonredundant site corpus
--> HRR structural representation
--> Stage-2 page-concept generation
+-> bounded opportunity and page selection
+-> canonical static site
+-> post-generation source/design/page/family maintenance
+-> drift, retirement, and case-study evaluation
 ```
 
-Most graph-learning papers instead study supervised node classification, graph classification, anomaly detection, graph-property detection, representation transfer, or clustering on benchmark datasets. Those are different problem classes.
+Most graph-learning papers study supervised node classification, graph classification, anomaly detection, transfer, clustering, or benchmark graph properties. Those are different tasks unless a concrete framework failure and real labels exist.
 
-A graph method may enter the production path only when it solves a measured framework failure better than the deterministic baseline while preserving evidence, safety, reproducibility, and complete compiler authority.
+A graph method may enter the canonical path only when it solves an exact measured framework problem better than the deterministic baseline while preserving evidence, safety, reproducibility, editability, and complete compiler authority.
 
-## 2. Current baseline that a learned method must beat
+## 2. Current baseline a learned method must beat
 
 ```text
 TF-IDF/BM25 lexical baseline
 + typed explicit/co-occurrence/lexical graph channels
 + separate requires/excludes plane
-+ k-core pruning with business-anchor retention
-+ deterministic connected components as descriptive macro-regions
-+ bounded frequent closed conjunctions
-+ graph-constrained best-first expansion
-+ sparse concave-over-modular coverage selection
++ k-core pruning with anchor retention
++ deterministic connected components
++ bounded observed conjunctions
++ graph-constrained expansion
++ sparse concave coverage
 + HRR after eligibility
++ page-existence justifications
++ explicit workspace dependency graph
++ rule-based invalidation and lifecycle ownership
 ```
 
-Current synthetic one-site proof:
+Synthetic scale evidence is a comparison floor for software execution only. It does not establish useful pages or framework quality.
 
-```text
-15,000 candidate regions
-10,000 selected page regions
-400 Stage-2 batches
-2,560,000 packed HRR bytes
-5,284.510 ms recorded total planning time
-```
-
-This is the comparison floor. It is not evidence that the selected pages are useful, indexable, or commercially valuable.
-
-## 3. Verified paper-by-paper triage
+## 3. Paper-by-paper disposition
 
 ### 3.1 GraphTARIF
 
-Zhaolin Hu, Kun Li, Hehe Fan, and Yi Yang, “GraphTARIF: Linear Graph Transformer with Augmented Rank and Improved Focus.”
+Hu et al., “GraphTARIF: Linear Graph Transformer with Augmented Rank and Improved Focus”: `https://arxiv.org/abs/2510.10631`
 
-- arXiv: https://arxiv.org/abs/2510.10631
-- problem studied: scalable learned graph attention for node representation/classification, with rank and attention-focus corrections;
-- potentially relevant later: a supervised comparison arm if the framework accumulates many independently labeled ontology graphs and a concrete node-classification task;
-- not established: ontology truth, page eligibility, evidence integrity, search demand, corpus distinctness, or benefit on small per-project graphs;
+- studied task: scalable learned graph attention for node representation/classification;
+- possible future use: supervised proposal ranking after many independently labeled project graphs exist;
+- missing evidence: ontology truth, page eligibility, maintenance actions, held-out real site outcomes;
 - disposition: **do not implement now**.
 
 ### 3.2 VSAL
 
-Jiahao Xie and Guangmo Tong, “VSAL: A Vision Solver with Adaptive Layouts for Graph Property Detection.”
+Xie and Tong, “VSAL: A Vision Solver with Adaptive Layouts for Graph Property Detection”: `https://arxiv.org/abs/2602.13880`
 
-- arXiv: https://arxiv.org/abs/2602.13880
-- DOI: https://doi.org/10.1145/3774904.3792224
-- problem studied: vision-based detection of structural graph properties using adaptive graph layouts;
-- potentially relevant later: operator/debug visualization experiments where layout quality affects human inspection;
-- not relevant to: ontology approval, region generation, candidate selection, HRR, or page publication;
-- disposition: **UI/debug visualization lead only; no compiler role**.
+- studied task: vision-based graph-property detection using adaptive layouts;
+- possible future use: operator/debug visualization experiments;
+- no current role in ontology approval, page selection, maintenance, or publication;
+- disposition: **visualization comparison only**.
 
 ### 3.3 Node-feature-transfer graph foundation model
 
-Jitao Zhao, Yi Wang, Yawen Li, Dongxiao He, Di Jin, Zhiyong Feng, and Weixiong Zhang, “Towards Graph Foundation Model: Node Feature Transfer Invariant Modeling on General Graphs.”
+Zhao et al., “Towards Graph Foundation Model: Node Feature Transfer Invariant Modeling on General Graphs”: `https://doi.org/10.1145/3774904.3792236`
 
-- DOI: https://doi.org/10.1145/3774904.3792236
-- problem studied: transferable learned node representations across heterogeneous graphs;
-- potentially relevant later: cross-project ontology prior or proposal ranking after a large, versioned, independently assessed multi-site graph corpus exists;
-- not established: correctness for one small business ontology, safe demographic discovery, page usefulness, or publication authority;
+- studied task: transferable node representations across heterogeneous graphs;
+- possible future use: cross-project ontology priors after a large independently assessed corpus exists;
+- missing evidence: correctness for one business, safe discovery, page usefulness, maintenance benefit;
 - disposition: **future cross-project research only**.
 
 ### 3.4 Unified graph clustering network
 
-Renda Han et al., “A Unified Graph Clustering Network.”
+Han et al., “A Unified Graph Clustering Network”: `https://doi.org/10.1145/3774904.3792266`
 
-- DOI: https://doi.org/10.1145/3774904.3792266
-- problem studied: learned graph clustering across graph settings;
-- potentially relevant later: comparison against connected components and Leiden on real customer/search graphs with frozen external segment labels;
-- not established: discovered clusters equal prospect segments, search intents, page families, or canonical routes;
-- disposition: **comparison-only after a real labeled benchmark**.
+- studied task: learned graph clustering;
+- possible future use: compare family coherence or consolidation decisions against connected components and Leiden;
+- required evidence: real graph corpus and frozen external family/page judgments;
+- disposition: **comparison-only after labels**.
 
 ### 3.5 Sustained vertex cover on temporal graphs
 
-Junqiang Peng, Tian Bai, Jingyang Zhao, and Mingyu Xiao, “Sustained Vertex Cover on Temporal Graphs.”
+Peng et al., “Sustained Vertex Cover on Temporal Graphs”: `https://doi.org/10.1145/3774904.3792250`
 
-- DOI: https://doi.org/10.1145/3774904.3792250
-- problem studied: temporal vertex-cover scheduling where selected vertices have bounded lifespans;
-- potentially relevant later: scheduling which sources, pages, or graph regions receive recurring review when the framework has real time-versioned operational history;
-- not relevant to: initial ontology construction or static page-region selection;
-- disposition: **no current implementation**.
+- studied task: temporal vertex-cover scheduling with bounded lifespans;
+- possible future use: recurring review schedules for sources, pages, or graph regions after versioned history exists;
+- not relevant to first-run ontology or page creation;
+- disposition: **future maintenance scheduling experiment**.
 
 ### 3.6 Positive-unlabeled graph classification
 
-Junghun Kim, Shihyung Park, and U Kang, “Dual-level Reweighting for Positive-Unlabeled Graph Classification.”
+Kim, Park, and Kang, “Dual-level Reweighting for Positive-Unlabeled Graph Classification”: `https://doi.org/10.1145/3774904.3792251`
 
-- DOI: https://doi.org/10.1145/3774904.3792251
-- problem studied: graph classification with positive and unlabeled examples using hop- and graph-level reweighting;
-- potentially relevant later: candidate-review prioritization after the framework has independently accepted positive pages/regions and a genuinely unlabeled pool;
-- not established: that rejected or unreviewed page candidates are negatives, or that PU learning should replace compiler gates;
-- disposition: **future triage experiment only after real labels**.
+- studied task: positive-unlabeled graph classification;
+- possible future use: review prioritization after independently accepted positives and a truly unlabeled pool exist;
+- invalid assumption: unreviewed or rejected pages are automatically negatives;
+- disposition: **future triage experiment only**.
 
 ### 3.7 Dynamic graph anomaly detection with prototypes
 
-Jialun Zheng et al., “DP-DGAD: A Generalist Dynamic Graph Anomaly Detector with Dynamic Prototypes.”
+Zheng et al., “DP-DGAD”: `https://arxiv.org/abs/2508.00664`
 
-- arXiv: https://arxiv.org/abs/2508.00664
-- DOI: https://doi.org/10.1145/3774904.3792268
-- problem studied: anomaly detection in evolving graphs with dynamic prototype memory;
-- potentially relevant later: drift/anomaly detection across versioned ontology, corpus, link, and outcome histories;
-- not relevant to: first-run opportunity construction where no temporal normal/anomalous history exists;
-- disposition: **future maintenance/monitoring comparison only**.
+- studied task: anomaly detection in evolving graphs;
+- possible future use: drift detection across ontology, source, link, page, and outcome history;
+- required evidence: real temporal normal/anomaly labels and action policy;
+- disposition: **future maintenance comparison only**.
 
 ### 3.8 Spiking graph neural network efficiency
 
-Han Zhao, Xu Yang, Cheng Deng, and Fan Liu, “E²SGNN: Reconciling Expression and Efficiency in Spiking Graph Neural Network.”
+Zhao et al., “E²SGNN”: `https://doi.org/10.1145/3774904.3792271`
 
-- DOI: https://doi.org/10.1145/3774904.3792271
-- problem studied: expressive and efficient spiking graph neural networks;
-- framework fit: no current supervised graph-learning workload, hardware target, or energy/latency bottleneck requiring a spiking model;
+- no current supervised graph task, energy target, or bottleneck justifies a spiking model;
 - disposition: **out of scope**.
 
-### 3.9 Streaming graph interaction anomaly detection
+### 3.9 Streaming interaction anomaly detection
 
-Shuai Ren et al., “Anomaly Detection of Interaction Behaviors in Streaming Graphs.”
+Ren et al., “Anomaly Detection of Interaction Behaviors in Streaming Graphs”: `https://doi.org/10.1145/3774904.3792282`
 
-- DOI: https://doi.org/10.1145/3774904.3792282
-- problem studied: anomaly detection over continually arriving graph interactions;
-- potentially relevant later: live field/outcome monitoring after the framework has streaming interaction data;
-- not relevant to: one-shot static site generation;
+- possible future use: field/outcome monitoring after real streaming interactions exist;
+- not relevant to static first-run generation;
 - disposition: **future field-monitoring lead only**.
 
 ### 3.10 Graph-to-tree self-supervised learning
 
-Yejiang Wang et al., “Graph-to-Tree: Topological Decomposition for Self-Supervised Learning.”
+Wang et al., “Graph-to-Tree: Topological Decomposition for Self-Supervised Learning”: `https://doi.org/10.1145/3774904.3792286`
 
-- DOI: https://doi.org/10.1145/3774904.3792286
-- problem studied: learned graph representations through topological decomposition and self-supervised objectives;
-- potentially relevant later: representation comparison across many real ontology/site graphs;
-- not established: better page-region eligibility, evidence handling, or corpus selection in the current framework;
+- possible future use: representation comparison across many real project/workspace graphs;
+- missing evidence: improved page selection, edit invalidation, maintenance, or corpus outcomes;
 - disposition: **future representation benchmark only**.
 
-## 4. Unified promotion validation vector
+## 4. Unified near-alpha promotion vector
 
-Any learned graph, clustering, anomaly, transfer, or transformer method must satisfy the same gate.
+Any learned graph, clustering, anomaly, transfer, temporal, or transformer method must satisfy every applicable gate.
 
 | Attribute | Validation vector | Pass vector | Fail vector |
 |---|---|---|---|
-| Problem-class match | training target, inference target, graph type, labels, temporal/static state | method solves the exact measured framework failure | paper studies a different graph task |
-| Data sufficiency | graph count, node/edge count, independent labels, train/validation/test split | enough real independent data for the claimed objective | synthetic fixture or agent-authored labels treated as training truth |
-| Baseline dominance | TF-IDF/BM25, typed graph, connected components, sparse coverage, HRR | material held-out gain over the simpler baseline | novelty of architecture is the only argument |
-| Semantic integrity | evidence references, hard constraints, safety/materiality gates | learned output remains subordinate to compiler gates | model score overrides evidence or exclusions |
-| Tail/noise behavior | head/tail slices, isolated outliers, false admissions | improves hidden-slice coverage without increasing noisy pages | diversity or clustering selects unsupported outliers |
-| Determinism/auditability | model/version/data hash, seed variance, explanation artifact | reproducible bounded result with inspectable provenance | unstable cluster/page authority |
-| Cost/performance | complete one-site build time, memory, training/inference cost | measurable full-run benefit within budget | benchmark-only accuracy or GPU microbenchmark |
-| Publication effect | information gain, cannibalization, browser/crawler quality, field cohort | improves independently assessed pages/outcomes | cluster quality described as SEO or commercial proof |
+| problem-class match | exact authoring/selection/maintenance target, graph type, labels, temporal state | method solves the measured framework failure | paper studies another graph task |
+| real data sufficiency | graph count, nodes/edges, revisions, independent labels, split policy | enough non-synthetic independent data | agent-authored synthetic labels treated as truth |
+| simpler baseline | lexical/typed graph/components/rules/connected components/sparse coverage/invalidation | material held-out gain | novelty is the argument |
+| semantic integrity | evidence, hard constraints, safety, design and lifecycle authority | output remains subordinate to compiler | score overrides exclusions or evidence |
+| page-existence effect | task, information, evidence, neighbor difference, owner | improves admitted pages without noise | cluster diversity creates unsupported pages |
+| maintenance effect | affected artifacts, review priority, drift, retirement, link repair | reduces verified maintenance cost or errors | metric has no action policy |
+| tail/noise behavior | head/tail/isolated/rare/revision slices | improves hidden slices without false admissions | outliers selected as diversity |
+| determinism/auditability | version/data hash, seed variance, explanation artifact | reproducible bounded result | unstable authority |
+| cost/performance | full framework build/edit/validation/memory/provider cost | material end-to-end benefit | isolated model benchmark |
+| operator and usability effect | review burden, false alerts, recovery, override | measurable operator benefit | complexity increases burden |
+| publication effect | relevance, information gain, cannibalization, accessibility, crawl, field outcomes | independently assessed improvement | graph metric described as SEO proof |
+| ordinary-framework comparison | same fixture/machine and comparable maintenance task | method contributes beyond ordinary framework behavior | no web-framework baseline |
 
 ## 5. Method-specific future gates
 
 ### Learned clustering or community detection
 
-Pass only when:
-
 ```text
-real multi-view graph corpus
-+ frozen external segment/page-family labels
+real multi-view project/workspace graphs
++ frozen family and consolidation judgments
 + head/tail/noise slices
 + connected-components and Leiden baselines
 + stability across seeds
++ page-existence and maintenance outcomes
 + no safety/evidence regression
 ```
 
-### Graph transformer or graph foundation model
-
-Pass only when:
+### Graph transformer or foundation model
 
 ```text
-many independently reviewed project graphs
-+ explicit supervised/self-supervised task
+many independently reviewed project/workspace graphs
++ explicit task
 + cross-project holdout
 + typed-graph baseline
-+ ablation of node text, relations, and constraints
-+ measurable full-site benefit
++ text/relation/constraint ablation
++ full-site and maintenance benefit
 ```
 
 ### Positive-unlabeled classifier
 
-Pass only when:
-
 ```text
 independently accepted positive set
-+ truly unlabeled candidate set
++ truly unlabeled pool
 + no assumption that unreviewed means negative
 + calibrated review-prioritization objective
-+ compiler still controls acceptance
++ compiler retains acceptance authority
 ```
 
 ### Temporal or anomaly model
 
-Pass only when:
-
 ```text
-versioned graph/corpus/outcome history
-+ independently defined anomaly/drift labels
+versioned source/ontology/page/link/outcome history
++ independently defined drift/anomaly labels
 + temporal holdout
 + simpler change-point/rule baseline
-+ action policy for each detected anomaly
++ action policy for each alert
++ measured false-alert and operator cost
 ```
 
-## 6. Wasm and graph-learning are separate decisions
+### Maintenance scheduling method
 
-None of these papers establishes that WebAssembly is the correct execution target.
+```text
+real source/page ownership and freshness history
++ explicit review-budget objective
++ rule and priority-queue baseline
++ held-out missed-staleness and wasted-review metrics
++ rollback and override
+```
+
+## 6. Network-science experiment protocol
+
+Every network study records:
+
+```text
+study ID
+graph fixture and revision
+simpler baseline
+metric definitions
+held-out judgment IDs
+hypothesis and falsification rule
+head/tail/noise slices
+seed/stability policy
+action policy
+full-framework cost
+operator outcome
+result hash
+```
+
+Valid target outcomes include:
+
+- family coherence;
+- held-out relevance;
+- information-object coverage;
+- cannibalization risk;
+- internal-link utility;
+- source/page review priority;
+- drift or anomaly detection;
+- page merge/retirement decisions.
+
+A mathematically valid metric with no measured action remains descriptive research.
+
+## 7. Wasm and graph learning remain separate
 
 ```text
 algorithm/model choice
@@ -230,52 +247,63 @@ algorithm/model choice
 execution target
 ```
 
-The current measured bottlenecks were reduced primarily through sparse algorithms and data-structure changes. HRR remains a compact numeric kernel, but its measured share is not yet large enough to pass the existing Wasm promotion policy.
+No graph-learning paper establishes Wasm, Zig, CUDA, or another runtime as correct.
 
-Current Wasm rule remains:
+TypeScript remains the semantic oracle. Runtime promotion requires:
 
-```text
-TypeScript is semantic/production oracle
--> isolate exact contiguous numeric kernel
--> 20+ bridge-inclusive JS/Wasm runs
--> exact selection-hash parity
--> cosine >= 0.999999
--> >=1.25x kernel speedup
--> >=500ms absolute full-build savings
--> complete TypeScript fallback
-```
+- isolated measurable kernel;
+- repeated bridge-inclusive runs;
+- exact semantic parity;
+- complete fallback;
+- full cold-build and incremental-maintenance benefit;
+- ordinary-framework context where relevant.
 
-## 7. Implementation decision
+## 8. Current implementation decision
 
-No new graph-learning model is implemented from this paper set.
+No learned graph model is promoted.
 
-That is a positive implementation decision, not an omission. The current source already contains the right extension boundary:
+That is an explicit positive decision.
+
+Current canonical boundary:
 
 ```text
 agent proposal
 -> deterministic ontology approval
--> sparse typed graph
--> bounded opportunity compiler
--> external validation
+-> sparse typed graph and hard constraints
+-> bounded opportunity selection
+-> canonical PageIR/static site
+-> explicit workspace dependencies
+-> external real-case and framework evaluation
 ```
 
-The next code work remains real repository/source ingestion, Stage-1 provider/reviewer integration, independent context assessment, Stage-2 provider transactions, and a 100–500 page noindex cohort. Those produce the real data required to test learned graph methods scientifically.
+The current source adds an executable near-alpha validator that fails network-science studies lacking a simpler baseline or held-out judgments.
 
-## 8. Current claim boundary
+## 9. Current claims
 
-Established now:
+Established:
 
-- the supplied paper titles above are real publications or preprints;
-- they define legitimate graph-learning, clustering, transfer, temporal, or anomaly methods;
-- none currently dominates the framework's deterministic baseline on its actual task;
-- none validates SEO, page usefulness, search demand, or commercial outcomes;
-- no learned graph implementation or Wasm promotion is warranted from this evidence alone.
+- the reviewed methods are legitimate graph-learning, clustering, transfer, temporal, or anomaly approaches;
+- none currently dominates the deterministic baseline on Hyper Site’s actual tasks;
+- none validates page usefulness, framework quality, search outcomes, or maintenance benefit;
+- no learned graph or native-runtime promotion is warranted now.
 
-Still pending:
+Pending:
 
-- real ontology and context corpora;
-- independent labels;
-- graph-method comparison fixtures;
-- 100–500 real noindex generated pages;
-- complete 10,000-page content/UI emission;
-- browser, crawler, accessibility, search, and commercial field evidence.
+- real project/workspace graph history;
+- independent relevance, family, drift, and maintenance labels;
+- ordinary-framework baseline fixture;
+- real starter site and 25-page cohort;
+- complete 10K maintenance matrix;
+- field outcomes.
+
+## 10. Next gates
+
+```text
+1. Create one real continuous workspace and revision history.
+2. Freeze page-family, relevance, and maintenance judgments.
+3. Run deterministic graph/network baselines first.
+4. Compare any proposed graph method on the exact failure task.
+5. Preserve compiler, evidence, safety, and operator authority.
+6. Measure full build, incremental edit, alert burden, and action outcome.
+7. Promote only when the preregistered held-out gate passes.
+```
