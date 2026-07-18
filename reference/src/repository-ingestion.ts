@@ -3,11 +3,11 @@ import { sha256 } from "./core.js";
 import {
   normalizeProjectInput,
   type ConfidenceLevel,
+  type NormalizedProject,
   type ProjectAssetInput,
   type ProjectInput,
   type ProjectSourceInput,
   type SourceKind,
-  type NormalizedProject,
 } from "./project-input.js";
 
 export interface RepositoryFileSnapshot {
@@ -47,6 +47,7 @@ interface RepositoryProjectConfig {
   project: Omit<ProjectInput, "sources" | "assets">;
   sources: readonly DeclaredSource[];
   assets?: readonly DeclaredAsset[];
+  fieldEvidence: Readonly<Record<string, readonly string[]>>;
 }
 
 export interface RepositoryIngestionEvidence {
@@ -64,10 +65,9 @@ export interface RepositoryIngestionResult {
 }
 
 /**
- * Compiles an explicit repository project declaration into canonical ProjectInput.
- * Business, brand, goal, pricing, proof, and publication truth must be present in
- * the declaration. Repository inspection verifies declared source and asset bytes;
- * it never promotes inferred text into business truth.
+ * Compiles an explicit repository declaration into canonical ProjectInput.
+ * Repository inspection verifies declared bytes and provenance. It never infers
+ * business, brand, pricing, proof, audience, goal, or publication truth.
  */
 export function ingestRepositoryProject(snapshot: RepositorySnapshot, configPath = "hyper-site.project.yaml"): RepositoryIngestionResult {
   assertNonEmpty(snapshot.repositoryRoot, "repositoryRoot");
@@ -75,26 +75,30 @@ export function ingestRepositoryProject(snapshot: RepositorySnapshot, configPath
   assertNonEmpty(snapshot.revision, "revision");
 
   const files = normalizeFiles(snapshot.files);
-  const configFile = files.get(normalizePath(configPath));
+  const normalizedConfigPath = normalizePath(configPath);
+  const configFile = files.get(normalizedConfigPath);
   if (!configFile) throw new Error(`repository project config not found: ${configPath}`);
 
-  const decoded = parse(configFile.content) as unknown;
-  const config = requireConfig(decoded);
+  const config = requireConfig(parse(configFile.content) as unknown);
   const sources = config.sources.map((source) => compileSource(source, files, snapshot.capturedAt));
   const assets = (config.assets ?? []).map((asset) => compileAsset(asset, files));
+  const fieldEvidence = compileFieldEvidence(config.fieldEvidence, sources);
   const project = normalizeProjectInput({ ...config.project, sources, assets });
   if (!project.validation.passes) {
-    const failures = project.validation.findings.filter((item) => item.status === "fail").map((item) => `${item.attributeId}: ${item.detail}`);
+    const failures = project.validation.findings.filter((item) => item.state === "fail").map((item) => `${item.attributeId}: ${item.detail}`);
     throw new Error(`repository project validation failed: ${failures.join("; ")}`);
   }
 
-  const fileHashes = Object.fromEntries([...files.entries()].map(([path, file]) => [path, sha256(file.content)]).sort(([left], [right]) => left.localeCompare(right)));
-  const fieldEvidence = compileFieldEvidence(config, sources);
+  const fileHashes = Object.fromEntries(
+    [...files.entries()]
+      .map(([path, file]) => [path, sha256(file.content)] as const)
+      .sort(([left], [right]) => left.localeCompare(right)),
+  );
   const canonical = {
     repositoryRoot: snapshot.repositoryRoot,
     repositoryRevision: snapshot.revision,
     capturedAt: snapshot.capturedAt,
-    configPath: normalizePath(configPath),
+    configPath: normalizedConfigPath,
     projectHash: project.projectHash,
     fileHashes,
     fieldEvidence,
@@ -102,7 +106,7 @@ export function ingestRepositoryProject(snapshot: RepositorySnapshot, configPath
   return {
     project,
     repositoryRevision: snapshot.revision,
-    configPath: normalizePath(configPath),
+    configPath: normalizedConfigPath,
     fileHashes,
     fieldEvidence,
     ingestionHash: sha256(JSON.stringify(canonical)),
@@ -147,10 +151,9 @@ function compileAsset(asset: DeclaredAsset, files: ReadonlyMap<string, Repositor
   };
 }
 
-function compileFieldEvidence(config: RepositoryProjectConfig, sources: readonly ProjectSourceInput[]): RepositoryIngestionEvidence[] {
-  const sourceIds = [...sources.map((source) => source.id)].sort();
-  if (sourceIds.length === 0) throw new Error("at least one declared repository source is required");
-  const fields = [
+function compileFieldEvidence(fieldEvidence: Readonly<Record<string, readonly string[]>>, sources: readonly ProjectSourceInput[]): RepositoryIngestionEvidence[] {
+  const knownSourceIds = new Set(sources.map((source) => source.id));
+  const requiredFields = [
     "business.purpose",
     "business.services",
     "business.offers",
@@ -165,16 +168,21 @@ function compileFieldEvidence(config: RepositoryProjectConfig, sources: readonly
     "technical",
     "goals",
   ];
-  // The declaration is itself a repository source of truth; all promoted fields
-  // remain reviewable against the bounded declared source set.
-  void config;
-  return fields.map((field) => ({ field, sourceIds }));
+  return requiredFields.map((field) => {
+    const sourceIds = [...new Set(fieldEvidence[field] ?? [])].sort();
+    if (sourceIds.length === 0) throw new Error(`fieldEvidence is required for ${field}`);
+    for (const sourceId of sourceIds) {
+      if (!knownSourceIds.has(sourceId)) throw new Error(`fieldEvidence for ${field} references unknown source ${sourceId}`);
+    }
+    return { field, sourceIds };
+  });
 }
 
 function requireConfig(value: unknown): RepositoryProjectConfig {
   if (!isRecord(value)) throw new Error("repository project config must be an object");
   if (!isRecord(value.project)) throw new Error("repository project config requires project");
   if (!Array.isArray(value.sources) || value.sources.length === 0) throw new Error("repository project config requires at least one source");
+  if (!isRecord(value.fieldEvidence)) throw new Error("repository project config requires fieldEvidence");
   const project = value.project as unknown as Omit<ProjectInput, "sources" | "assets">;
   const business = project.business;
   if (!business || !business.purpose?.trim()) throw new Error("explicit business purpose is required; repository text is not inferred");
@@ -184,6 +192,7 @@ function requireConfig(value: unknown): RepositoryProjectConfig {
     project,
     sources: value.sources as unknown as readonly DeclaredSource[],
     ...(Array.isArray(value.assets) ? { assets: value.assets as unknown as readonly DeclaredAsset[] } : {}),
+    fieldEvidence: value.fieldEvidence as Readonly<Record<string, readonly string[]>>,
   };
 }
 
