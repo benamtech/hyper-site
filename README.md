@@ -1,32 +1,19 @@
 # Hyper Monorepo
 
-Status: research prototype; useful framework and agent pipeline not yet proven  
+Status: working compiler prototype; useful external framework not yet proven  
 Updated: 2026-07-18  
 PR: #3 remains draft and unmerged
 
-## Target system
-
-```text
-Hyper Content (optional evidence/content producer)
-        |
-        v
-Hyper Site (deterministic static framework)
-
-External agent control plane
-  operates both packages through public tools and artifacts
-```
-
-Hard direction:
-
-```text
-hyper-content -> hyper-site
-hyper-site -X-> hyper-content
-package cores -X-> orchestration runtime internals
-```
-
 ## What works now
 
-The current compiler prototype can validate a structured `SiteSource`, reject missing or under-supported references, construct `PageIR`, emit semantic HTML, metadata, JSON-LD, sitemap and optional instruction Markdown, generate a reverse dependency index, and compute deterministic page/build hashes.
+The current compiler can:
+
+- validate structured `SiteSource` input;
+- reject missing references and under-supported claims;
+- construct `PageIR`;
+- emit semantic HTML, metadata, JSON-LD, sitemap and optional instruction Markdown;
+- generate a reverse dependency index;
+- compute deterministic page and build hashes.
 
 Current execution path:
 
@@ -37,124 +24,97 @@ consumer
 -> compileSite(SiteSource)
 ```
 
-This is real compiler behavior, but package extraction is incomplete. Most canonical source still lives under `reference/src`.
+This is real compiler behavior, but `hyper-site` does not yet physically own the implementation and is not yet a normal installable framework.
 
-## What is not built yet
-
-The repository does not yet provide:
-
-- an independently owned and packed Hyper Site compiler package;
-- a normal create/dev/build/preview/inspect/publish workflow;
-- a five-page accepted site and ordinary-framework comparison;
-- proven incremental maintenance correctness or value;
-- a durable agent runtime with checkpoints and approval interrupts;
-- idempotent publication or another consequential effect;
-- end-to-end telemetry and commit-time authorization;
-- production readiness or commercial evidence.
-
-## Useful framework floor
-
-Hyper Site must work for an ordinary developer without Hyper Content, an LLM, an agent runtime or a GPU:
+## Active product target
 
 ```text
-create
+Hyper Content (optional later producer)
+-> portable SiteSource
+-> Hyper Site
+-> complete static artifacts
+```
+
+Hyper Site must work without Hyper Content, an LLM, an agent runtime, a GPU, a database, Zig or Wasm.
+
+Agent runtimes, task surfaces, remote publication, 10K generation and low-level acceleration are not active product milestones.
+
+## Definition of useful
+
+A clean external developer must be able to:
+
+```text
+install packed package
+-> create starter
+-> edit facts, pages and design tokens
 -> dev
--> build five distinct real pages
--> preview
--> inspect output and diagnostics
--> local publish
+-> build five distinct pages
+-> preview built output
+-> inspect routes, links, metadata and dependencies
+-> publish locally by copying the accepted static build
 ```
 
-The direct control is Astro or another suitable static framework using the same facts, design, assets and output requirements.
-
-## Agent-first target
-
-Agent-first means an external durable control plane, not an LLM call inside the compiler.
+## Current execution order
 
 ```text
-freeze input snapshot
--> plan bounded work
--> invoke deterministic and model-backed tools
--> persist checkpoints and evidence
--> pause for approval
--> revalidate authority at commit time
--> invoke an idempotent effect
--> record traces and receipt
+U1 package ownership and isolated consumption
+-> U2 ordinary CLI and starter
+-> U3 five-page browser-accepted proof
+-> U4 maintenance comparison and advance/narrow/stop decision
+-> U5 optional minimal Hyper Content adapter
 ```
 
-Durability, retries, human interruption, policy, credentials, connectors and effects belong to an established orchestration/runtime category through adapters. They do not belong in the Hyper Site compiler core.
+Only U1 is currently unblocked.
 
-## Low-level runtime disposition
+## Immediate work
 
-Zig, WebAssembly, CBOR and MessagePack are optional implementation experiments, not the product architecture.
+1. Classify every file under `reference/src` by one owner and role.
+2. Move the existing compiler/renderer cluster into `hyper-site/src` without redesigning behavior.
+3. Build `hyper-site/dist` from package-owned source.
+4. Switch package exports away from `reference/dist`.
+5. Make `reference/` consume `@amtech/hyper-site`.
+6. Prove frozen positive and negative parity.
+7. Prove two isolated consumers installed from `npm pack`.
 
-```text
-canonical authoring/interchange: typed SiteSource + deterministic JSON
-optional derived cache/IPC: deterministic CBOR
-LLM prompts: compact text or provider-native structured output
-pure kernels: TypeScript oracle + optional Zig/native/Wasm challenger
-orchestration/policy/effects: external runtime only
-```
+No new compiler features belong in this extraction pass.
 
-Current decisions:
+## Research-backed direct controls
 
-- binary bytes do not imply lower model token cost;
-- CBOR may be tested as a deterministic derived artifact after validation;
-- MessagePack may be a cache/IPC benchmark control but is not an integrity authority without an explicit canonical profile;
-- Zig/Wasm may challenge measured pure kernels only after profiling;
-- HTML rendering, source approval, agent state, authorization and publication stay outside low-level kernels;
-- runtime Zig SSR and binary LLM prompting are outside the current critical path;
-- every challenger must include conversion, cold-start, validation, packaging and fallback costs in its benchmark.
+Hyper will be compared with:
 
-Authorities:
+- typed JSON plus direct templates;
+- an Astro static site using the same facts, routes, design and acceptance criteria.
 
-- `docs/research/47-zig-wasm-binary-boundary-audit.md`
-- `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
-- `docs/validation/49-low-level-kernel-promotion-gates.md`
-- `docs/architecture/CODEGRAPH-LOW-LEVEL.md`
+npm package exports and tarball consumption establish the external package floor. Astro's documented `dev`, `build`, `preview`, static routing and schema-validated content establish an ordinary framework floor. Playwright browser tests verify user-visible behavior; accessibility scanning remains partial evidence and must be supplemented by manual review.
 
-## Current work order
+## Local dependencies
 
-```text
-R0 reconcile repository truth
--> R1 physical package extraction
--> R2 ordinary framework floor
--> R3 five-page usefulness comparison
--> R4 maintenance correctness and value
--> R5 durable agent wrapper
--> R6 one approved idempotent publication effect
-```
+Current compiler tests require:
 
-Task surfaces, SDRT, GNNs, GPU promotion, browser Wasm promotion and 10K publication remain deferred until the ordinary framework and maintenance gates pass. Low-level experiments may run only when they are optional and do not delay R1-R4.
+- Git;
+- Node.js 20 or newer;
+- npm;
+- Bash and ordinary Unix tools;
+- curl only for live download scripts;
+- pacman only for the optional Manjaro installer.
+
+No Python, Docker, database, GPU, LLM key, Zig compiler or Wasm runtime is required.
 
 ## Test the current compiler
 
-Manjaro/Arch external verification:
+Manjaro/Arch:
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh)
 ```
 
-Generic Unix-like verification:
+Generic Unix-like:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/clone-and-test-hyper.sh | bash
 ```
 
-These scripts prove current compiler behavior for their exact commit, generated fixture and machine. They do not satisfy the framework or agent gates.
-
-## Local dependencies
-
-For the current repository tests you need:
-
-- Git, to clone and identify the exact branch/commit;
-- Node.js 20 or newer, to run ESM scripts and tests;
-- npm, to install the locked workspace dependencies and invoke scripts;
-- Bash and standard Unix tools for the external runners;
-- curl only when downloading a live runner from GitHub;
-- pacman only for the optional Manjaro dependency installer.
-
-No Python, Docker, database, GPU, model API key, Zig compiler, Wasm runtime, Temporal, LangGraph or OpenTelemetry service is required to test the compiler prototype. Those become dependencies only for later, separately gated integrations or optional experiments.
+These verify only current compiler behavior for an exact commit, machine and generated fixture. They do not pass U1-U5.
 
 ## Local commands
 
@@ -168,36 +128,18 @@ npm run validate:workstreams
 node scripts/check-doc-system.mjs
 ```
 
-## Current authority
+## Active authority
 
-- research audit: `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
-- target architecture: `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
-- recovery plan: `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
-- validation gates: `docs/validation/46-useful-framework-and-agent-first-gates.md`
-- low-level audit: `docs/research/47-zig-wasm-binary-boundary-audit.md`
-- low-level architecture: `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
-- low-level gates: `docs/validation/49-low-level-kernel-promotion-gates.md`
-- code graphs: `CODEGRAPH.md`, `docs/architecture/CODEGRAPH-LOW-LEVEL.md`
+- research: `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
+- architecture: `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
+- plan: `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
+- gates: `docs/validation/46-useful-framework-and-agent-first-gates.md`
+- code graph: `CODEGRAPH.md`
 - operating contract: `AGENTS.md`
 - durable state: `memory/MEMORY.md`
 
+Low-level Zig/Wasm/binary documents remain optional research and cannot reorder U1-U5.
+
 ## Nonclaims
 
-Passing compiler fixtures, deterministic hashes, schema validity, graph metrics, binary byte-size reductions, isolated kernel speedups and synthetic page counts are software evidence only. They do not prove a useful framework, lower LLM token cost, correct complete incrementality, a reliable agent pipeline, authorized effects, SEO quality, Lighthouse scores, ranking, conversion, revenue or production readiness.
-
-## Governed task surfaces
-
-Hyper Site's next interaction layer is a protocol-neutral governed task-surface platform. Static pages remain complete and indexable; optional runtime services accept typed intents and return public projections, resources, artifacts, actions, and receipts. Theme developers own trusted renderers, site developers own mounts and fallbacks, and growth operators own bounded experiment and conversion policy. Hyper Content may propose task semantics but contains zero UI implementation logic.
-
-Current authority:
-
-- `docs/intake/2026-07-18-next-generation-task-surfaces.md`
-- `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
-- `docs/architecture/32-governed-task-surface-architecture.md`
-- `docs/validation/33-task-surface-validation-matrix.md`
-
-A2UI, AG-UI, MCP Apps, and AMTECH AI Employee are adapters after the internal ABI passes. Ten-thousand-page surface scale is a mandatory benchmark tier, not a page-usefulness claim.
-
-## Documentation system
-
-Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.
+Passing compiler fixtures, hashes, schema checks, graph metrics, synthetic scale and isolated kernel benchmarks do not prove a useful framework, complete incrementality, page usefulness, SEO quality, ranking, conversion, revenue or production readiness.
