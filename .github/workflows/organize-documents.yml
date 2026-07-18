@@ -6,6 +6,10 @@ on:
     branches: ["agent/glm-blackwell-vertical-slice"]
     paths:
       - ".github/workflows/organize-documents.yml"
+      - "docs/legacy-root-moves.json"
+      - "scripts/apply-doc-moves.mjs"
+      - "scripts/check-declared-doc-moves.mjs"
+      - "scripts/organize-legacy-memory.mjs"
       - "scripts/organize-root-docs.mjs"
       - "scripts/normalize-doc-paths.mjs"
       - "scripts/ensure-doc-index-links.mjs"
@@ -15,6 +19,10 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/organize-documents.yml"
+      - "docs/legacy-root-moves.json"
+      - "scripts/apply-doc-moves.mjs"
+      - "scripts/check-declared-doc-moves.mjs"
+      - "scripts/organize-legacy-memory.mjs"
       - "scripts/organize-root-docs.mjs"
       - "scripts/normalize-doc-paths.mjs"
       - "scripts/ensure-doc-index-links.mjs"
@@ -39,6 +47,9 @@ jobs:
           show-progress: false
       - name: Validate migration scripts
         run: |
+          node --check scripts/apply-doc-moves.mjs
+          node --check scripts/check-declared-doc-moves.mjs
+          node --check scripts/organize-legacy-memory.mjs
           node --check scripts/organize-root-docs.mjs
           node --check scripts/normalize-doc-paths.mjs
           node --check scripts/ensure-doc-index-links.mjs
@@ -46,6 +57,8 @@ jobs:
       - name: Organize and reconcile documents
         run: |
           cp scripts/check-doc-system.mjs /tmp/check-doc-system.mjs
+          node scripts/apply-doc-moves.mjs docs/legacy-root-moves.json >/tmp/legacy-root-result.json
+          node scripts/organize-legacy-memory.mjs >/tmp/legacy-memory-result.json
           node scripts/organize-root-docs.mjs >/tmp/organize-result.json
           cp /tmp/check-doc-system.mjs scripts/check-doc-system.mjs
           node scripts/normalize-doc-paths.mjs >/tmp/normalize-result.json
@@ -53,7 +66,9 @@ jobs:
       - name: Validate documentation system
         id: validate_docs
         continue-on-error: true
-        run: node scripts/check-doc-system.mjs > /tmp/doc-validation.json 2>&1
+        run: |
+          node scripts/check-declared-doc-moves.mjs > /tmp/doc-validation.json 2>&1
+          node scripts/check-doc-system.mjs >> /tmp/doc-validation.json 2>&1
       - name: Upload document validation failure
         if: steps.validate_docs.outcome == 'failure'
         uses: actions/upload-artifact@v4
