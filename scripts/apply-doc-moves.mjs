@@ -47,7 +47,7 @@ for (const [from, to] of Object.entries(moves)) {
 
 const rewritten = [];
 for (const path of await walk(root)) {
-  if (path === self || !textExtensions.has(extname(path))) continue;
+  if (path === self || path === manifestPath || !textExtensions.has(extname(path))) continue;
   let text = await readFile(path, "utf8");
   const before = text;
   for (const [from, to] of Object.entries(moves)) text = text.split(from).join(to);
