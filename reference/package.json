@@ -17,6 +17,8 @@
     "framework:preview": "npm run build && node scripts/framework-cli.mjs preview ../site-manifest.yaml fixtures/orchestration-fixture.mjs generated-framework-preview",
     "production": "npm run build && node scripts/production-cli.mjs",
     "production:help": "npm run build && node scripts/production-cli.mjs help",
+    "production:stage1": "npm run build && node scripts/production-stage1.mjs",
+    "production:approve": "npm run build && node scripts/production-approve.mjs",
     "browser:check": "browserslist",
     "ui:r3f:build": "npm --prefix ui-r3f install --no-audit --no-fund && npm --prefix ui-r3f test",
     "manifest:check": "npm run test && npm run manifest:emit && npm run ui:emit && npm run orchestration:check && npm run framework:validate && npm run browser:check"
