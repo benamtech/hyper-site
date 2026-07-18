@@ -29,6 +29,15 @@ async function walk(directory) {
   return output;
 }
 
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function replaceUnqualifiedPath(text, from, to) {
+  const pattern = new RegExp(`(^|[\\s('"\\x60])${escapeRegex(from)}(?=$|[\\s)'"\\x60,:])`, "gm");
+  return text.replace(pattern, (_match, prefix) => `${prefix}${to}`);
+}
+
 const moved = [];
 for (const [from, to] of Object.entries(moves)) {
   const source = resolve(root, from);
@@ -50,7 +59,7 @@ for (const path of await walk(root)) {
   if (path === self || path === manifestPath || !textExtensions.has(extname(path))) continue;
   let text = await readFile(path, "utf8");
   const before = text;
-  for (const [from, to] of Object.entries(moves)) text = text.split(from).join(to);
+  for (const [from, to] of Object.entries(moves)) text = replaceUnqualifiedPath(text, from, to);
   if (text !== before) {
     await writeFile(path, text);
     rewritten.push(path.slice(root.length + 1));
