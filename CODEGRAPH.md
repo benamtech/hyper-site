@@ -1,26 +1,32 @@
 # CODEGRAPH.md — Vector-Native Site Generation Compiler
 
-Status: standalone root; evidence-gated repository ingestion added; real providers, independent review, real context corpus, canonical output transaction, and field acceptance remain pending  
+Status: standalone root; operator repository ingestion, GLM structured generation, independent approvals, design authority, atomic PageDraft-to-PageIR transaction, resumable batches, static emission, and bounded synthetic 10K corpus validation are implemented. Real repository/provider/hardware/field acceptance remains pending.  
 Updated: 2026-07-18
 
-## Canonical source graph
+## Canonical production graph
 
 ```text
-explicit repository snapshot + hyper-site.project.yaml
+local repository + hyper-site.project.yaml + style/source/assets
+  reference/scripts/production-cli.mjs ingest
   reference/src/repository-ingestion.ts
-  bytes, revision, deterministic hashes, field-level evidence
         |
         v
 ProjectInput + source/evidence/asset ledgers
   reference/src/project-input.ts
         |
         v
-Stage-1 AgentOntologyProposal
+physical Stage 1: GLM AgentOntologyProposal
+  reference/src/glm-provider.ts
+  reference/src/generation-schemas.ts
+        |
+        v
+exact-hash operator / independent reviewer approval
+  production-approve.mjs ontology
+  applyOntologyApproval
         |
         v
 ApprovedOntology
   reference/src/ontology-discovery.ts
-  provenance + materiality + targeting safety + reviewer gates
         |
         v
 CompiledOntologyGraph
@@ -35,87 +41,165 @@ ProductionOpportunitySpace
   bounded expansion + sparse concave selection + HRR structure
         |
         v
-SiteGenerationPlan / Stage-2 PageConceptProposal
+SiteGenerationPlan
   reference/src/site-program-optimized.ts
+        |
+        +-----------------------------+
+        | approved design authority   |
+        | design-authoring.ts         |
+        | core-page briefs + CSS      |
+        +-----------------------------+
+        |
+        v
+physical Stage 2: bounded GLM PageDraft batches
+  generateStageTwoPageBatch
+  JSON object mode + external schema/semantic validation
+  bounded repair or reject
+        |
+        v
+existing PageConceptProposal compiler
   reference/src/site-program.ts
         |
         v
-CandidatePageSeed
-        |
-        v
-PageCoordinate / CorpusPlan / PageGenerationJob
-  reference/src/page-coordinate.ts
-  reference/src/corpus-plan.ts
-  reference/src/page-generation.ts
-        |
-        v
-manifest / PageIR / static UI
-  reference/src/manifest.ts
+atomic canonical transaction
+  reference/src/page-draft-transaction.ts
+  PageConcept -> CandidatePageSeed -> SiteSource -> PageIR
   reference/src/framework.ts
-  reference/src/ui-*.ts
+        |
+        v
+shared static design renderer
+  reference/src/design-authoring.ts
+        |
+        v
+bounded local corpus validator
+  reference/src/corpus-validation-production.ts
+  exact duplicate + sparse lexical + local semantic LSH
+  + evidence/information + static crawl checks
+        |
+        v
+noindex static site + validation reports + checkpoints
+  reference/src/production-orchestrator.ts
+  reference/scripts/production-cli.mjs run
 ```
 
-`reference/src/agent-site-orchestrator.ts` remains the one two-stage front end. No second publication pipeline is permitted.
+There is one canonical publication path. New model output converges into the existing `compilePageConceptProposals` and `compileSite` authorities; it does not create a second manifest or PageIR implementation.
+
+## Physical model topology
+
+```text
+Stage 1: one bounded ontology proposal job per project
+Stage 2: deterministic batches of PageDraft jobs
+Stage 3: optional independent review/repair observations only
+```
+
+The older conceptual pass names remain useful compiler concerns, but they are not seven mandatory API calls per page.
 
 ## Production boundary map
 
-| Boundary | Authority | State | Next gate |
+| Boundary | Authority | Implemented state | Remaining real gate |
 |---|---|---|---|
-| project truth | `reference/src/project-input.ts` | implemented | real declarations from operators |
-| repository ingestion | `reference/src/repository-ingestion.ts` | implemented and test-gated | adapter that captures a real repository/config snapshot |
-| ontology | `reference/src/ontology-discovery.ts` | compiler-gated proposal contract | JSON-schema provider + independent reviewer |
-| graph | `reference/src/ontology-graph.ts` | typed, sparse, constraints separated | reviewed real observations |
-| opportunity | `reference/src/opportunity-space-production.ts` | synthetic 10k planning pass | frozen real hidden-slice evidence |
-| HRR | `reference/src/opportunity-space-optimized.ts` | structural representation only | external usefulness validation |
-| Stage 2 | `reference/src/site-program.ts` | contracts and seed compiler | real provider + atomic accepted-output transaction |
-| generation | `reference/src/page-generation.ts` | provider-neutral bounded runner | real agent adapter |
-| publication | `reference/src/framework.ts` | static source pass | 100–500 noindex browser/a11y/crawler validation |
+| appliance | `appliance-contract.ts` | Blackwell optimized target + compatibility profiles | benchmark real rented nodes |
+| repository truth | `repository-ingestion.ts` | bytes, revision, paths, field evidence, no inference | one operator-approved business repo |
+| provider transport | `glm-provider.ts` | Z.AI chat completions, JSON mode, timeout, bounded repair | live GLM request/evaluation |
+| Stage 1 | `generation-schemas.ts` | external schema/ledger validation | real proposal quality |
+| ontology approval | `generation-schemas.ts`, `production-approve.mjs` | exact-hash human/independent approval | real reviewer observations |
+| graph/opportunity | existing ontology/opportunity modules | same deterministic compiler | held-out real contexts |
+| design | `design-authoring.ts` | core-page briefs, approval, safe shared CSS, restyle invariant | real creative review and assets |
+| Stage 2 | `generation-schemas.ts` | complete PageDraft batch schema and validation | live generated prose/utility quality |
+| transaction | `page-draft-transaction.ts` | atomic canonical SiteSource/PageIR/static build | real accepted batch |
+| recovery | `production-orchestrator.ts` | immutable payload/dependency checkpoints | interruption test on persistent rented node |
+| corpus validation | `corpus-validation-production.ts` | bounded exact/lexical/local-semantic/evidence/render checks | real embedding model and relevance set |
+| operator experience | production CLI scripts | doctor, ingest, provider check, Stage 1, approval, run, emit | packaged installer/UI and usability test |
+| publication | `framework.ts` | noindex static output | accessibility/browser/crawler review on real pages |
 
-## Ingestion invariants
+## Appliance profiles
 
-- The config is explicit business truth, not an extraction prompt.
-- Every promoted field has declared source IDs.
-- Every source and asset resolves to captured root-relative bytes.
-- Content hashes bind the declaration to the repository revision.
-- Missing fields, unknown evidence IDs, missing files, duplicate paths, and traversal paths reject.
-- Repository prose is never used to fill missing business truth.
+Optimized:
 
-## Retained production baseline
+- `rtx-pro-6000-blackwell-96gb`.
+
+Compatibility candidates, not equivalent guarantees:
+
+- `h200-141gb`;
+- `h100-80gb`;
+- `a100-80gb`;
+- `rtx-5090-32gb`;
+- `rtx-4090-24gb`.
+
+Hardware price is a time-stamped observation and soft economic vector. It does not determine feature acceptance.
+
+## Design invariants
+
+- The core site is designed before bulk landing-page generation.
+- Design source IDs and exact approval hashes are preserved.
+- The design generator cannot self-approve.
+- CSS is one shared static artifact, not regenerated for each page.
+- Unsafe or remote CSS constructs reject.
+- Post-generation design refinement must preserve canonical content hashes and index state.
+- Attractive rendering cannot change evidence, claims, route identity, or publication authority.
+
+## Checkpoint dependency graph
 
 ```text
-TF-IDF/BM25
-+ typed graph and hard constraints
-+ weighted observations
-+ bounded closed conjunctions
-+ k-core pruning
-+ constrained best-first expansion
-+ sparse concave coverage
-+ HRR after eligibility
-+ two compiler-bounded agent stages
-+ static deterministic output
+Stage 1 checkpoint
+  project hash + source excerpt hash + provider identity
+
+Stage 2 checkpoint
+  project + ontology + plan + batch + design + provider
+  + source excerpt hash + hashes of prior accepted batches
+
+transaction checkpoint
+  project + ontology + plan + design + base URL + all draft hashes
+
+corpus checkpoint
+  transaction + embedding backend identity + validation policy hash
 ```
 
-Comparison-only: Leiden, learned graph methods, learned embeddings, ANN, GPU inference optimization, Zig/Wasm kernels. Promotion requires primary-source fit, a simpler baseline, frozen validation vectors, parity/safety, and measured full-run improvement.
+Checkpoint payload bytes have their own hash. Artifact hashes such as `transactionHash` remain separate semantic identities.
 
-## Exact inherited proof
+## Validation proof
 
-The imported source state previously recorded 46/46 tests and a synthetic planning fixture of 15,000 candidates -> 10,000 selected regions -> 400 Stage-2 batches in 5,284.510 ms. That proof is retained as synthetic compiler evidence only.
+Focused production workflow run `29635741933` on branch head `5cfcc85fd6fe6910b9e4a2e366581e5514f08ffa` passed:
 
-The current branch adds repository ingestion tests and restores standalone CI. Final exact-head proof belongs in the newest validation report and memory handoff after CI completion.
+- 10/10 production tests;
+- operator command syntax/help;
+- 25-page atomic/noindex/design/recovery gates;
+- near-duplicate rejection;
+- full synthetic 100, 500, and 10,000 PageDraft -> PageIR -> HTML -> corpus-validation path.
 
-## Not proven
-
-Real relevance, useful page bodies, indexing, ranking, AI citations, conversion, revenue, 10,000 complete UIs, or Wasm/GPU advantage.
-
-## Next gates
+Measured 10,000 fixture:
 
 ```text
-1. real repository/config snapshot adapter and operator fixture
-2. Stage-1 JSON-schema provider adapter
-3. independent reviewer and observation approval workflow
-4. frozen real ContextCorpus with held-out judgments
-5. 100–500 noindex Stage-2 jobs
-6. atomic canonical output transaction
-7. information-gain, cannibalization, browser, crawler, accessibility validation
-8. scale only after those gates pass
+pages: 10,000
+elapsed: 19,179.290 ms
+rendered HTML: 54,291,900 bytes
+bounded candidate pairs: 12,949
+transaction: 481a1adc00ebc860f6f3c276c16978c7e28c3cfa62a39114d1bdb8e0cf013d72
+corpus: 67fe904020a2d0ca573790d135037515e200938ae4c7803c67e27a9ea47182b2
+```
+
+The existing full reference workflow also passed through test, manifest, UI, orchestration, framework, browser, and R3F validation on the same code/example head before documentation reconciliation.
+
+## Explicit nonproof
+
+Synthetic full emission does not prove:
+
+- real relevance, insight, factual completeness, usefulness, or search demand;
+- live GLM structured-output reliability or cost;
+- Blackwell, A100, H100, H200, 5090, or 4090 runtime performance;
+- indexability, rankings, citations, conversion, revenue, or lifecycle return;
+- that every one of 10,000 pages deserves to exist;
+- GPU, HRR, ANN, Zig, or Wasm advantage.
+
+## Next gate
+
+```text
+one real repository + approved business facts + real style authority
+-> live Stage 1 proposal
+-> independent approval
+-> 25 real noindex PageDrafts
+-> local semantic/evidence/render checks
+-> human and held-out relevance review
+-> 100, then 500
+-> 10,000 only after field gates pass
 ```
