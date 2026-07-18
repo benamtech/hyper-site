@@ -15,39 +15,63 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: agent/glm-blackwell-vertical-slice
-      - name: Patch dependency and exact-duplicate boundaries
+      - name: Patch dependency, checkpoint, and duplicate boundaries
         run: |
           python - <<'PY'
           from pathlib import Path
 
+          def replace(text, old, new, label):
+              if new in text:
+                  return text
+              if old not in text:
+                  raise SystemExit(f'missing {label}')
+              return text.replace(old, new, 1)
+
           orchestrator = Path('reference/src/production-orchestrator.ts')
           text = orchestrator.read_text()
-          old = '  const acceptedSummaries: { pageId: string; route: string; title: string; canonicalQuestion: string }[] = [];\n  for (const batch of input.prepared.siteGenerationPlan.batches) {'
-          new = '  const acceptedSummaries: { pageId: string; route: string; title: string; canonicalQuestion: string }[] = [];\n  const sourceExcerptHash = sha256(JSON.stringify([...input.sourceExcerpts].sort((left, right) => left.excerptId.localeCompare(right.excerptId))));\n  for (const batch of input.prepared.siteGenerationPlan.batches) {'
-          if old not in text: raise SystemExit('missing accepted summaries insertion point')
-          text = text.replace(old, new, 1)
-          old = '      design: input.design.authorityHash,\n      provider: sha256(input.provider.id),'
-          new = '      design: input.design.authorityHash,\n      provider: sha256(input.provider.id),\n      sources: sourceExcerptHash,\n      priorAcceptedBatches: sha256(JSON.stringify(outputs.map((item) => [item.batchId, sha256(JSON.stringify(item))]))),'
-          if old not in text: raise SystemExit('missing stage-two dependencies')
-          text = text.replace(old, new, 1)
-          old = '    plan: input.prepared.siteGenerationPlan.planHash,\n    design: input.design.authorityHash,\n    drafts: sha256(JSON.stringify(transaction.draftHashes)),'
-          new = '    project: input.prepared.project.projectHash,\n    ontology: input.prepared.ontology.ontologyHash,\n    plan: input.prepared.siteGenerationPlan.planHash,\n    design: input.design.authorityHash,\n    baseUrl: sha256(input.baseUrl),\n    drafts: sha256(JSON.stringify(transaction.draftHashes)),'
-          if old not in text: raise SystemExit('missing transaction dependencies')
-          text = text.replace(old, new, 1)
-          old = '  }, corpus.validationHash, { transaction: transaction.transactionHash, embedding: sha256(input.embeddingBackend.id) }, input.generatedAt));'
-          new = '  }, corpus.validationHash, { transaction: transaction.transactionHash, embedding: sha256(input.embeddingBackend.id), policy: sha256(JSON.stringify(input.corpusPolicy ?? null)) }, input.generatedAt));'
-          if old not in text: raise SystemExit('missing corpus dependencies')
-          text = text.replace(old, new, 1)
+          text = replace(text,
+              '  const acceptedSummaries: { pageId: string; route: string; title: string; canonicalQuestion: string }[] = [];\n  for (const batch of input.prepared.siteGenerationPlan.batches) {',
+              '  const acceptedSummaries: { pageId: string; route: string; title: string; canonicalQuestion: string }[] = [];\n  const sourceExcerptHash = sha256(JSON.stringify([...input.sourceExcerpts].sort((left, right) => left.excerptId.localeCompare(right.excerptId))));\n  for (const batch of input.prepared.siteGenerationPlan.batches) {',
+              'source excerpt hash')
+          text = replace(text,
+              '      design: input.design.authorityHash,\n      provider: sha256(input.provider.id),',
+              '      design: input.design.authorityHash,\n      provider: sha256(input.provider.id),\n      sources: sourceExcerptHash,\n      priorAcceptedBatches: sha256(JSON.stringify(outputs.map((item) => [item.batchId, sha256(JSON.stringify(item))]))),',
+              'stage-two dependencies')
+          text = replace(text,
+              '    plan: input.prepared.siteGenerationPlan.planHash,\n    design: input.design.authorityHash,\n    drafts: sha256(JSON.stringify(transaction.draftHashes)),',
+              '    project: input.prepared.project.projectHash,\n    ontology: input.prepared.ontology.ontologyHash,\n    plan: input.prepared.siteGenerationPlan.planHash,\n    design: input.design.authorityHash,\n    baseUrl: sha256(input.baseUrl),\n    drafts: sha256(JSON.stringify(transaction.draftHashes)),',
+              'transaction dependencies')
+          text = replace(text,
+              '  }, corpus.validationHash, { transaction: transaction.transactionHash, embedding: sha256(input.embeddingBackend.id) }, input.generatedAt));',
+              '  }, sha256(JSON.stringify({ validationHash: corpus.validationHash, reportHash: corpus.validation.reportHash, pageCount: corpus.pageCount })), { transaction: transaction.transactionHash, embedding: sha256(input.embeddingBackend.id), policy: sha256(JSON.stringify(input.corpusPolicy ?? null)) }, input.generatedAt));',
+              'corpus checkpoint')
+          text = replace(text,
+              '    if (proposalHash !== existing.payloadHash) throw new Error("stage-one checkpoint payload hash mismatch");',
+              '    if (sha256(JSON.stringify(existing.payload)) !== existing.payloadHash) throw new Error("stage-one checkpoint payload hash mismatch");',
+              'stage-one resume hash')
+          text = replace(text,
+              '  const checkpoint = createCheckpoint(input.runId, "stage-1-ontology", result.value, proposalHash, dependencyHashes, input.generatedAt);',
+              '  const checkpoint = createCheckpoint(input.runId, "stage-1-ontology", result.value, sha256(JSON.stringify(result.value)), dependencyHashes, input.generatedAt);',
+              'stage-one checkpoint hash')
+          text = replace(text,
+              '  }, transaction.transactionHash, transactionDependencies, input.generatedAt));',
+              '  }, sha256(JSON.stringify({ transactionHash: transaction.transactionHash, buildHash: transaction.site.buildHash, renderedSiteHash: transaction.rendered.siteHash })), transactionDependencies, input.generatedAt));',
+              'transaction checkpoint hash')
+          text = replace(text,
+              '  if (sha256(JSON.stringify(checkpoint.payload)) !== checkpoint.payloadHash && checkpoint.stage !== "stage-1-ontology") throw new Error(`checkpoint ${checkpoint.key} payload hash mismatch`);',
+              '  if (sha256(JSON.stringify(checkpoint.payload)) !== checkpoint.payloadHash) throw new Error(`checkpoint ${checkpoint.key} payload hash mismatch`);',
+              'checkpoint invariant')
           orchestrator.write_text(text)
 
           validator = Path('reference/src/corpus-validation-production.ts')
           text = validator.read_text()
-          old = '  const index = buildSparseLexicalIndex(documents);\n  const candidateKeys = boundedLexicalCandidates(index, policy);'
-          new = '  const index = buildSparseLexicalIndex(documents);\n  const candidateKeys = boundedLexicalCandidates(index, policy);\n  addExactDuplicateCandidates(documents, candidateKeys);'
-          if old not in text: raise SystemExit('missing validator insertion point')
-          text = text.replace(old, new, 1)
+          text = replace(text,
+              '  const index = buildSparseLexicalIndex(documents);\n  const candidateKeys = boundedLexicalCandidates(index, policy);',
+              '  const index = buildSparseLexicalIndex(documents);\n  const candidateKeys = boundedLexicalCandidates(index, policy);\n  addExactDuplicateCandidates(documents, candidateKeys);',
+              'exact duplicate call')
           marker = 'function boundedLexicalCandidates(index: ReturnType<typeof buildSparseLexicalIndex>, policy: ProductionCorpusValidationPolicy): Set<string> {'
-          addition = '''function addExactDuplicateCandidates(documents: readonly { id: string; text: string }[], candidates: Set<string>): void {
+          if 'function addExactDuplicateCandidates(' not in text:
+              addition = '''function addExactDuplicateCandidates(documents: readonly { id: string; text: string }[], candidates: Set<string>): void {
   const groups = new Map<string, string[]>();
   for (const document of documents) {
     const hash = sha256(document.text.normalize("NFKC").replace(/\\s+/g, " ").trim().toLowerCase());
@@ -62,12 +86,12 @@ jobs:
 }
 
 '''
-          if marker not in text: raise SystemExit('missing validator function marker')
-          text = text.replace(marker, addition + marker, 1)
+              if marker not in text: raise SystemExit('missing validator function marker')
+              text = text.replace(marker, addition + marker, 1)
           validator.write_text(text)
           PY
           rm .github/workflows/agent-production-dependency-patch.yml
-      - name: Commit dependency patch
+      - name: Commit production hardening
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
