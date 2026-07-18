@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active  
-updated_at: 2026-07-18T22:15:00-04:00
+updated_at: 2026-07-18T23:00:00-04:00
 
 ## State
 
@@ -9,142 +9,111 @@ branch: agent/glm-blackwell-vertical-slice
 pr: 3  
 draft: true  
 merged: false  
-maturity: research prototype; useful framework and durable agent pipeline unproven
+maturity: working compiler prototype; useful external framework unproven
 
-## Target boundary
+## Active boundary
 
 ```text
-Hyper Content (optional producer) -> Hyper Site
-external agent control plane -> public package tools and artifacts
+Hyper Content (optional later) -> portable SiteSource -> Hyper Site -> static output
 Hyper Site -X-> Hyper Content
-package cores -X-> orchestration runtime internals
 ```
+
+Agent runtimes, task surfaces, remote effects, scale programs and low-level acceleration are not active product milestones.
 
 ## Physical truth
 
 - Most canonical implementation still resides under `reference/src`.
-- `hyper-site/index.mjs` delegates current compiler behavior to `reference/dist/framework-core.js`.
+- `hyper-site/index.mjs` delegates compiler behavior to `reference/dist/framework-core.js`.
+- `hyper-site/package.json` is private and has no package-owned compiler build.
 - `hyper-content/src/content-program-adapter.ts` is the first physically extracted stable content adapter.
-- Physical package extraction remains incomplete.
-- `reference/` is still transitional runtime authority, not yet only a consumer.
+- `reference/` remains transitional runtime authority.
 
 ## Verified current capability
 
-The current compiler can validate `SiteSource`, enforce reference and evidence constraints, construct `PageIR`, emit semantic HTML, metadata, JSON-LD, sitemap and instruction projections, generate a reverse dependency index, and compute deterministic page/build hashes.
+The compiler validates `SiteSource`, enforces references and evidence thresholds, constructs `PageIR`, emits semantic HTML, metadata, JSON-LD, sitemap and instruction Markdown, generates a reverse dependency index, and computes deterministic page/build hashes.
 
-Portable external runners exercise this behavior against generated unique fixtures. A pass proves behavior for the exact commit, machine and fixture only.
+Portable runners verify this behavior for exact commits and fixtures only. They do not establish package ownership or framework usefulness.
 
-## Depth-first audit verdict
+## Reality reset
 
-The repository does not yet meet the floor of a useful ordinary framework or a durable agent-first pipeline.
-
-Framework gaps:
-
-- no package-owned compiler source;
-- no clean packed-package consumers;
-- no create/dev/build/preview/inspect/publish workflow;
-- no accepted five-page site against an ordinary-framework control;
-- no proven complete incremental maintenance model.
-
-Agent-pipeline gaps:
-
-- no durable external orchestrator;
-- no checkpoint/restart proof;
-- no separation of replay-safe workflow logic from model calls and effects;
-- no approval interrupt proof;
-- no idempotent publication effect;
-- no end-to-end trace correlation or commit-time authorization.
-
-## Current architecture
-
-Hyper Site is the deterministic static framework. It must work without Hyper Content, an LLM, an agent runtime or a GPU.
-
-Hyper Content is an optional evidence/content producer that emits portable Hyper Site input.
-
-An external agent control plane owns durable state, retries, cancellation, human approval, policy, credentials, connectors, effects, receipts and telemetry. Use an established runtime category through adapters rather than embedding a custom runtime in package cores.
-
-## Low-level runtime disposition
-
-Zig, WebAssembly, CBOR and MessagePack are implementation candidates only. They do not redefine the product boundary.
-
-Accepted state:
+The useful product bar is now:
 
 ```text
-semantic source/interchange: typed SiteSource and deterministic JSON
-semantic hashing control: one specified canonical JSON profile
-optional derived binary cache/IPC: deterministic CBOR after validation
-MessagePack: benchmark control, not integrity authority without a canonical profile
-LLM prompts: compact text or provider-native structured output
-pure kernels: TypeScript oracle plus optional Zig/native/Wasm challenger
-orchestration, policy and effects: external runtime only
+install packed package
+-> create starter
+-> dev
+-> build five distinct pages
+-> preview built output
+-> inspect routes, links, metadata and dependencies
+-> publish locally
 ```
 
-Binary byte reduction is not evidence of lower LLM token cost. Raw binary commonly requires base64, hexadecimal or decoding before use by a model. Measure the actual provider transport and tokenizer.
-
-Zig/Wasm may be considered only for profiled pure operations with bounded input/output and no authority. Candidate areas are canonical encoding preparation, deterministic CBOR, large dependency-set comparison, sparse numeric work, vector packing after product validation, and sandboxed pure transforms.
-
-Do not place HTML semantics, source approval, agent planning, checkpoints, authorization, credentials, publication or receipts inside native or Wasm kernels.
-
-Every challenger must prove semantic parity and include encode/copy/lower, initialization, execution, decode/copy/lift, host validation, packaging, cold-start and fallback costs. The default promotion threshold is at least 1.25x end-to-end speedup, at least 30% peak-memory reduction without material regression, or a required portable sandbox capability.
-
-The supplied ORCHESTRATOR v6 guide is abstract inspiration, not an implemented runtime. Preserve bounded allocation, schemas, checkpoints, evidence binding, circuit breakers and completion gates. Replace positional vectors with named versioned durable records; local checkpoint files with real durable state for production; regex-only rejection with AST/type/policy/behavior checks; and one opaque error scalar with rolling-window metrics and sample counts.
+The direct controls are typed JSON plus templates and Astro using the same brief and inputs.
 
 ## Execution order
 
 ```text
-R0 truth reconciliation
--> R1 physical extraction
--> R2 ordinary framework floor
--> R3 five-page usefulness comparison
--> R4 maintenance correctness and value
--> R5 durable agent wrapper
--> R6 approved idempotent publication
+U1 package ownership and isolated consumption
+-> U2 ordinary CLI and starter
+-> U3 five-page browser-accepted proof
+-> U4 maintenance comparison and advance/narrow/stop
+-> U5 optional minimal Hyper Content adapter
 ```
 
-R0 documentation reconciliation is substantially complete. R1 remains the only valid implementation work. Optional low-level experiments may not delay R1-R4.
+Only U1 is unblocked.
 
-## Incremental correctness rule
+## U1 scope
 
-The dependency index is a hypothesis, not proof of completeness. Every maintenance test must freeze an expected affected set and measure both:
+- classify every `reference/src` file by one owner and role;
+- freeze positive and negative compiler fixtures;
+- move the compiler/renderer cluster into `hyper-site/src` without redesign;
+- build `hyper-site/dist` from package-owned source;
+- switch exports away from `reference/dist`;
+- make `reference/` consume Hyper Site;
+- prove two isolated `npm pack` consumers;
+- produce positive and negative parity evidence.
 
-- required artifacts that failed to change;
-- unexpected artifacts that changed.
+## U2-U4 proof
+
+U2 requires create/dev/build/preview/inspect/local-publish with Node 20+ and no Hyper Content, model, GPU, database or external service.
+
+U3 requires one real five-page site, browser-visible assertions, route/link/metadata validation, automated accessibility scanning and manual review against direct controls.
+
+U4 freezes shared-fact, page-fact, design, retirement and invalid-change scenarios. Pass correctness requires zero missed required changes, no accepted invalid change and no accepted partial output after failure. The result must be `advance`, `narrow` or `stop`.
+
+## Incremental correctness
+
+The dependency index is a hypothesis. Every maintenance test freezes an expected affected set and measures both under-invalidation and over-invalidation.
 
 ## Deferred work
 
-Until R4 passes, do not place the following on the critical path:
+Until U4 records `advance`:
 
-- governed task-surface implementation;
-- SDRT or custom graph query language;
-- GNN internal linking;
-- GPU promotion;
-- browser Wasm promotion;
-- mandatory Zig/native runtime;
+- model-backed generation;
+- agent orchestration and task surfaces;
+- remote publication;
+- SDRT/custom graph languages;
+- GNN/GPU/Zig/Wasm promotion;
 - binary LLM prompting;
-- runtime Zig SSR;
-- 10K publication programs;
-- autonomous publication;
-- enterprise-readiness claims.
+- 10K publication;
+- enterprise claims.
 
-## Current authorities
+## Active authorities
 
 - `README.md`
-- `identity.md`
 - `AGENTS.md`
 - `CODEGRAPH.md`
-- `docs/architecture/CODEGRAPH-LOW-LEVEL.md`
 - `docs/README.md`
 - `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
 - `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
 - `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
 - `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
 - `docs/validation/46-useful-framework-and-agent-first-gates.md`
-- `docs/research/47-zig-wasm-binary-boundary-audit.md`
-- `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
-- `docs/validation/49-low-level-kernel-promotion-gates.md`
+
+Low-level documents 47-49 remain subordinate optional research.
 
 ## Nonclaims
 
-No complete extraction, normal framework workflow, five-page advantage, complete incremental correctness, maintenance value, durable agent runtime, authorized idempotent effect, binary token savings, low-level performance advantage, perfect SEO, perfect Lighthouse score, production readiness or business outcome is established.
+No complete package extraction, normal framework workflow, five-page acceptance, maintenance advantage, complete incremental correctness, content-product value, agent runtime, scale advantage, SEO outcome, production readiness or business result is established.
 
 PR #3 stays draft.
