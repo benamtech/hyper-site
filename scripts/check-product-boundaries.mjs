@@ -6,7 +6,18 @@ const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const readText = (path) => readFile(resolve(root, path), "utf8");
 const readJson = async (path) => JSON.parse(await readText(path));
 
-const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex, frameworkCore, siteManifest, frameworkAdapter, contentProgramAdapter] = await Promise.all([
+const [
+  rootPackage,
+  sitePackage,
+  contentPackage,
+  siteIndex,
+  contentIndex,
+  frameworkCore,
+  siteManifest,
+  frameworkAdapter,
+  referenceContentProgramAdapter,
+  ownedContentProgramAdapter,
+] = await Promise.all([
   readJson("package.json"),
   readJson("hyper-site/package.json"),
   readJson("hyper-content/package.json"),
@@ -16,6 +27,7 @@ const [rootPackage, sitePackage, contentPackage, siteIndex, contentIndex, framew
   readText("reference/src/site-manifest.ts"),
   readText("reference/src/framework.ts"),
   readText("reference/src/content-program-adapter.ts"),
+  readText("hyper-content/src/content-program-adapter.ts"),
 ]);
 
 const errors = [];
@@ -52,9 +64,20 @@ for (const token of ["vector_space", "agent_harness", "coverage_policy", "profil
 }
 if (!frameworkAdapter.includes('from "./framework-core.js"')) errors.push("legacy framework adapter must delegate to framework-core");
 if (!frameworkAdapter.includes("compileFrameworkCore")) errors.push("legacy framework adapter does not call the neutral compiler");
-if (!contentProgramAdapter.includes('from "./framework-core.js"')) errors.push("content program adapter must target the neutral Hyper Site contract");
-if (!contentProgramAdapter.includes("adaptContentProgramSiteSource")) errors.push("content program adapter must expose an explicit SiteSource adaptation");
-if (contentProgramAdapter.includes('from "../hyper-content')) errors.push("content program adapter must not depend on the package that owns it");
+
+if (!ownedContentProgramAdapter.includes("adaptContentProgramSiteSource")) errors.push("Hyper Content must own the SiteSource adapter implementation");
+for (const forbidden of ["../reference", "../../reference", "compileFrameworkManifest", "compileHyperSite", "packSite"]) {
+  if (ownedContentProgramAdapter.includes(forbidden)) errors.push(`owned Hyper Content adapter contains forbidden compatibility dependency: ${forbidden}`);
+}
+if (!referenceContentProgramAdapter.includes("../../hyper-content/dist/content-program-adapter.js")) {
+  errors.push("reference compatibility wrapper must consume the built Hyper Content adapter");
+}
+if (!referenceContentProgramAdapter.includes("compileContentProgramManifest")) {
+  errors.push("reference compatibility wrapper must retain the transitional legacy compiler");
+}
+if (!contentIndex.includes('./dist/content-program-adapter.js')) {
+  errors.push("hyper-content public facade must export its owned adapter build");
+}
 
 const requiredContentSurface = [
   "hyper-site", "compileContentSite", "compileContentProgramManifest", "content-program-adapter",
@@ -72,7 +95,8 @@ if (errors.length > 0) {
     dependencyDirection: "hyper-content -> hyper-site",
     neutralFrameworkSource: "reference/src/framework-core.ts",
     neutralManifestSource: "reference/src/site-manifest.ts",
-    contentProgramAdapter: "reference/src/content-program-adapter.ts",
+    contentProgramAdapterAuthority: "hyper-content/src/content-program-adapter.ts",
+    contentProgramCompatibilityWrapper: "reference/src/content-program-adapter.ts",
     siteSurfaceForbiddenTokens: forbiddenSiteSurface.length,
     contentSurfaceRequiredTokens: requiredContentSurface.length,
   }));
