@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active
-updated_at: 2026-07-18T15:30:00-04:00
+updated_at: 2026-07-18T18:45:00-04:00
 
 ## State
 
@@ -26,47 +26,50 @@ hyper-site -X-> hyper-content
 
 ## Verified execution state
 
-A one-page fixture was executed through the current public Hyper Site entrypoint and therefore through the transitional `reference/dist/framework-core.js` implementation.
+A one-page fixture executed through the current public Hyper Site entrypoint and therefore through the transitional `reference/dist/framework-core.js` implementation.
 
-Verified outputs and behavior:
+Verified: SiteSource validation, reference resolution, evidence-threshold rejection, PageIR, semantic HTML, metadata, instruction Markdown, sitemap, dependency index, page hash, and build hash.
 
-- SiteSource structural validation;
-- reference resolution across evidence, claims, information objects, modules, and pages;
-- evidence-threshold rejection;
-- PageIR construction;
-- semantic HTML;
-- metadata, canonical URL, robots, and JSON-LD;
-- Markdown instruction projection;
-- sitemap;
-- reverse dependency index;
-- page and build SHA-256 hashes.
+The negative fixture was rejected with `claim claim-practical exceeds evidence ev-business`.
 
-The negative fixture was rejected with `claim claim-practical exceeds evidence ev-business` after its evidence level was lowered below the claim requirement.
+This proves only that the current compiler works for that fixture. It does not prove independent package installation, tarball consumption, full extraction, five-page usefulness, maintenance advantage, or production readiness.
 
-This is evidence that the current compiler works for that fixture. It is not evidence of independent package installation, tarball consumption, full extraction, five-page usefulness, or production readiness.
+## Four-part program
 
-## Demonstration rule
+Current authority: `docs/planning/38-four-part-product-workstream-map.md`.
 
-Never claim that a copied compatibility harness used the framework. Every future framework demonstration must record the exact public import, reached implementation path, input, outputs, independently verified hash or artifact, rejection test, and environment limitations.
+```text
+W1 physical package extraction
+-> W2 standalone five-page static proof
+-> W3 measured maintenance proof
+-> W4 optional local task proof
+```
 
-## Current program
+The repository is in W1.
 
-1. physical source extraction
-2. clean package consumer proof
-3. repository-owned verified compiler fixture
-4. standalone five-page static proof
-5. measured maintenance
-6. optional local side-effect-free task
+Immediate next slice:
+
+```text
+reference/src ownership inventory
+-> neutral compiler-cluster extraction into hyper-site/src
+-> public entrypoint switch
+-> reference consumer conversion
+-> verified one-page byte/hash parity
+```
+
+Do not begin W2 until this slice passes. Do not begin W4 until W3 demonstrates that the static product remains justified.
 
 ## Rules
 
-- one canonical renderer and publisher during migration
+- one canonical compiler, renderer, and publisher during migration
+- every `reference/src` file receives exactly one owner and role
+- stable and experimental exports remain separate
+- future framework demonstrations record the public entrypoint, reached implementation, immutable input, artifacts, independent verification, rejection test, and limitations
 - every advanced method has a direct simpler control
-- model output remains proposal state
 - every page needs independent existence justification
 - new dependencies require a demonstrated fixture need and measured benefit
-- current public boundary delegation to `reference/dist` must remain explicit
-- one-page compiler verification is not the five-page product gate
+- current public delegation to `reference/dist` remains explicit
+- one-page verification is not completion of W1 or W2
 - PR #3 stays draft
 
 ## Authorities
@@ -78,9 +81,10 @@ Never claim that a copied compatibility harness used the framework. Every future
 - planning/meta-plan-v3.steps.json
 - docs/research/34-intellectual-competitive-and-use-case-landscape.md
 - docs/architecture/35-reality-grounded-product-and-integration-boundary.md
-- docs/planning/36-next-three-workstreams-reality-grounded-plan.md
+- docs/planning/38-four-part-product-workstream-map.md
+- docs/planning/36-next-three-workstreams-reality-grounded-plan.md (superseded for execution ordering)
 - docs/validation/37-reality-grounded-product-validation-matrix.md
 
 ## Nonclaims
 
-No complete extraction, independent package proof, five-page framework advantage, accepted real cohort, task advantage, production readiness, or business outcome is established.
+No complete extraction, independent package proof, five-page framework advantage, maintenance advantage, accepted real cohort, task advantage, production readiness, or business outcome is established.
