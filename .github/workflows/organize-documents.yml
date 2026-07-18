@@ -1,0 +1,62 @@
+name: Organize Repository Documents
+
+on:
+  push:
+    branches: ["agent/glm-blackwell-vertical-slice"]
+    paths:
+      - ".github/workflows/organize-documents.yml"
+      - "scripts/organize-root-docs.mjs"
+      - "scripts/normalize-doc-paths.mjs"
+      - "scripts/ensure-doc-index-links.mjs"
+      - "scripts/check-doc-system.mjs"
+      - "docs/test/doc-system.test.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: organize-repository-documents
+  cancel-in-progress: false
+
+jobs:
+  organize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/glm-blackwell-vertical-slice
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate migration scripts
+        run: |
+          node --check scripts/organize-root-docs.mjs
+          node --check scripts/normalize-doc-paths.mjs
+          node --check scripts/ensure-doc-index-links.mjs
+          node --check scripts/check-doc-system.mjs
+      - name: Organize and reconcile documents
+        run: |
+          cp scripts/check-doc-system.mjs /tmp/check-doc-system.mjs
+          node scripts/organize-root-docs.mjs
+          cp /tmp/check-doc-system.mjs scripts/check-doc-system.mjs
+          node scripts/normalize-doc-paths.mjs
+          node scripts/ensure-doc-index-links.mjs
+      - name: Validate documentation and executable plan
+        run: |
+          node scripts/check-doc-system.mjs
+          node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
+          node --test planning/test/meta-plan.test.mjs docs/test/doc-system.test.mjs
+          git diff --check
+      - name: Commit organized documentation
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No document migration changes remain."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Organize documentation and expand task-surface program"
+          git push origin HEAD:agent/glm-blackwell-vertical-slice
