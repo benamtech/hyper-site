@@ -5,7 +5,14 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const ignoredDirectories = new Set([".git", "node_modules", "dist", "coverage", ".cache"]);
 const extensions = new Set([".md", ".json", ".mjs", ".ts", ".yml", ".yaml"]);
-const selfPath = resolve(root, "scripts/normalize-doc-paths.mjs");
+const protectedPaths = new Set([
+  "scripts/normalize-doc-paths.mjs",
+  "scripts/apply-doc-moves.mjs",
+  "scripts/check-declared-doc-moves.mjs",
+  "scripts/check-doc-system.mjs",
+  "docs/legacy-root-moves.json",
+  "docs/test/doc-system.test.mjs"
+]);
 
 // Keep the most specific prefixes first. The root-document migration rewrites legacy
 // basenames inside already-canonical paths, so the post-pass must collapse any repeated
@@ -34,7 +41,8 @@ async function walk(directory) {
 
 const changed = [];
 for (const path of await walk(root)) {
-  if (path === selfPath || !extensions.has(extname(path))) continue;
+  const relative = path.slice(root.length + 1);
+  if (protectedPaths.has(relative) || !extensions.has(extname(path))) continue;
   let text = await readFile(path, "utf8");
   const before = text;
   for (const prefix of prefixes) {
@@ -43,7 +51,7 @@ for (const path of await walk(root)) {
   }
   if (text !== before) {
     await writeFile(path, text);
-    changed.push(path.slice(root.length + 1));
+    changed.push(relative);
   }
 }
 
