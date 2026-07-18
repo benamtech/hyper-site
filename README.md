@@ -111,7 +111,7 @@ Authorities:
 - `docs/research/47-zig-wasm-binary-boundary-audit.md`
 - `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
 - `docs/validation/49-low-level-kernel-promotion-gates.md`
-- `CODEGRAPH-LOW-LEVEL.md`
+- `docs/architecture/CODEGRAPH-LOW-LEVEL.md`
 
 ## Current work order
 
@@ -177,7 +177,7 @@ node scripts/check-doc-system.mjs
 - low-level audit: `docs/research/47-zig-wasm-binary-boundary-audit.md`
 - low-level architecture: `docs/architecture/48-low-level-runtime-and-serialization-boundary.md`
 - low-level gates: `docs/validation/49-low-level-kernel-promotion-gates.md`
-- code graphs: `CODEGRAPH.md`, `CODEGRAPH-LOW-LEVEL.md`
+- code graphs: `CODEGRAPH.md`, `docs/architecture/CODEGRAPH-LOW-LEVEL.md`
 - operating contract: `AGENTS.md`
 - durable state: `memory/MEMORY.md`
 
