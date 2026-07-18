@@ -21,19 +21,67 @@
   ],
   "documents": [
     {
-      "id": "docs-system",
-      "path": "docs/README.md",
-      "kind": "bootstrap",
-      "status": "active",
-      "authority": "documentation lifecycle, read order, freshness and write protocol"
+      "id": "legacy-architecture-01-system-architecture",
+      "path": "docs/architecture/01-system-architecture.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 01-system-architecture.md"
     },
     {
-      "id": "research-useful-framework",
-      "path": "docs/research/43-useful-framework-and-agent-first-pipeline-audit.md",
-      "kind": "research",
-      "status": "active",
-      "authority": "current external-package, ordinary-framework and product-usefulness audit",
-      "sources": "docs/research/sources/2026-07-18-framework-agent-architecture.sources.json"
+      "id": "legacy-architecture-11-hyper-distributed-content-generative-ui-and-design-collaboration",
+      "path": "docs/architecture/11-hyper-distributed-content-generative-ui-and-design-collaboration.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 11-hyper-distributed-content-generative-ui-and-design-collaboration.md"
+    },
+    {
+      "id": "legacy-architecture-12-compiler-design-and-autonomy-validation-addendum",
+      "path": "docs/architecture/12-compiler-design-and-autonomy-validation-addendum.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 12-compiler-design-and-autonomy-validation-addendum.md"
+    },
+    {
+      "id": "legacy-architecture-16-unified-hypervector-manifest-agent-harness",
+      "path": "docs/architecture/16-unified-hypervector-manifest-agent-harness.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 16-unified-hypervector-manifest-agent-harness.md"
+    },
+    {
+      "id": "legacy-architecture-17-agentic-ui-metaprogramming-standard",
+      "path": "docs/architecture/17-agentic-ui-metaprogramming-standard.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 17-agentic-ui-metaprogramming-standard.md"
+    },
+    {
+      "id": "legacy-architecture-18-vector-node-path-web-framework-model",
+      "path": "docs/architecture/18-vector-node-path-web-framework-model.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 18-vector-node-path-web-framework-model.md"
+    },
+    {
+      "id": "legacy-architecture-20-agent-operated-vector-site-generation-and-wasm",
+      "path": "docs/architecture/20-agent-operated-vector-site-generation-and-wasm.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 20-agent-operated-vector-site-generation-and-wasm.md"
+    },
+    {
+      "id": "legacy-architecture-21-vector-to-generation-job-compiler",
+      "path": "docs/architecture/21-vector-to-generation-job-compiler.md",
+      "kind": "architecture",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 21-vector-to-generation-job-compiler.md"
+    },
+    {
+      "id": "architecture-task-surfaces",
+      "path": "docs/architecture/32-governed-task-surface-architecture.md",
+      "kind": "architecture",
+      "status": "deferred",
+      "authority": "historical target architecture; no active product authority"
     },
     {
       "id": "architecture-useful-framework",
@@ -44,12 +92,203 @@
       "input": "research-useful-framework"
     },
     {
+      "id": "architecture-low-level",
+      "path": "docs/architecture/48-low-level-runtime-and-serialization-boundary.md",
+      "kind": "architecture",
+      "status": "deferred-optional",
+      "authority": "optional pure-kernel and derived-serialization boundary",
+      "input": "research-low-level"
+    },
+    {
+      "id": "codegraph-low-level",
+      "path": "docs/architecture/CODEGRAPH-LOW-LEVEL.md",
+      "kind": "architecture",
+      "status": "deferred-optional",
+      "authority": "supplemental low-level graph; subordinate to root CODEGRAPH"
+    },
+    {
+      "id": "legacy-archive-handoff-landing-pages",
+      "path": "docs/archive/HANDOFF-LANDING-PAGES.md",
+      "kind": "bootstrap",
+      "status": "archived",
+      "authority": "historical repository document moved from HANDOFF-LANDING-PAGES.md"
+    },
+    {
+      "id": "intake-task-surfaces",
+      "path": "docs/intake/2026-07-18-next-generation-task-surfaces.md",
+      "kind": "intake",
+      "status": "preserved-deferred",
+      "authority": "supplied task-surface thesis; not active implementation work"
+    },
+    {
+      "id": "legacy-intake-research-notes-2026-07-17",
+      "path": "docs/intake/RESEARCH-NOTES-2026-07-17.md",
+      "kind": "intake",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from RESEARCH-NOTES-2026-07-17.md"
+    },
+    {
+      "id": "legacy-intake-research-notes-current",
+      "path": "docs/intake/RESEARCH-NOTES-CURRENT.md",
+      "kind": "intake",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from RESEARCH-NOTES-CURRENT.md"
+    },
+    {
+      "id": "legacy-planning-08-implementation-plan",
+      "path": "docs/planning/08-implementation-plan.md",
+      "kind": "planning",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 08-implementation-plan.md"
+    },
+    {
+      "id": "legacy-planning-14-phase-2-experience-materialization-engine-plan",
+      "path": "docs/planning/14-phase-2-experience-materialization-engine-plan.md",
+      "kind": "planning",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 14-phase-2-experience-materialization-engine-plan.md"
+    },
+    {
+      "id": "legacy-planning-15-hyper-targeted-search-distribution-workstreams",
+      "path": "docs/planning/15-hyper-targeted-search-distribution-workstreams.md",
+      "kind": "planning",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 15-hyper-targeted-search-distribution-workstreams.md"
+    },
+    {
+      "id": "legacy-planning-23-groundwork-orchestration-implementation",
+      "path": "docs/planning/23-groundwork-orchestration-implementation.md",
+      "kind": "planning",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 23-groundwork-orchestration-implementation.md"
+    },
+    {
       "id": "planning-useful-framework",
       "path": "docs/planning/45-depth-first-framework-and-agent-recovery-plan.md",
       "kind": "planning",
       "status": "active",
       "authority": "current U1-U5 execution sequence",
       "input": "architecture-useful-framework"
+    },
+    {
+      "id": "docs-system",
+      "path": "docs/README.md",
+      "kind": "bootstrap",
+      "status": "active",
+      "authority": "documentation lifecycle, read order, freshness and write protocol"
+    },
+    {
+      "id": "legacy-research-02-shape-model-and-hrr-core",
+      "path": "docs/research/02-shape-model-and-hrr-core.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 02-shape-model-and-hrr-core.md"
+    },
+    {
+      "id": "legacy-research-03-agentic-seo-system",
+      "path": "docs/research/03-agentic-seo-system.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 03-agentic-seo-system.md"
+    },
+    {
+      "id": "legacy-research-09-phase-1-synthesis-competitive-and-systems-positioning",
+      "path": "docs/research/09-phase-1-synthesis-competitive-and-systems-positioning.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 09-phase-1-synthesis-competitive-and-systems-positioning.md"
+    },
+    {
+      "id": "legacy-research-10-software-category-and-commercial-use-cases",
+      "path": "docs/research/10-software-category-and-commercial-use-cases.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 10-software-category-and-commercial-use-cases.md"
+    },
+    {
+      "id": "legacy-research-13-academic-and-normative-basis-for-validation-vectors",
+      "path": "docs/research/13-academic-and-normative-basis-for-validation-vectors.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 13-academic-and-normative-basis-for-validation-vectors.md"
+    },
+    {
+      "id": "legacy-research-19-vector-native-corrections-and-csi-validation",
+      "path": "docs/research/19-vector-native-corrections-and-csi-validation.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 19-vector-native-corrections-and-csi-validation.md"
+    },
+    {
+      "id": "research-task-surfaces",
+      "path": "docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md",
+      "kind": "research",
+      "status": "deferred",
+      "authority": "historical protocol research; blocked behind U4 advance"
+    },
+    {
+      "id": "research-useful-framework",
+      "path": "docs/research/43-useful-framework-and-agent-first-pipeline-audit.md",
+      "kind": "research",
+      "status": "active",
+      "authority": "current external-package, ordinary-framework and product-usefulness audit",
+      "sources": "docs/research/sources/2026-07-18-framework-agent-architecture.sources.json"
+    },
+    {
+      "id": "research-low-level",
+      "path": "docs/research/47-zig-wasm-binary-boundary-audit.md",
+      "kind": "research",
+      "status": "deferred-optional",
+      "authority": "optional low-level implementation research; cannot reorder U1-U5"
+    },
+    {
+      "id": "legacy-research-experiments-07-v0-1-request-mirror-lab",
+      "path": "docs/research/experiments/07-v0.1-request-mirror-lab.md",
+      "kind": "research",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 07-v0.1-request-mirror-lab.md"
+    },
+    {
+      "id": "legacy-validation-00-scientific-and-feasibility-validation",
+      "path": "docs/validation/00-scientific-and-feasibility-validation.md",
+      "kind": "validation-contract",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 00-scientific-and-feasibility-validation.md"
+    },
+    {
+      "id": "legacy-validation-04-feature-validation-vectors",
+      "path": "docs/validation/04-feature-validation-vectors.md",
+      "kind": "validation-contract",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 04-feature-validation-vectors.md"
+    },
+    {
+      "id": "legacy-validation-05-pass-fail-vectors",
+      "path": "docs/validation/05-pass-fail-vectors.md",
+      "kind": "validation-contract",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 05-pass-fail-vectors.md"
+    },
+    {
+      "id": "legacy-validation-06-experimentation-privacy-operations",
+      "path": "docs/validation/06-experimentation-privacy-operations.md",
+      "kind": "validation-contract",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 06-experimentation-privacy-operations.md"
+    },
+    {
+      "id": "legacy-validation-22-agent-operated-framework-workflow-validation-matrix",
+      "path": "docs/validation/22-agent-operated-framework-workflow-validation-matrix.md",
+      "kind": "validation-contract",
+      "status": "historical-foundation",
+      "authority": "historical repository document moved from 22-agent-operated-framework-workflow-validation-matrix.md"
+    },
+    {
+      "id": "validation-task-surfaces",
+      "path": "docs/validation/33-task-surface-validation-matrix.md",
+      "kind": "validation-contract",
+      "status": "deferred",
+      "authority": "historical prospective gates; not current execution"
     },
     {
       "id": "validation-useful-framework",
@@ -60,62 +299,12 @@
       "input": "planning-useful-framework"
     },
     {
-      "id": "research-low-level",
-      "path": "docs/research/47-zig-wasm-binary-boundary-audit.md",
-      "kind": "research",
-      "status": "deferred-optional",
-      "authority": "optional low-level implementation research; cannot reorder U1-U5"
-    },
-    {
-      "id": "architecture-low-level",
-      "path": "docs/architecture/48-low-level-runtime-and-serialization-boundary.md",
-      "kind": "architecture",
-      "status": "deferred-optional",
-      "authority": "optional pure-kernel and derived-serialization boundary",
-      "input": "research-low-level"
-    },
-    {
       "id": "validation-low-level",
       "path": "docs/validation/49-low-level-kernel-promotion-gates.md",
       "kind": "validation-contract",
       "status": "deferred-optional",
       "authority": "optional low-level challenger promotion gates",
       "input": "architecture-low-level"
-    },
-    {
-      "id": "codegraph-low-level",
-      "path": "docs/architecture/CODEGRAPH-LOW-LEVEL.md",
-      "kind": "architecture",
-      "status": "deferred-optional",
-      "authority": "supplemental low-level graph; subordinate to root CODEGRAPH"
-    },
-    {
-      "id": "intake-task-surfaces",
-      "path": "docs/intake/2026-07-18-next-generation-task-surfaces.md",
-      "kind": "intake",
-      "status": "preserved-deferred",
-      "authority": "supplied task-surface thesis; not active implementation work"
-    },
-    {
-      "id": "research-task-surfaces",
-      "path": "docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md",
-      "kind": "research",
-      "status": "deferred",
-      "authority": "historical protocol research; blocked behind U4 advance"
-    },
-    {
-      "id": "architecture-task-surfaces",
-      "path": "docs/architecture/32-governed-task-surface-architecture.md",
-      "kind": "architecture",
-      "status": "deferred",
-      "authority": "historical target architecture; no active product authority"
-    },
-    {
-      "id": "validation-task-surfaces",
-      "path": "docs/validation/33-task-surface-validation-matrix.md",
-      "kind": "validation-contract",
-      "status": "deferred",
-      "authority": "historical prospective gates; not current execution"
     },
     {
       "id": "memory-index",
