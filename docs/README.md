@@ -2,13 +2,11 @@
 
 Status: active documentation authority  
 Updated: 2026-07-18  
-Scope: repository documentation, research intake, architecture decisions, plans, validation, and durable handoffs
+Scope: repository documentation, research, architecture, planning, validation and durable state
 
 ## Purpose
 
-The documentation system keeps research, decisions, executable plans, measured proof, and durable memory separate while preserving a deterministic read path for human and agent contributors.
-
-Documentation is a map of current authority. Source, tests, emitted artifacts, CI, field records, and the newest validated handoff remain proof.
+The documentation system separates proposals, external evidence, accepted decisions, executable plans, pass/fail contracts, measured proof and durable handoffs. Documentation maps authority; source, tests, emitted artifacts, CI and field records remain proof.
 
 ## Root allowlist
 
@@ -20,61 +18,104 @@ Only bootstrap documents remain at repository root:
 - `CONTRIBUTING.md`
 - `identity.md`
 
-New research, architecture, planning, intake, or validation documents must not be added at root.
+New research, architecture, planning or validation documents belong under `docs/`.
 
 ## Directory model
 
 ```text
 docs/
-  README.md                 documentation read path and lifecycle
-  catalog.json              machine-readable document registry
-  intake/                   raw proposals, user notes, unresolved claims
-  research/                 source-backed investigation and comparisons
+  README.md                 lifecycle and read/write protocol
+  catalog.json              machine-readable authority and supersession registry
+  intake/                   supplied notes and unresolved claims
+  research/                 source-backed investigation and dispositions
     sources/                machine-readable source registries
-  architecture/             accepted boundaries and target designs
-  planning/                 explanatory plan documents; machine plans stay in /planning
-  validation/               acceptance contracts and non-measured gate definitions
+    experiments/            bounded research fixtures
+  architecture/             accepted product and system decisions
+  planning/                 explanatory plans; executable JSON stays in /planning
+  validation/               prospective pass/fail contracts
+  archive/                  retained noncurrent material
 
-planning/                    executable JSON plans and plan tests
-validation/reports/          measured validation reports tied to exact commits
-memory/                      durable current index plus immutable handoffs
+planning/                    executable plans and plan tests
+validation/reports/          immutable measured reports tied to exact commits
+memory/                      current index and immutable handoffs
 ```
 
-## Stateful writing lifecycle
+## Self-reinforcing lifecycle
 
 ```text
 intake
--> source verification
--> research disposition
--> architecture decision
+-> external source verification
+-> critical research and alternatives
+-> architecture disposition
 -> executable plan mutation
--> implementation and TDD
+-> RED/GREEN/REFACTOR implementation
 -> measured validation report
 -> immutable memory handoff
--> MEMORY.md reconciliation
+-> MEMORY.md and catalog reconciliation
+-> next research or implementation gate
 ```
 
-Each stage has a different authority:
+A downstream contradiction must flow backward. Failed validation updates the plan and may reverse architecture. New research does not become architecture until explicitly accepted. Historical documents cannot silently override current authorities.
+
+## Authority by stage
 
 | Stage | May contain | Must not claim |
 |---|---|---|
 | intake | hypotheses, supplied notes, candidate formats | verified architecture or measured superiority |
-| research | primary sources, competing designs, falsification paths | implementation completion |
-| architecture | accepted boundaries, contracts, ownership | measured performance or field value |
-| planning | dependencies, tests, effects, gates, rollback | completed outcomes without evidence |
-| validation contract | required fixtures and pass/fail metrics | a passing result |
-| validation report | exact commit, commands, artifacts, measured results | unrun checks |
+| research | primary sources, competitors, complements, controls, falsification | implementation completion |
+| architecture | accepted boundaries, ownership, build/integrate decisions | measured performance or field value |
+| planning | dependencies, tests, effects, gates and rollback | completed outcomes without evidence |
+| validation contract | fixtures, controls, metrics and thresholds | a passing result |
+| validation report | exact commit, commands, artifacts and measured outcomes | unrun checks or broader claims |
 | memory handoff | durable state and next gate | replacement of source or CI authority |
+
+## Current authority chain
+
+### Product and package boundary
+
+- Research and split rationale: `docs/architecture/29-product-boundary-research-and-root-folder-split.md`
+- Current reality-grounded research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
+- Accepted integration boundary: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
+- Active three-workstream plan: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- Validation contract: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+- Executable program: `planning/meta-plan-v3.json`, `planning/meta-plan-v3.steps.json`
+
+### Governed task surfaces
+
+- Intake: `docs/intake/2026-07-18-next-generation-task-surfaces.md`
+- Research: `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
+- Architecture: `docs/architecture/32-governed-task-surface-architecture.md`
+- Validation: `docs/validation/33-task-surface-validation-matrix.md`
+- Sources: `docs/research/sources/2026-07-18-task-surfaces.sources.json`
+
+### Competitive and intellectual grounding
+
+- Research: `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
+- Sources: `docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json`
+- Architecture disposition: `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
+- Plan: `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
+- Validation: `docs/validation/37-reality-grounded-product-validation-matrix.md`
+
+## Current implementation truth
+
+- `hyper-content/src/content-program-adapter.ts` is the first physically owned Hyper Content implementation.
+- `reference/src/content-program-adapter.ts` is a temporary legacy manifest/parity wrapper.
+- Most canonical Hyper Site and Hyper Content implementation still resides under `reference/src` pending P1.4 and P1.5.
+- Folder names and facades are not proof of complete extraction.
+- PR #3 remains draft and unmerged.
 
 ## Mutation rules
 
-1. Current architecture, plan, index, and catalog documents are updated in place.
-2. Timestamped files under `memory/` are immutable after commit.
-3. Validation reports are immutable records for their named implementation head. Corrections use a new report.
-4. Raw intake remains preserved even when its claims are rejected or narrowed.
-5. Superseded documents remain cataloged with their replacement path.
-6. No document may silently promote model output, a protocol preview, synthetic scale, or a nominal specification into product proof.
-7. External sources are recorded in a machine-readable source registry with access date, source class, status, and the exact claim they support.
+1. Current architecture, plan, bootstrap and catalog documents are updated in place.
+2. Timestamped handoffs under `memory/` are immutable after commit.
+3. Validation reports are immutable for their named implementation head; corrections use a new report.
+4. Raw intake remains preserved even when rejected or narrowed.
+5. Superseded documents remain cataloged with replacements.
+6. Model output, preview protocols, synthetic scale and schema validity cannot be promoted into product proof.
+7. External sources require a registry entry with access date, source class, status and supported claims.
+8. Advanced methods require a named simple control and removal path.
+9. Enterprise comparisons must include governance and operating gaps, not only features.
+10. Every active plan must terminate in measurable validation and durable memory.
 
 ## Agent read order
 
@@ -87,44 +128,47 @@ Each stage has a different authority:
 7. `planning/meta-plan-v3.json`
 8. `planning/meta-plan-v3.steps.json`
 9. `memory/MEMORY.md`
-10. newest immutable handoff under `memory/`
-11. newest measured report under `validation/reports/`
-12. task-specific intake, research, architecture, and validation documents
+10. newest immutable handoff
+11. newest measured report
+12. task-specific research, architecture, plan and validation chain
 
 ## Agent write protocol
 
 Before writing:
 
-- identify the document lifecycle stage;
-- read the current catalog entry and replacement chain;
-- state whether the write is evidence, inference, proposal, or decision;
-- identify affected plan steps and downstream documents.
+- identify the lifecycle stage;
+- read the catalog and replacement chain;
+- state whether the material is evidence, inference, proposal or decision;
+- identify controls, alternatives, affected plan steps and downstream documents.
 
 After writing:
 
 - update `docs/catalog.json`;
 - run `node scripts/check-doc-system.mjs`;
-- update machine plans when dependencies or gates changed;
-- append a new immutable memory handoff for a coherent validated pass;
-- reconcile `memory/MEMORY.md`;
-- preserve the draft PR and maturity nonclaims.
+- update executable plans when dependencies or gates change;
+- run relevant source and package tests;
+- produce a measured report only for completed checks;
+- append an immutable handoff for a coherent validated pass;
+- reconcile `memory/MEMORY.md` and the draft PR body.
 
-## Current next-generation surface documents
+## Documentation freshness rules
 
-- Intake: `docs/intake/2026-07-18-next-generation-task-surfaces.md`
-- Research: `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
-- Architecture: `docs/architecture/32-governed-task-surface-architecture.md`
-- Validation: `docs/validation/33-task-surface-validation-matrix.md`
-- Sources: `docs/research/sources/2026-07-18-task-surfaces.sources.json`
+An active document is stale when it names a noncanonical implementation as current, cites an older CI head as current proof, conflicts with the executable plan, omits its downstream validation contract, or makes a claim invalidated by newer research.
 
-## Validation hooks
+Historical documents remain useful intellectual record. Their status in `docs/catalog.json`, not their confident language, determines authority.
 
-The permanent documentation gate must verify:
+## Permanent validation hooks
+
+The documentation gate verifies or should be extended to verify:
 
 - root Markdown allowlist;
 - catalog uniqueness and path existence;
 - no stale references to moved root documents;
-- required intake/research/architecture/validation relationships;
-- executable plan and durable-memory paths;
+- required research, architecture, planning and validation relationships;
+- executable plan and memory paths;
 - immutable handoff naming;
-- current bootstrap documents link to this index.
+- bootstrap links to this index;
+- active-source registry existence;
+- current implementation-path assertions;
+- explicit controls for advanced methods;
+- current PR maturity nonclaims.
