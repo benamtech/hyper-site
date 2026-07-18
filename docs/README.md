@@ -9,6 +9,8 @@ Documentation separates supplied ideas, external evidence, accepted architecture
 
 ## Current authority chain
 
+Core product path:
+
 ```text
 docs/research/43-useful-framework-and-agent-first-pipeline-audit.md
 -> docs/architecture/44-useful-framework-and-agent-first-target-architecture.md
@@ -18,7 +20,18 @@ docs/research/43-useful-framework-and-agent-first-pipeline-audit.md
 -> immutable memory handoff
 ```
 
-Earlier documents remain historical, supporting or superseded authorities. When they conflict with the chain above, the newer chain controls current execution order and product boundaries.
+Optional low-level runtime path:
+
+```text
+docs/research/47-zig-wasm-binary-boundary-audit.md
+-> docs/architecture/48-low-level-runtime-and-serialization-boundary.md
+-> docs/validation/49-low-level-kernel-promotion-gates.md
+-> docs/architecture/CODEGRAPH-LOW-LEVEL.md
+```
+
+The low-level path is subordinate to the core product path. It may approve an optional implementation challenger but cannot reorder R1-R6, create a second semantic authority, or make Zig/Wasm/binary formats mandatory before the ordinary framework floor passes.
+
+Earlier documents remain historical, supporting or superseded authorities. When they conflict with the chains above, the newer chain controls current execution order and product boundaries.
 
 ## Root allowlist
 
@@ -84,7 +97,20 @@ package cores -X-> runtime internals
 - The ordinary framework workflow is not built.
 - The five-page usefulness and maintenance comparisons are not run.
 - A durable agent runtime and idempotent effect path are not implemented.
+- Zig, Wasm and binary serialization have no production authority.
 - PR #3 remains draft and unmerged.
+
+## Low-level runtime truth
+
+```text
+canonical semantic interchange: typed SiteSource + deterministic JSON
+optional derived cache/IPC: deterministic CBOR after validation
+MessagePack: benchmark control only without an explicit canonical profile
+TypeScript: semantic oracle
+Zig/native/Wasm: optional measured pure-kernel challengers
+```
+
+Binary byte count is not a model-token metric. Runtime language does not guarantee SEO, accessibility, Lighthouse, ranking or usefulness. Every low-level promotion requires boundary-inclusive profiling, semantic parity, deterministic bytes where required, resource limits, packaging proof and a retained fallback.
 
 ## Authority by stage
 
@@ -110,7 +136,7 @@ R0 truth reconciliation
 -> R6 approved idempotent publication
 ```
 
-Task surfaces, SDRT, GNNs, GPU promotion, browser Wasm and 10K publication are not current implementation work.
+Task surfaces, SDRT, GNNs, GPU promotion, browser Wasm, mandatory Zig/native kernels, binary LLM prompting, runtime Zig SSR and 10K publication are not current implementation work.
 
 ## Official external verification
 
@@ -126,7 +152,7 @@ Generic Unix-like:
 scripts/clone-and-test-hyper.sh
 ```
 
-Both verify only the current compiler behavior for an exact commit, machine and generated fixture. They do not satisfy the framework or agent gates.
+Both verify only the current compiler behavior for an exact commit, machine and generated fixture. They do not satisfy the framework, agent or low-level promotion gates.
 
 ## Research-source requirements
 
@@ -144,6 +170,8 @@ Current source registry:
 
 - `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
 
+The low-level audit also cites RFC 8785, RFC 8949, official MessagePack, Zig and WebAssembly documentation, and relevant USENIX systems/security work directly in `docs/research/47-zig-wasm-binary-boundary-audit.md`.
+
 ## Agent read order
 
 1. `identity.md`
@@ -156,6 +184,8 @@ Current source registry:
 8. newest immutable handoff
 9. newest measured report
 10. current task-specific authority chain
+
+For low-level work, read `docs/architecture/CODEGRAPH-LOW-LEVEL.md` after the root `CODEGRAPH.md`.
 
 ## Write protocol
 
@@ -175,7 +205,7 @@ After writing:
 - run applicable package and validation tests;
 - create a measured report only for checks actually run;
 - append an immutable handoff for a coherent completed pass;
-- reconcile `memory/MEMORY.md` and the draft PR body.
+- reconcile `memory/MEMORY.md` and the draft PR body or conversation record.
 
 ## Freshness rules
 
@@ -188,6 +218,9 @@ An active document is stale when it:
 - puts task surfaces or advanced methods before the five-page maintenance proof;
 - treats a dependency index as complete incremental correctness;
 - claims publication from compilation without approval and effect evidence;
+- assumes binary bytes reduce model token cost without tokenizer evidence;
+- treats a kernel microbenchmark as an end-to-end framework result;
+- claims Zig, Wasm or SSR guarantees SEO or Lighthouse outcomes;
 - cites an older execution order as current.
 
 ## Permanent validation hooks
@@ -201,5 +234,6 @@ The documentation gate should verify:
 - explicit current `reference/dist` delegation;
 - ordinary framework and agent-runtime nonclaims;
 - direct controls for advanced methods;
+- low-level runtime subordination and nonclaims;
 - immutable handoff naming;
 - current PR draft posture.
