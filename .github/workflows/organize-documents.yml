@@ -63,6 +63,7 @@ jobs:
           cp /tmp/check-doc-system.mjs scripts/check-doc-system.mjs
           node scripts/normalize-doc-paths.mjs >/tmp/normalize-result.json
           node scripts/ensure-doc-index-links.mjs >/tmp/link-result.json
+          node scripts/normalize-doc-paths.mjs >/tmp/final-normalize-result.json
       - name: Validate documentation system
         id: validate_docs
         continue-on-error: true
