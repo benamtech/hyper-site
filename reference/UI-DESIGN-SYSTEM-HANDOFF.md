@@ -8,7 +8,7 @@ The UI pass starts from the compiled `ui-scaffold` profile, not hand-authored pa
 ## Generate the inputs and rendered fixtures
 
 ```bash
-cd reference
+cd GTM-RESEARCH/website-framework/reference
 npm install
 npm run manifest:emit
 npm run ui:emit

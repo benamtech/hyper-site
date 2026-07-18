@@ -1,33 +1,31 @@
 # AGENTS.md — Website Framework Rules
 
 Status: active  
-Updated: 2026-07-18
+Updated: 2026-07-17
 
 ## Read first
 
-1. `AMTECH_IDENTITY.md`
+1. `../../identity.md`
 2. `identity.md`
-3. `CODEGRAPH.md`
-4. `README.md`
-5. `memory/MEMORY.md`
-6. newest immutable file under `memory/`
-7. `26-graph-learning-paper-triage-and-promotion-gates.md`
-8. `25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md`
-9. `24-agent-discovered-ontology-and-10k-site-program.md`
-10. `23-groundwork-orchestration-implementation.md`
-11. `22-agent-operated-framework-workflow-validation-matrix.md`
-12. `21-vector-to-generation-job-compiler.md`
-13. `20-agent-operated-vector-site-generation-and-wasm.md`
-14. `18-vector-node-path-web-framework-model.md`
-15. `19-vector-native-corrections-and-csi-validation.md`
-16. newest validation report
-17. `site-manifest.yaml`
-18. `reference/README.md`
-19. `docs/AMTECH_WEB_DESIGN_SYSTEM.md` when changing UI or interaction behavior
+3. `../../CODEGRAPH.md`
+4. `CODEGRAPH.md`
+5. `README.md`
+6. `memory/MEMORY.md`
+7. newest immutable file under `memory/`
+8. `23-groundwork-orchestration-implementation.md`
+9. `22-agent-operated-framework-workflow-validation-matrix.md`
+10. `21-vector-to-generation-job-compiler.md`
+11. `20-agent-operated-vector-site-generation-and-wasm.md`
+12. `18-vector-node-path-web-framework-model.md`
+13. `19-vector-native-corrections-and-csi-validation.md`
+14. newest validation report
+15. `site-manifest.yaml`
+16. `reference/README.md`
+17. supplied design/product authorities when changing UI or interaction behavior
 
 ## Scope
 
-This repository is an agent-operated vector-native website-generation research framework. The groundwork orchestration is source-wired; production acceptance is not.
+This subtree is an agent-operated vector-native website-generation research framework. The groundwork orchestration is source-wired; production acceptance is not.
 
 The coding agent is first-class at:
 

@@ -1,6 +1,6 @@
 # identity.md — Holographic Website Systems Architect
 
-> Read `AMTECH_IDENTITY.md` first. This file adds the operating identity required for this standalone repository.
+> Read the root `identity.md` first. This file adds the operating identity required for the website-framework subtree.
 
 ## Operating role
 

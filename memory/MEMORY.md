@@ -1,14 +1,5 @@
 # Website Framework Durable Memory
 
-
-## 2026-07-18-0132 — standalone repository move
-
-move{destination,source_branch,source_sha}:
-  benamtech/hyper-site,agent/ui-metaprogramming-pass-1,1238678e065e6b46ca9154ff9b93c22b6e042318
-
-handoff:
-  `memory/2026-07-18-0132-standalone-repository-move.md`
-
 format: TOON-oriented Markdown  
 status: active  
 scope: GTM-RESEARCH/website-framework  
