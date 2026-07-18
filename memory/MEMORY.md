@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active
-updated_at: 2026-07-18T20:05:00-04:00
+updated_at: 2026-07-18T20:30:00-04:00
 
 ## State
 
@@ -22,7 +22,7 @@ hyper-site -X-> hyper-content
 - `reference/src/content-program-adapter.ts` is a temporary compatibility wrapper.
 - most package source still lives under `reference/src`.
 - `hyper-site/index.mjs` currently delegates compiler exports to `reference/dist/framework-core.js`.
-- P1.4 and P1.5 are incomplete.
+- W1 physical extraction is incomplete.
 
 ## Verified execution state
 
@@ -30,14 +30,15 @@ A one-page fixture executed through the current public Hyper Site entrypoint and
 
 Verified: SiteSource validation, reference resolution, evidence-threshold rejection, PageIR, semantic HTML, metadata, instruction Markdown, sitemap, dependency index, page hash, and build hash.
 
-A portable randomized limit harness now exists:
+Portable randomized verification now has two wrappers:
 
-- `scripts/clone-and-test-hyper.sh` clones and tests the selected branch from an internet-connected Unix-like machine with Git, Node.js 20+, and npm.
-- `scripts/run-compiler-limit-test-v2.mjs` generates unique arbitrary structured input, compiles twice, independently recomputes hashes, checks dependencies and escaping, and runs ten rejection cases.
-- `test/compiler-limit-harness.test.mjs` exercises both multi-page and one-page workloads inside the repository test suite.
+- `scripts/manjaro-clone-and-test-hyper.sh` is the official Manjaro/Arch external entrypoint. It checks `pacman`, supports explicit dependency-install opt-in, verifies the live branch head, clones the named branch, records the exact commit and URLs, runs the full test sequence, runs the randomized compiler harness, and retains machine-readable artifacts.
+- `scripts/clone-and-test-hyper.sh` remains the generic Unix-like wrapper for machines that already have Git, Node.js 20+, npm, and curl.
+- `scripts/run-compiler-limit-test-v2.mjs` is the canonical randomized harness. It generates unique arbitrary structured input, compiles twice, independently recomputes hashes, checks dependencies and escaping, and runs ten rejection cases.
+- `test/compiler-limit-harness.test.mjs` exercises multi-page and one-page workloads inside the repository test suite.
 - authority: `docs/validation/40-portable-compiler-limit-test.md`.
 
-A passing portable run proves current compiler behavior for the generated fixture and exact commit only. It does not prove W1 completion, independent package ownership, page usefulness, framework superiority, or production readiness.
+A passing external run proves current compiler behavior for the generated fixture and exact commit only. It does not prove W1 completion, independent package ownership, page usefulness, framework superiority, or production readiness.
 
 ## Four-part program
 
@@ -94,6 +95,8 @@ Authority: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`.
 - current public delegation to `reference/dist` remains explicit
 - one-page or randomized compiler verification is not completion of W1 or W2
 - synthetic throughput and deterministic hashes are software evidence only
+- the official external runner must print the exact repository, branch, commit, raw script, harness, report, and artifact paths
+- dependency installation is explicit opt-in; Manjaro/Arch installation uses a full `pacman -Syu` transaction
 - PR #3 stays draft
 
 ## Authorities
@@ -105,10 +108,12 @@ Authority: `docs/research/41-critical-claims-sdrt-and-internal-linking.md`.
 - planning/meta-plan-v3.steps.json
 - docs/research/34-intellectual-competitive-and-use-case-landscape.md
 - docs/research/41-critical-claims-sdrt-and-internal-linking.md
+- docs/research/42-critical-compiler-network-and-llm-claims.md
 - docs/architecture/35-reality-grounded-product-and-integration-boundary.md
 - docs/planning/38-four-part-product-workstream-map.md
 - docs/planning/36-next-three-workstreams-reality-grounded-plan.md (superseded for execution ordering)
 - docs/validation/37-reality-grounded-product-validation-matrix.md
+- docs/validation/39-w1-w3-validation-first-execution.md
 - docs/validation/40-portable-compiler-limit-test.md
 
 ## Nonclaims
