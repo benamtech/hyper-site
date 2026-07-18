@@ -1,91 +1,99 @@
-# Intellectual, Competitive, and Use-Case Landscape
+# Product Reality and Direct Baselines
 
 Status: active research authority  
 Updated: 2026-07-18
 
-## Conclusion
+## Correction
 
-Hyper is a proposed composition of a static framework, evidence-governed content compiler, content-operations layer, governed browser task surface, and bridge to durable workflow runtimes. It is not yet a credible replacement for one established category.
+The previous audit introduced adjacent software categories before the repository demonstrated a need for them. Active research now covers only claims made by the current code and next workstreams.
 
-The composition is useful only if each product remains separable. Hyper Site must work without Hyper Content. Hyper Content must emit portable contracts. Durable effects must remain behind adapters. Experimental graph, vector, GPU, and Wasm methods must have simple controls and removal paths.
+## Current thesis
 
-The closest realistic product is an evidence-governed compiler and review workspace that emits ordinary static sites and one bounded task. The furthest outcome is an enterprise content-and-action operating layer. That distant outcome overlaps mature platforms and must not distort near-term design.
+```text
+approved source material
+-> Hyper Content
+-> portable content/site contracts
+-> Hyper Site
+-> deterministic static artifacts
+```
 
-## Category map
-
-| Category | Hyper overlap | Comparables | Disposition |
-|---|---|---|---|
-| static generation | PageIR to HTML and assets | Astro, Hugo, Eleventy, Next.js | commoditized; prove lifecycle or governance advantage |
-| headless CMS | structured content and publishing | Contentful, Sanity, Strapi, Directus, Payload | complement first |
-| digital experience platform | content, personalization, orchestration | Adobe AEM, Sitecore, Optimizely | distant overlap with major enterprise gaps |
-| content intelligence | opportunity and quality analysis | Semrush, Ahrefs, Conductor, BrightEdge, MarketMuse | compare against simple editorial baselines |
-| knowledge graph | ontology and evidence relationships | Neo4j, RDF/OWL, GraphRAG | optional; must beat relational and JSON controls |
-| agent orchestration | approvals, checkpoints and repair | LangGraph, Temporal, Copilot Studio | integrate rather than recreate durability |
-| automation | connectors and effects | n8n, Zapier, Make, Power Automate | strong replacement for routine workflows |
-| generative UI | declarative trusted surfaces | A2UI, AG-UI, MCP Apps, CopilotKit | adapter only |
-| experimentation | bounded variants and outcomes | Optimizely, Statsig, GrowthBook, OpenFeature | integrate before rebuilding statistics |
-| enterprise agents | tools, channels and governance | Copilot Studio, Agentforce, ServiceNow | distant competitor |
+The hypothesis is that typed evidence, explicit rejection, deterministic compilation, and dependency-aware maintenance can reduce defects and lifecycle cost. This is unproven.
 
 ## Closest realistic use cases
 
-1. Evidence-governed service-business sites built from approved facts, services, locations, proof and policies.
-2. Noindex review artifacts where provenance, scope, freshness and human approval matter.
-3. Multi-location maintenance of shared facts, local exceptions, dependencies and retirement.
-4. Static explanations paired with bounded tasks such as intake planners, estimate preparation or document preflight.
-5. An internal workspace that proposes page opportunities, evidence changes and invalidations to an operator.
+1. Build a five-page service-business site from approved facts and evidence.
+2. Keep shared facts consistent across pages.
+3. Reject unsupported, duplicative, or unjustified pages.
+4. Produce noindex review artifacts with traceable sources.
+5. Rebuild only affected pages after a fact, component, or design change.
 
-Each case fails if a disciplined operator using Astro or Next.js, a headless CMS, or an embedded workflow product reaches equivalent quality and maintenance cost.
+These cases require no external orchestration, editorial platform, connector catalog, policy product, or enterprise runtime.
 
-## Medium-distance outcomes
+## First optional task
 
-An evidence-aware content operations platform could manage sources, claims, page contracts, dependencies and publication state across sites. Missing prerequisites include tenancy, permissions, editorial workflow, localization, assets, audit, integration APIs and support tooling.
+Only after the static pipeline passes, test one side-effect-free local task such as project intake, estimate preparation, document preflight, or a requirements checklist.
 
-A governed experience compiler could combine static pages with trusted interactive components. A content-to-workflow bridge could initiate typed work while Temporal, n8n, an AI Employee runtime, CRM or line-of-business system performs durable effects.
+```text
+typed input
+-> local validation
+-> deterministic state transition
+-> public result or rejection
+```
 
-## Furthest realistic outcome
+The task must not require distributed durability, external effects, enterprise identity, or multi-agent execution.
 
-The maximum thesis coordinates approved knowledge, generation, public projections, personalization, experiments, task initiation, durable workflows and audit. It overlaps Adobe, Sitecore, Optimizely, Microsoft, Salesforce, ServiceNow and UiPath. It requires years of product and operating work and remains a long-horizon hypothesis.
+## Direct controls
 
-## Complements and replacements
+### Hyper Site
 
-Strong complements include Astro, Hugo and Eleventy as targets or controls; headless CMSs as editorial sources; Temporal for durable workflows; LangGraph for stateful orchestration; n8n for connector-rich automation; OpenFeature and GrowthBook for experiments; OpenTelemetry for traces; OPA or Cedar for policy; JSON Schema and Zod for validation; PostgreSQL as the state baseline; and Playwright, Axe and Lighthouse for browser validation.
+Compare the same five-page fixture against a minimal ordinary static implementation with identical routes, content, assets, structured data, accessibility requirements, and deployment target.
 
-Likely replacements for parts of Hyper include Astro content collections, a headless CMS plus an ordinary framework, n8n or Power Automate, LangGraph plus a custom application, Semrush or Ahrefs plus disciplined editorial work, Temporal, and Optimizely or GrowthBook.
+### Hyper Content
 
-Hyper earns a place only where the integrated evidence-to-page-to-task contract reduces lifecycle cost or risk beyond these combinations.
+Compare against manually maintained typed JSON or Markdown, direct templates, explicit page lists, schema validation, lexical duplicate checks, and disciplined human review.
 
-## Critical corrections
+### Task surface
 
-1. Ontology is optional machinery, not the product.
-2. Vector, HRR/HDC, GPU and Wasm methods require workload-specific evidence.
-3. Static output alone is not differentiation.
-4. Evidence identifiers do not guarantee truth or freshness.
-5. Ten thousand pages is a software scale test, not a content strategy.
-6. Visible completion is not authorized completion; effects need current policy checks, idempotency and receipts.
-7. Integration breadth can destroy focus.
-8. Enterprise prices reflect governance, services, ecosystem and risk transfer, not merely technical sophistication.
+Compare against a normal HTML form, deterministic multi-step form, static checklist, or downloadable template.
 
-## Recommended wedge
+## Current risks
 
-Compile approved business evidence into a small, maintainable static site and one bounded task surface, with deterministic artifacts, explicit rejection, human approval and portable deployment.
+- review overhead may exceed manual work;
+- ontology and vector methods may not beat typed data and rules;
+- framework ergonomics may trail ordinary static tooling;
+- proposed pages may fail independent existence review;
+- deterministic output may not offset poor authoring UX;
+- the task surface may not outperform a form;
+- two packages may create complexity without independent value;
+- 10,000-page scale may be irrelevant to the initial product.
 
-Compare against a skilled Astro operator, a headless CMS plus an ordinary framework, an SEO tool plus human production, and an ordinary site with an embedded form or workflow service.
+## Promotion rules
 
-Do not advance broad platform claims until Hyper wins on operator time, defect rate, evidence fidelity, maintenance cost or task completion.
+- Ontology must beat typed data on accepted outcomes or maintenance.
+- Embeddings must beat lexical/rule methods on held-out cases.
+- HRR/HDC, Wasm, and GPU work must beat direct implementations on real workloads.
+- Task surfaces must beat ordinary forms on completion, clarity, accessibility, or artifact quality.
+- Hyper Site must justify itself against an ordinary static implementation on lifecycle cost or governed invariants.
 
-## Architecture consequences
+## Immediate scope
 
-- Hyper Site remains content-neutral and replaceable.
-- Hyper Content emits portable contracts.
-- Durable execution remains behind adapters.
-- A2UI, AG-UI and MCP Apps remain protocol adapters.
-- Policy and experiment engines are integrated before rebuilt.
-- PostgreSQL and JSON are the baseline; graph and vector stores require promotion evidence.
-- Every advanced method has a simple control and removal path.
-- First commercial proof is five pages plus one task, not a 10K corpus.
+```text
+five justified pages
++ one static theme
++ one deterministic build
++ one local publisher
++ one measured maintenance change
+```
+
+Then, only if that passes:
+
+```text
+one bounded side-effect-free task
++ ordinary-form control
+```
 
 ## Falsification
 
-Narrow, pause or split the project if ordinary frameworks reach equivalent outcomes with less conceptual overhead; evidence review exceeds manual drafting cost; tasks fail to outperform forms; graph or vector methods fail controls; integration maintenance dominates value; operators cannot safely understand generated contracts; or page cohorts fail independent existence review.
+Narrow or stop if manual typed content plus templates is equally reliable and cheaper, an ordinary static implementation reaches the same result with less effort, evidence review exceeds manual maintenance time, advanced methods fail direct controls, most proposed pages are rejected, or the task fails to beat a normal form.
 
-Sources are registered in `docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json`.
+Sources are limited to direct framework baselines in `docs/research/sources/2026-07-18-intellectual-competitive-landscape.sources.json`.
