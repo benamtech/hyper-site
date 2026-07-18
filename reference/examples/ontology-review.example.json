@@ -1,0 +1,20 @@
+{
+  "reviewerId": "operator:replace-me",
+  "reviewerClass": "human",
+  "decision": "approved",
+  "approvedAt": "2026-07-18T00:00:00Z",
+  "approvedSensitiveAttributeIds": [],
+  "observations": [
+    {
+      "id": "review:ontology:1",
+      "targetId": "attr:replace-me",
+      "state": "pass",
+      "severity": "soft",
+      "detail": "Replace with a concrete reviewer observation.",
+      "evidenceIds": ["evidence:source:business-facts"]
+    }
+  ],
+  "notes": [
+    "Approval applies only to the exact proposal hash produced by the CLI."
+  ]
+}
