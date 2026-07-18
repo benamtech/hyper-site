@@ -1,30 +1,33 @@
-# Useful Framework and Agent-First Validation Gates
+# Useful Framework Validation Gates
 
 Status: active validation contract  
 Updated: 2026-07-18
 
 ## Principle
 
-Each layer must pass independently. A powerful content pipeline cannot compensate for a poor framework, and a working compiler cannot compensate for an unreliable agent runtime.
+A green compiler fixture is not a useful framework. Each gate requires evidence from the public package and user-visible workflow.
 
-## Gate F1 — Package ownership
+## Gate U1 — Package ownership
 
 Pass only when:
 
-- canonical Hyper Site source resides under `hyper-site/src`;
-- canonical stable Hyper Content source resides under `hyper-content/src`;
-- package runtime imports do not enter `reference/`;
-- two isolated packed consumers pass;
-- legacy positive and negative artifacts remain equivalent.
+- canonical compiler and renderer source resides under `hyper-site/src`;
+- `hyper-site/dist` is built from package-owned source;
+- package exports resolve only package-owned files;
+- Hyper Site runtime imports do not enter `reference/`;
+- `reference/` consumes Hyper Site rather than implementing it;
+- two isolated `npm pack` consumers pass;
+- frozen positive and negative behavior remains equivalent.
 
 Failure examples:
 
 - copied `dist` presented as source ownership;
 - workspace-only relative imports;
-- facade delegates to `reference/dist`;
-- hidden second compiler or renderer.
+- facade still delegates to `reference/dist`;
+- hidden second compiler or renderer;
+- tarball requires the monorepo root.
 
-## Gate F2 — Ordinary framework workflow
+## Gate U2 — Ordinary framework workflow
 
 Pass only when a clean consumer can perform:
 
@@ -32,146 +35,96 @@ Pass only when a clean consumer can perform:
 create -> dev -> build -> preview -> inspect -> local publish
 ```
 
-without installing Hyper Content, an LLM SDK, agent runtime or GPU dependency.
+without Hyper Content, an LLM SDK, GPU, database or external service.
 
-Evidence:
+Required evidence:
 
-- exact commands;
-- clean environment identity;
-- emitted five-page artifact tree;
-- browser and accessibility report;
-- operator time and errors encountered.
+- exact install and command transcript;
+- command help and exit-code tests;
+- starter artifact tree;
+- atomic build test;
+- text and JSON diagnostics;
+- preview of the built output;
+- local publish hash parity with the accepted build.
 
-## Gate F3 — Five-page usefulness
+## Gate U3 — Five-page usefulness
 
 Pass only when:
 
 - five pages have distinct accepted purposes;
-- content and design are not generated placeholder variants;
-- an ordinary-framework direct control uses the same facts, design and output requirements;
-- held-out reviewers accept the site as usable;
-- no superiority claim exceeds measured evidence.
+- facts, copy, design and assets are real and approved;
+- Hyper, direct-template and Astro controls use the same brief;
+- route, link, metadata and static-file assertions pass;
+- browser tests verify user-visible behavior;
+- accessibility scanning reports no critical automatically detectable violation;
+- manual review is recorded;
+- output is usable from a basic static file server;
+- superiority claims are limited to measured results.
 
-## Gate F4 — Incremental correctness
+Automated accessibility checks are partial evidence and cannot replace manual review.
 
-For each frozen maintenance change define the expected affected set before execution.
+## Gate U4 — Maintenance correctness and value
 
-Pass only when:
+For each frozen change, define the expected affected set before execution.
+
+Pass correctness only when:
 
 ```text
 required_but_missed = 0
-unexpected_changed = 0 or explicitly justified
 invalid_change_accepted = false
 partial_accepted_output_after_failure = false
 ```
 
-The emitted dependency index alone cannot satisfy this gate.
+Unexpected changed artifacts must be zero or explicitly justified.
 
-## Gate F5 — Measured maintenance value
+Pass value only when Hyper demonstrates at least one of:
 
-Pass only when Hyper Site demonstrates at least one of:
-
-- materially lower operator time or review burden;
+- materially lower operator or review time;
 - lower defect rate;
-- a required invariant absent from the direct control;
-- simpler rollback or retirement;
+- safer rejection or rollback;
+- a required evidence/reference invariant absent from controls;
 - more precise affected-set behavior.
 
-Otherwise record `narrow` or `stop`.
+Otherwise the required decision is `narrow` or `stop`.
 
-## Gate A1 — Durable run state
+## Gate U5 — Minimal Hyper Content adapter
 
-Pass only when an external orchestrator can:
-
-- persist a run snapshot;
-- resume after process failure;
-- expose current and historical step state;
-- cancel without corrupting accepted artifacts;
-- correlate run, step, tool and artifact IDs.
-
-A JSON checkpoint written by an ad hoc loop is insufficient unless crash/restart semantics are tested.
-
-## Gate A2 — Deterministic and model-backed tool separation
+Blocked until U4 records `advance`.
 
 Pass only when:
 
-- compiler and validation calls are deterministic tools;
-- model calls are explicitly non-deterministic activities with retained request/response evidence;
-- retries do not silently replace previously approved model output;
-- replay does not repeat side effects.
+- approved facts and evidence deterministically produce portable `SiteSource`;
+- Hyper Site remains usable without Hyper Content;
+- no private Hyper Site implementation is imported;
+- invalid claims and broken references reject before accepted output;
+- the adapter is simpler than hand-authoring for the frozen fixture.
 
-## Gate A3 — Human approval interruption
+No LLM or ontology gate is part of U5.
 
-Pass only when:
+## Adversarial matrix
 
-- approval pauses durable execution;
-- the pending state survives restart;
-- the operator can inspect the exact artifact and policy being approved;
-- rejection, edit and cancellation paths exist;
-- approval cannot be reused for a changed artifact or target.
+Every gate includes tests for:
 
-## Gate A4 — Idempotent effect boundary
-
-Pass only when duplicate or retried publication attempts produce at most one durable effect.
-
-Required tests:
-
-- duplicate idempotency key;
-- timeout after possible remote success;
-- retry after worker crash;
-- stale approval epoch;
-- changed branch head;
-- changed artifact hash;
-- changed publisher target.
-
-## Gate A5 — Observability
-
-Pass only when one trace or correlated record connects:
-
-```text
-run
--> planning/model step
--> tool invocation
--> compiler commit and input hash
--> artifact manifest
--> approval
--> publisher effect
--> receipt or failure
-```
-
-Metrics and logs must retain enough context to distinguish retries, replays, duplicate requests and operator interventions.
-
-## Gate A6 — Security boundary
-
-Pass only when:
-
-- untrusted content cannot directly widen tools or effects;
-- secrets and private memory remain outside public artifacts;
-- authorization is checked at commit time;
-- policy and approval freshness are revalidated;
-- browser task surfaces cannot mutate durable state directly;
-- failure is closed for mismatched authority.
-
-## Gate P1 — Product coherence
-
-Pass only when:
-
-- Hyper Site is usable without Hyper Content;
-- Hyper Content has a portable output contract;
-- the agent control plane uses public interfaces;
-- each layer has a distinct user, responsibility and failure model;
-- removal of experimental methods does not break the ordinary framework path.
+- missing files and references;
+- duplicate IDs and routes;
+- path traversal and output-directory escape;
+- malformed metadata and unsafe HTML text;
+- nondeterministic ordering;
+- stale output surviving a failed build;
+- package exports that work only in the workspace;
+- changed source not represented in hashes;
+- under-invalidation and over-invalidation;
+- command interruption and cleanup;
+- broken links and inaccessible controls.
 
 ## Current expected state
 
 ```text
-F1 RED
-F2 BLOCKED BY F1
-F3 BLOCKED BY F2
-F4 BLOCKED BY F3
-F5 BLOCKED BY F4
-A1-A6 NOT IMPLEMENTED
-P1 RED
+U1 RED
+U2 BLOCKED BY U1
+U3 BLOCKED BY U2
+U4 BLOCKED BY U3
+U5 BLOCKED BY U4 ADVANCE
 ```
 
-A green existing compiler fixture does not change this state.
+Agent, task-surface, low-level runtime and 10K-scale gates are not active product gates.
