@@ -1,24 +1,30 @@
-# CODEGRAPH.md — Hyper Site / Hyper Content Monorepo
+# CODEGRAPH.md — Hyper Framework, Content and Agent Control Plane
 
-Status: two product boundaries established; physical extraction incomplete  
+Status: target architecture accepted; physical extraction incomplete  
 Updated: 2026-07-18
 
-## Root dependency graph
+## Product and runtime graph
 
 ```text
-approved evidence and project truth
+approved project truth
         |
         v
-@amtech/hyper-content
-  proposals, generation, validation and maintenance
+@amtech/hyper-content (optional)
+  evidence, claims, page contracts, content proposals
+        |
+        v
+portable SiteSource
         |
         v
 @amtech/hyper-site
-  content-neutral PageIR, static artifacts and task mounts
+  validate -> PageIR -> static web artifacts
         |
         v
-optional runtime adapters
-  policy, durable workflows, connectors, effects and receipts
+publisher adapter
+
+external agent control plane
+  plans and invokes public tools from both packages
+  persists checkpoints, approvals, policy and telemetry
 ```
 
 Hard rules:
@@ -26,256 +32,320 @@ Hard rules:
 ```text
 hyper-content -> hyper-site
 hyper-site -X-> hyper-content
-hyper-site -X-> private runtime internals
-protocol adapters -X-> canonical domain authority
+agent-control-plane -> public commands, contracts and artifacts
+package cores -X-> runtime internals
+browser surfaces -X-> durable effects
+compiler output -X-> publication authority
 ```
 
-## Current physical ownership
+## Current physical graph
 
 ```text
-hyper-content/src/content-program-adapter.ts
-  canonical geometry-removal adapter
+hyper-site/index.mjs
+  -> reference/dist/framework-core.js
+  -> reference/dist/site-manifest.js
+  -> other transitional reference outputs
 
-reference/src/content-program-adapter.ts
-  temporary legacy manifest compiler and parity wrapper
+hyper-content/src/content-program-adapter.ts
+  first physically extracted stable content adapter
 
 reference/src/framework-core.ts
 reference/src/site-manifest.ts
-  current neutral Hyper Site source pending P1.4
-
 reference/src/*
-  most remaining content and framework implementation pending classification and extraction
+  remaining mixed implementation authority
 ```
 
-Folder boundaries are not complete source boundaries. `reference/` is still transitional implementation authority, but its target role is consumer, compatibility suite, fixtures, examples and benchmarks.
+`reference/` is still runtime authority for most behavior. Its target role is consumer, compatibility suite, fixtures, examples and benchmarks.
 
 ## Target repository graph
 
 ```text
 hyper-site/
   src/
-    framework core
-    SiteSource and PageIR
-    renderer and design contracts
-    browser and accessibility policy
-    task-surface contracts
-    publisher interfaces
+    contracts/
+      site-source
+      page-ir
+      artifacts
+      dependencies
+    compiler/
+      validate
+      normalize
+      compile
+    renderer/
+      html
+      metadata
+      structured-data
+      sitemap
+    framework/
+      components
+      layouts
+      themes
+      assets
+      routing
+    cli/
+      create
+      dev
+      build
+      preview
+      inspect
+      publish
+    publishers/
+      local
   test/
   dist/
 
 hyper-content/
   src/
-    intake and evidence
-    ontology and opportunity
-    generation and ArticleIR
-    validation and maintenance
-    task-semantic proposals
-    experimental vectors/Wasm/GPU
+    evidence/
+    claims/
+    page-existence/
+    proposals/
+    generation/
+    validation/
+    maintenance/
+    adapters/hyper-site
+    experimental/
+      ontology
+      retrieval
+      vectors
+      wasm
+      gpu
   test/
   dist/
+
+agent-control-plane/ or external adapter package
+  workflow contracts
+  runtime adapter
+  tool adapters
+  approval and policy boundary
+  effect activities
+  telemetry correlation
+  evaluation fixtures
 
 reference/
   fixtures/
   examples/
   compatibility/
   benchmarks/
-  scripts/
 ```
 
-## Hyper Content graph
+## Hyper Site execution graph
 
 ```text
-repository + explicit project truth
--> source, evidence and asset ledgers
--> claim and information-object proposals
--> optional ontology and opportunity methods
--> independently approved page seeds
--> deterministic PCN
--> model prose backend
--> ArticleIR validation
--> deterministic unfolding
--> portable Hyper Site inputs
-```
-
-Content lifecycle:
-
-```text
-cohort proposal
--> page-existence and evidence review
--> duplicate/cannibalization checks
--> noindex artifact review
--> publication decision
--> evidence refresh and dependency invalidation
--> repair or retirement
-```
-
-Experimental arms remain optional:
-
-- graph and ontology methods;
-- lexical and embedding retrieval;
-- HRR/HDC and vector packing;
-- current Wasm/Zig kernels;
-- GPU/model acceleration;
-- automated opportunity selection.
-
-Each requires a simple control and measured promotion.
-
-## Hyper Site graph
-
-```text
-site config + portable content objects + design + assets
+project config + validated content + design + assets
 -> SiteSource
+-> structural and reference validation
 -> PageIR
--> semantic HTML + structured data + shared CSS/assets
--> static output
--> publisher adapter
+-> renderer
+-> HTML / CSS / assets / metadata / JSON-LD
+-> sitemap / instruction projections
+-> artifact manifest + declared dependencies + hashes
+-> preview or publisher adapter
 ```
 
-Optional interaction path:
+Framework usability graph:
 
 ```text
-static page and fallback
--> governed task mount
--> typed intent
--> runtime adapter policy and execution
--> ordered public projection
--> artifact/action/receipt
+create
+-> dev
+-> edit five distinct pages
+-> build
+-> preview
+-> inspect diagnostics and artifacts
+-> local publish
 ```
 
-Hyper Site owns the public contract and trusted renderer. Runtime adapters own identity, authorization, durable state, tools, effects and private session data.
+This path must have no Hyper Content, model provider, agent runtime or GPU dependency.
+
+## Hyper Content execution graph
+
+```text
+sources and approved project truth
+-> evidence and claim records
+-> page-existence proposals
+-> optional retrieval/ontology candidates
+-> structured content proposal
+-> evidence, duplicate and policy validation
+-> portable SiteSource
+-> Hyper Site public compiler
+```
+
+Hyper Content never owns rendering or publication authority.
+
+## Agent control-plane graph
+
+```text
+run request
+-> freeze input snapshot and policy
+-> create bounded plan
+-> persist checkpoint
+-> invoke model-backed proposal task or deterministic tool
+-> retain request/response/tool evidence
+-> evaluate output
+-> persist checkpoint
+-> interrupt for human approval when required
+-> revalidate branch, artifact, policy, approval and target
+-> invoke idempotent effect activity
+-> record receipt or failure
+-> emit trace-correlated final snapshot
+```
+
+Runtime-owned state:
+
+```text
+run_id
+step_id
+input_snapshot_hash
+plan_version
+checkpoint_version
+tool invocation records
+model request/response evidence
+artifact_manifest_hash
+approval_id and epoch
+policy_version
+publisher target
+idempotency key
+receipt
+trace and span identifiers
+```
+
+## Replay and effect boundary
+
+```text
+workflow/planning code
+  deterministic or replay-safe
+
+model/API/compiler calls
+  explicit tasks or activities
+
+consequential effects
+  idempotent activities with commit-time authorization
+```
+
+A retry after timeout or worker failure must not duplicate publication or another irreversible effect.
+
+## Dependency and maintenance graph
+
+```text
+fact / evidence / component / token / page-policy change
+-> declared direct dependency edges
+-> expected affected artifact set frozen before execution
+-> rebuild
+-> actual changed set
+-> compare:
+     required but missed
+     unexpected changed
+     unchanged as expected
+-> accept, reject or repair dependency model
+```
+
+The emitted reverse dependency index is a diagnostic artifact. It is not proof that all actual inputs were declared.
+
+## External controls and complements
+
+```text
+Astro
+  ordinary static-framework control
+
+Temporal
+  durable workflow and retry control
+
+LangGraph
+  stateful agent and human-interrupt control
+
+OpenTelemetry
+  traces, metrics and logs
+
+OPA / Cedar / host policy
+  authorization decisions
+
+n8n / Power Automate / connector platforms
+  deterministic business integrations
+
+headless CMS
+  editorial workflows
+```
+
+Core packages should integrate these categories through replaceable adapters when the five-page and one-effect fixtures require them.
 
 ## Forbidden Hyper Site imports
 
 ```text
-ontology*
-context-corpus
-sparse-lexical
-opportunity*
-site-program*
-page-generation
-glm-provider
-pcn-emitter
-articleir-parser
-unfolder
+ontology and opportunity selection
+provider and prompt orchestration
+PCN / ArticleIR internals
+embedding and vector packing
 current vector/facility Wasm
-packed content geometry
-private runtime credentials or memory
+GPU topology
+private runtime memory
+credentials and connectors
+authorization engine
+durable workflow implementation
+experiment statistics
 ```
 
-## External complements
+## Source extraction graph
 
 ```text
-Astro/Hugo/Eleventy/Next.js
-  controls or alternate render targets
-
-headless CMS
-  editorial and structured-content input
-
-Temporal
-  durable workflow and recovery
-
-LangGraph
-  stateful agent orchestration and human review
-
-n8n/Power Automate
-  connectors and deterministic business effects
-
-OpenFeature/GrowthBook/Optimizely
-  experiment delivery and analysis
-
-OpenTelemetry
-  trace and metric correlation
-
-OPA/Cedar/host policy
-  authorization decisions
+inventory every reference/src file
+-> assign one owner and role
+-> extract SiteSource/PageIR/compiler/renderer cluster
+-> build package-owned Hyper Site output
+-> switch public entrypoint
+-> make reference consume Hyper Site
+-> prove positive and negative parity
+-> extract stable content clusters
+-> make reference consume Hyper Content
+-> add two isolated packed consumers
+-> remove runtime imports into reference
+-> retire compatibility duplicates
 ```
 
-Core must not reimplement these categories unless an owned invariant cannot be preserved through an adapter.
-
-## Source extraction order
+## Proof graph
 
 ```text
-1. inventory every reference/src file
-2. move neutral framework core and manifest to hyper-site/src
-3. make reference consume @amtech/hyper-site
-4. classify and split mixed UI modules
-5. move content clusters to hyper-content/src
-6. replace star exports with explicit surfaces
-7. make reference consume @amtech/hyper-content
-8. add clean tarball consumers
-9. remove product runtime imports into reference
-10. retire duplicate compatibility source
+F1 package ownership
+-> F2 ordinary framework workflow
+-> F3 five-page usefulness and direct control
+-> F4 incremental correctness
+-> F5 measured maintenance value
+-> A1 durable run state
+-> A2 deterministic/model task separation
+-> A3 approval interruption
+-> A4 idempotent effect
+-> A5 observability
+-> A6 security boundary
+-> P1 product coherence
 ```
 
-## Validation graph
+Current state:
 
 ```text
-research and alternatives
--> accepted architecture
--> executable plan and RED tests
--> implementation
--> measured validation report
--> immutable memory handoff
--> catalog, README, CODEGRAPH and PR reconciliation
+F1 RED
+F2-F5 BLOCKED
+A1-A6 NOT IMPLEMENTED
+P1 RED
 ```
 
-Current authority chain:
+## Deferred critical-path work
 
-- `docs/research/34-intellectual-competitive-and-use-case-landscape.md`
-- `docs/architecture/35-reality-grounded-product-and-integration-boundary.md`
-- `docs/planning/36-next-three-workstreams-reality-grounded-plan.md`
-- `docs/validation/37-reality-grounded-product-validation-matrix.md`
+Until F5 passes:
 
-## First credible proof graph
+- governed task-surface implementation;
+- SDRT and custom graph query language;
+- GNN internal linking;
+- browser Wasm promotion;
+- GPU promotion;
+- 10K publication programs;
+- autonomous publication;
+- enterprise-readiness claims.
 
-```text
-one approved evidence set
--> five justified pages
--> one bounded task
--> one static publisher
--> one durable runtime adapter
--> ordinary-framework and ordinary-form controls
--> held-out operator and artifact review
-```
+## Authority chain
 
-Ten thousand pages remains a mandatory software scale tier, not a publication or usefulness claim.
-
-## Maturity boundary
-
-Not yet proven:
-
-- complete physical extraction;
-- independent tarball use;
-- standalone scaffold and publisher;
-- ordinary-framework advantage;
-- real five-page acceptance;
-- governed runtime isolation;
-- task completion advantage;
-- graph/vector/Wasm/GPU advantage;
-- enterprise governance or commercial outcomes.
+- `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
+- `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
+- `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
+- `docs/validation/46-useful-framework-and-agent-first-gates.md`
+- `memory/MEMORY.md`
 
 PR #3 remains draft and unmerged.
-
-## Governed task-surface graph
-
-```text
-Hyper Content optional task proposal
-  goal + evidence + inputs + outputs + limits
-              |
-              v
-W7 protocol-neutral TaskServiceManifest / SurfacePlan
-              |
-      +-------+-------+
-      |               |
-      v               v
-static fallback   runtime adapter interface
-      |               |
-      v               v
-PageIR/HTML       intent -> events -> resource/receipt
-      |               |
-      +-------+-------+
-              v
-       governed task page
-```
-
-W7 is permanent. W1 remains static framework and renderer authority, W3 remains the temporary migration bridge, W4 owns observability/recovery/security infrastructure, and W6 owns field and revenue acceptance. Protocol adapters live outside the canonical ABI.
