@@ -292,7 +292,7 @@ reference/src/index.ts
 reference/fixtures/agent-site-fixture.mjs
 reference/test/agent-site-program.test.mjs
 reference/test/acceleration-decision.test.mjs
-24-agent-discovered-ontology-and-10k-site-program.md
+docs/research/24-agent-discovered-ontology-and-10k-site-program.md
 ```
 
 ## Exact proof fixtures

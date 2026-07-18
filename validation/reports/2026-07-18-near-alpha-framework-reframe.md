@@ -48,10 +48,10 @@ The following authorities now share the near-alpha framework boundary:
 - `README.md`;
 - `CODEGRAPH.md`;
 - `reference/README.md`;
-- `24-agent-discovered-ontology-and-10k-site-program.md`;
-- `25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md`;
-- `26-graph-learning-paper-triage-and-promotion-gates.md`;
-- `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`;
+- `docs/research/24-agent-discovered-ontology-and-10k-site-program.md`;
+- `docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md`;
+- `docs/research/26-graph-learning-paper-triage-and-promotion-gates.md`;
+- `docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md`;
 - PR `#3` title and description.
 
 The documents now state:

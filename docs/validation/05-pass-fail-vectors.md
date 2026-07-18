@@ -9,7 +9,7 @@ These gates combine four evidence classes:
 - **N — normative/platform:** required by web standards, Google Search documentation/policies, or target-runtime contracts.
 - **E — AMTECH engineering:** a falsifiable product/risk budget chosen for this system. It must be tuned from data and must never be described as a published scientific constant.
 
-The source IDs are defined in `13-academic-and-normative-basis-for-validation-vectors.md`. A source can justify the metric or failure mode without justifying the exact numeric threshold.
+The source IDs are defined in `docs/research/13-academic-and-normative-basis-for-validation-vectors.md`. A source can justify the metric or failure mode without justifying the exact numeric threshold.
 
 ## Gate classes
 

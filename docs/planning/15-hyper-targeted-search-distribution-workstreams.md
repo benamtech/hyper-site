@@ -20,7 +20,7 @@ The contextual-ranking result in arXiv `2309.05113` is a baseline: query/documen
 
 HTML is a disposable emission. Canonical source truth is the typed information model, compatibility geometry, evidence graph, and page plan.
 
-This document narrows `14-phase-2-experience-materialization-engine-plan.md` into the two highest-value workstreams. Existing truth, privacy, evidence, accessibility, canonical-baseline, and finite-runtime constraints remain active.
+This document narrows `docs/planning/14-phase-2-experience-materialization-engine-plan.md` into the two highest-value workstreams. Existing truth, privacy, evidence, accessibility, canonical-baseline, and finite-runtime constraints remain active.
 
 ## Current executable state
 

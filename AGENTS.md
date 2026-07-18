@@ -10,11 +10,11 @@ Scope: repository root
 2. `AGENTS.md`
 3. `CODEGRAPH.md`
 4. `README.md`
-5. `29-product-boundary-research-and-root-folder-split.md`
+5. `docs/architecture/29-product-boundary-research-and-root-folder-split.md`
 6. `memory/MEMORY.md`
 7. newest immutable file under `memory/`
-8. `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
-9. `28-agent-first-web-framework-and-llm-backend.md`
+8. `docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
+9. `docs/architecture/28-agent-first-web-framework-and-llm-backend.md`
 10. newest report under `validation/reports/`
 11. `hyper-site/README.md`
 12. `hyper-content/README.md`
@@ -247,3 +247,18 @@ Framework-owned static pages that do not originate from `hyper-content` still re
 - Record branch, exact commit, CI run, test count, artifacts, unrun validation, remaining failures, and next gate.
 - Commit or merge only coherent work that has passed applicable validation.
 - Do not merge PR #3 merely because synthetic or package-boundary tests pass. The PR remains draft while physical extraction, publisher, real cases, and comparable benchmarks are pending.
+
+## Governed task-surface boundary
+
+- Hyper Content may propose a task goal, evidence, static examples, input/output classes, limitations, and review triggers. It must not emit UI implementation logic.
+- Hyper Site owns protocol-neutral service, surface, theme, mount, public-projection, and growth-policy contracts. It must not own reasoning, credentials, private memory, connectors, or consequential authorization.
+- Browser surfaces submit typed intents; they never mutate canonical runtime state directly.
+- Public projections are allowlisted and must not include full ontology state, hidden reasoning, private memory, credentials, raw provider payloads, or unrelated tenant resources.
+- Static fallback remains complete. Dynamic native, declarative, and sandboxed tiers are progressive enhancement.
+- A2UI, AG-UI, MCP Apps, and AI Employee integrations are adapters, not internal authority.
+- Growth operators may vary approved presentation, sequencing, allocation, and conversion. They may not widen capabilities, lower safety, alter private-data policy, or index sessions and generated artifacts.
+- Run `node scripts/check-doc-system.mjs` with plan and boundary validation.
+
+## Documentation lifecycle
+
+Documentation lifecycle: `docs/README.md`. Every research or architecture mutation must follow intake -> research -> architecture -> executable plan -> validation report -> immutable memory handoff.

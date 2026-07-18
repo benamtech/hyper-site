@@ -82,7 +82,7 @@ The current static compiler still performs legacy vector packing internally. Tha
 
 The full repo and external-source analysis, hypotheses, falsification rules, corrected classifications, and migration plan are recorded in:
 
-- `29-product-boundary-research-and-root-folder-split.md`.
+- `docs/architecture/29-product-boundary-research-and-root-folder-split.md`.
 
 ## Corrections to the initial criticism
 
@@ -217,7 +217,7 @@ Content research, model latency, embedding time, and corpus validation must be r
 
 | Area | Source |
 |---|---|
-| product-boundary research and migration | `29-product-boundary-research-and-root-folder-split.md` |
+| product-boundary research and migration | `docs/architecture/29-product-boundary-research-and-root-folder-split.md` |
 | web-framework public surface | `hyper-site/` |
 | content-compiler public surface | `hyper-content/` |
 | dependency enforcement | `scripts/check-product-boundaries.mjs` |
@@ -226,6 +226,23 @@ Content research, model latency, embedding time, and corpus validation must be r
 | ArticleIR acceptance | `reference/src/articleir-parser.ts` |
 | deterministic unfolding | `reference/src/unfolder.ts` |
 | static compiler | `reference/src/framework.ts` |
-| maturity and real-use gates | `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`, `reference/src/near-alpha-framework.ts` |
+| maturity and real-use gates | `docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md`, `reference/src/near-alpha-framework.ts` |
 
 PR #3 remains draft while the physical extraction, real framework fixture, live provider, publisher, and comparable benchmarks are pending.
+
+## Governed task surfaces
+
+Hyper Site's next interaction layer is a protocol-neutral governed task-surface platform. Static pages remain complete and indexable; optional runtime services accept typed intents and return public projections, resources, artifacts, actions, and receipts. Theme developers own trusted renderers, site developers own mounts and fallbacks, and growth operators own bounded experiment and conversion policy. Hyper Content may propose task semantics but contains zero UI implementation logic.
+
+Current authority:
+
+- `docs/intake/2026-07-18-next-generation-task-surfaces.md`
+- `docs/research/31-next-generation-task-surfaces-protocol-crosswalk.md`
+- `docs/architecture/32-governed-task-surface-architecture.md`
+- `docs/validation/33-task-surface-validation-matrix.md`
+
+A2UI, AG-UI, MCP Apps, and AMTECH AI Employee are adapters after the internal ABI passes. Ten-thousand-page surface scale is a mandatory benchmark tier, not a page-usefulness claim.
+
+## Documentation system
+
+Documentation lifecycle and research catalog: `docs/README.md`. Machine-readable document authority: `docs/catalog.json`.

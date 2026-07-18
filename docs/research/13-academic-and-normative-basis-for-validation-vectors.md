@@ -1,6 +1,6 @@
 # 13 — Academic and Normative Basis for Validation Vectors
 
-Status: evidence map for `04-feature-validation-vectors.md`, `05-pass-fail-vectors.md`, and `12-compiler-design-and-autonomy-validation-addendum.md`
+Status: evidence map for `docs/validation/04-feature-validation-vectors.md`, `docs/validation/05-pass-fail-vectors.md`, and `docs/architecture/12-compiler-design-and-autonomy-validation-addendum.md`
 Updated: 2026-07-17
 
 ## Interpretation rule

@@ -68,7 +68,7 @@ read_order[16]{order,file,role}:
   2,../AGENTS.md,"product boundary and scientific operating contract"
   3,../CODEGRAPH.md,"framework/content code graphs and migration map"
   4,../README.md,"current monorepo product and maturity"
-  5,../30-meta-plan-v3-executable-program.md,"current executable program rationale and phase authority"
+  5,../docs/planning/30-meta-plan-v3-executable-program.md,"current executable program rationale and phase authority"
   6,../planning/meta-plan-v3.json,"machine program, workstreams, outcomes, hypotheses"
   7,../planning/meta-plan-v3.steps.json,"machine TODO DAG, TDD, effects, rollback and pass metrics"
   8,MEMORY.md,"durable current state"
@@ -76,7 +76,7 @@ read_order[16]{order,file,role}:
   10,../validation/reports/2026-07-18-content-program-adapter.md,"P1.3 exact validation proof"
   11,2026-07-18-0610-meta-plan-v3-framework-core-extraction.md,"P0.2/P1.1/P1.2 handoff"
   12,../validation/reports/2026-07-18-meta-plan-v3-framework-core-extraction.md,"P0.2/P1.1/P1.2 proof"
-  13,../29-product-boundary-research-and-root-folder-split.md,"research and folder decision"
+  13,../docs/architecture/29-product-boundary-research-and-root-folder-split.md,"research and folder decision"
   14,../hyper-site/README.md,"framework ownership"
   15,../hyper-content/README.md,"content compiler ownership"
   16,../validation/reports/,"measured reports"
@@ -113,13 +113,13 @@ decisions[13]{id,decision,ref}:
   D01,"maturity remains research prototype approaching near-alpha",../AGENTS.md
   D02,"hyper-content may depend on hyper-site; reverse dependency is forbidden",../scripts/check-product-boundaries.mjs
   D03,"all existing technologies are preserved but activation is evidence-gated",../planning/meta-plan-v3.json
-  D04,"revenue validation is an independent W6 authority, not an inference from technical tests",../30-meta-plan-v3-executable-program.md
+  D04,"revenue validation is an independent W6 authority, not an inference from technical tests",../docs/planning/30-meta-plan-v3-executable-program.md
   D05,"neutral web compilation precedes content geometry in the compatibility path",../reference/src/framework.ts
   D06,"Hyper Site public compile returns no packed content geometry",../hyper-site/test/boundary.test.mjs
   D07,"legacy web artifacts must remain exactly equal during extraction",../reference/test/framework-core-boundary.test.mjs
-  D08,"legacy mixed manifest remains preserved until physical migration and consumer enumeration",../30-meta-plan-v3-executable-program.md
+  D08,"legacy mixed manifest remains preserved until physical migration and consumer enumeration",../docs/planning/30-meta-plan-v3-executable-program.md
   D09,"current Wasm remains content/research infrastructure",../reference/src/wasm.ts
-  D10,"nominal model memory and token pricing are hypotheses or formulas, not workload proof",../30-meta-plan-v3-executable-program.md
+  D10,"nominal model memory and token pricing are hypotheses or formulas, not workload proof",../docs/planning/30-meta-plan-v3-executable-program.md
   D11,"ordinary-framework, real-provider, field and revenue evidence remain mandatory",../planning/meta-plan-v3.steps.json
   D12,"PR #3 stays draft until all release outcomes pass",../planning/meta-plan-v3.json
   D13,"Content Program adaptation is explicit, geometry-free, and artifact-parity checked",../reference/src/content-program-adapter.ts

@@ -33,7 +33,7 @@ The initial criticism was directionally correct, but four claims were rejected:
 
 Research and falsification authority:
 
-- `29-product-boundary-research-and-root-folder-split.md`;
+- `docs/architecture/29-product-boundary-research-and-root-folder-split.md`;
 - `validation/reports/2026-07-18-product-boundary-folder-split.md`.
 
 ## Implemented

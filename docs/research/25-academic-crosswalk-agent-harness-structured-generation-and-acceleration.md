@@ -3,7 +3,7 @@
 Status: verified research crosswalk; source, tests, real baselines, and validation reports remain implementation authority  
 Updated: 2026-07-18  
 Scope: standalone repository root  
-Maturity authority: `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
+Maturity authority: `docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
 
 ## 1. Purpose
 

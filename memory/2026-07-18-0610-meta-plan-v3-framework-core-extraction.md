@@ -31,7 +31,7 @@ Completed in this slice:
 - `planning/meta-plan-v3.json`
 - `planning/meta-plan-v3.steps.json`
 - `scripts/check-meta-plan.mjs`
-- `30-meta-plan-v3-executable-program.md`
+- `docs/planning/30-meta-plan-v3-executable-program.md`
 - `CONTRIBUTING.md`
 - `reference/src/framework-core.ts`
 - `reference/src/site-manifest.ts`

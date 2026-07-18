@@ -57,7 +57,7 @@ Not established:
 
 ### HDC/VSA identity and prototypes
 
-Primary authority remains Plate 1995, Kanerva 2009, and the Kleyko et al. surveys in `13-academic-and-normative-basis-for-validation-vectors.md`.
+Primary authority remains Plate 1995, Kanerva 2009, and the Kleyko et al. surveys in `docs/research/13-academic-and-normative-basis-for-validation-vectors.md`.
 
 Framework consequence:
 

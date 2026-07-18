@@ -64,3 +64,20 @@ Do not claim:
 A failed gate does not require deleting the technology. Keep it in the correct package or research workstream, record the negative result, and block canonical activation.
 
 Rollback is required for reverse dependencies, duplicate publication authorities, unapproved artifact changes, data loss, non-idempotent external effects or regression-suite failures.
+
+## Stateful documentation
+
+Use the lifecycle defined in `docs/README.md`:
+
+```text
+intake -> research -> architecture -> executable plan -> validation report -> memory handoff
+```
+
+Root Markdown is restricted to the bootstrap allowlist. Update `docs/catalog.json` for every document addition, move, supersession, or authority change. Timestamped memory handoffs and validation reports are immutable records. Run:
+
+```bash
+node scripts/check-doc-system.mjs
+node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
+node --test planning/test/meta-plan.test.mjs
+node scripts/check-product-boundaries.mjs
+```

@@ -154,7 +154,7 @@ Read next:
 
 1. `../README.md`
 2. `../CODEGRAPH.md`
-3. `../24-agent-discovered-ontology-and-10k-site-program.md`
+3. `../docs/research/24-agent-discovered-ontology-and-10k-site-program.md`
 4. `../validation/reports/2026-07-17-agent-ontology-10k-site-program.md`
 5. `../reference/README.md`
 

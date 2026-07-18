@@ -22,16 +22,16 @@ No AMTECH marketing redesign is required for v0.1.
 ```text
 GTM-RESEARCH/website-framework/
 ├── README.md
-├── 00-scientific-and-feasibility-validation.md
-├── 01-system-architecture.md
-├── 02-shape-model-and-hrr-core.md
-├── 03-agentic-seo-system.md
-├── 04-feature-validation-vectors.md
-├── 05-pass-fail-vectors.md
-├── 06-experimentation-privacy-operations.md
-├── 07-v0.1-request-mirror-lab.md
-├── 08-implementation-plan.md
-├── RESEARCH-NOTES-2026-07-17.md
+├── docs/validation/00-scientific-and-feasibility-validation.md
+├── docs/architecture/01-system-architecture.md
+├── docs/research/02-shape-model-and-hrr-core.md
+├── docs/research/03-agentic-seo-system.md
+├── docs/validation/04-feature-validation-vectors.md
+├── docs/validation/05-pass-fail-vectors.md
+├── docs/validation/06-experimentation-privacy-operations.md
+├── docs/research/experiments/07-v0.1-request-mirror-lab.md
+├── docs/planning/08-implementation-plan.md
+├── docs/intake/RESEARCH-NOTES-2026-07-17.md
 ├── site-manifest.yaml
 ├── packages/
 │   ├── hrr-reference/
@@ -141,7 +141,7 @@ Done when:
 
 ## Priority 2 — Zig/WASM core
 
-Implement the minimal ABI from `02-shape-model-and-hrr-core.md`.
+Implement the minimal ABI from `docs/research/02-shape-model-and-hrr-core.md`.
 
 Rules:
 

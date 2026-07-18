@@ -3,7 +3,7 @@
 Status: source-wired and synthetic-scale validated; 10K is an experimental tier, not a minimum product contract. Real starter-site, framework baseline, maintenance, provider, hardware, and field evidence remain pending.  
 Updated: 2026-07-18  
 Controlling implementation: `reference/src/agent-site-orchestrator.ts`  
-Maturity authority: `27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
+Maturity authority: `docs/validation/27-near-alpha-framework-validation-and-continuous-agent-workspace.md`
 
 ## 1. Corrected workload definition
 

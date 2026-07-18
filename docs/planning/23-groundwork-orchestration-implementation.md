@@ -207,7 +207,7 @@ Coordinate/selection/job/runner/preview: 8
 Total new attributes: 22
 ```
 
-These complement the broader 27-feature operational matrix in `22-agent-operated-framework-workflow-validation-matrix.md` and the existing compiler/UI validation authorities.
+These complement the broader 27-feature operational matrix in `docs/validation/22-agent-operated-framework-workflow-validation-matrix.md` and the existing compiler/UI validation authorities.
 
 ## Exact source proof
 

@@ -199,3 +199,15 @@ Pass only when all are true:
 - PR remains draft and unmerged.
 
 Fail and rollback the extraction if any unapproved web artifact changes, reverse dependency appears, or legacy tests regress.
+
+## 7. Governed task-surface program mutation
+
+The UI research adds W7, a permanent task-surface platform workstream, rather than overloading W1 or the temporary W3 migration bridge. The executable program now contains P1.6, P2.5, and P3.4 plus a fifth plan outcome.
+
+- P1.4 physically extracts neutral framework and classifies mixed UI modules.
+- P1.5 removes vector geometry and current Wasm from all framework/UI paths.
+- P1.6 freezes protocol-neutral task, surface, projection, event, receipt, theme, and growth contracts.
+- P2 adds one governed task page, adapter conformance fixtures, shared-bundle constraints, and the mandatory 10K surface matrix.
+- P3 keeps content and task-service proposals independently rejectable, then proves a real governed-surface cohort and recovery.
+
+A2UI, AG-UI, MCP Apps, OpenFeature, RDF/SHACL/PROV, and relationship-projection notation remain evidence-gated adapters or research arms.

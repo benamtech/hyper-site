@@ -1,6 +1,6 @@
 # UI and Page-Generation Session Handoff
 
-Read root/scoped identity, AGENTS, CODEGRAPH, `README.md`, `16-unified-hypervector-manifest-agent-harness.md`, `site-manifest.yaml`, and `reference/UI-DESIGN-SYSTEM-HANDOFF.md`.
+Read root/scoped identity, AGENTS, CODEGRAPH, `README.md`, `docs/architecture/16-unified-hypervector-manifest-agent-harness.md`, `site-manifest.yaml`, and `reference/UI-DESIGN-SYSTEM-HANDOFF.md`.
 
 Do not create independent HTML pages or bypass the manifest.
 

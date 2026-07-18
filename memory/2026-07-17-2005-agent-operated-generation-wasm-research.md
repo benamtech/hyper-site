@@ -67,7 +67,7 @@ The vector system's most important search function is rejection. Every indexable
 ## files
 
 created:
-  ../20-agent-operated-vector-site-generation-and-wasm.md
+  ../docs/architecture/20-agent-operated-vector-site-generation-and-wasm.md
 
 updated:
   ../README.md

@@ -3,7 +3,7 @@
 Status: required Phase 2 validation extension
 Updated: 2026-07-17
 
-This addendum extends `04-feature-validation-vectors.md` and `05-pass-fail-vectors.md` for the newly defined software category, landing-page compiler, distributed content fabric, generative UI, commitment elasticity, and autonomous operating-loop claims.
+This addendum extends `docs/validation/04-feature-validation-vectors.md` and `docs/validation/05-pass-fail-vectors.md` for the newly defined software category, landing-page compiler, distributed content fabric, generative UI, commitment elasticity, and autonomous operating-loop claims.
 
 ## V25 — Content compiler determinism
 

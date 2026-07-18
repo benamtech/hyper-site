@@ -10,7 +10,7 @@ branch_pr{branch,pr,reviewed_code_head,exact_head_ci,ci_status}:
   agent/ui-metaprogramming-pass-1,17,f6d726d08491c63f8aac3e8de28ddb84edaa93a1,29629423243,pass
 
 new_docs[2]:
-  ../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  ../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
   ../validation/reports/2026-07-18-academic-crosswalk-harness-and-acceleration.md
 
 job_boundary:
@@ -42,16 +42,16 @@ research_rule:
 ## decisions
 
 decisions[12]{id,decision,ref}:
-  R01,"HRR/VSA remains first-class structural representation after evidence/safety/materiality/graph gates",../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
-  R02,"vectors do not establish page usefulness, search demand, or publication eligibility",../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  R01,"HRR/VSA remains first-class structural representation after evidence/safety/materiality/graph gates",../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  R02,"vectors do not establish page usefulness, search demand, or publication eligibility",../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
   R03,"independent ContextCorpus and held-out compatibility remain evaluation authority",../reference/src/context-corpus.ts
   R04,"sparse concave coverage remains production selector; CSI comparison waits for real hidden slices",../reference/src/opportunity-space-optimized.ts
-  R05,"Leiden remains comparison-only; communities are not prospect/page truth",../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  R05,"Leiden remains comparison-only; communities are not prospect/page truth",../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
   R06,"same-model self-critique never accepts ontology/page output",../reference/src/page-generation.ts
   R07,"external compiler findings and bounded repair remain harness authority",../reference/src/validation-contracts.ts
-  R08,"Stage-1/Stage-2 adapters should use schema-constrained output plus post-decode compiler validation",../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
-  R09,"AgentO is an interoperability vocabulary candidate, not the business/prospect ontology",../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
-  R10,"SGLang/equivalent may optimize provider execution only after real adapters exist",../25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  R08,"Stage-1/Stage-2 adapters should use schema-constrained output plus post-decode compiler validation",../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  R09,"AgentO is an interoperability vocabulary candidate, not the business/prospect ontology",../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
+  R10,"SGLang/equivalent may optimize provider execution only after real adapters exist",../docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md
   R11,"TypeScript remains semantic/production oracle; Zig/Wasm remains research",../reference/src/acceleration-decision.ts
   R12,"unverified paper/cost/TPS/crate/action-item claims remain notes only",../validation/reports/2026-07-18-academic-crosswalk-harness-and-acceleration.md
 
