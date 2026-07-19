@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "status": "complete",
+  "records": [
+    {
+      "path": "reference/src/core-packed-overload.d.ts",
+      "owner": "research-deferred",
+      "role": "legacy declaration overload for packed vector research compatibility",
+      "dependencies": ["reference/src/core.ts"],
+      "tests": [],
+      "migration_order": 821
+    },
+    {
+      "path": "reference/src/node.d.ts",
+      "owner": "reference-only",
+      "role": "legacy ambient Node declaration compatibility shim",
+      "dependencies": [],
+      "tests": ["reference/test/*.test.mjs"],
+      "migration_order": 980
+    }
+  ]
+}
