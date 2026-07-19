@@ -1,69 +1,136 @@
 # Hyper Monorepo
 
-Status: H0-H4 bounded MVP loop PASS; H5-H6 remain measured challenger tracks  
+Status: H0-H4 bounded MVP PASS; production outbox/reconciliation contract PASS; live-provider environment gates remain  
 Updated: 2026-07-19  
 PR: #3 remains draft and unmerged
 
-## Working loop
+## Working product path
 
 ```text
-approved corpus
--> bounded semantic proposal
+approved source truth
+-> Hyper Content bounded semantic generation
 -> independent evidence validation
--> bounded repair or atomic rejection
 -> accepted SiteSource + LivingSurfaceState
--> deterministic Hyper Site compilation
+-> Hyper Site deterministic compilation
 -> public/operator living surfaces
--> resumable accepted checkpoint
--> explicit approval
--> injected external action executor
--> immutable idempotent receipt
--> completed living-surface state
+-> tenant/actor authorization
+-> transactional outbox
+-> approved connector execution
+-> immutable receipt
+-> deterministic post-effect projection
 ```
 
-`@amtech/hyper-site` owns deterministic site and living-surface compilation. `@amtech/hyper-content` owns bounded semantic proposals, independent validation, checkpoints, approved external actions and receipts.
+## Production effect path
+
+```text
+verified principal
+-> approved tenant-scoped action
+-> PostgreSQL SERIALIZABLE outbox transaction
+-> SKIP LOCKED worker claim
+-> connector dispatch
+   ├─ succeeded -> receipt + succeeded state in one transaction
+   ├─ definitely not sent -> bounded retry
+   ├─ rejected/exhausted -> dead letter
+   └─ unknown -> ambiguous quarantine
+-> provider reconciliation
+   ├─ succeeded -> immutable receipt
+   ├─ pending -> remain ambiguous
+   ├─ confirmed absent -> bounded retry
+   └─ failed -> operator dead letter
+```
+
+The central production invariant is:
+
+```text
+unknown provider outcome -X-> automatic retry
+unknown provider outcome -> ambiguous -> reconcile
+```
+
+## Package APIs
 
 ```ts
-import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
-import { executeApprovedSurfaceAction } from "@amtech/hyper-content/action-runtime";
+import {
+  compileSite,
+  compileLivingSurface,
+} from "@amtech/hyper-site";
+
+import {
+  runSemanticGeneration,
+} from "@amtech/hyper-content/semantic-generation";
+
+import {
+  DurableJsonTransactionStore,
+  GlmStructuredOutputProvider,
+  ShadowConnectorExecutor,
+} from "@amtech/hyper-content/durable-pilot";
+
+import {
+  PostgresProductionStore,
+  EnvironmentSecretSource,
+  verifyIdentityClaims,
+  buildOutboxRecord,
+  processNextOutbox,
+  reconcileNextAmbiguous,
+} from "@amtech/hyper-content/production-runtime";
 ```
 
-## Measured result
-
-Validated source commit: `cf9e9553637ba1b8f6337735fca3fbc2255ffe30`  
-Workflow run: `29679215879`  
-Artifact: `h0-h1-proof-29679215879`
+## Current package versions
 
 ```text
-H0 integration: PASS
-H1 compiler/package extraction: PASS
-H2 bounded semantic-generation MVP: PASS
-H3 living-surface MVP: PASS
-H4 approved idempotent-action MVP: PASS
-H5 SDRT/GNN comparisons: NOT RUN
-H6 GPU/Zig/Wasm comparisons: NOT RUN
+@amtech/hyper-site     0.3.0-alpha.0
+@amtech/hyper-content  0.4.0-alpha.0
 ```
 
-- Hyper Site tests: 8/8;
-- Hyper Content tests: 4/4;
-- legacy tests: 80/80;
-- isolated tarball consumers: PASS;
-- unsupported proposal rejection and repair: PASS;
-- accepted checkpoint resume without provider call: PASS;
-- atomic bounded rejection: PASS;
-- public/private projection boundary: PASS;
-- approval-before-effect: PASS;
-- exactly-once executor behavior under replay: PASS;
-- immutable receipt replay: PASS;
-- randomized 25-page compiler/rejection suite: PASS.
+## Measured exact-head proof
 
-Measured authority: `validation/reports/2026-07-19-semantic-action-loop-mvp.md`
+Validated production-runtime source commit:
 
-Active H0-H6 program: `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+```text
+d38b5c6b9ea8991edcf40d094dbdabad138fe489
+```
 
-Documentation system: `docs/README.md`
+Workflows:
 
-## Run it
+```text
+Organize Repository Documents          PASS  29682124539
+Hyper Site H0-H1 Integration Pipeline  PASS  29682124534
+Hyper Site Reference Compatibility     PASS  29682124533
+```
+
+Proof artifact:
+
+```text
+h0-h1-proof-29682124534
+sha256:80f0f0f98940367cfc4d4f85391935f2ebf5208c6e7bbfcd7a87d4e98b439391
+```
+
+Measured reports:
+
+- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`;
+- `validation/reports/2026-07-19-living-surface-mvp.md`;
+- `validation/reports/2026-07-19-semantic-action-loop-mvp.md`;
+- `validation/reports/2026-07-19-durable-provider-connector-pilot.md`;
+- `validation/reports/2026-07-19-production-outbox-reconciliation.md`.
+
+## H0-H6 hypothesis state
+
+```text
+H0 integrated proof: PASS
+H1 physical extraction: PASS
+H2 bounded semantic generation: PASS for deterministic/provider-adapter MVP
+H3 living GenUI: typed deterministic MVP PASS
+H4 authorized durable action path: outbox/reconciliation contract PASS
+H5 SDRT/GNN comparisons: pending
+H6 GPU/Zig/Wasm comparisons: pending
+```
+
+Active program authority:
+
+- `docs/README.md`;
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`;
+- `docs/planning/51-durable-provider-connector-pilot.md`.
+
+## Run the complete repository proof
 
 ```bash
 git clone --single-branch --branch agent/glm-blackwell-vertical-slice https://github.com/benamtech/hyper-site.git
@@ -71,20 +138,28 @@ cd hyper-site
 npm --prefix hyper-site install
 npm --prefix hyper-content install
 npm --prefix reference install
-npm run mvp:semantic-action
 npm run proof:h0-h1
 ```
 
-## Next gate
+Package-level tests:
 
-Real provider and connector pilot:
+```bash
+npm --prefix hyper-content test
+```
 
-1. durable transactional checkpoint and receipt storage;
-2. GLM-compatible structured-output provider adapter;
-3. one approved real business corpus;
-4. tenant, actor and approval-epoch authorization;
-5. one sandbox or shadow connector;
-6. timeout, retry, duplicate-delivery and process-restart tests;
-7. deterministic post-effect surface and receipt.
+## External environment gates
 
-The current provider and executor are deterministic fixtures. Production connector safety, credential custody, durable leases, dead-letter handling and live browser execution are not yet proven. H5 and H6 require separate frozen controls and measured promotion decisions.
+The repository now contains fail-closed adapter contracts for the remaining production systems. The following cannot be honestly marked complete without configured external infrastructure:
+
+- a real PostgreSQL instance and crash-injection harness;
+- managed secret custody;
+- cryptographically verified OIDC tokens and provider JWKS;
+- a live GLM endpoint and controlled credential;
+- a real provider sandbox supporting idempotency and status reconciliation;
+- kill-after-provider-acknowledgement testing.
+
+No production connector should be enabled until those tests pass. The current code does not auto-retry unknown outcomes, accept unsigned identity claims, or silently fall back to embedded secrets.
+
+## Nonclaims
+
+The project does not yet claim production deployment, live autonomous publication, live browser execution, provider credential custody, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage, or GPU/Zig/Wasm advantage.
