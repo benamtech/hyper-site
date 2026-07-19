@@ -18,7 +18,7 @@ Pass requires:
 - two `npm pack` consumers pass outside the monorepo;
 - the randomized compiler fixture passes;
 - no accepted test reaches `reference/` through the Hyper Site public entrypoint;
-- failures produce a repair-only decision rather than additional feature work.
+- failures produce the machine-readable decision `repair-gate-failures-only`, never additional feature work.
 
 Canonical command:
 
