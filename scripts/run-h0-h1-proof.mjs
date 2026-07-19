@@ -62,9 +62,11 @@ const referenceWrappers = ["framework-core.ts", "site-manifest.ts", "browser-tar
   name,
   text: readFileSync(resolve(root, "reference/src", name), "utf8"),
 }));
-const inventory = JSON.parse(readFileSync(resolve(root, "validation/reference-source-inventory.json"), "utf8"));
+const implementationInventory = JSON.parse(readFileSync(resolve(root, "validation/reference-source-inventory.json"), "utf8"));
+const declarationInventory = JSON.parse(readFileSync(resolve(root, "validation/reference-declaration-inventory.json"), "utf8"));
+const inventories = [implementationInventory, declarationInventory];
 const referenceFiles = walkTs("reference/src");
-const inventoryRecords = Array.isArray(inventory.records) ? inventory.records : [];
+const inventoryRecords = inventories.flatMap((inventory) => Array.isArray(inventory.records) ? inventory.records : []);
 const inventoryPaths = inventoryRecords.map((record) => record.path);
 const inventoryMissing = referenceFiles.filter((path) => !inventoryPaths.includes(path));
 const inventoryOrphans = inventoryPaths.filter((path) => !referenceFiles.includes(path));
@@ -84,7 +86,7 @@ const structural = {
   packageOwnsCompilerSource: ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts", "index.ts"].every((name) => {
     try { return readFileSync(resolve(root, "hyper-site/src", name), "utf8").length > 100; } catch { return false; }
   }),
-  inventoryStatusComplete: inventory.status === "complete",
+  inventoryStatusComplete: inventories.every((inventory) => inventory.status === "complete"),
   inventoryCoversReferenceSource: referenceFiles.length > 0 && inventoryMissing.length === 0 && inventoryOrphans.length === 0 && inventoryDuplicates.length === 0,
   inventoryRecordsComplete: inventoryRecords.length === referenceFiles.length && inventoryIncomplete.length === 0,
 };
@@ -107,6 +109,7 @@ const report = {
     inventory: {
       referenceFileCount: referenceFiles.length,
       recordCount: inventoryRecords.length,
+      inventoryFiles: ["validation/reference-source-inventory.json", "validation/reference-declaration-inventory.json"],
       missing: inventoryMissing,
       orphans: inventoryOrphans,
       duplicates: inventoryDuplicates,
