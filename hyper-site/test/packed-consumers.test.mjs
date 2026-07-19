@@ -15,7 +15,7 @@ function packPackage(root) {
   assert.equal(output.length, 1);
   const record = output[0];
   const paths = record.files.map((file) => file.path);
-  for (const required of ["index.mjs", "dist/index.js", "dist/index.d.ts", "dist/framework-core.js", "dist/framework-core.d.ts"]) assert(paths.includes(required), `tarball missing ${required}`);
+  for (const required of ["index.mjs", "dist/index.js", "dist/index.d.ts", "dist/framework-core.js", "dist/framework-core.d.ts", "dist/living-surface.js", "dist/living-surface.d.ts"]) assert(paths.includes(required), `tarball missing ${required}`);
   assert(paths.every((path) => !path.includes("reference/")), "tarball must not contain reference runtime files");
   return join(root, record.filename);
 }
@@ -34,7 +34,7 @@ function runJavaScriptConsumer(root, name, tarball, source) {
 
 const validSource = `
 import assert from "node:assert/strict";
-import { compileSite } from "@amtech/hyper-site";
+import { compileSite, compileLivingSurface } from "@amtech/hyper-site";
 const source = {
   baseUrl: "https://clean-room.example",
   evidence: [{ id: "e1", level: 4, summary: "approved" }],
@@ -50,7 +50,9 @@ assert.equal(first.pages.length, 1);
 assert.match(first.pages[0].html, /Packed Hyper Site/);
 assert.equal(first.sitemapXml.includes("https://clean-room.example/"), true);
 assert.deepEqual(first.dependencyIndex.get("e1"), ["home"]);
-console.log(JSON.stringify({ passed: true, buildHash: first.buildHash, pageHash: first.pages[0].sha256 }));
+const living = compileLivingSurface({ schemaVersion: 1, id: "surface", title: "Surface", purpose: "Clean room surface", currentTask: "Inspect", governanceThreshold: 0.5, evidenceIds: [], informationObjects: [], actions: [], approvals: [], receipts: [], nodes: [{ id: "n", kind: "status", title: "Ready", body: "Ready", visibility: "both", field: { visibility: 1, scale: 1, curvature: 0, density: 0.2, governance: 0, agency: 1, relevance: 1, valence: 0.5, urgency: 0.2 }, informationObjectIds: [], actionIds: [], evidenceIds: [] }], runtime: { status: "idle", activeAgents: 0, queueDepth: 0, pendingApprovals: 0, costUsd: 0, lastHeartbeatAt: "2026-07-19T00:00:00.000Z" } }, "public");
+assert.match(living.html, /Clean room surface/);
+console.log(JSON.stringify({ passed: true, buildHash: first.buildHash, pageHash: first.pages[0].sha256, livingSurfaceHash: living.buildHash }));
 `;
 const invalidSource = `
 import assert from "node:assert/strict";
@@ -67,12 +69,14 @@ assert.throws(() => compileSite(source), /claim c1 exceeds evidence e1/);
 console.log(JSON.stringify({ passed: true, rejected: "under-supported claim" }));
 `;
 const typedSource = `
-import { compileSite, compileSiteManifest, resolveBrowserTargets, evaluateCssFeatureChecklist, type SiteSource, type SiteManifest } from "@amtech/hyper-site";
+import { compileSite, compileSiteManifest, compileLivingSurface, resolveBrowserTargets, evaluateCssFeatureChecklist, type SiteSource, type SiteManifest, type LivingSurfaceState } from "@amtech/hyper-site";
 const source: SiteSource = { baseUrl: "https://typed.example", evidence: [], claims: [], informationObjects: [], modules: [{ id: "m", kind: "answer", layoutRole: "lead", claimIds: [], informationObjectIds: [], requiredCapabilities: [], sourceIds: [] }], pages: [{ id: "p", route: "/", canonicalQuestion: "Typed?", title: "Typed", description: "Typed", moduleIds: ["m"], internalPageIds: [], requiredCapabilities: [], indexable: false }] };
 compileSite(source);
 const manifest = { version: "1", base_url: source.baseUrl, evidence: [], claims: [], information_objects: [], modules: [{ id: "m", kind: "answer", layout_role: "lead", claim_ids: [], information_object_ids: [], required_capabilities: [], source_ids: [] }], pages: [{ id: "p", route: "/", canonical_question: "Typed?", title: "Typed", description: "Typed", module_ids: ["m"], internal_page_ids: [], required_capabilities: [], indexable: false }] } satisfies SiteManifest;
 compileSiteManifest(manifest);
 evaluateCssFeatureChecklist(resolveBrowserTargets({}));
+const surface: LivingSurfaceState = { schemaVersion: 1, id: "s", title: "S", purpose: "P", currentTask: "T", governanceThreshold: 0.5, evidenceIds: [], informationObjects: [], actions: [], approvals: [], receipts: [], nodes: [], runtime: { status: "idle", activeAgents: 0, queueDepth: 0, pendingApprovals: 0, costUsd: 0, lastHeartbeatAt: "2026-07-19T00:00:00.000Z" } };
+compileLivingSurface(surface, "public");
 `;
 
 test("npm pack installs into isolated runtime and TypeScript consumers without reference access", () => {
@@ -84,6 +88,7 @@ test("npm pack installs into isolated runtime and TypeScript consumers without r
     const valid = JSON.parse(validConsumer.output);
     const invalid = JSON.parse(invalidConsumer.output);
     assert.equal(valid.passed, true);
+    assert.equal(typeof valid.livingSurfaceHash, "string");
     assert.equal(invalid.passed, true);
     assert.equal(invalid.rejected, "under-supported claim");
 
