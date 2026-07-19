@@ -7,6 +7,7 @@ export { adaptContentProgramSiteSource } from "./dist/content-program-adapter.js
 export * from "./dist/semantic-generation.js";
 export * from "./dist/action-runtime.js";
 export * from "./dist/durable-pilot.js";
+export * from "./dist/production-runtime.js";
 export { compileSite, compileSite as compileContentSite, packSite } from "../reference/dist/framework.js";
 export { compileContentProgramManifest } from "../reference/dist/content-program-adapter.js";
 
