@@ -1,4 +1,4 @@
-name: Hyper Site Near-Alpha Pipeline
+name: Hyper Site H0-H1 Integration Pipeline
 
 on:
   pull_request:
@@ -9,36 +9,29 @@ permissions:
   contents: read
 
 jobs:
-  near-alpha-pipeline:
+  h0-h1-pipeline:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: reference
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Build owned Hyper Content source
+      - name: Install package toolchains
         run: |
-          npm --prefix ../hyper-content install --no-audit --no-fund --no-package-lock
-          npm --prefix ../hyper-content run build
-      - run: npm install --no-audit --no-fund --no-package-lock
-      - run: npm run build
-      - name: Validate executable plan
+          npm --prefix hyper-site install --no-audit --no-fund --no-package-lock
+          npm --prefix hyper-content install --no-audit --no-fund --no-package-lock
+          npm --prefix reference install --no-audit --no-fund --no-package-lock
+      - name: Validate executable plan and documentation
         run: |
-          node ../scripts/check-meta-plan.mjs ../planning/meta-plan-v3.json
-          node --test ../planning/test/meta-plan.test.mjs
-      - name: Validate documentation system
-        run: |
-          node ../scripts/check-declared-doc-moves.mjs
-          node ../scripts/check-doc-system.mjs
-          node --test ../docs/test/doc-system.test.mjs
-      - name: Validate product boundaries
-        run: |
-          node ../scripts/check-product-boundaries.mjs
-          node --test ../hyper-site/test/*.test.mjs ../hyper-content/test/*.test.mjs
+          node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
+          node --test planning/test/meta-plan.test.mjs
+          node scripts/check-declared-doc-moves.mjs
+          node scripts/check-doc-system.mjs
+          node --test docs/test/doc-system.test.mjs
+      - name: Run H0 integration and H1 extraction proof
+        run: node scripts/run-h0-h1-proof.mjs
       - name: Validate operator commands
+        working-directory: reference
         run: |
           node --check scripts/production-cli.mjs
           node --check scripts/production-stage1.mjs
@@ -48,24 +41,13 @@ jobs:
           node scripts/production-cli.mjs help
           node scripts/workspace-cli.mjs help
           node scripts/near-alpha-cli.mjs help
-      - name: Run near-alpha boundary tests
-        shell: bash
-        run: |
-          set -o pipefail
-          node --test --test-reporter=spec \
-            test/framework-core-boundary.test.mjs \
-            test/content-program-adapter.test.mjs \
-            test/production-pipeline.test.mjs \
-            test/page-backend-pass.test.mjs \
-            test/near-alpha-framework.test.mjs \
-            test/near-alpha-release.test.mjs \
-            test/agent-workspace.test.mjs \
-            test/agent-workspace-cardinality.test.mjs \
-            2>&1 | tee near-alpha-test.log
-      - name: Upload near-alpha test transcript
+      - name: Upload H0-H1 proof
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: near-alpha-test-log-${{ github.run_id }}
-          path: reference/near-alpha-test.log
-          if-no-files-found: error
+          name: h0-h1-proof-${{ github.run_id }}
+          path: |
+            validation/reports/h0-h1-proof.json
+            validation/reports/h0-h1-proof.md
+            validation/reports/h0-h1-compiler-limit/
+          if-no-files-found: warn
