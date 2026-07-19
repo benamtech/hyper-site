@@ -49,29 +49,10 @@ unknown provider outcome -> ambiguous -> reconcile
 ## Package APIs
 
 ```ts
-import {
-  compileSite,
-  compileLivingSurface,
-} from "@amtech/hyper-site";
-
-import {
-  runSemanticGeneration,
-} from "@amtech/hyper-content/semantic-generation";
-
-import {
-  DurableJsonTransactionStore,
-  GlmStructuredOutputProvider,
-  ShadowConnectorExecutor,
-} from "@amtech/hyper-content/durable-pilot";
-
-import {
-  PostgresProductionStore,
-  EnvironmentSecretSource,
-  verifyIdentityClaims,
-  buildOutboxRecord,
-  processNextOutbox,
-  reconcileNextAmbiguous,
-} from "@amtech/hyper-content/production-runtime";
+import { compileSite, compileLivingSurface } from "@amtech/hyper-site";
+import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
+import { DurableJsonTransactionStore, GlmStructuredOutputProvider, ShadowConnectorExecutor } from "@amtech/hyper-content/durable-pilot";
+import { PostgresProductionStore, EnvironmentSecretSource, verifyIdentityClaims, buildOutboxRecord, processNextOutbox, reconcileNextAmbiguous } from "@amtech/hyper-content/production-runtime";
 ```
 
 ## Current package versions
