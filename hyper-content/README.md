@@ -1,91 +1,118 @@
 # @amtech/hyper-content
 
-Status: `0.4.0-alpha.0` production-boundary alpha  
+Evidence-grounded content generation and semantic validation pipeline.
+
+Status: `0.4.0-alpha.0`  
 Updated: 2026-07-19
 
-`@amtech/hyper-content` owns bounded semantic generation, durable action orchestration and production outbox contracts targeting `@amtech/hyper-site`.
+## Product identity
 
-## Dependency rule
+Hyper Content produces validated website content and optional task/surface proposals for Hyper Site.
+
+It is not the website renderer and it is not the governed execution runtime.
 
 ```text
-hyper-content -> hyper-site
+approved corpus
+-> semantic proposal
+-> independent evidence validation
+-> bounded repair or atomic rejection
+-> accepted SiteSource
+-> Hyper Site
 ```
 
-Hyper Content must not maintain a second renderer or publication authority.
+## Owns
 
-## Semantic generation
+Hyper Content owns:
 
-```ts
-import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
-```
+- approved business facts, evidence and corpus intake;
+- deterministic and model-backed semantic proposals;
+- claim-to-evidence validation;
+- bounded provider attempts and repair;
+- accepted generation checkpoints;
+- portable `SiteSource` production;
+- optional task and `LivingSurfaceState` proposals.
 
-The provider proposes structured semantic state. Independent validation decides acceptance.
+A provider may propose content. It cannot validate, approve, publish or execute its own output.
 
-## Durable single-host pilot
+## Does not own
+
+Hyper Content does not own:
+
+- HTML, CSS or `PageIR` rendering authority;
+- customer/operator projection rendering;
+- authenticated identity;
+- tenant authorization;
+- approval decisions;
+- connector credentials;
+- durable effect execution;
+- retry and reconciliation policy;
+- immutable effect receipt authority.
+
+## Semantic-generation API
 
 ```ts
 import {
-  DurableJsonTransactionStore,
-  GlmStructuredOutputProvider,
-  ShadowConnectorExecutor,
-} from "@amtech/hyper-content/durable-pilot";
+  runSemanticGeneration,
+  validateSemanticProposal,
+} from "@amtech/hyper-content/semantic-generation";
 ```
 
-This path provides deterministic local durability and a no-effect shadow connector.
+The pipeline validates provider proposals against approved corpus records and compiles accepted proposals through the public Hyper Site contracts.
 
-## Production runtime contract
+## Transitional runtime exports
 
-```ts
-import {
-  PostgresProductionStore,
-  EnvironmentSecretSource,
-  verifyIdentityClaims,
-  buildOutboxRecord,
-  processNextOutbox,
-  reconcileNextAmbiguous,
-} from "@amtech/hyper-content/production-runtime";
+The following exports currently live in this package for migration convenience:
+
+```text
+@amtech/hyper-content/action-runtime
+@amtech/hyper-content/durable-pilot
+@amtech/hyper-content/production-runtime
 ```
 
-The production runtime provides:
+They implement the logical **Hyper Runtime** subsystem:
 
-- PostgreSQL schema and serializable transaction adapter;
-- bounded retry for serialization/deadlock SQLSTATEs;
-- `FOR UPDATE SKIP LOCKED` worker claims;
-- transactional outbox and immutable receipt commit;
-- explicit ambiguous-outcome quarantine;
-- provider status reconciliation;
-- bounded retry only for definitely-not-sent or provider-confirmed-absent effects;
-- operator-visible dead letters;
-- verified-claims policy checks;
-- fail-closed secret-source contract;
-- deterministic payload and idempotency hashing.
+- tenant and actor policy;
+- approvals;
+- durable outbox state;
+- connectors;
+- ambiguous-outcome reconciliation;
+- dead letters;
+- immutable effect receipts.
 
-Critical invariant:
+Their current location does not make those responsibilities part of Hyper Content’s product identity. A future package-boundary cleanup may move them to `@amtech/hyper-runtime` while preserving their contracts.
+
+Critical runtime invariant:
 
 ```text
 unknown provider outcome -X-> automatic retry
 unknown provider outcome -> ambiguous -> reconcile
 ```
 
-## Owns
+## Dependency rule
 
-- approved evidence and business-source intake;
-- bounded semantic proposals and independent acceptance;
-- durable checkpoints and action orchestration;
-- tenant/actor/approval policy inputs;
-- transactional outbox and receipt contracts;
-- reconciliation and dead-letter transitions;
-- optional task-semantic proposals;
-- experimental vector, graph, Wasm, Zig and GPU methods behind promotion gates.
+```text
+hyper-content -> hyper-site
+hyper-site -X-> hyper-content
+```
 
-## Does not own
+Hyper Content must not maintain a second renderer or publication authority.
 
-- HTML rendering or PageIR authority;
-- theme components or browser state;
-- raw credential storage;
-- raw JWT signature verification without a trusted identity adapter;
-- autonomous production publication without approval;
-- silent retries after an ambiguous provider outcome.
+## AI Employee composition
+
+An AI Employee product may use:
+
+```text
+Hyper Content
+-> evidence-grounded website and task proposals
+
+Hyper Site
+-> website and operator/customer presentation
+
+Hyper Runtime
+-> approved task execution and receipts
+```
+
+Hyper Content alone is a content pipeline, not an AI Employee.
 
 ## Validation
 
@@ -94,26 +121,12 @@ npm run build
 npm test
 ```
 
-Repository-level exact proof:
+Tests cover semantic rejection/repair, accepted checkpoint resume, authorization, durable shadow effects, PostgreSQL transaction contracts, ambiguous-outcome reconciliation, dead letters and immutable receipts.
 
-```bash
-npm run proof:h0-h1
-```
+## External gates
 
-Measured authority:
+Live deployment still requires configured external PostgreSQL, managed secrets, cryptographic identity verification, a live model endpoint and a provider sandbox. Repository adapter tests do not claim those services are deployed.
 
-- `validation/reports/2026-07-19-production-outbox-reconciliation.md`;
-- `memory/2026-07-19-0948-production-outbox-reconciliation.md`.
+Canonical taxonomy:
 
-## External production gates
-
-A deployment must still supply and test:
-
-- a real PostgreSQL instance;
-- a managed `SecretSource` implementation;
-- cryptographically verified OIDC/JWKS claims;
-- a live GLM credential and endpoint contract;
-- a provider sandbox with idempotency or status reconciliation;
-- kill-after-provider-acknowledgement recovery.
-
-Until those pass, irreversible connectors remain disabled.
+- `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
