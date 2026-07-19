@@ -1,118 +1,151 @@
 # AGENTS.md — Hyper Monorepo Operating Contract
 
 Status: active implementation contract  
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 ## Read first
 
 1. `identity.md`
 2. `AGENTS.md`
-3. `CODEGRAPH.md`
-4. `README.md`
+3. `README.md`
+4. `CODEGRAPH.md`
 5. `docs/README.md`
-6. `docs/catalog.json`
-7. `memory/MEMORY.md`
-8. newest immutable handoff
-9. newest measured validation report
-10. current research -> architecture -> plan -> validation chain
+6. `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
+7. `docs/catalog.json`
+8. `memory/MEMORY.md`
+9. newest immutable handoff
+10. newest measured validation report
+11. current task-specific authority chain
 
-Current authority chain:
-
-- `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
-- `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
-- `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
-- `docs/validation/46-useful-framework-and-agent-first-gates.md`
-
-Historical filenames do not change their current useful-framework authority.
-
-## Active product boundary
+## Canonical product boundary
 
 ```text
-Hyper Content (optional later) -> portable SiteSource -> Hyper Site -> static artifacts
-Hyper Site -X-> Hyper Content
-Hyper Site -X-> reference runtime in target state
+Hyper Content
+  evidence-grounded content generation and validation
+        |
+        | SiteSource + optional task/surface proposals
+        v
+Hyper Site
+  deterministic website framework and compiler
+        |
+        | optional governed task mounts
+        v
+Hyper Runtime
+  identity, approvals, durable jobs, connectors and receipts
+
+AI Employee
+  product assembled from all three
 ```
+
+The names are not interchangeable.
 
 ### Hyper Site
 
-Owns `SiteSource`, `PageIR`, validation, deterministic compilation, rendering, routes, metadata, JSON-LD, sitemap, design tokens, layouts, components, assets, diagnostics, dependencies, hashes and the ordinary CLI.
+Owns:
 
-Must work without Hyper Content, an LLM, agent runtime, database, GPU, Zig or Wasm.
+- `SiteSource`, `PageIR`, validation and deterministic compilation;
+- HTML, CSS, metadata, JSON-LD, sitemap and instruction projections;
+- browser capability contracts;
+- public/operator surface rendering;
+- static fallback output;
+- dependency declarations and hashes.
+
+Must work without Hyper Content, an LLM, runtime service, database, GPU, Zig or Wasm.
+
+Must not own credentials, authorization, connector execution or durable effects.
 
 ### Hyper Content
 
-Blocked until the framework maintenance decision is `advance`.
+Owns:
 
-Its first allowed scope is approved facts/evidence -> validated claims/page records -> portable `SiteSource`.
+- approved corpus and evidence intake;
+- deterministic/model-backed semantic proposals;
+- independent evidence validation;
+- bounded repair and atomic rejection;
+- accepted generation checkpoints;
+- portable `SiteSource` and optional task/surface proposals.
 
-### Reference
+Must not own HTML rendering, publication authority, approvals or external effects.
 
-`reference/` is current transitional runtime authority. Its target role is compatibility consumer, fixtures, examples and benchmarks.
+### Hyper Runtime
 
-Current truth:
+Owns:
 
-- most canonical source remains under `reference/src`;
-- `hyper-site/index.mjs` delegates to `reference/dist/framework-core.js`;
-- package extraction is incomplete;
-- folder names and facades are not ownership.
+- verified tenant and actor identity context;
+- role, scope and approval policy;
+- durable outbox and worker claims;
+- connector dispatch and reconciliation;
+- ambiguous-outcome quarantine;
+- dead-letter/operator recovery state;
+- immutable effect receipts.
 
-## One-authority rule
+Current implementation lives in `hyper-content/src/action-runtime.ts`, `durable-pilot.ts` and `production-runtime.ts`. This is transitional physical placement, not product identity.
 
-Never create a second compiler, renderer, `SiteSource`, `PageIR`, sitemap or hash authority. Freeze behavior, move ownership, delegate compatibility, prove parity, then remove the old authority.
+### AI Employee
 
-## Active execution order
+“AI Employee” is a composed deployment using Hyper Content, Hyper Site and Hyper Runtime.
 
-```text
-U1 package ownership and isolated consumption
--> U2 ordinary CLI and starter
--> U3 five-page browser-accepted proof
--> U4 maintenance comparison and advance/narrow/stop
--> U5 optional minimal Hyper Content adapter
-```
+Do not call Hyper Site, Hyper Content or the entire repository an AI Employee by itself.
 
-Only U1 is unblocked.
+## One-authority rules
 
-## U1 implementation rule
+Never create a second authority for:
 
-U1 moves existing behavior without feature redesign.
+- `SiteSource` or `PageIR`;
+- deterministic HTML rendering;
+- evidence acceptance;
+- tenant authorization;
+- approval decisions;
+- effect receipts.
 
-Required sequence:
+Move behavior through compatibility wrappers and prove parity before removing the old authority.
 
-```text
-inventory reference/src
--> assign one owner/role per file
--> freeze positive and negative fixtures
--> extract compiler/renderer cluster to hyper-site/src
--> build hyper-site/dist
--> switch exports
--> make reference consume Hyper Site
--> npm pack
--> two isolated consumers
--> parity report
-```
-
-Stop when:
-
-- a tarball needs the monorepo;
-- runtime imports still enter `reference/`;
-- output or rejection behavior drifts without an approved contract change;
-- duplicate authorities appear.
-
-## Ordinary framework floor
-
-No framework differentiation claim is allowed until a clean external developer can complete:
+## Semantic authority rule
 
 ```text
-install -> create -> dev -> build -> preview -> inspect -> local publish
+provider proposes
+independent validator accepts or rejects
+provider -X-> self-validation
+provider -X-> self-approval
+provider -X-> direct publication/effect authority
 ```
 
-for five distinct real pages.
+## Effect safety rule
 
-The direct controls are typed JSON plus direct templates and Astro using the same facts, routes, design and acceptance criteria.
+```text
+succeeded -> immutable receipt
+not sent + retryable -> bounded retry
+rejected/exhausted -> dead letter
+unknown -> ambiguous quarantine -> reconciliation
+```
 
-## Browser and accessibility rule
+Unknown outcomes must never be automatically retried.
 
-Tests verify user-visible behavior, complete static output, routes, links, metadata and browser rendering. Automated accessibility scanning is required but partial; manual review remains required.
+## Permission rule
+
+- Permission filtering occurs before public rendering.
+- Browser surfaces submit typed intents; they do not mutate canonical runtime state directly.
+- Public projections are allowlisted.
+- Rendered controls are not authorization enforcement.
+- High-risk actions require an independently authorized approval.
+
+## Packaging direction
+
+```text
+hyper-content -> hyper-site
+hyper-site -X-> hyper-content
+reference -> hyper-site compatibility surface
+```
+
+Future target:
+
+```text
+hyper-content   semantic pipeline
+hyper-site      framework/presentation
+hyper-runtime   governed execution
+```
+
+Extracting `hyper-runtime` is package cleanup and must preserve current behavior and tests.
 
 ## Baseline-first rule
 
@@ -125,22 +158,9 @@ Every advanced method requires a simpler control:
 - Wasm/Zig vs JavaScript;
 - GPU vs CPU/provider API;
 - generated UI vs trusted static components;
-- autonomous page plan vs human-curated plan.
+- autonomous plan vs human-curated plan.
 
-Advanced methods cannot enter the active graph before U4 advances.
-
-## Incremental correctness
-
-For every maintenance test freeze the expected affected set before execution and report:
-
-```text
-required but missed
-unexpected changed
-unchanged as expected
-partial accepted output after failure
-```
-
-The dependency index cannot prove its own completeness.
+Advanced research cannot become semantic, rendering or effect authority without a measured promotion gate.
 
 ## Required evidence
 
@@ -148,6 +168,8 @@ Every substantive change names:
 
 ```text
 hypothesis
+logical owner
+physical owner
 owned invariant
 primary metric
 falsification rule
@@ -161,18 +183,36 @@ measured evidence
 
 Pending and not-run checks remain visible.
 
-## Deferred work
+## Side-effect documentation
 
-Until U4 records `advance`, do not implement:
+For every source or operational entry point document:
 
-- model-backed bulk generation;
-- agent runtime or task surfaces;
-- remote publication effects;
-- SDRT/custom graph languages;
-- GNN/GPU/Zig/Wasm promotion;
-- binary LLM prompting;
-- 10K publication;
-- enterprise claims.
+- file reads and writes;
+- database queries and transaction boundaries;
+- network requests;
+- process spawns;
+- environment and secret reads;
+- external effects;
+- retry and reconciliation behavior.
+
+## Validation commands
+
+```bash
+npm run build
+npm test
+npm run test:validation
+npm run test:compiler-limit
+npm run validate:workstreams
+node scripts/check-doc-system.mjs
+```
+
+Package-specific:
+
+```bash
+npm --prefix hyper-site test
+npm --prefix hyper-content test
+npm run proof:h0-h1
+```
 
 ## Documentation lifecycle
 
@@ -187,31 +227,6 @@ intake
 -> catalog/bootstrap/PR reconciliation
 ```
 
-## Validation commands
+Documents are stale if they collapse the subsystem taxonomy, claim unrun external integrations, present unknown effects as retryable or describe transitional package placement as the desired architecture.
 
-```bash
-npm ci
-npm run build
-npm test
-npm run test:validation
-npm run test:compiler-limit
-npm run validate:workstreams
-node scripts/check-doc-system.mjs
-```
-
-Existing green compiler fixtures do not satisfy U1-U5. PR #3 remains draft.
-
-## Governed task-surface boundary
-
-- Hyper Content may propose a task goal, evidence, static examples, input/output classes, limitations, and review triggers. It must not emit UI implementation logic.
-- Hyper Site owns protocol-neutral service, surface, theme, mount, public-projection, and growth-policy contracts. It must not own reasoning, credentials, private memory, connectors, or consequential authorization.
-- Browser surfaces submit typed intents; they never mutate canonical runtime state directly.
-- Public projections are allowlisted and must not include full ontology state, hidden reasoning, private memory, credentials, raw provider payloads, or unrelated tenant resources.
-- Static fallback remains complete. Dynamic native, declarative, and sandboxed tiers are progressive enhancement.
-- A2UI, AG-UI, MCP Apps, and AI Employee integrations are adapters, not internal authority.
-- Growth operators may vary approved presentation, sequencing, allocation, and conversion. They may not widen capabilities, lower safety, alter private-data policy, or index sessions and generated artifacts.
-- Run `node scripts/check-doc-system.mjs` with plan and boundary validation.
-
-## Documentation lifecycle
-
-Documentation lifecycle: `docs/README.md`. Every research or architecture mutation must follow intake -> research -> architecture -> executable plan -> validation report -> immutable memory handoff.
+PR #3 remains draft and unmerged until external deployment gates or an explicit scope decision changes that posture.
