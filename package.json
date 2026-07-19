@@ -21,6 +21,7 @@
     "test:validation": "node --test test/workstream-validation.test.mjs",
     "test:compiler-limit": "node scripts/run-compiler-limit-test-v2.mjs --pages 100",
     "test:packed-consumers": "npm --prefix hyper-site run build && node --test hyper-site/test/packed-consumers.test.mjs",
+    "mvp:living-surface": "npm run site:build && node scripts/run-living-surface-mvp.mjs",
     "proof:h0-h1": "node scripts/run-h0-h1-proof.mjs",
     "build": "npm run site:build && npm run content:build && npm run legacy:build && npm run check:boundaries",
     "test": "npm run build && npm run legacy:test && node --test hyper-site/test/*.test.mjs hyper-content/test/*.test.mjs test/*.test.mjs"
