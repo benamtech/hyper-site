@@ -1,39 +1,61 @@
 # Hyper Monorepo Documentation System
 
 Status: active documentation authority  
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 ## Purpose
 
-Documentation separates supplied ideas, verified evidence, accepted architecture, executable work, prospective gates, measured reports and durable handoffs. Source, tests, emitted artifacts, CI and field evidence remain proof.
+Documentation separates product taxonomy, verified source behavior, accepted architecture, executable plans, measured reports and durable handoffs. Source, tests, emitted artifacts, CI and external integration evidence remain proof.
+
+## Canonical product taxonomy
+
+```text
+Hyper Content
+  evidence-grounded content generation and validation
+        |
+        | SiteSource + optional task/surface proposals
+        v
+Hyper Site
+  deterministic website framework and compiler
+        |
+        | optional governed task mounts
+        v
+Hyper Runtime
+  identity, approvals, durable execution, connectors and receipts
+
+AI Employee
+  a composed product using all three
+```
+
+Canonical boundary document:
+
+- `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
+
+The repository, Hyper Site and Hyper Content must not be described as interchangeable with “AI Employee.”
 
 ## Current authority chain
 
 ```text
-docs/research/43-useful-framework-and-agent-first-pipeline-audit.md
--> docs/architecture/44-useful-framework-and-agent-first-target-architecture.md
--> docs/planning/45-depth-first-framework-and-agent-recovery-plan.md
--> docs/validation/46-useful-framework-and-agent-first-gates.md
--> measured report
+README.md
+-> identity.md
+-> CODEGRAPH.md
+-> docs/architecture/52-product-taxonomy-and-runtime-boundaries.md
+-> current task-specific planning document
+-> measured validation report
 -> immutable memory handoff
 ```
 
-Despite historical filenames, these documents now define the **useful static framework path**, not an active agent-runtime program.
+Current production-runtime authorities:
 
-The low-level path remains optional research:
+- `docs/planning/51-durable-provider-connector-pilot.md`;
+- `validation/reports/2026-07-19-production-outbox-reconciliation.md`;
+- `memory/2026-07-19-0948-production-outbox-reconciliation.md`.
 
-```text
-docs/research/47-zig-wasm-binary-boundary-audit.md
--> docs/architecture/48-low-level-runtime-and-serialization-boundary.md
--> docs/validation/49-low-level-kernel-promotion-gates.md
--> docs/architecture/CODEGRAPH-LOW-LEVEL.md
-```
-
-It cannot reorder or block U1-U5.
+Historical research and architecture documents remain evidence of prior decisions but do not override current source or the canonical taxonomy.
 
 ## Root allowlist
 
-Only bootstrap documents remain at repository root:
+Bootstrap documents at repository root:
 
 - `README.md`
 - `AGENTS.md`
@@ -69,7 +91,7 @@ memory/
 ```text
 intake
 -> primary and official source verification
--> simpler direct controls and falsification
+-> direct controls and falsification
 -> architecture disposition
 -> executable plan
 -> RED/GREEN/REFACTOR implementation
@@ -78,130 +100,91 @@ intake
 -> catalog, MEMORY, bootstrap and PR reconciliation
 ```
 
-A failed downstream gate changes the plan and may reverse architecture. Historical confidence does not override source truth.
-
 ## Current product truth
 
-```text
-Hyper Content (optional later) -> portable SiteSource -> Hyper Site -> static output
-Hyper Site -X-> Hyper Content
-Hyper Site -X-> reference runtime in target state
-```
+### Hyper Site
 
-- The compiler works for bounded fixtures.
-- Most canonical source remains under `reference/src`.
-- `hyper-site/index.mjs` still delegates to `reference/dist/framework-core.js`.
-- The package is private and not independently proven.
-- The ordinary create/dev/build/preview/inspect/local-publish workflow is not built.
-- The five-page browser and maintenance comparisons have not run.
-- Agent runtimes, task surfaces, remote effects and 10K generation are not active milestones.
-- Zig, Wasm and binary serialization have no production authority.
-- PR #3 remains draft and unmerged.
+- Package-owned deterministic compiler and living-surface renderer exist.
+- The package is consumed through isolated runtime and strict TypeScript tarball tests.
+- It renders static website artifacts and public/operator projections.
+- It has no credential or connector authority.
 
-## Active implementation order
+### Hyper Content
 
-```text
-U1 package ownership and isolated consumption
--> U2 ordinary CLI and starter
--> U3 five-page browser-accepted proof
--> U4 maintenance comparison and decision
--> U5 optional minimal Hyper Content adapter
-```
+- Bounded semantic generation and independent evidence validation exist.
+- Accepted checkpoints are resumable and invalid proposals reject atomically.
+- Providers propose; they do not validate or approve themselves.
 
-Only U1 is currently valid implementation work.
+### Hyper Runtime
+
+- Logical runtime contracts exist for authorization, durable outbox processing, reconciliation, dead letters and immutable receipts.
+- Runtime source is currently located in `hyper-content/src` as a transitional package placement.
+- A future `@amtech/hyper-runtime` extraction is packaging cleanup, not a change to product semantics.
+
+### AI Employee
+
+- “AI Employee” describes a deployment composed from Hyper Content, Hyper Site and Hyper Runtime.
+- The repository does not yet prove a deployed live AI Employee service.
+
+## Source-of-truth rules
+
+A document is stale when it:
+
+- describes Hyper Site as an AI Employee runtime rather than a website framework/presentation layer;
+- describes Hyper Content as the owner of connectors or effect execution;
+- treats the current physical runtime location as the desired package taxonomy;
+- calls an adapter contract a deployed external service;
+- treats unsigned claims as authenticated identity;
+- treats an unknown provider outcome as retryable;
+- claims production completion without external PostgreSQL, managed secrets, OIDC/JWKS, provider sandbox and crash evidence;
+- presents old extraction status as current package truth.
 
 ## Authority by stage
 
 | Stage | May contain | Must not claim |
 |---|---|---|
 | intake | supplied ideas and unresolved claims | verified architecture |
-| research | official sources, controls, alternatives and falsification | implementation completion |
-| architecture | accepted ownership and product boundaries | measured value |
+| research | sources, controls, alternatives and falsification | implementation completion |
+| architecture | accepted ownership and product boundaries | measured production behavior |
 | planning | dependencies, tests, rollback and stop conditions | completed outcomes |
 | validation contract | fixtures, metrics and thresholds | a passing result |
 | validation report | exact commit, commands, artifacts and outcomes | unrun checks |
 | memory handoff | durable state and next gate | replacement of source or CI authority |
 
-## Official external verification
-
-Manjaro/Arch:
-
-```text
-scripts/manjaro-clone-and-test-hyper.sh
-```
-
-Generic Unix-like:
-
-```text
-scripts/clone-and-test-hyper.sh
-```
-
-These verify the current compiler only. They do not pass U1-U5.
-
-## Research-source requirements
-
-An active claim records:
-
-- official or primary source URL;
-- access date where relevant;
-- exact claim supported;
-- limitation;
-- simpler control;
-- downstream gate affected.
-
-Current source registry:
-
-- `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
-
 ## Agent read order
 
 1. `identity.md`
 2. `AGENTS.md`
-3. `CODEGRAPH.md`
-4. `README.md`
+3. `README.md`
+4. `CODEGRAPH.md`
 5. `docs/README.md`
-6. `docs/catalog.json`
-7. `memory/MEMORY.md`
-8. newest immutable handoff
-9. newest measured report
-10. current task-specific authority chain
-
-Read low-level documents only for an approved optional benchmark.
+6. `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
+7. `docs/catalog.json`
+8. `memory/MEMORY.md`
+9. newest immutable handoff
+10. newest measured report
+11. current task-specific authority chain
 
 ## Write protocol
 
 Before writing:
 
-- identify the lifecycle stage;
-- read current authorities and physical source;
+- identify the subsystem and logical owner;
+- verify the current physical owner in source;
+- distinguish package location from product identity;
 - distinguish evidence, inference, proposal and decision;
-- name the simplest direct control;
-- define falsification and rollback;
-- identify affected bootstrap, validation and memory surfaces.
+- identify side effects and external dependencies;
+- define falsification, rollback and nonclaims.
 
 After writing:
 
-- update product truth when it changed;
+- reconcile `README.md`, `identity.md`, `CODEGRAPH.md` and package READMEs when product truth changed;
 - update `docs/catalog.json` or record an explicit blocker;
 - run `node scripts/check-doc-system.mjs`;
 - run applicable package and validation tests;
 - create reports only for checks actually run;
 - append an immutable handoff for a coherent completed pass;
-- reconcile `memory/MEMORY.md` and the draft PR record.
-
-## Freshness rules
-
-An active document is stale when it:
-
-- calls a facade or folder a completed package;
-- presents `reference/` as only a consumer while runtime imports remain;
-- treats compiler invocation as a normal framework workflow;
-- puts agents, task surfaces or scale before the five-page maintenance proof;
-- treats the dependency index as complete incrementality;
-- assumes binary bytes reduce model tokens;
-- treats a microbenchmark as product performance;
-- claims SEO, ranking, conversion or revenue from software fixtures;
-- cites the old R0-R6 sequence as current.
+- reconcile `memory/MEMORY.md` and the draft PR.
 
 ## Permanent documentation checks
 
@@ -209,11 +192,11 @@ The documentation gate should verify:
 
 - root Markdown allowlist;
 - catalog uniqueness and path existence;
-- current authority-chain paths;
-- explicit `reference/dist` delegation;
-- U1-U5 sequencing;
-- framework nonclaims;
-- direct controls for advanced methods;
-- low-level research subordination;
-- immutable handoff naming;
-- current PR draft posture.
+- canonical product taxonomy path;
+- current package ownership and transitional runtime placement;
+- no “Hyper Site equals AI Employee” claim;
+- no provider self-approval claim;
+- ambiguous-outcome non-retry invariant;
+- external deployment nonclaims;
+- measured report and handoff naming;
+- current PR posture.
