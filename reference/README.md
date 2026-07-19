@@ -1,76 +1,144 @@
-# Website-Framework Reference Package
+# Hyper Site Reference Package
 
-Status: executable agent-discovered ontology front end, sparse 10,000-page site-program planner, vector-native compiler, and deterministic UI research reference; real providers, complete page generation, browser-scale acceptance, and field outcomes remain pending
+Status: executable research reference approaching near-alpha. It contains the governed ontology/site compiler, GLM proposal boundaries, approved design rendering, canonical PageDraft transaction, bounded corpus validation, file-based continuous workspace, and synthetic full-site scale fixtures. It is not production-ready and has not beaten an ordinary web framework on a real case.
 
-## Primary paths
+## Package identity
 
-### Agent-discovered site program
+This package is not only a 10,000-page planner.
+
+It is the current executable reference for:
+
+```text
+repository/source truth
+-> business and design workspace artifacts
+-> starter-site authority
+-> Stage-1 ontology proposal and approval
+-> sparse typed graph and bounded opportunity selection
+-> Stage-2 PageDraft batches
+-> existing PageConcept/SiteSource/PageIR compiler
+-> shared static design render
+-> local corpus validation
+-> immutable checkpoints
+-> post-generation dependency invalidation
+-> near-alpha scientific evaluation
+```
+
+The 10K fixture is one scale experiment. The framework must also work for a small, attractive, editable site.
+
+## Main entrypoints
+
+| Entry point | Role |
+|---|---|
+| `prepareAgentSiteProgram()` | governed ontology, graph, opportunity, and site-program planning |
+| `generateProductionCohort()` | experimental physical Stage-2 batches, checkpoints, canonical transaction, and corpus validation |
+| `createAgentWorkspaceSnapshot()` | immutable lifecycle artifact workspace |
+| `planAgentWorkspaceInvalidation()` | transitive dependency invalidation and unaffected-artifact set |
+| `evaluateNearAlphaFramework()` | maturity, TDD, baseline, network, real-case, page-existence, and scale-transition rejection |
+| `compileSite()` | canonical semantic PageIR/static output authority |
+
+`production` in a source or command name denotes the production boundary under experiment. It does not denote production maturity.
+
+## Canonical generation path
 
 ```text
 ProjectInput
 -> AgentOntologyProposal
+-> exact-hash independent approval
 -> ApprovedOntology
--> sparse typed ontology graph
+-> sparse typed ontology graph + hard constraints
 -> bounded opportunity candidates
--> ProductionOpportunitySpace
--> SiteGenerationPlan
--> Stage-2 PageConceptProposals
+-> selected SiteGenerationPlan
+-> GLM PageDraft batches
+-> external schema/source/evidence validation
+-> compilePageConceptProposals()
 -> CandidatePageSeeds
--> existing coordinate/corpus/job/manifest/PageIR/UI path
+-> SiteSource
+-> compileSite()
+-> PageIR + static HTML
+-> approved shared design render
+-> bounded local corpus validation
 ```
 
-`prepareAgentSiteProgram()` is the hard-gated entrypoint. It uses:
+There is one publication path. The newer GLM and workspace layers converge on existing compiler authorities.
+
+## Continuous workspace path
 
 ```text
-compileApprovedOntology()
--> compileOntologyGraph()
--> compileProductionOpportunitySpace()
--> compileSparseSiteGenerationPlan()
+business-datasheet
+evidence-ledger
+style-guide
+design-system
+typography-system
+layout-system
+graphic-brief
+starter-page
+page-batch
+post-generation-patch
+validation-report
+case-study
 ```
 
-`compileAgentSiteProgram()` then validates Stage-2 proposals and emits deterministic `CandidatePageSeed` objects.
+Every artifact has producer, source IDs, dependency IDs, status, and content hash.
 
-The user supplies project truth and source material. The agents discover ontology and page concepts. The user does not author vector axes, page coordinates, matrices, or jobs.
+Workspace commands:
 
-### Existing independent-context orchestration
-
-```text
-ProjectInput
--> source/evidence/asset ledgers
--> independent ContextCorpus + frozen splits
--> isotonic compatibility calibration
--> explicit-primary PageCoordinates
--> finite SelectedCorpusPlan + typed graph
--> PageGenerationJobs
--> bounded provider-neutral agent runner
--> static framework preview
--> ../../site-manifest.yaml
--> SiteSource / PageIR / packed artifacts
--> static HTML, instruction, agent-context, and UI emissions
+```bash
+npm run workspace -- help
+npm run workspace -- init workspace-input.json workspace.json
+npm run workspace -- append workspace.json artifact.json 2 workspace-v2.json
+npm run workspace -- replace workspace-v2.json revised-artifact.json 3 workspace-v3.json
+npm run workspace -- invalidate workspace-v3.json changed-artifacts.json invalidation-plan.json
+npm run workspace -- summary workspace-v3.json
 ```
 
-The two paths converge on the existing coordinate, graph, job, manifest, semantic IR, and renderer authorities.
+This is a file-based near-alpha primitive. It does not yet execute incremental file builds or provide a visual multi-user workspace.
 
-## Workload contract
+## Operator experiment
 
-A site-generation **job** is one finite site project, not request-time serving.
-
-```text
-one project
-one approved ontology/opportunity space
-at least minimumInitialPages selected regions
-one PageConceptJob per selected region
-all Stage-2 batches
-static/compiler outputs
+```bash
+npm install --no-audit --no-fund --no-package-lock
+npm run production:help
+npm run production -- doctor examples/appliance-probe.example.json
+npm run production -- ingest /path/to/repo hyper-site.project.yaml generated-operator/repository-ingestion.json
+ZAI_API_KEY=... npm run production -- provider-check glm-5.2
+ZAI_API_KEY=... npm run production:stage1 -- ingestion.json source-excerpts.json generated-stage1
+npm run production:approve -- ontology proposal.json review.json approval.json
+npm run production:approve -- design design-draft.json review.json approval.json
+ZAI_API_KEY=... npm run production -- run production-run.json generated-near-alpha-site
 ```
 
-The current synthetic scale fixture requires exactly 10,000 page-region jobs and creates 400 batches of 25.
+Model output remains proposal state. Same-model self-acceptance is prohibited.
+
+## Source layers
+
+| File | Authority |
+|---|---|
+| `validation-contracts.ts` | cross-layer pass/fail attributes, findings, reports, hashes |
+| `near-alpha-framework.ts` | framework maturity, scientific, baseline, case-study, page-existence, and scale gates |
+| `agent-workspace.ts` | immutable lifecycle snapshots and dependency invalidation |
+| `repository-ingestion.ts` | explicit repository bytes/config/field-evidence boundary |
+| `project-input.ts` | approved business/brand/technical/goals and ledgers |
+| `glm-provider.ts` | Z.AI JSON transport, timeout, usage, and bounded repair |
+| `generation-schemas.ts` | Stage-1/Stage-2 schemas and independent approval records |
+| `design-authoring.ts` | core-page briefs, design tokens, CSS safety, static design refinement |
+| `ontology-discovery.ts` | governed ontology compiler and rejection ledgers |
+| `ontology-graph.ts` | typed sparse graph, constraints, pruning, macro-regions |
+| `opportunity-*.ts` | bounded candidate generation, sparse selection, HRR structure |
+| `site-program*.ts` | PageConcept jobs, batches, proposal compiler, CandidatePageSeeds |
+| `page-draft-transaction.ts` | atomic draft-to-canonical SiteSource/PageIR transaction |
+| `corpus-validation-production.ts` | bounded exact/lexical/local-semantic/evidence/render validation |
+| `production-orchestrator.ts` | physical batches, persistent checkpoints, recovery, full run |
+| `framework.ts` | semantic and packed IR, static HTML, sitemap, instructions |
+| `ui-*.ts` | deterministic UI research paths |
+| `wasm.ts`, `zig/` | unpromoted numeric-kernel research arms |
 
 ## Commands
 
 ```bash
-npm install
+npm install --no-audit --no-fund --no-package-lock
 npm test
+npm run production:help
+npm run workspace:help
 npm run framework:doctor
 npm run framework:plan
 npm run framework:validate
@@ -83,131 +151,114 @@ npm run ui:r3f:build
 npm run benchmark:scale
 ```
 
-## Package layers
+## Current executable validation
 
-| File | Authority |
-|---|---|
-| `validation-contracts.ts` | Cross-layer validation/pass/fail attributes, findings, severity, reports, hashes |
-| `project-input.ts` | Business/brand/technical/goals, ledgers, and minimum/maximum site page bounds |
-| `sparse-lexical.ts` | Deterministic tokenization, TF-IDF, BM25, postings, and lexical neighbors |
-| `ontology-discovery.ts` | Stage-1 agent proposal approval, safety/materiality/duplicate gates, rejected ledgers |
-| `ontology-graph.ts` | Multi-channel sparse graph, hard constraints, k-core pruning, macro-regions |
-| `opportunity-space.ts` | Transparent reference opportunity generator/selector |
-| `opportunity-generation-optimized.ts` | Cached constrained production candidate generator |
-| `opportunity-space-optimized.ts` | Incremental sparse selection and packed HRR vectors |
-| `opportunity-space-production.ts` | Production opportunity-space composition |
-| `site-program.ts` | Stage-2 PageConceptJob/Proposal contracts and CandidatePageSeed compiler |
-| `site-program-optimized.ts` | Bounded sparse page-neighbor retrieval and deterministic batching |
-| `agent-site-orchestrator.ts` | End-to-end two-stage site-program entrypoint |
-| `acceleration-decision.ts` | Evidence-gated TypeScript/Wasm promotion decision |
-| `context-corpus.ts` | Independent contexts, assessors, graded labels, frozen splits, isotonic calibration |
-| `typed-graph.ts` | Existing typed semantic page-edge and path compiler |
-| `page-coordinate.ts` | Existing explicit-primary coordinates, eligibility, calibrated multi-prototype fit |
-| `corpus-plan.ts` | Existing facility/information/rare/diversity finite-corpus selection |
-| `page-generation.ts` | Existing typed noindex jobs and bounded provider-neutral agent runner |
-| `framework-preview.ts` | Selected/rejected static review artifact |
-| `framework-orchestrator.ts` | Existing context/calibration/corpus/job orchestration entrypoint |
-| `manifest.ts` | Unified manifest parser/composer and legacy proposal path |
-| `framework.ts` | Semantic/packed IR and neutral emissions |
-| `ui-scaffold.ts`, `ui-metaprogramming.ts`, `ui-renderer.ts` | Deterministic static UI path |
-| `wasm.ts`, `zig/` | Unaccepted numeric-kernel research arm |
-| `resolver.ts`, `worker/` | Optional finite runtime research paths |
-| `ui-r3f/` | Optional noncanonical visualization adapter |
+The focused near-alpha suite covers:
 
-## Agent ontology emissions
+- optimized and compatibility appliance classification;
+- GLM JSON parsing, external validation, and bounded repair/rejection;
+- Stage-1 checkpoint recovery and exact-hash approval;
+- design self-approval and unsafe CSS rejection;
+- CSS-only refinement preserving content hashes;
+- atomic noindex PageDraft-to-PageIR/static emission;
+- evidence rejection and near-duplicate rejection;
+- Stage-2 batch recovery without provider reinvocation;
+- full synthetic 100, 500, and 10,000 PageDraft/static/corpus paths;
+- near-alpha rejection of bulk-only, baseline-free, maintenance-free, or overclaimed scale;
+- workspace append, replacement, cycle rejection, lifecycle coverage, and transitive invalidation.
 
-The Stage-1 compiler produces:
+The existing full reference suite also validates ontology safety, graph constraints, opportunity parity, manifest/UI emission, framework preview, browser targets, and R3F research adapters.
 
-- approved attributes with normalized dimensions and material effects;
-- rejected attributes with explicit reasons;
-- accepted and rejected typed relations;
-- accepted and rejected weighted observations;
-- deterministic sparse lexical index;
-- typed sparse graph and hard constraints;
-- core numbers, active/pruned nodes, and macro-regions;
-- bounded opportunity candidates;
-- selected regions and packed vectors;
-- validation reports and checkpoint hashes.
+Exact current-head counts and run IDs belong in the newest validation report.
 
-The site-program compiler produces:
+## Framework comparison requirement
 
-- one `PageConceptJob` per selected region;
-- bounded nearby-region context;
-- deterministic agent/API batches;
-- validated Stage-2 proposals;
-- deterministic `CandidatePageSeed` objects.
-
-## Validation behavior
-
-The adversarial fixture proves:
-
-- an inferred-sensitive medical trait is rejected;
-- an unreviewed age cohort is rejected;
-- the weaker duplicate painting attribute is rejected;
-- approved lifestyle attributes survive only with reviewer/public-targeting approval and page-changing effects;
-- hard exclusions remain outside similarity;
-- the optimized candidate generator emits the exact ordered region hashes of the transparent baseline;
-- a Stage-2 proposal missing one selected-region attribute fails.
-
-The acceleration fixture proves:
-
-- the measured 10k profile keeps TypeScript because the isolated dense numeric share is below the promotion floor;
-- a hypothetical large, parity-safe, repeated, bridge-inclusive kernel benchmark can promote Wasm;
-- TypeScript remains the semantic oracle and fallback.
-
-## Exact source proof
-
-Validated source head before documentation: `dcc8beded51290f8084a421996c51c18b2afed83`  
-Workflow run: `29628832989`
+No performance conclusion is valid until Hyper Site and at least one ordinary static, SSR, or SPA framework share:
 
 ```text
-strict TypeScript build: pass
-Node tests: 46/46
-manifest emission: pass
-UI emission: pass
-orchestration check: pass
-framework validate: pass
-framework preview: pass
-browser resolution: pass
-R3F build: pass
-artifact upload: pass
+fixture
+machine
+runtime
+routes and semantics
+assets
+build mode
+cache policy
+scale tiers
 ```
 
-Final recorded 10,000-page site-program profile:
+Measure cold build, incremental edit, dev startup/update, memory, output bytes, validation, serving/crawl, browser/accessibility, operator effort, recovery, and maintenance invalidation.
+
+Planning-only or generation-only timings are insufficient.
+
+## Scale boundary
+
+Experimental tiers:
 
 ```text
-project normalization       0.126 ms
-ontology compilation       20.363 ms
-graph compilation          36.644 ms
-closed itemsets           202.478 ms
-candidate generation     2218.216 ms
-sparse selection         1784.044 ms
-site-program planning     973.168 ms
-total                    5284.510 ms
-
-candidates                  15,000
-selected                    10,000
-batches                        400
-packed vector bytes      2,560,000
+5 qualitative starter pages
+25 real noindex pages
+100
+500
+10,000
 ```
 
-The transparent pre-optimization implementation recorded approximately 29 seconds on the same workflow class. These are synthetic compiler measurements and do not establish content, search, browser, or commercial quality.
+At 10K, measure post-generation source, design-token, shared-component, page, page-family, ontology, evidence, and interruption changes. Record invalidated, rebuilt, and unchanged artifacts.
 
-## Wasm boundary
+The claimed ceiling may not exceed the measured full-framework ceiling.
 
-Current disposition: keep TypeScript.
+## Research disposition
 
-The final run measured 49.358 ms for a 1,000-region HRR sample. A linear 10,000-region estimate is approximately 0.49 seconds. That is an estimate, not a direct standalone kernel benchmark, and it is below the current dense-share/absolute-time promotion gate.
+Retained now:
 
-Promotion requires an isolated contiguous numeric kernel, 20 or more repeated JavaScript/Wasm runs, bridge costs included, exact selection-hash parity, vector cosine at least 0.999999, at least 1.25 times speedup, at least 500 ms full-build savings, and a retained TypeScript fallback.
+```text
+external harness authority
+schema-bearing proposals
+explicit provenance and evidence
+TF-IDF/BM25 baseline
+typed sparse graph and hard constraints
+bounded expansion
+sparse concave selection
+HRR after eligibility
+TypeScript semantic oracle
+static-first PageIR
+```
 
-## Boundaries
+Comparison-only until real evidence:
 
-- Synthetic fixtures prove wiring, rejection behavior, deterministic scale, and measured compiler performance only.
-- Community detection is descriptive, not page or market truth.
-- Sparse clustering becomes relevant only with real customer-row observations and a validated clustering objective.
-- The current ontology and 10k regions are not external relevance authority.
-- No real Stage-1 or Stage-2 provider is connected.
-- Successful Stage-2 output does not yet transact into canonical evidence/modules/pages/tasks.
-- The source proves 10,000 validated page-region jobs, not 10,000 complete page bodies and UIs.
-- Browser/accessibility/Core Web Vitals, crawler behavior, native/Wasm benefit, indexing, search, conversion, and revenue remain unvalidated.
+```text
+learned embeddings and ANN
+Leiden and learned graph methods
+CSI cohort selection
+SGLang or provider runtimes
+local GPU specialist models
+Wasm/Zig/native kernels
+AgentO interoperability
+```
+
+## Explicit nonclaims
+
+The source does not prove:
+
+- real starter-site design quality;
+- live provider reliability, token cost, or semantic fidelity;
+- real GPU throughput;
+- ordinary-framework performance advantage;
+- real incremental build or maintenance advantage;
+- real page usefulness, accessibility, relevance, or information gain;
+- network-science improvement;
+- indexability, ranking, citations, conversion, revenue, or lifecycle return.
+
+## Next gate
+
+```text
+one real five-page site
++ approved business/style/type/layout/graphics/assets
++ live provider and rented node
++ ordinary-framework implementation of the same fixture
+-> authoring and framework comparison
+-> 25 real noindex pages and post-generation edits
+-> held-out review
+-> 100, then 500
+-> 10K maintenance matrix
+-> alpha decision only after evidence
+```

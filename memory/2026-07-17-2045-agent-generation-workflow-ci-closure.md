@@ -21,8 +21,8 @@ scope:
   "validated documentation/authority reorientation plus unchanged executable compiler; does not implement orchestration or generation jobs"
 
 new_authority[5]:
-  ../21-vector-to-generation-job-compiler.md
-  ../22-agent-operated-framework-workflow-validation-matrix.md
+  ../docs/architecture/21-vector-to-generation-job-compiler.md
+  ../docs/validation/22-agent-operated-framework-workflow-validation-matrix.md
   ../AGENTS.md
   ../README.md
   ../CODEGRAPH.md

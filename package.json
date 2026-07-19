@@ -1,0 +1,30 @@
+{
+  "name": "@amtech/hyper-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "hyper-site",
+    "hyper-content"
+  ],
+  "scripts": {
+    "site:build": "npm --prefix hyper-site run build",
+    "site:pack:check": "npm --prefix hyper-site run pack:check",
+    "content:build": "npm --prefix hyper-content run build",
+    "legacy:build": "npm --prefix reference run build",
+    "legacy:test": "npm --prefix reference test",
+    "check:boundaries": "node scripts/check-product-boundaries.mjs",
+    "validate:workstreams": "node scripts/validate-workstreams.mjs status --out validation/reports/workstream-status.json",
+    "validate:w1": "node scripts/validate-workstreams.mjs w1 --out validation/reports/w1-status.json",
+    "validate:w2": "node scripts/validate-workstreams.mjs w2 --out validation/reports/w2-status.json",
+    "validate:w3": "node scripts/validate-workstreams.mjs w3 --out validation/reports/w3-status.json",
+    "test:validation": "node --test test/workstream-validation.test.mjs",
+    "test:compiler-limit": "node scripts/run-compiler-limit-test-v2.mjs --pages 100",
+    "test:packed-consumers": "npm --prefix hyper-site run build && node --test hyper-site/test/packed-consumers.test.mjs",
+    "mvp:living-surface": "npm run site:build && node scripts/run-living-surface-mvp.mjs",
+    "mvp:semantic-action": "npm run site:build && npm run content:build && node scripts/run-semantic-action-mvp.mjs",
+    "proof:h0-h1": "node scripts/run-h0-h1-proof.mjs",
+    "build": "npm run site:build && npm run content:build && npm run legacy:build && npm run check:boundaries",
+    "test": "npm run build && npm run legacy:test && node --test hyper-site/test/*.test.mjs hyper-content/test/*.test.mjs test/*.test.mjs"
+  }
+}

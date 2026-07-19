@@ -10,7 +10,7 @@ branch_pr{branch,pr,reviewed_head,reviewed_ci,status}:
   agent/ui-metaprogramming-pass-1,17,8fc397a38381474734cfe6e411d1f0bf81b31349,29631422126,pass
 
 new_docs[2]:
-  ../26-graph-learning-paper-triage-and-promotion-gates.md
+  ../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
   ../validation/reports/2026-07-18-graph-learning-paper-triage.md
 
 job_boundary:
@@ -39,13 +39,13 @@ verified[10]{paper,source,task,disposition}:
 ## decisions
 
 decisions[10]{id,decision,ref}:
-  GL01,"a graph paper is not applicable merely because the framework contains a graph",../26-graph-learning-paper-triage-and-promotion-gates.md
+  GL01,"a graph paper is not applicable merely because the framework contains a graph",../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
   GL02,"current per-project ontology graph remains deterministic/evidence-bound",../reference/src/ontology-graph.ts
-  GL03,"learned clustering cannot define prospects, intents, page families, or routes without external labels",../26-graph-learning-paper-triage-and-promotion-gates.md
-  GL04,"graph transformers/foundation models require many independently reviewed project graphs and an explicit held-out task",../26-graph-learning-paper-triage-and-promotion-gates.md
-  GL05,"PU learning requires accepted positives and truly unlabeled candidates; unreviewed is not negative",../26-graph-learning-paper-triage-and-promotion-gates.md
-  GL06,"temporal/anomaly models require versioned history and independent anomaly/drift labels",../26-graph-learning-paper-triage-and-promotion-gates.md
-  GL07,"VSAL may inform operator visualization only; rendered layouts are not compiler authority",../26-graph-learning-paper-triage-and-promotion-gates.md
+  GL03,"learned clustering cannot define prospects, intents, page families, or routes without external labels",../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
+  GL04,"graph transformers/foundation models require many independently reviewed project graphs and an explicit held-out task",../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
+  GL05,"PU learning requires accepted positives and truly unlabeled candidates; unreviewed is not negative",../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
+  GL06,"temporal/anomaly models require versioned history and independent anomaly/drift labels",../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
+  GL07,"VSAL may inform operator visualization only; rendered layouts are not compiler authority",../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
   GL08,"no learned graph code promoted from this paper set",../validation/reports/2026-07-18-graph-learning-paper-triage.md
   GL09,"graph-model choice and Wasm execution-target choice remain separate",../reference/src/acceleration-decision.ts
   GL10,"current next code path remains real ingestion/providers/reviewers/context/content transaction",../memory/MEMORY.md

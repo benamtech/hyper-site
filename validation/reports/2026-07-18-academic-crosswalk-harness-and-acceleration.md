@@ -139,7 +139,7 @@ Fail/pending:
 
 ## 8. Files
 
-- `25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md`
+- `docs/research/25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md`
 - `reference/src/validation-contracts.ts`
 - `reference/src/ontology-discovery.ts`
 - `reference/src/ontology-graph.ts`

@@ -1,0 +1,53 @@
+name: Hyper Site H0-H1 Integration Pipeline
+
+on:
+  pull_request:
+  push:
+    branches: [main, "agent/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  h0-h1-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install package toolchains
+        run: |
+          npm --prefix hyper-site install --no-audit --no-fund --no-package-lock
+          npm --prefix hyper-content install --no-audit --no-fund --no-package-lock
+          npm --prefix reference install --no-audit --no-fund --no-package-lock
+      - name: Validate executable plan and documentation
+        run: |
+          node scripts/check-meta-plan.mjs planning/meta-plan-v3.json
+          node --test planning/test/meta-plan.test.mjs
+          node scripts/check-declared-doc-moves.mjs
+          node scripts/check-doc-system.mjs
+          node --test docs/test/doc-system.test.mjs
+      - name: Run H0 integration and H1 extraction proof
+        run: node scripts/run-h0-h1-proof.mjs
+      - name: Validate operator commands
+        working-directory: reference
+        run: |
+          node --check scripts/production-cli.mjs
+          node --check scripts/production-stage1.mjs
+          node --check scripts/production-approve.mjs
+          node --check scripts/workspace-cli.mjs
+          node --check scripts/near-alpha-cli.mjs
+          node scripts/production-cli.mjs help
+          node scripts/workspace-cli.mjs help
+          node scripts/near-alpha-cli.mjs help
+      - name: Upload H0-H1 proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: h0-h1-proof-${{ github.run_id }}
+          path: |
+            validation/reports/h0-h1-proof.json
+            validation/reports/h0-h1-proof.md
+            validation/reports/h0-h1-compiler-limit/
+          if-no-files-found: warn

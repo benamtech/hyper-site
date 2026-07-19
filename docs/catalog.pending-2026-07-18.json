@@ -1,0 +1,48 @@
+{
+  "status": "pending-merge-into-docs-catalog",
+  "reason": "Current connector does not support partial JSON patching; these entries must be merged into docs/catalog.json before PR completion.",
+  "documents": [
+    {
+      "id": "planning-four-part-workstreams",
+      "path": "docs/planning/38-four-part-product-workstream-map.md",
+      "kind": "planning",
+      "status": "active",
+      "authority": "current W1 through W4 execution order"
+    },
+    {
+      "id": "validation-w1-w3-first",
+      "path": "docs/validation/39-w1-w3-validation-first-execution.md",
+      "kind": "validation-contract",
+      "status": "active",
+      "authority": "validation-first failure and attack vector baseline"
+    },
+    {
+      "id": "validation-portable-compiler-limit",
+      "path": "docs/validation/40-portable-compiler-limit-test.md",
+      "kind": "validation-contract",
+      "status": "active",
+      "authority": "official Manjaro and portable external compiler verification"
+    },
+    {
+      "id": "research-sdrt-internal-linking",
+      "path": "docs/research/41-critical-claims-sdrt-and-internal-linking.md",
+      "kind": "research",
+      "status": "active",
+      "authority": "SDRT disposition and internal-linking control baseline"
+    },
+    {
+      "id": "research-critical-compiler-network-llm",
+      "path": "docs/research/42-critical-compiler-network-and-llm-claims.md",
+      "kind": "research",
+      "status": "active",
+      "authority": "critical compiler, dependency, retrieval, calibration, constrained-output and prompt-injection claim dispositions"
+    },
+    {
+      "id": "memory-official-manjaro-verification",
+      "path": "memory/2026-07-18-2030-official-manjaro-external-verification.md",
+      "kind": "memory-handoff",
+      "status": "immutable",
+      "authority": "official Manjaro external verification handoff"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "version": "3.0.0",
+  "accessedAt": "2026-07-18",
+  "scope": "neutral standards relevant to deterministic static web output",
+  "sources": [
+    {
+      "id": "whatwg-html",
+      "class": "standard",
+      "status": "current",
+      "title": "HTML Living Standard",
+      "publisher": "WHATWG",
+      "url": "https://html.spec.whatwg.org/",
+      "supports": ["semantic HTML and document conformance"]
+    },
+    {
+      "id": "wcag-22",
+      "class": "standard",
+      "status": "current",
+      "title": "Web Content Accessibility Guidelines 2.2",
+      "publisher": "W3C",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "supports": ["accessibility acceptance criteria"]
+    },
+    {
+      "id": "sitemaps-protocol",
+      "class": "standard",
+      "status": "current",
+      "title": "Sitemaps XML Format",
+      "publisher": "Sitemaps.org",
+      "url": "https://www.sitemaps.org/protocol.html",
+      "supports": ["sitemap output requirements"]
+    },
+    {
+      "id": "json-schema-2020-12",
+      "class": "standard",
+      "status": "current",
+      "title": "JSON Schema Draft 2020-12",
+      "publisher": "JSON Schema",
+      "url": "https://json-schema.org/draft/2020-12",
+      "supports": ["typed contract validation baseline"]
+    }
+  ]
+}

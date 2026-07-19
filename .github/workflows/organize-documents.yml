@@ -1,0 +1,85 @@
+name: Organize Repository Documents
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["agent/glm-blackwell-vertical-slice"]
+    paths:
+      - ".github/workflows/organize-documents.yml"
+      - "docs/legacy-root-moves.json"
+      - "scripts/apply-doc-moves.mjs"
+      - "scripts/check-declared-doc-moves.mjs"
+      - "scripts/organize-legacy-memory.mjs"
+      - "scripts/organize-root-docs.mjs"
+      - "scripts/normalize-doc-paths.mjs"
+      - "scripts/ensure-doc-index-links.mjs"
+      - "scripts/check-doc-system.mjs"
+      - "docs/test/doc-system.test.mjs"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/organize-documents.yml"
+      - "docs/legacy-root-moves.json"
+      - "scripts/apply-doc-moves.mjs"
+      - "scripts/check-declared-doc-moves.mjs"
+      - "scripts/organize-legacy-memory.mjs"
+      - "scripts/organize-root-docs.mjs"
+      - "scripts/normalize-doc-paths.mjs"
+      - "scripts/ensure-doc-index-links.mjs"
+      - "scripts/check-doc-system.mjs"
+      - "docs/test/doc-system.test.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: organize-repository-documents
+  cancel-in-progress: false
+
+jobs:
+  organize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/glm-blackwell-vertical-slice
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Validate documentation scripts
+        run: |
+          node --check scripts/apply-doc-moves.mjs
+          node --check scripts/check-declared-doc-moves.mjs
+          node --check scripts/organize-legacy-memory.mjs
+          node --check scripts/organize-root-docs.mjs
+          node --check scripts/normalize-doc-paths.mjs
+          node --check scripts/ensure-doc-index-links.mjs
+          node --check scripts/check-doc-system.mjs
+
+      - name: Organize documents without roadmap mutation
+        run: |
+          node scripts/apply-doc-moves.mjs docs/legacy-root-moves.json >/tmp/legacy-root-result.json
+          node scripts/organize-legacy-memory.mjs >/tmp/legacy-memory-result.json
+          node scripts/organize-root-docs.mjs >/tmp/organize-result.json
+          node scripts/normalize-doc-paths.mjs >/tmp/normalize-result.json
+          node scripts/ensure-doc-index-links.mjs >/tmp/link-result.json
+          node scripts/normalize-doc-paths.mjs >/tmp/final-normalize-result.json
+
+      - name: Validate documentation system
+        run: |
+          node scripts/check-declared-doc-moves.mjs
+          node scripts/check-doc-system.mjs
+          node --test docs/test/doc-system.test.mjs
+          git diff --check
+
+      - name: Commit organization-only changes
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No document organization changes remain."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Organize repository documents"
+          git push origin HEAD:agent/glm-blackwell-vertical-slice

@@ -1,92 +1,238 @@
-# Hyper Site
+# Hyper Monorepo
 
-Status: standalone vector-native site-generation compiler; synthetic 10k planning is source-wired; evidence-gated repository ingestion is implemented; real provider, reviewer, content, browser, search, and commercial acceptance remain pending  
-Updated: 2026-07-18
+Status: framework, content-pipeline and governed-runtime contracts implemented; external deployment gates remain  
+Updated: 2026-07-19  
+PR: #3 remains draft and unmerged
 
-## Product boundary
+## What this repository is
 
-Hyper Site compiles explicit approved business truth into a finite static site program. The intended operator is a repository-aware coding agent, but agents propose; typed compiler and independent review gates accept or reject.
+Hyper is not one monolithic “AI employee.” It contains three technical subsystems:
 
 ```text
-repository snapshot + hyper-site.project.yaml
--> ProjectInput
--> AgentOntologyProposal
--> ApprovedOntology
--> typed sparse graph + constraints
--> bounded opportunity regions
--> sparse concave selection
--> HRR structure
--> SiteGenerationPlan
--> PageConceptProposal
--> CandidatePageSeed
--> PageCoordinate / CorpusPlan / PageGenerationJob
--> manifest / PageIR / static UI
+Hyper Content
+  evidence-grounded content generation and semantic validation
+        |
+        | SiteSource and optional task declarations
+        v
+Hyper Site
+  deterministic website framework and compiler
+        |
+        | optional governed task mounts
+        v
+Hyper Runtime
+  identity, approvals, durable jobs, connectors and receipts
 ```
 
-One job is one finite site-generation run. Canonical HTML is static-first and does not require request-time generation, a vector database, or an always-on serving process.
+**AI Employee** is a product assembled from all three layers. It is not the name of the compiler or content pipeline.
 
-## Real repository ingestion
+Canonical taxonomy:
 
-`reference/src/repository-ingestion.ts` is the first production-boundary adapter beyond synthetic fixtures. It accepts:
+- `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
 
-- a captured repository revision and root-relative file snapshot;
-- an explicit `hyper-site.project.yaml` declaration;
-- declared repository source and asset paths;
-- field-level evidence mapping for business, brand, technical, and goal truth.
+## Hyper Site
 
-It verifies bytes, hashes files deterministically, binds evidence to known source IDs, normalizes into the existing `ProjectInput`, and rejects missing truth, missing files, duplicate paths, unknown evidence IDs, or path traversal. It does not infer services, audiences, pricing, proof, brand, goals, or publication claims from repository prose.
+`@amtech/hyper-site` is the deterministic website framework.
 
-This is ingestion infrastructure, not proof that a real business declaration is complete or that generated pages are useful.
+It validates structured `SiteSource` input and emits:
 
-## Current authorities
+- static HTML and CSS;
+- metadata and JSON-LD;
+- sitemap and instruction projections;
+- dependency metadata;
+- deterministic page and build hashes;
+- public/operator surface projections and static fallbacks.
 
-| Area | Source |
-|---|---|
-| repository ingestion | `reference/src/repository-ingestion.ts` |
-| project truth | `reference/src/project-input.ts` |
-| validation | `reference/src/validation-contracts.ts` |
-| Stage 1 ontology | `reference/src/ontology-discovery.ts` |
-| graph and constraints | `reference/src/ontology-graph.ts` |
-| opportunity generation/selection | `reference/src/opportunity-*.ts` |
-| Stage 2 contracts | `reference/src/site-program*.ts` |
-| generation runner | `reference/src/page-generation.ts` |
-| manifest/PageIR/static output | `reference/src/manifest.ts`, `reference/src/framework.ts` |
+Hyper Site does not own providers, credentials, authorization, connectors or external effects.
 
-## Validation
+```ts
+import { compileSite, compileLivingSurface } from "@amtech/hyper-site";
+```
 
-From `reference/`:
+## Hyper Content
+
+`@amtech/hyper-content` is the evidence-grounded generation pipeline.
+
+It:
+
+- consumes approved business facts and evidence;
+- accepts deterministic or model-backed proposals;
+- independently validates claims against the approved corpus;
+- applies bounded repair and atomic rejection;
+- persists accepted generation checkpoints;
+- produces portable `SiteSource` and optional task/surface proposals.
+
+A provider can propose content. It cannot approve, publish or execute its own output.
+
+```ts
+import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
+```
+
+## Hyper Runtime
+
+Hyper Runtime is the logical governed-execution subsystem.
+
+It owns:
+
+- tenant and actor identity context;
+- role, scope and approval policy;
+- transactional outbox state;
+- connector dispatch;
+- ambiguous-outcome reconciliation;
+- bounded retry for definitely-not-sent effects;
+- dead-letter recovery state;
+- immutable effect receipts;
+- deterministic post-effect state.
+
+Its code is currently located in `hyper-content/src` as a transitional packaging decision and exported through:
+
+```ts
+import {
+  DurableJsonTransactionStore,
+  GlmStructuredOutputProvider,
+  ShadowConnectorExecutor,
+} from "@amtech/hyper-content/durable-pilot";
+
+import {
+  PostgresProductionStore,
+  EnvironmentSecretSource,
+  verifyIdentityClaims,
+  buildOutboxRecord,
+  processNextOutbox,
+  reconcileNextAmbiguous,
+} from "@amtech/hyper-content/production-runtime";
+```
+
+That physical location does not make connector execution part of Hyper Content’s product identity. A later package cleanup may extract it to `@amtech/hyper-runtime`.
+
+## Composed AI Employee product
+
+An AI Employee deployment uses the layers together:
+
+```text
+approved business corpus
+-> Hyper Content generates and validates content/task proposals
+-> Hyper Site compiles the website and operator/customer surfaces
+-> Hyper Runtime executes explicitly approved tasks
+-> connector result becomes an immutable receipt
+-> Hyper Site renders deterministic post-effect state
+```
+
+A site using only Hyper Site is a website.  
+A system using Hyper Content plus Hyper Site is a generated website pipeline.  
+A deployment using all three layers may be sold as an AI Employee.
+
+## Production effect state machine
+
+```text
+verified principal
+-> approved tenant-scoped action
+-> PostgreSQL SERIALIZABLE outbox transaction
+-> SKIP LOCKED worker claim
+-> connector dispatch
+   ├─ succeeded -> receipt + succeeded state
+   ├─ definitely not sent -> bounded retry
+   ├─ rejected/exhausted -> dead letter
+   └─ unknown -> ambiguous quarantine
+-> provider reconciliation
+   ├─ succeeded -> immutable receipt
+   ├─ pending -> remain ambiguous
+   ├─ confirmed absent -> bounded retry
+   └─ failed -> operator dead letter
+```
+
+Central invariant:
+
+```text
+unknown provider outcome -X-> automatic retry
+unknown provider outcome -> ambiguous -> reconcile
+```
+
+## Package versions
+
+```text
+@amtech/hyper-site     0.3.0-alpha.0
+@amtech/hyper-content  0.4.0-alpha.0
+```
+
+## Research and implementation gates
+
+The H labels are research/implementation gates, not product names:
+
+```text
+H0 integration proof: PASS
+H1 physical compiler extraction: PASS
+H2 bounded semantic generation: MVP PASS
+H3 living-surface presentation: MVP PASS
+H4 governed durable execution contract: PASS
+H5 SDRT/GNN comparisons: pending
+H6 GPU/Zig/Wasm comparisons: pending
+```
+
+Active H0-H6 program record:
+
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+
+## Measured proof
+
+Validated production-runtime implementation commit:
+
+```text
+d38b5c6b9ea8991edcf40d094dbdabad138fe489
+```
+
+Measured workflows:
+
+```text
+Organize Repository Documents          PASS  29682124539
+Hyper Site H0-H1 Integration Pipeline  PASS  29682124534
+Hyper Site Reference Compatibility     PASS  29682124533
+```
+
+Measured reports:
+
+- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`;
+- `validation/reports/2026-07-19-living-surface-mvp.md`;
+- `validation/reports/2026-07-19-semantic-action-loop-mvp.md`;
+- `validation/reports/2026-07-19-durable-provider-connector-pilot.md`;
+- `validation/reports/2026-07-19-production-outbox-reconciliation.md`;
+- `validation/reports/2026-07-19-product-taxonomy-documentation-reconciliation.md`.
+
+## Run the repository proof
 
 ```bash
-npm install --no-audit --no-fund --no-package-lock
-npm test
-npm run manifest:emit
-npm run ui:emit
-npm run orchestration:check
-npm run framework:validate
-npm run framework:preview
-npm run browser:check
-npm run ui:r3f:build
+git clone --single-branch --branch agent/glm-blackwell-vertical-slice https://github.com/benamtech/hyper-site.git
+cd hyper-site
+npm --prefix hyper-site install
+npm --prefix hyper-content install
+npm --prefix reference install
+npm run proof:h0-h1
 ```
 
-The standalone workflow is `.github/workflows/reference.yml` and runs on `main`, `agent/**`, and pull requests.
+Package tests:
 
-## Research disposition
+```bash
+npm --prefix hyper-content test
+npm --prefix hyper-site test
+```
 
-Canonical: deterministic lexical baseline, typed graph, separate hard constraints, bounded graph expansion, sparse concave selection, HRR after eligibility, two compiler-bounded agent stages, TypeScript oracle, static output.
+## External deployment gates
 
-Comparison-only: Leiden, graph learning, learned embeddings, HNSW/ANN, GPU provider optimization, Zig/Wasm. Mathematical or paper fit does not establish implementation fit.
+The repository contains fail-closed adapter contracts, not a deployed AI Employee service. Production operation still requires:
 
-## Proof boundary
+- a real PostgreSQL instance and process-kill testing;
+- managed secret custody;
+- cryptographically verified OIDC/JWKS integration;
+- a live GLM endpoint and controlled credential;
+- a real provider sandbox with idempotency or status reconciliation;
+- kill-after-provider-acknowledgement recovery proof;
+- a hosted worker and customer/operator deployment.
 
-Inherited source proof recorded 46/46 tests and a synthetic planning run of 15,000 candidates -> 10,000 selected regions -> 400 Stage-2 batches in 5,284.510 ms. That is compiler plumbing and scale evidence only.
+No irreversible connector should be enabled until those environment-specific tests pass.
 
-Not proven: real relevance, useful page bodies, indexing, ranking, citations, conversion, revenue, complete 10k UI emission, or native/Wasm advantage.
+## Nonclaims
 
-## Next gate
+The repository does not yet claim a deployed AI Employee, live autonomous publication, live browser execution, production credential custody, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage or GPU/Zig/Wasm advantage.
 
-1. Capture one real repository and operator-approved `hyper-site.project.yaml` without invented truth.
-2. Add a JSON-schema-constrained Stage-1 provider adapter.
-3. Add independent reviewer and observation approval.
-4. Freeze a real ContextCorpus with held-out judgments.
-5. Run 100–500 noindex Stage-2 jobs and atomically transact accepted outputs into canonical pages.
-6. Validate information gain, cannibalization, browser, crawler, accessibility, and static delivery before scaling.
+## Documentation system
+
+Documentation lifecycle and machine-readable authority are in `docs/README.md` and `docs/catalog.json`.

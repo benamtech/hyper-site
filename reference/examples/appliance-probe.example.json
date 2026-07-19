@@ -1,0 +1,15 @@
+{
+  "profileId": "rtx-pro-6000-blackwell-96gb",
+  "gpuVendor": "NVIDIA",
+  "gpuModel": "RTX PRO 6000 Blackwell",
+  "gpuCount": 1,
+  "gpuMemoryGiB": 96,
+  "computeCapability": 12,
+  "systemMemoryGiB": 128,
+  "localNvmeFreeGiB": 500,
+  "cudaVersion": "12.8",
+  "nodeVersion": "v22.14.0",
+  "os": "linux",
+  "architecture": "x64",
+  "observedHourlyRateUsd": 2.5
+}

@@ -1,89 +1,232 @@
-# AGENTS.md — Hyper Site Operating Contract
+# AGENTS.md — Hyper Monorepo Operating Contract
 
-Status: active  
-Updated: 2026-07-18  
-Scope: repository root
+Status: active implementation contract  
+Updated: 2026-07-19
 
 ## Read first
 
 1. `identity.md`
 2. `AGENTS.md`
-3. `CODEGRAPH.md`
-4. `README.md`
-5. `memory/MEMORY.md`
-6. newest immutable file under `memory/`
-7. `26-graph-learning-paper-triage-and-promotion-gates.md`
-8. `25-academic-crosswalk-agent-harness-structured-generation-and-acceleration.md`
-9. `24-agent-discovered-ontology-and-10k-site-program.md`
-10. newest report under `validation/reports/`
-11. `site-manifest.yaml`
-12. `reference/README.md`
+3. `README.md`
+4. `CODEGRAPH.md`
+5. `docs/README.md`
+6. `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
+7. `docs/catalog.json`
+8. `memory/MEMORY.md`
+9. newest immutable handoff
+10. newest measured validation report
+11. current task-specific authority chain
 
-The repository is standalone. Do not use former `GTM-RESEARCH/website-framework`, parent-directory, `mvp-build`, or removed source-repository paths as live authority.
-
-## Canonical pipeline
+## Canonical product boundary
 
 ```text
-ProjectInput
--> AgentOntologyProposal
--> ApprovedOntology
--> typed sparse graph + separate constraints
--> bounded opportunity regions
--> sparse concave selection
--> HRR structure
--> SiteGenerationPlan
--> PageConceptProposal
--> CandidatePageSeed
--> PageCoordinate / CorpusPlan / PageGenerationJob
--> manifest / PageIR / static UI
+Hyper Content
+  evidence-grounded content generation and validation
+        |
+        | SiteSource + optional task/surface proposals
+        v
+Hyper Site
+  deterministic website framework and compiler
+        |
+        | optional governed task mounts
+        v
+Hyper Runtime
+  identity, approvals, durable jobs, connectors and receipts
+
+AI Employee
+  product assembled from all three
 ```
 
-Preserve one pipeline. Do not create a parallel manifest, context corpus, page selector, generation runner, output transaction, or publication path.
+The names are not interchangeable.
 
-## Truth and ingestion
+### Hyper Site
 
-- Source, tests, emitted artifacts, and newest memory outrank explanatory docs.
-- Business purpose, services, offers, audiences, locations, pricing, proof, brand, goals, rights, and publication constraints must be explicit.
-- Repository text may be proposed for review but cannot be silently promoted into `ProjectInput` truth.
-- `reference/src/repository-ingestion.ts` is the canonical repository snapshot/config boundary.
-- Every promoted field requires declared source IDs; every declared repository source or asset must resolve to actual captured bytes.
-- Missing, contradictory, unsupported, or path-traversing input is rejected rather than repaired by invention.
+Owns:
 
-## Agent and reviewer boundary
+- `SiteSource`, `PageIR`, validation and deterministic compilation;
+- HTML, CSS, metadata, JSON-LD, sitemap and instruction projections;
+- browser capability contracts;
+- public/operator surface rendering;
+- static fallback output;
+- dependency declarations and hashes.
 
-- Stage 1 and Stage 2 model output is proposal state.
-- Schema-constrained decoding is transport safety, not semantic authority.
-- Same-model self-critique never accepts ontology or page output.
-- Independent reviewers or externally supplied observations control approval.
-- Repair is bounded; exhausted repair rejects the output.
+Must work without Hyper Content, an LLM, runtime service, database, GPU, Zig or Wasm.
 
-## Validation
+Must not own credentials, authorization, connector execution or durable effects.
 
-Every substantive change must name its validation vector, pass/fail boundary, simpler baseline, and measured evidence. Hard failures stop orchestration. Pending and not-run remain visible.
+### Hyper Content
 
-Run from `reference/`:
+Owns:
+
+- approved corpus and evidence intake;
+- deterministic/model-backed semantic proposals;
+- independent evidence validation;
+- bounded repair and atomic rejection;
+- accepted generation checkpoints;
+- portable `SiteSource` and optional task/surface proposals.
+
+Must not own HTML rendering, publication authority, approvals or external effects.
+
+### Hyper Runtime
+
+Owns:
+
+- verified tenant and actor identity context;
+- role, scope and approval policy;
+- durable outbox and worker claims;
+- connector dispatch and reconciliation;
+- ambiguous-outcome quarantine;
+- dead-letter/operator recovery state;
+- immutable effect receipts.
+
+Current implementation lives in `hyper-content/src/action-runtime.ts`, `durable-pilot.ts` and `production-runtime.ts`. This is transitional physical placement, not product identity.
+
+### AI Employee
+
+“AI Employee” is a composed deployment using Hyper Content, Hyper Site and Hyper Runtime.
+
+Do not call Hyper Site, Hyper Content or the entire repository an AI Employee by itself.
+
+## One-authority rules
+
+Never create a second authority for:
+
+- `SiteSource` or `PageIR`;
+- deterministic HTML rendering;
+- evidence acceptance;
+- tenant authorization;
+- approval decisions;
+- effect receipts.
+
+Move behavior through compatibility wrappers and prove parity before removing the old authority.
+
+## Semantic authority rule
+
+```text
+provider proposes
+independent validator accepts or rejects
+provider -X-> self-validation
+provider -X-> self-approval
+provider -X-> direct publication/effect authority
+```
+
+## Effect safety rule
+
+```text
+succeeded -> immutable receipt
+not sent + retryable -> bounded retry
+rejected/exhausted -> dead letter
+unknown -> ambiguous quarantine -> reconciliation
+```
+
+Unknown outcomes must never be automatically retried.
+
+## Permission rule
+
+- Permission filtering occurs before public rendering.
+- Browser surfaces submit typed intents; they do not mutate canonical runtime state directly.
+- Public projections are allowlisted.
+- Rendered controls are not authorization enforcement.
+- High-risk actions require an independently authorized approval.
+
+## Packaging direction
+
+```text
+hyper-content -> hyper-site
+hyper-site -X-> hyper-content
+reference -> hyper-site compatibility surface
+```
+
+Future target:
+
+```text
+hyper-content   semantic pipeline
+hyper-site      framework/presentation
+hyper-runtime   governed execution
+```
+
+Extracting `hyper-runtime` is package cleanup and must preserve current behavior and tests.
+
+## Baseline-first rule
+
+Every advanced method requires a simpler control:
+
+- ontology graph vs typed records;
+- embeddings vs lexical/rule retrieval;
+- SDRT/GNN linking vs explicit links and entity co-occurrence;
+- HRR/HDC vs ordinary maps/vectors;
+- Wasm/Zig vs JavaScript;
+- GPU vs CPU/provider API;
+- generated UI vs trusted static components;
+- autonomous plan vs human-curated plan.
+
+Advanced research cannot become semantic, rendering or effect authority without a measured promotion gate.
+
+## Required evidence
+
+Every substantive change names:
+
+```text
+hypothesis
+logical owner
+physical owner
+owned invariant
+primary metric
+falsification rule
+simple baseline
+negative control
+fixture/environment
+pass threshold
+rollback
+measured evidence
+```
+
+Pending and not-run checks remain visible.
+
+## Side-effect documentation
+
+For every source or operational entry point document:
+
+- file reads and writes;
+- database queries and transaction boundaries;
+- network requests;
+- process spawns;
+- environment and secret reads;
+- external effects;
+- retry and reconciliation behavior.
+
+## Validation commands
 
 ```bash
-npm install --no-audit --no-fund --no-package-lock
+npm run build
 npm test
-npm run manifest:emit
-npm run ui:emit
-npm run orchestration:check
-npm run framework:validate
-npm run framework:preview
-npm run browser:check
-npm run ui:r3f:build
+npm run test:validation
+npm run test:compiler-limit
+npm run validate:workstreams
+node scripts/check-doc-system.mjs
 ```
 
-Synthetic compiler scale does not prove real relevance, useful pages, indexing, ranking, citations, conversion, revenue, or native/Wasm advantage.
+Package-specific:
 
-## Publication boundary
+```bash
+npm --prefix hyper-site test
+npm --prefix hyper-content test
+npm run proof:h0-h1
+```
 
-No page enters an indexable cohort until evidence, relevance, information gain, distinctness, cannibalization, utility/task, path, static delivery, canonical, browser, crawler, accessibility, and lifecycle gates pass. Initial real cohorts remain noindex.
+## Documentation lifecycle
 
-## Memory and commits
+```text
+intake
+-> source verification and direct controls
+-> architecture
+-> executable plan
+-> RED/GREEN/REFACTOR
+-> measured report
+-> immutable handoff
+-> catalog/bootstrap/PR reconciliation
+```
 
-- `memory/MEMORY.md` is the current TOON index.
-- Append immutable `memory/YYYY-MM-DD-HHMM-<slug>.md` handoffs.
-- Record branch, exact commit, CI run, test count, artifacts, unrun validation, remaining failures, and next gate.
-- Commit or merge only coherent work that has passed the applicable validation suite.
+Documents are stale if they collapse the subsystem taxonomy, claim unrun external integrations, present unknown effects as retryable or describe transitional package placement as the desired architecture.
+
+PR #3 remains draft and unmerged until external deployment gates or an explicit scope decision changes that posture.

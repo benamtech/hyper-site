@@ -1,0 +1,92 @@
+{
+  "updatedAt": "2026-07-18",
+  "scope": "installable static framework floor, external package proof, browser validation and maintenance correctness",
+  "sources": [
+    {
+      "id": "npm-package-json-exports",
+      "type": "official-documentation",
+      "url": "https://docs.npmjs.com/files/package.json/",
+      "supports": [
+        "package exports define the public interface",
+        "package metadata and dependencies are part of reproducible external consumption"
+      ],
+      "limitation": "does not prove the package actually works outside its monorepo"
+    },
+    {
+      "id": "npm-pack",
+      "type": "official-documentation",
+      "url": "https://docs.npmjs.com/cli/pack/",
+      "supports": [
+        "npm pack creates the distributable tarball used for isolated consumer tests"
+      ],
+      "limitation": "a successful tarball build does not prove its exports or runtime dependencies are correct"
+    },
+    {
+      "id": "astro-cli",
+      "type": "official-documentation",
+      "url": "https://docs.astro.build/en/reference/cli-reference/",
+      "supports": [
+        "ordinary framework baseline includes dev, build and preview commands",
+        "static output is placed in a deployable dist directory"
+      ],
+      "limitation": "Astro is a comparison control, not a required Hyper dependency"
+    },
+    {
+      "id": "astro-routing",
+      "type": "official-documentation",
+      "url": "https://docs.astro.build/en/reference/routing-reference/",
+      "supports": [
+        "static routes must be known and generated at build time",
+        "route collisions and missing paths are framework correctness concerns"
+      ],
+      "limitation": "does not establish Hyper's route model or product value"
+    },
+    {
+      "id": "astro-content-collections",
+      "type": "official-documentation",
+      "url": "https://docs.astro.build/en/guides/content-collections/",
+      "supports": [
+        "schema-validated structured content is an ordinary framework capability"
+      ],
+      "limitation": "Hyper may use a different authoring model if it remains simpler and externally usable"
+    },
+    {
+      "id": "node-test-runner",
+      "type": "official-documentation",
+      "url": "https://nodejs.org/download/release/v20.19.0/docs/api/test.html",
+      "supports": [
+        "Node 20 provides a stable built-in test runner suitable for package and CLI tests"
+      ],
+      "limitation": "test framework choice does not prove test quality"
+    },
+    {
+      "id": "playwright-best-practices",
+      "type": "official-documentation",
+      "url": "https://playwright.dev/docs/best-practices",
+      "supports": [
+        "browser tests should verify user-visible behavior rather than private implementation details",
+        "tests should be isolated"
+      ],
+      "limitation": "browser automation cannot replace human review"
+    },
+    {
+      "id": "playwright-accessibility",
+      "type": "official-documentation",
+      "url": "https://playwright.dev/docs/accessibility-testing",
+      "supports": [
+        "automated accessibility scans can detect common defects",
+        "manual and inclusive testing remain necessary"
+      ],
+      "limitation": "an automated zero-violation result is not complete accessibility proof"
+    },
+    {
+      "id": "bazel-dependencies",
+      "type": "official-documentation",
+      "url": "https://bazel.build/versions/6.0.0/concepts/dependencies",
+      "supports": [
+        "correct incremental rebuilds require complete dependency declarations"
+      ],
+      "limitation": "Hyper's dependency index must still be tested against frozen expected affected sets"
+    }
+  ]
+}

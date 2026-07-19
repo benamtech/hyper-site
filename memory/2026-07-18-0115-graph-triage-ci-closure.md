@@ -21,7 +21,7 @@ validated_stages[9]:
   artifact-upload
 
 validated_docs[4]:
-  ../26-graph-learning-paper-triage-and-promotion-gates.md
+  ../docs/research/26-graph-learning-paper-triage-and-promotion-gates.md
   ../validation/reports/2026-07-18-graph-learning-paper-triage.md
   2026-07-18-0105-graph-learning-paper-triage.md
   MEMORY.md

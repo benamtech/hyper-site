@@ -10,9 +10,9 @@ refs[12]{role,file}:
   current-reality,../README.md
   operating-rules,../AGENTS.md
   source-graph,../CODEGRAPH.md
-  implementation-authority,../23-groundwork-orchestration-implementation.md
-  operational-validation,../22-agent-operated-framework-workflow-validation-matrix.md
-  generation-job-model,../21-vector-to-generation-job-compiler.md
+  implementation-authority,../docs/planning/23-groundwork-orchestration-implementation.md
+  operational-validation,../docs/validation/22-agent-operated-framework-workflow-validation-matrix.md
+  generation-job-model,../docs/architecture/21-vector-to-generation-job-compiler.md
   validation-report,../validation/reports/2026-07-17-groundwork-orchestration-implementation.md
   orchestrator,../reference/src/framework-orchestrator.ts
   project-input,../reference/src/project-input.ts

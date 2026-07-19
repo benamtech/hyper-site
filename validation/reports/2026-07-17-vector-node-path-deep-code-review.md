@@ -409,7 +409,7 @@ The review narrows these phrases:
 
 ## Correct conceptual model
 
-The project should use the three-plane model in `18-vector-node-path-web-framework-model.md`:
+The project should use the three-plane model in `docs/architecture/18-vector-node-path-web-framework-model.md`:
 
 1. offline publication/corpus plane;
 2. stable canonical navigation/node-path plane;

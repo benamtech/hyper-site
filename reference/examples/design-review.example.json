@@ -1,0 +1,10 @@
+{
+  "reviewerId": "operator:replace-me",
+  "reviewerClass": "human",
+  "decision": "approved",
+  "approvedAt": "2026-07-18T00:00:00Z",
+  "notes": [
+    "Review the homepage and core conversion-page briefs before approving the bulk-page design authority.",
+    "Approval applies only to the exact design-draft hash."
+  ]
+}

@@ -5,9 +5,9 @@ status: architecture-authority-pass; implementation pending
 branch: agent/ui-metaprogramming-pass-1
 
 refs[8]{file,role}:
-  ../20-agent-operated-vector-site-generation-and-wasm.md,"product/use/Wasm model"
-  ../21-vector-to-generation-job-compiler.md,"accepted vectors -> agent page-generation jobs"
-  ../22-agent-operated-framework-workflow-validation-matrix.md,"whole-system validation/pass/fail authority"
+  ../docs/architecture/20-agent-operated-vector-site-generation-and-wasm.md,"product/use/Wasm model"
+  ../docs/architecture/21-vector-to-generation-job-compiler.md,"accepted vectors -> agent page-generation jobs"
+  ../docs/validation/22-agent-operated-framework-workflow-validation-matrix.md,"whole-system validation/pass/fail authority"
   ../AGENTS.md,"scoped operating invariants"
   ../README.md,"product reality and workflow"
   ../CODEGRAPH.md,"authority/generation graph"

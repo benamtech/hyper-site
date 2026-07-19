@@ -32,11 +32,11 @@ HRR/HDC/vector math does not independently author prose, but it is first-class g
 
 ## Files added
 
-- `21-vector-to-generation-job-compiler.md`
+- `docs/architecture/21-vector-to-generation-job-compiler.md`
   - defines the missing bridge from accepted prospect-context coordinates to executable agent jobs;
   - defines joint context, page coordinate, generation job shape, specialized passes, specificity requirements, and build-time versus runtime boundaries.
 
-- `22-agent-operated-framework-workflow-validation-matrix.md`
+- `docs/validation/22-agent-operated-framework-workflow-validation-matrix.md`
   - defines expected framework ergonomics;
   - maps `init -> inspect -> research -> plan -> generate -> preview -> validate -> build -> publish -> measure`;
   - defines validation/pass/fail vectors for 27 cross-cutting features and workflow stages;
@@ -65,16 +65,16 @@ HRR/HDC/vector math does not independently author prose, but it is first-class g
 
 ### Existing internal research
 
-- `04-feature-validation-vectors.md`
-- `05-pass-fail-vectors.md`
-- `12-compiler-design-and-autonomy-validation-addendum.md`
-- `13-academic-and-normative-basis-for-validation-vectors.md`
-- `15-hyper-targeted-search-distribution-workstreams.md`
-- `16-unified-hypervector-manifest-agent-harness.md`
-- `17-agentic-ui-metaprogramming-standard.md`
-- `18-vector-node-path-web-framework-model.md`
-- `19-vector-native-corrections-and-csi-validation.md`
-- `20-agent-operated-vector-site-generation-and-wasm.md`
+- `docs/validation/04-feature-validation-vectors.md`
+- `docs/validation/05-pass-fail-vectors.md`
+- `docs/architecture/12-compiler-design-and-autonomy-validation-addendum.md`
+- `docs/research/13-academic-and-normative-basis-for-validation-vectors.md`
+- `docs/planning/15-hyper-targeted-search-distribution-workstreams.md`
+- `docs/architecture/16-unified-hypervector-manifest-agent-harness.md`
+- `docs/architecture/17-agentic-ui-metaprogramming-standard.md`
+- `docs/architecture/18-vector-node-path-web-framework-model.md`
+- `docs/research/19-vector-native-corrections-and-csi-validation.md`
+- `docs/architecture/20-agent-operated-vector-site-generation-and-wasm.md`
 
 `22` does not replace these. It is the operational matrix tying their scientific and normative gates to the framework user/developer lifecycle.
 
