@@ -9,10 +9,10 @@
     "README.md"
   ],
   "main": "./index.mjs",
-  "types": "./dist/framework-core.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/framework-core.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./index.mjs"
     },
     "./framework-core": {
