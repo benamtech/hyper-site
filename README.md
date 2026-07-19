@@ -1,12 +1,14 @@
 # Hyper Monorepo
 
-Status: H0 integration and H1 physical compiler extraction measured PASS; H2 is next  
+Status: H0/H1 PASS; living-surface MVP PASS; H2 autonomous semantic generation is next  
 Updated: 2026-07-19  
 PR: #3 remains draft and unmerged
 
 ## What works now
 
-The package-owned Hyper Site compiler can:
+### Deterministic site compiler
+
+The package-owned `@amtech/hyper-site` compiler can:
 
 - validate structured `SiteSource` input;
 - reject missing references and under-supported claims;
@@ -15,208 +17,209 @@ The package-owned Hyper Site compiler can:
 - generate a reverse dependency index;
 - compute deterministic page and build hashes.
 
-Current public execution path:
+Current path:
 
 ```text
 consumer
 -> @amtech/hyper-site
 -> hyper-site/index.mjs
 -> hyper-site/dist/index.js
--> compileSite(SiteSource)
 ```
 
-The content-neutral compiler cluster is physically owned by `hyper-site/src`:
+### Living AI employee surface MVP
 
-- `framework-core.ts`;
-- `site-manifest.ts`;
-- `browser-targets.ts`;
-- `css-modern.ts`;
-- aggregate typed entrypoint `index.ts`.
+`@amtech/hyper-site` now also exports a package-owned living-surface runtime:
 
-The matching `reference/src` files are compatibility consumers of built Hyper Site output.
+```text
+LivingSurfaceState
+-> validation
+-> public/operator permission projection
+-> agency and governance resolution
+-> deterministic decision ledger
+-> accessible static HTML
+-> state, HTML and build hashes
+```
 
-## H0/H1 measured proof
+Implemented MVP behavior:
 
-Canonical command:
+- nine interface-field channels: visibility, scale, curvature, density, governance, agency, relevance, valence and urgency;
+- public, operator and shared data visibility enforced before rendering;
+- user, agent and mixed action authority;
+- risk thresholds that convert available consequential actions to `approval-required`;
+- user-control agency continuum and blend-radius calculation;
+- logistic approval-boundary curvature;
+- runtime health, queue, cost and approval projection;
+- deterministic ordering with human-readable reasons;
+- hostile HTML escaping;
+- static public and operator fallback artifacts.
+
+The continuous field is currently a deterministic presentation/governance model. PDE evolution, CSG composition and WebGPU are optional future renderers, not semantic authorities.
+
+## Measured proofs
+
+### H0/H1 extraction
 
 ```bash
 npm run proof:h0-h1
 ```
 
-Measured source commit:
+Measured authority:
 
-```text
-af4774e0efc90f1890a977896ac41f87e1452744
-```
+- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`;
+- `memory/2026-07-19-0150-h0-h1-proof-closure.md`.
 
 Result:
 
 ```text
 H0 integrated proof: PASS
 H1 physical extraction: PASS
-decision: advance-to-H2
 ```
 
-Exact proof:
+### Living-surface MVP
 
-- monorepo/package/compatibility build: pass;
-- legacy tests: 80/80;
-- clean-room packed runtime consumer: pass;
-- clean-room invalid-input consumer: pass;
-- clean-room strict TypeScript consumer: pass;
-- randomized 25-page compiler and rejection suite: pass;
-- `reference/src` files classified: 59/59;
-- missing/orphan/duplicate/incomplete ownership records: 0.
+```bash
+npm run mvp:living-surface
+npm run proof:h0-h1
+```
+
+Measured source commit:
+
+```text
+f5734533da137f1f28509d495f7fc67a187495ad
+```
+
+Workflow run: `29677235149`  
+Artifact: `h0-h1-proof-29677235149`
+
+Result:
+
+```text
+Hyper Site package tests: 8/8
+legacy compatibility tests: 80/80
+clean-room runtime consumer: PASS
+clean-room strict TypeScript consumer: PASS
+public/private projection checks: PASS
+approval gate checks: PASS
+deterministic demo artifacts: PASS
+```
 
 Measured authority:
 
-- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`;
-- `memory/2026-07-19-0150-h0-h1-proof-closure.md`;
-- workflow run `29675348346`;
-- artifact `h0-h1-proof-29675348346`.
+- `validation/reports/2026-07-19-living-surface-mvp.md`;
+- `memory/2026-07-19-0310-living-surface-mvp.md`.
 
-The generated machine reports remain:
+Generated local demo artifacts:
 
-- `validation/reports/h0-h1-proof.json`;
-- `validation/reports/h0-h1-proof.md`;
-- `validation/reports/h0-h1-compiler-limit/`.
-
-A failed future proof produces `repair-gate-failures-only`. It does not authorize bypassing the compiler boundary.
+```text
+validation/reports/living-surface-mvp/public.html
+validation/reports/living-surface-mvp/operator.html
+validation/reports/living-surface-mvp/public-projection.json
+validation/reports/living-surface-mvp/operator-projection.json
+validation/reports/living-surface-mvp/report.json
+```
 
 ## Product thesis
-
-Hyper is not intended to stop at parity with a conventional static framework. The ordinary framework workflow is a reliability substrate, not the product ceiling.
-
-The intended suite is:
 
 ```text
 approved source truth
 -> Hyper Content semantic compiler
--> evidence, claims, page existence and design intent
 -> autonomous generation and bounded repair
--> versioned portable semantic state
+-> versioned semantic/runtime state
 -> Hyper Site deterministic compiler
--> static HTML, GenUI projections and task declarations
+-> static HTML + living GenUI projections + task declarations
 -> remote agent/browser adapters
--> receipts and field feedback
+-> approvals, receipts and field feedback
 ```
 
-Hyper Site remains the deterministic semantic and rendering oracle. It is not the complete product.
+The ordinary static framework is the reliability substrate, not the product ceiling.
 
 ## Active hypothesis order
 
 ```text
 H0 integrated proof: PASS
--> H1 physical compiler extraction: PASS
--> H2 autonomous semantic generation: NEXT
--> H3 self-aware multi-surface GenUI
+-> H1 physical extraction: PASS
+-> H2 autonomous semantic generation: NEXT CORE GATE
+-> H3 self-aware GenUI: MVP SUBSTRATE PASS; live integration pending
 -> H4 remote bounded agent/browser tasks
 -> H5 SDRT/GNN graph-intelligence comparisons
 -> H6 GPU/Zig/Wasm accelerated-kernel comparisons
 ```
 
-H2-H6 are first-class end-state hypotheses. They may not bypass evidence validation, create a second semantic authority or acquire publication/credential authority by default.
+H2-H6 may not bypass evidence validation, create a second semantic authority or silently own credentials/publication.
 
-## H2 next vertical slice
-
-H2 must use one real approved source corpus and produce:
+## Next vertical slice
 
 ```text
-source intake
--> approved evidence and fact ledger
--> bounded provider job
--> schema-constrained semantic proposal
--> independent semantic/evidence validation
--> bounded repair or reject
--> accepted portable SiteSource
--> deterministic Hyper Site compilation
--> resumable accepted-work ledger
+approved real source corpus
+-> bounded provider proposal
+-> independent evidence validation
+-> accepted SiteSource + LivingSurfaceState
+-> deterministic site and public/operator projections
+-> bounded external action adapter
+-> explicit approval
+-> immutable receipt
 ```
 
 Required proof:
 
-- the generating model cannot approve its own output;
-- every accepted claim traces to approved evidence;
-- retries are bounded;
-- accepted work is not regenerated after interruption;
-- invalid output leaves no partially accepted `SiteSource`;
+- generating model cannot approve its own output;
+- accepted claims trace to approved evidence;
+- public/private filtering happens before rendering;
+- retries and repairs are bounded;
+- invalid work leaves no partially accepted state;
+- accepted work resumes without regeneration;
 - provider/model/token/cost evidence is recorded;
-- the accepted result compiles through the H1 package boundary.
+- effects remain external, approved and receipt-bound.
 
-## Advanced tracks
+## Package use
 
-### Autonomous generation
+```ts
+import {
+  compileSite,
+  compileLivingSurface,
+  type SiteSource,
+  type LivingSurfaceState,
+} from "@amtech/hyper-site";
+```
 
-Provider-backed workers propose structured semantic state. Deterministic compilers and independent reviewers accept, repair or reject it.
+Explicit living-surface subpath:
 
-### Self-aware GenUI
-
-Semantic state describes information purpose, user task, evidence, design constraints and component capabilities. Multiple UI projections consume that state while retaining a deterministic static fallback.
-
-### Remote agent and browser execution
-
-Public task declarations are consumed by an external runtime that owns durable state, approvals, credentials, idempotency and receipts.
-
-### SDRT and GNNs
-
-They are comparison arms for relationship reasoning, internal linking, task-state representation and repair prioritization. They must beat explicit typed edges, co-occurrence, shared evidence, route hierarchy and lexical controls on held-out judgments.
-
-### GPU, Zig and Wasm
-
-They are active substrate hypotheses for pure bounded kernels and sandboxed transforms. They may not own business truth, evidence approval, policy, credentials, publication or irreversible effects.
+```ts
+import { compileLivingSurface } from "@amtech/hyper-site/living-surface";
+```
 
 ## Local dependencies
 
-Current H0/H1 testing requires:
+Current compilation and MVP testing require:
 
 - Git;
 - Node.js 20 or newer;
 - npm;
 - Bash and ordinary Unix tools;
-- curl only for live download scripts;
-- pacman only for the optional Manjaro installer.
+- curl only for live download scripts.
 
-No Python, Docker, database, GPU, LLM key, Zig compiler or Wasm runtime is required for H0/H1.
+No Python, Docker, database, GPU, LLM key, Zig compiler or Wasm runtime is required for the current MVP.
 
-H2 provider execution will additionally require an explicitly configured provider credential and approved source fixture. It does not automatically require local GPU inference.
-
-## Test the current branch
-
-Manjaro/Arch:
+## Test the branch
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/manjaro-clone-and-test-hyper.sh)
-```
-
-Generic Unix-like:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/benamtech/hyper-site/agent/glm-blackwell-vertical-slice/scripts/clone-and-test-hyper.sh | bash
-```
-
-## Local commands
-
-```bash
+git clone --single-branch --branch agent/glm-blackwell-vertical-slice https://github.com/benamtech/hyper-site.git
+cd hyper-site
 npm --prefix hyper-site install
 npm --prefix hyper-content install
 npm --prefix reference install
 npm run proof:h0-h1
-npm run build
-npm test
-npm run test:packed-consumers
-npm run test:compiler-limit
-node scripts/check-doc-system.mjs
+npm run mvp:living-surface
 ```
 
 ## Current authorities
 
-- H0/H1 and content-first end-state program: `docs/planning/50-h0-h1-content-first-reinvention-program.md`
-- measured H0/H1 report: `validation/reports/2026-07-19-h0-h1-extraction-proof.md`
-- package architecture: `CODEGRAPH.md`
-- operating contract: `AGENTS.md`
-- documentation system: `docs/README.md`
-- durable state: `memory/MEMORY.md`
+- package and product state: `README.md`;
+- package architecture: `CODEGRAPH.md`;
+- H0/H1 program: `docs/planning/50-h0-h1-content-first-reinvention-program.md`;
+- living-surface proof: `validation/reports/2026-07-19-living-surface-mvp.md`;
+- durable state: `memory/MEMORY.md`.
 
 ## Nonclaims
 
-H0/H1 do not prove autonomous generation, useful GenUI, remote task safety, graph-learning advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion or revenue. Each requires its own frozen fixture, control, independent validator and measured promotion decision.
+The current MVP does not prove autonomous semantic generation, remote task safety, live browser execution, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion or revenue.
