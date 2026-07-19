@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active  
-updated_at: 2026-07-19T04:10:00-04:00
+updated_at: 2026-07-19T04:20:00-04:00
 
 ## State
 
@@ -9,7 +9,7 @@ branch: agent/glm-blackwell-vertical-slice
 pr: 3  
 draft: true  
 merged: false  
-maturity: H0-H4 bounded MVP loop measured PASS; real provider and durable connector pilot is next
+maturity: H0-H4 bounded MVP loop measured PASS; H5-H6 remain unrun challenger tracks; real provider and durable connector pilot is next
 
 ## Active boundary
 
@@ -33,6 +33,8 @@ H1 physical extraction: PASS
 H2 bounded semantic-generation MVP: PASS
 H3 living-surface MVP: PASS
 H4 approved idempotent-action MVP: PASS
+H5 SDRT/GNN comparisons: NOT RUN
+H6 GPU/Zig/Wasm comparisons: NOT RUN
 ```
 
 ## Physical truth
@@ -44,7 +46,6 @@ H4 approved idempotent-action MVP: PASS
 - Hyper Content tests pass 4/4.
 - legacy compatibility tests pass 80/80.
 - isolated Hyper Site tarball consumers pass.
-- all three exact-head workflows passed on the measured commit.
 
 ## Complete bounded loop
 
@@ -75,8 +76,8 @@ Measured hashes:
 ## Authorities
 
 - `README.md`
-- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`
-- `validation/reports/2026-07-19-living-surface-mvp.md`
+- `docs/README.md`
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`
 - `validation/reports/2026-07-19-semantic-action-loop-mvp.md`
 - `memory/2026-07-19-0410-semantic-action-loop-mvp.md`
 
@@ -94,6 +95,6 @@ Real provider and connector pilot:
 
 ## Nonclaims
 
-The provider and executor are fixtures. Current proof does not establish hosted-model quality, production connector safety, credential custody, multi-tenant authorization, durable leases, dead-letter handling, live browser execution or autonomous production publication.
+The provider and executor are fixtures. Current proof does not establish hosted-model quality, production connector safety, credential custody, multi-tenant authorization, durable leases, dead-letter handling, live browser execution or autonomous production publication. H5 and H6 remain separate comparison and promotion programs.
 
 PR #3 remains draft and unmerged.
