@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active  
-updated_at: 2026-07-19T01:35:00-04:00
+updated_at: 2026-07-19T01:50:00-04:00
 
 ## State
 
@@ -9,7 +9,7 @@ branch: agent/glm-blackwell-vertical-slice
 pr: 3  
 draft: true  
 merged: false  
-maturity: package-owned compiler extraction implemented; exact-head H0/H1 proof required
+maturity: H0 integration and H1 physical compiler extraction measured PASS; H2 autonomous semantic generation is next
 
 ## Active boundary
 
@@ -20,31 +20,42 @@ Hyper Site -X-> Hyper Content
 Hyper Site -X-> reference runtime
 ```
 
-## Physical truth
+## H0/H1 measured truth
 
-- `hyper-site/src` now owns `framework-core.ts`, `site-manifest.ts`, `browser-targets.ts`, `css-modern.ts` and the aggregate typed entrypoint.
-- `hyper-site/index.mjs` exports `hyper-site/dist/index.js`.
-- `hyper-site/package.json` is packable and exposes package-owned runtime and declaration files.
-- matching `reference/src` modules are compatibility re-exports from built Hyper Site output.
-- most Hyper Content, generation, ontology, graph and experimental source remains under `reference/src` and still requires later ownership classification.
+Validated source commit: `af4774e0efc90f1890a977896ac41f87e1452744`  
+Workflow run: `29675348346`  
+Artifact: `h0-h1-proof-29675348346`
 
-## H0/H1 proof
-
-Canonical command:
-
-```bash
-npm run proof:h0-h1
+```text
+H0 integrated proof: PASS
+H1 physical extraction: PASS
+decision: advance-to-H2
 ```
 
-The proof runs complete builds, legacy tests, clean-room runtime/rejection/TypeScript tarball consumers, validation tests and a bounded randomized compiler test. It writes exact-commit reports under `validation/reports/`.
+Measured authority:
 
-H0 passes only when all current streams integrate and the clean-room proof runs.
+- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`
+- `memory/2026-07-19-0150-h0-h1-proof-closure.md`
 
-H1 passes only when the public compiler cluster is package-owned and existing accepted artifacts, ordering, hashes and rejection behavior remain coherent.
+## Physical truth
+
+- `hyper-site/src` owns `framework-core.ts`, `site-manifest.ts`, `browser-targets.ts`, `css-modern.ts` and the aggregate typed entrypoint.
+- `hyper-site/index.mjs` exports `hyper-site/dist/index.js`.
+- `hyper-site/package.json` is public/packable and exposes package-owned runtime and declaration files.
+- matching `reference/src` modules are compatibility consumers of built Hyper Site output.
+- clean-room runtime, invalid-input and strict TypeScript tarball consumers pass.
+- legacy compatibility tests pass 80/80.
+- the randomized 25-page compiler and rejection suite passes.
+- 59 current `reference/src` TypeScript/declaration files have 59 ownership records with zero missing, orphan, duplicate or incomplete records.
+
+Ownership authorities:
+
+- `validation/reference-source-inventory.json`
+- `validation/reference-declaration-inventory.json`
 
 ## Product thesis
 
-The conventional static framework floor is a validation substrate, not the product ceiling.
+The conventional static framework floor is a proven reliability substrate, not the product ceiling.
 
 Intended system:
 
@@ -62,20 +73,40 @@ approved source truth
 ## Active hypothesis order
 
 ```text
-H0 integrated proof
--> H1 physical extraction
--> H2 autonomous semantic generation
+H0 integrated proof: PASS
+-> H1 physical extraction: PASS
+-> H2 autonomous semantic generation: NEXT
 -> H3 self-aware GenUI
 -> H4 remote bounded agent/browser execution
 -> H5 SDRT/GNN graph-intelligence comparisons
 -> H6 GPU/Zig/Wasm accelerated-kernel comparisons
 ```
 
-H2-H6 are active end-state hypotheses, not permanently deferred work. They may begin bounded research fixtures after H1 but cannot bypass the compiler or become a second semantic authority.
+H2-H6 are active end-state hypotheses, not permanently deferred work. They cannot bypass evidence/compiler validation, create a second semantic authority, or silently own credentials/publication.
 
-## Next gate
+## Next gate: H2
 
-Repair only exact-head H0/H1 failures. On green, begin H2 with one approved real business repository, five complete pages and a 25-page noindex cohort.
+Implement one real autonomous semantic-generation vertical slice:
+
+```text
+one approved real source corpus
+-> one bounded GLM/provider job
+-> one schema-constrained semantic proposal
+-> independent semantic/evidence validation
+-> bounded repair or reject
+-> accepted portable SiteSource
+-> deterministic Hyper Site compilation
+```
+
+Required proof:
+
+- generating model does not approve its own output;
+- all accepted claims bind to approved evidence;
+- retries are bounded and resumable;
+- accepted work is not regenerated after interruption;
+- rejection is atomic;
+- provider/model/token/cost evidence is recorded;
+- output compiles through the H1 package boundary.
 
 ## Active authorities
 
@@ -84,10 +115,11 @@ Repair only exact-head H0/H1 failures. On green, begin H2 with one approved real
 - `CODEGRAPH.md`
 - `docs/README.md`
 - `docs/planning/50-h0-h1-content-first-reinvention-program.md`
-- `memory/2026-07-19-0135-h0-h1-extraction-content-first-reset.md`
+- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`
+- `memory/2026-07-19-0150-h0-h1-proof-closure.md`
 
 ## Nonclaims
 
-No autonomous generation quality, GenUI usefulness, remote task safety, SDRT/GNN advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion, revenue or production readiness is established by H0/H1.
+H0/H1 do not establish autonomous generation quality, GenUI usefulness, remote task safety, SDRT/GNN advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion, revenue or complete-suite production readiness.
 
-PR #3 stays draft until measured gates and review justify otherwise.
+PR #3 remains draft until H2 evidence and review justify a new status.
