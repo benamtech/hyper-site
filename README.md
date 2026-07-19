@@ -1,26 +1,127 @@
 # Hyper Monorepo
 
-Status: H0-H4 bounded MVP PASS; production outbox/reconciliation contract PASS; live-provider environment gates remain  
+Status: framework, content-pipeline and governed-runtime contracts implemented; external deployment gates remain  
 Updated: 2026-07-19  
 PR: #3 remains draft and unmerged
 
-## Working product path
+## What this repository is
+
+Hyper is not one monolithic “AI employee.” It contains three technical subsystems:
 
 ```text
-approved source truth
--> Hyper Content bounded semantic generation
--> independent evidence validation
--> accepted SiteSource + LivingSurfaceState
--> Hyper Site deterministic compilation
--> public/operator living surfaces
--> tenant/actor authorization
--> transactional outbox
--> approved connector execution
--> immutable receipt
--> deterministic post-effect projection
+Hyper Content
+  evidence-grounded content generation and semantic validation
+        |
+        | SiteSource and optional task declarations
+        v
+Hyper Site
+  deterministic website framework and compiler
+        |
+        | optional governed task mounts
+        v
+Hyper Runtime
+  identity, approvals, durable jobs, connectors and receipts
 ```
 
-## Production effect path
+**AI Employee** is a product assembled from all three layers. It is not the name of the compiler or content pipeline.
+
+Canonical taxonomy:
+
+- `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`
+
+## Hyper Site
+
+`@amtech/hyper-site` is the deterministic website framework.
+
+It validates structured `SiteSource` input and emits:
+
+- static HTML and CSS;
+- metadata and JSON-LD;
+- sitemap and instruction projections;
+- dependency metadata;
+- deterministic page and build hashes;
+- public/operator surface projections and static fallbacks.
+
+Hyper Site does not own providers, credentials, authorization, connectors or external effects.
+
+```ts
+import { compileSite, compileLivingSurface } from "@amtech/hyper-site";
+```
+
+## Hyper Content
+
+`@amtech/hyper-content` is the evidence-grounded generation pipeline.
+
+It:
+
+- consumes approved business facts and evidence;
+- accepts deterministic or model-backed proposals;
+- independently validates claims against the approved corpus;
+- applies bounded repair and atomic rejection;
+- persists accepted generation checkpoints;
+- produces portable `SiteSource` and optional task/surface proposals.
+
+A provider can propose content. It cannot approve, publish or execute its own output.
+
+```ts
+import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
+```
+
+## Hyper Runtime
+
+Hyper Runtime is the logical governed-execution subsystem.
+
+It owns:
+
+- tenant and actor identity context;
+- role, scope and approval policy;
+- transactional outbox state;
+- connector dispatch;
+- ambiguous-outcome reconciliation;
+- bounded retry for definitely-not-sent effects;
+- dead-letter recovery state;
+- immutable effect receipts;
+- deterministic post-effect state.
+
+Its code is currently located in `hyper-content/src` as a transitional packaging decision and exported through:
+
+```ts
+import {
+  DurableJsonTransactionStore,
+  GlmStructuredOutputProvider,
+  ShadowConnectorExecutor,
+} from "@amtech/hyper-content/durable-pilot";
+
+import {
+  PostgresProductionStore,
+  EnvironmentSecretSource,
+  verifyIdentityClaims,
+  buildOutboxRecord,
+  processNextOutbox,
+  reconcileNextAmbiguous,
+} from "@amtech/hyper-content/production-runtime";
+```
+
+That physical location does not make connector execution part of Hyper Content’s product identity. A later package cleanup may extract it to `@amtech/hyper-runtime`.
+
+## Composed AI Employee product
+
+An AI Employee deployment uses the layers together:
+
+```text
+approved business corpus
+-> Hyper Content generates and validates content/task proposals
+-> Hyper Site compiles the website and operator/customer surfaces
+-> Hyper Runtime executes explicitly approved tasks
+-> connector result becomes an immutable receipt
+-> Hyper Site renders deterministic post-effect state
+```
+
+A site using only Hyper Site is a website.  
+A system using Hyper Content plus Hyper Site is a generated website pipeline.  
+A deployment using all three layers may be sold as an AI Employee.
+
+## Production effect state machine
 
 ```text
 verified principal
@@ -28,7 +129,7 @@ verified principal
 -> PostgreSQL SERIALIZABLE outbox transaction
 -> SKIP LOCKED worker claim
 -> connector dispatch
-   ├─ succeeded -> receipt + succeeded state in one transaction
+   ├─ succeeded -> receipt + succeeded state
    ├─ definitely not sent -> bounded retry
    ├─ rejected/exhausted -> dead letter
    └─ unknown -> ambiguous quarantine
@@ -39,50 +140,34 @@ verified principal
    └─ failed -> operator dead letter
 ```
 
-The central production invariant is:
+Central invariant:
 
 ```text
 unknown provider outcome -X-> automatic retry
 unknown provider outcome -> ambiguous -> reconcile
 ```
 
-## Package APIs
-
-```ts
-import { compileSite, compileLivingSurface } from "@amtech/hyper-site";
-import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
-import { DurableJsonTransactionStore, GlmStructuredOutputProvider, ShadowConnectorExecutor } from "@amtech/hyper-content/durable-pilot";
-import { PostgresProductionStore, EnvironmentSecretSource, verifyIdentityClaims, buildOutboxRecord, processNextOutbox, reconcileNextAmbiguous } from "@amtech/hyper-content/production-runtime";
-```
-
-## Current package versions
+## Package versions
 
 ```text
 @amtech/hyper-site     0.3.0-alpha.0
 @amtech/hyper-content  0.4.0-alpha.0
 ```
 
-## Measured exact-head proof
+## Measured proof
 
-Validated production-runtime source commit:
+Validated production-runtime implementation commit:
 
 ```text
 d38b5c6b9ea8991edcf40d094dbdabad138fe489
 ```
 
-Workflows:
+Measured workflows:
 
 ```text
 Organize Repository Documents          PASS  29682124539
 Hyper Site H0-H1 Integration Pipeline  PASS  29682124534
 Hyper Site Reference Compatibility     PASS  29682124533
-```
-
-Proof artifact:
-
-```text
-h0-h1-proof-29682124534
-sha256:80f0f0f98940367cfc4d4f85391935f2ebf5208c6e7bbfcd7a87d4e98b439391
 ```
 
 Measured reports:
@@ -93,25 +178,7 @@ Measured reports:
 - `validation/reports/2026-07-19-durable-provider-connector-pilot.md`;
 - `validation/reports/2026-07-19-production-outbox-reconciliation.md`.
 
-## H0-H6 hypothesis state
-
-```text
-H0 integrated proof: PASS
-H1 physical extraction: PASS
-H2 bounded semantic generation: PASS for deterministic/provider-adapter MVP
-H3 living GenUI: typed deterministic MVP PASS
-H4 authorized durable action path: outbox/reconciliation contract PASS
-H5 SDRT/GNN comparisons: pending
-H6 GPU/Zig/Wasm comparisons: pending
-```
-
-Active program authority:
-
-- `docs/README.md`;
-- `docs/planning/50-h0-h1-content-first-reinvention-program.md`;
-- `docs/planning/51-durable-provider-connector-pilot.md`.
-
-## Run the complete repository proof
+## Run the repository proof
 
 ```bash
 git clone --single-branch --branch agent/glm-blackwell-vertical-slice https://github.com/benamtech/hyper-site.git
@@ -122,25 +189,27 @@ npm --prefix reference install
 npm run proof:h0-h1
 ```
 
-Package-level tests:
+Package tests:
 
 ```bash
 npm --prefix hyper-content test
+npm --prefix hyper-site test
 ```
 
-## External environment gates
+## External deployment gates
 
-The repository now contains fail-closed adapter contracts for the remaining production systems. The following cannot be honestly marked complete without configured external infrastructure:
+The repository contains fail-closed adapter contracts, not a deployed AI Employee service. Production operation still requires:
 
-- a real PostgreSQL instance and crash-injection harness;
+- a real PostgreSQL instance and process-kill testing;
 - managed secret custody;
-- cryptographically verified OIDC tokens and provider JWKS;
+- cryptographically verified OIDC/JWKS integration;
 - a live GLM endpoint and controlled credential;
-- a real provider sandbox supporting idempotency and status reconciliation;
-- kill-after-provider-acknowledgement testing.
+- a real provider sandbox with idempotency or status reconciliation;
+- kill-after-provider-acknowledgement recovery proof;
+- a hosted worker and customer/operator deployment.
 
-No production connector should be enabled until those tests pass. The current code does not auto-retry unknown outcomes, accept unsigned identity claims, or silently fall back to embedded secrets.
+No irreversible connector should be enabled until those environment-specific tests pass.
 
 ## Nonclaims
 
-The project does not yet claim production deployment, live autonomous publication, live browser execution, provider credential custody, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage, or GPU/Zig/Wasm advantage.
+The repository does not yet claim a deployed AI Employee, live autonomous publication, live browser execution, production credential custody, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage or GPU/Zig/Wasm advantage.
