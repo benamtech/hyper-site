@@ -1,6 +1,6 @@
 # Hyper Monorepo
 
-Status: H0-H4 bounded MVP loop PASS  
+Status: H0-H4 bounded MVP loop PASS; H5-H6 remain measured challenger tracks  
 Updated: 2026-07-19  
 PR: #3 remains draft and unmerged
 
@@ -40,6 +40,8 @@ H1 compiler/package extraction: PASS
 H2 bounded semantic-generation MVP: PASS
 H3 living-surface MVP: PASS
 H4 approved idempotent-action MVP: PASS
+H5 SDRT/GNN comparisons: NOT RUN
+H6 GPU/Zig/Wasm comparisons: NOT RUN
 ```
 
 - Hyper Site tests: 8/8;
@@ -56,6 +58,10 @@ H4 approved idempotent-action MVP: PASS
 - randomized 25-page compiler/rejection suite: PASS.
 
 Measured authority: `validation/reports/2026-07-19-semantic-action-loop-mvp.md`
+
+Active H0-H6 program: `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+
+Documentation system: `docs/README.md`
 
 ## Run it
 
@@ -81,4 +87,4 @@ Real provider and connector pilot:
 6. timeout, retry, duplicate-delivery and process-restart tests;
 7. deterministic post-effect surface and receipt.
 
-The current provider and executor are deterministic fixtures. Production connector safety, credential custody, durable leases, dead-letter handling and live browser execution are not yet proven.
+The current provider and executor are deterministic fixtures. Production connector safety, credential custody, durable leases, dead-letter handling and live browser execution are not yet proven. H5 and H6 require separate frozen controls and measured promotion decisions.
