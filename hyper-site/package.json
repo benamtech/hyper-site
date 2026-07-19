@@ -1,6 +1,6 @@
 {
   "name": "@amtech/hyper-site",
-  "version": "0.2.0-alpha.1",
+  "version": "0.3.0-alpha.0",
   "private": false,
   "type": "module",
   "files": [
@@ -30,6 +30,10 @@
     "./css-modern": {
       "types": "./dist/css-modern.d.ts",
       "import": "./dist/css-modern.js"
+    },
+    "./living-surface": {
+      "types": "./dist/living-surface.d.ts",
+      "import": "./dist/living-surface.js"
     }
   },
   "scripts": {
