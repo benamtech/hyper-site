@@ -124,6 +124,10 @@ H6 GPU/Zig/Wasm comparisons pending
 
 These H labels describe research/implementation gates, not product names.
 
+Active H0-H6 program record:
+
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`.
+
 ## Active authorities
 
 - `README.md`;
@@ -132,6 +136,7 @@ These H labels describe research/implementation gates, not product names.
 - `CODEGRAPH.md`;
 - `docs/README.md`;
 - `docs/architecture/52-product-taxonomy-and-runtime-boundaries.md`;
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`;
 - `validation/reports/2026-07-19-product-taxonomy-documentation-reconciliation.md`;
 - `memory/2026-07-19-1015-product-taxonomy-reconciliation.md`.
 
