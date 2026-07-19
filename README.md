@@ -223,3 +223,7 @@ npm run mvp:living-surface
 ## Nonclaims
 
 The current MVP does not prove autonomous semantic generation, remote task safety, live browser execution, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion or revenue.
+
+## Documentation system
+
+Documentation lifecycle and machine-readable authority are in `docs/README.md` and `docs/catalog.json`.
