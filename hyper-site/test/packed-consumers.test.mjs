@@ -7,30 +7,31 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 const packageDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const tsc = join(packageDir, "node_modules", ".bin", "tsc");
 
 function run(command, args, options = {}) {
   return execFileSync(command, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], ...options });
 }
-
 function packPackage(root) {
   const output = JSON.parse(run("npm", ["pack", "--json", "--pack-destination", root], { cwd: packageDir }));
   assert.equal(output.length, 1);
   const record = output[0];
   const paths = record.files.map((file) => file.path);
-  assert(paths.includes("index.mjs"));
-  assert(paths.includes("dist/framework-core.js"));
-  assert(paths.includes("dist/framework-core.d.ts"));
+  for (const required of ["index.mjs", "dist/index.js", "dist/index.d.ts", "dist/framework-core.js", "dist/framework-core.d.ts"]) assert(paths.includes(required), `tarball missing ${required}`);
   assert(paths.every((path) => !path.includes("reference/")), "tarball must not contain reference runtime files");
   return join(root, record.filename);
 }
-
-function installConsumer(root, name, tarball, source) {
+function createConsumer(root, name, tarball) {
   const dir = join(root, name);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, "package.json"), JSON.stringify({ name, private: true, type: "module" }, null, 2));
   run("npm", ["install", "--no-audit", "--no-fund", tarball], { cwd: dir });
+  return dir;
+}
+function runJavaScriptConsumer(root, name, tarball, source) {
+  const dir = createConsumer(root, name, tarball);
   writeFileSync(join(dir, "test.mjs"), source);
-  return run(process.execPath, ["test.mjs"], { cwd: dir });
+  return { dir, output: run(process.execPath, ["test.mjs"], { cwd: dir }) };
 }
 
 const validSource = `
@@ -53,7 +54,6 @@ assert.match(first.sitemapXml, /https:\/\/clean-room\.example\//);
 assert.deepEqual(first.dependencyIndex.get("e1"), ["home"]);
 console.log(JSON.stringify({ passed: true, buildHash: first.buildHash, pageHash: first.pages[0].sha256 }));
 `;
-
 const invalidSource = `
 import assert from "node:assert/strict";
 import { compileSite } from "@amtech/hyper-site";
@@ -68,17 +68,32 @@ const source = {
 assert.throws(() => compileSite(source), /claim c1 exceeds evidence e1/);
 console.log(JSON.stringify({ passed: true, rejected: "under-supported claim" }));
 `;
+const typedSource = `
+import { compileSite, compileSiteManifest, resolveBrowserTargets, evaluateCssFeatureChecklist, type SiteSource, type SiteManifest } from "@amtech/hyper-site";
+const source: SiteSource = { baseUrl: "https://typed.example", evidence: [], claims: [], informationObjects: [], modules: [{ id: "m", kind: "answer", layoutRole: "lead", claimIds: [], informationObjectIds: [], requiredCapabilities: [], sourceIds: [] }], pages: [{ id: "p", route: "/", canonicalQuestion: "Typed?", title: "Typed", description: "Typed", moduleIds: ["m"], internalPageIds: [], requiredCapabilities: [], indexable: false }] };
+compileSite(source);
+const manifest = { version: "1", base_url: source.baseUrl, evidence: [], claims: [], information_objects: [], modules: [{ id: "m", kind: "answer", layout_role: "lead", claim_ids: [], information_object_ids: [], required_capabilities: [], source_ids: [] }], pages: [{ id: "p", route: "/", canonical_question: "Typed?", title: "Typed", description: "Typed", module_ids: ["m"], internal_page_ids: [], required_capabilities: [], indexable: false }] } satisfies SiteManifest;
+compileSiteManifest(manifest);
+evaluateCssFeatureChecklist(resolveBrowserTargets({}));
+`;
 
-test("npm pack installs into two isolated consumers without reference access", () => {
+test("npm pack installs into isolated runtime and TypeScript consumers without reference access", () => {
   const root = mkdtempSync(join(tmpdir(), "hyper-site-packed-"));
   try {
     const tarball = packPackage(root);
-    const valid = JSON.parse(installConsumer(root, "valid-consumer", tarball, validSource));
-    const invalid = JSON.parse(installConsumer(root, "invalid-consumer", tarball, invalidSource));
+    const validConsumer = runJavaScriptConsumer(root, "valid-consumer", tarball, validSource);
+    const invalidConsumer = runJavaScriptConsumer(root, "invalid-consumer", tarball, invalidSource);
+    const valid = JSON.parse(validConsumer.output);
+    const invalid = JSON.parse(invalidConsumer.output);
     assert.equal(valid.passed, true);
     assert.equal(invalid.passed, true);
     assert.equal(invalid.rejected, "under-supported claim");
-    assert.equal(readFileSync(join(root, "valid-consumer", "node_modules", "@amtech", "hyper-site", "index.mjs"), "utf8").includes("reference"), false);
+    assert.equal(readFileSync(join(validConsumer.dir, "node_modules", "@amtech", "hyper-site", "index.mjs"), "utf8").includes("reference"), false);
+
+    const typedDir = createConsumer(root, "typed-consumer", tarball);
+    writeFileSync(join(typedDir, "test.ts"), typedSource);
+    writeFileSync(join(typedDir, "tsconfig.json"), JSON.stringify({ compilerOptions: { target: "ES2022", module: "NodeNext", moduleResolution: "NodeNext", strict: true, noEmit: true, skipLibCheck: false }, include: ["test.ts"] }, null, 2));
+    run(tsc, ["-p", "tsconfig.json"], { cwd: typedDir });
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
