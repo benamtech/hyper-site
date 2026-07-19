@@ -1,8 +1,7 @@
-// Public Hyper Site boundary over the content-neutral canonical compiler.
-// The implementation is emitted by the reference TypeScript build while source
-// ownership is migrated into this package in dependency order.
+// Public Hyper Site boundary over package-owned, content-neutral compiler output.
+// reference/ is now a compatibility consumer rather than runtime authority.
 
-export * from "../reference/dist/framework-core.js";
-export * from "../reference/dist/site-manifest.js";
-export * from "../reference/dist/browser-targets.js";
-export * from "../reference/dist/css-modern.js";
+export * from "./dist/framework-core.js";
+export * from "./dist/site-manifest.js";
+export * from "./dist/browser-targets.js";
+export * from "./dist/css-modern.js";
