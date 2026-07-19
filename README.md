@@ -154,6 +154,24 @@ unknown provider outcome -> ambiguous -> reconcile
 @amtech/hyper-content  0.4.0-alpha.0
 ```
 
+## Research and implementation gates
+
+The H labels are research/implementation gates, not product names:
+
+```text
+H0 integration proof: PASS
+H1 physical compiler extraction: PASS
+H2 bounded semantic generation: MVP PASS
+H3 living-surface presentation: MVP PASS
+H4 governed durable execution contract: PASS
+H5 SDRT/GNN comparisons: pending
+H6 GPU/Zig/Wasm comparisons: pending
+```
+
+Active H0-H6 program record:
+
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+
 ## Measured proof
 
 Validated production-runtime implementation commit:
@@ -176,7 +194,8 @@ Measured reports:
 - `validation/reports/2026-07-19-living-surface-mvp.md`;
 - `validation/reports/2026-07-19-semantic-action-loop-mvp.md`;
 - `validation/reports/2026-07-19-durable-provider-connector-pilot.md`;
-- `validation/reports/2026-07-19-production-outbox-reconciliation.md`.
+- `validation/reports/2026-07-19-production-outbox-reconciliation.md`;
+- `validation/reports/2026-07-19-product-taxonomy-documentation-reconciliation.md`.
 
 ## Run the repository proof
 
