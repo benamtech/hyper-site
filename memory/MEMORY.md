@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active  
-updated_at: 2026-07-19T03:10:00-04:00
+updated_at: 2026-07-19T04:10:00-04:00
 
 ## State
 
@@ -9,135 +9,91 @@ branch: agent/glm-blackwell-vertical-slice
 pr: 3  
 draft: true  
 merged: false  
-maturity: H0/H1 PASS; bounded H3 living-surface MVP PASS; H2 autonomous semantic generation remains the next core gate
+maturity: H0-H4 bounded MVP loop measured PASS; real provider and durable connector pilot is next
 
 ## Active boundary
 
 ```text
-Hyper Content -> portable semantic state -> Hyper Site
+Hyper Content -> accepted semantic/runtime state -> Hyper Site
 reference -> Hyper Site compatibility surface
 Hyper Site -X-> Hyper Content
 Hyper Site -X-> reference runtime
+external executor -X-> semantic approval authority
 ```
 
-## Measured package truth
+## Measured truth
 
-H0/H1 validated source commit: `af4774e0efc90f1890a977896ac41f87e1452744`  
-H0/H1 workflow: `29675348346`
-
-Living-surface MVP validated source commit: `f5734533da137f1f28509d495f7fc67a187495ad`  
-Living-surface workflow: `29677235149`  
-Living-surface artifact: `h0-h1-proof-29677235149`
+Validated source commit: `cf9e9553637ba1b8f6337735fca3fbc2255ffe30`  
+Workflow run: `29679215879`  
+Artifact: `h0-h1-proof-29679215879`
 
 ```text
-H0 integrated proof: PASS
+H0 integration: PASS
 H1 physical extraction: PASS
-H3 living-surface MVP substrate: PASS
-next core gate: H2 autonomous semantic generation
+H2 bounded semantic-generation MVP: PASS
+H3 living-surface MVP: PASS
+H4 approved idempotent-action MVP: PASS
 ```
 
 ## Physical truth
 
-- `hyper-site/src` owns the deterministic compiler and `living-surface.ts`.
-- `hyper-site/index.mjs` exports package-owned `hyper-site/dist/index.js`.
-- package version is `0.3.0-alpha.0`.
-- `@amtech/hyper-site/living-surface` exports runtime and declarations.
-- clean-room runtime, invalid-input and strict TypeScript tarball consumers pass.
-- Hyper Site package tests pass 8/8.
+- `hyper-site/src` owns deterministic site and living-surface compilation.
+- `hyper-content/src/semantic-generation.ts` owns bounded provider proposals, independent validation, repair attempts and checkpoints.
+- `hyper-content/src/action-runtime.ts` owns approval verification, idempotency keys, executor invocation and immutable receipts.
+- Hyper Site tests pass 8/8.
+- Hyper Content tests pass 4/4.
 - legacy compatibility tests pass 80/80.
-- 59 `reference/src` TypeScript/declaration files remain fully classified.
+- isolated Hyper Site tarball consumers pass.
+- all three exact-head workflows passed on the measured commit.
 
-## Living-surface MVP
-
-```text
-LivingSurfaceState
--> validation
--> audience permission projection
--> governance and agency resolution
--> deterministic decision ledger
--> accessible static public/operator HTML
--> state, HTML and build hashes
-```
-
-Implemented:
-
-- nine normalized interface-field channels;
-- explicit public/operator/both visibility filtering before rendering;
-- user/agent/mixed action authority;
-- risk threshold to `approval-required` transition;
-- agency mode and blend-radius calculation;
-- logistic approval-boundary curvature;
-- runtime status, queue, cost and approval projection;
-- deterministic node order and explanation reasons;
-- hostile HTML escaping;
-- deterministic static fallback.
-
-Measured authority:
-
-- `validation/reports/2026-07-19-living-surface-mvp.md`
-- `memory/2026-07-19-0310-living-surface-mvp.md`
-
-## Product thesis
+## Complete bounded loop
 
 ```text
-approved source truth
--> Hyper Content semantic compiler
--> autonomous generation and bounded repair
--> versioned semantic/runtime state
--> Hyper Site deterministic compiler
--> static HTML + living GenUI projections + task declarations
--> remote agent/browser adapters
--> approvals, receipts and field feedback
+approved corpus
+-> provider proposal attempt 1
+-> independent UNAPPROVED_CLAIM rejection
+-> provider proposal attempt 2
+-> independent acceptance
+-> SiteSource + LivingSurfaceState checkpoint
+-> deterministic site/public/operator builds
+-> resume without provider regeneration
+-> explicit approval
+-> injected external executor
+-> immutable receipt
+-> idempotent replay
+-> completed surface state
 ```
 
-The conventional static framework is the reliability substrate. The living surface is now executable, but it has no live side effects.
+Measured hashes:
 
-## Active hypothesis order
+- accepted proposal: `ae109f40dcb8e79a45f5cf7187b19ec9a2223219894df3a368aa15b3ab827b29`;
+- site build: `54c4bc9e345b99450d65b014fc94a20eb6700a4f196f2f4eeddd6b4ed36784ca`;
+- public surface: `27c8787f3d99221b10010618f84c1fe50b0313ca62641266d55830673c3ee869`;
+- operator surface: `ce2f7c5eafa572968edea4948f94cba7b77f8823ae17ecd7e3611cd0b426f2b0`;
+- receipt and replay: `66ec407dd9241e1469873aa92beccdd0b74a3ff6f04d92e3aea1585e2b03e9a1`.
 
-```text
-H0 integrated proof: PASS
--> H1 physical extraction: PASS
--> H2 autonomous semantic generation: NEXT CORE GATE
--> H3 self-aware GenUI: MVP SUBSTRATE PASS; live integration pending
--> H4 remote bounded agent/browser execution
--> H5 SDRT/GNN graph-intelligence comparisons
--> H6 GPU/Zig/Wasm accelerated-kernel comparisons
-```
-
-## Next implementation gate
-
-```text
-approved real source corpus
--> bounded provider proposal
--> independent evidence validation
--> accepted SiteSource + LivingSurfaceState
--> deterministic Hyper Site compilation
--> public/operator projection
--> external bounded action adapter
--> approval and receipt
-```
-
-Required constraints:
-
-- generating model cannot approve its own output;
-- public/private filtering occurs before rendering;
-- actions do not directly own credentials or side effects;
-- retries and repairs are bounded;
-- rejected work is atomic;
-- accepted work is resumable;
-- provider/model/token/cost evidence is recorded.
-
-## Active authorities
+## Authorities
 
 - `README.md`
-- `CODEGRAPH.md`
-- `docs/planning/50-h0-h1-content-first-reinvention-program.md`
 - `validation/reports/2026-07-19-h0-h1-extraction-proof.md`
 - `validation/reports/2026-07-19-living-surface-mvp.md`
-- `memory/2026-07-19-0310-living-surface-mvp.md`
+- `validation/reports/2026-07-19-semantic-action-loop-mvp.md`
+- `memory/2026-07-19-0410-semantic-action-loop-mvp.md`
+
+## Next gate
+
+Real provider and connector pilot:
+
+1. durable transactional checkpoint and receipt store;
+2. GLM-compatible structured-output provider adapter;
+3. approved real business corpus;
+4. tenant, actor and approval-epoch authorization;
+5. one sandbox/shadow connector;
+6. timeout, retry, duplicate-delivery and process-restart proof;
+7. deterministic post-effect projection and immutable receipt.
 
 ## Nonclaims
 
-The MVP does not establish autonomous generation quality, remote task safety, live browser execution, PDE/CSG/WebGPU advantage, psychographic inference quality, SDRT/GNN advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion or revenue.
+The provider and executor are fixtures. Current proof does not establish hosted-model quality, production connector safety, credential custody, multi-tenant authorization, durable leases, dead-letter handling, live browser execution or autonomous production publication.
 
 PR #3 remains draft and unmerged.
