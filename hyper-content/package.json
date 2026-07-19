@@ -1,6 +1,6 @@
 {
   "name": "@amtech/hyper-content",
-  "version": "0.1.0",
+  "version": "0.2.0-alpha.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -8,6 +8,14 @@
     "./content-program-adapter": {
       "types": "./dist/content-program-adapter.d.ts",
       "import": "./dist/content-program-adapter.js"
+    },
+    "./semantic-generation": {
+      "types": "./dist/semantic-generation.d.ts",
+      "import": "./dist/semantic-generation.js"
+    },
+    "./action-runtime": {
+      "types": "./dist/action-runtime.d.ts",
+      "import": "./dist/action-runtime.js"
     }
   },
   "files": [
@@ -19,6 +27,7 @@
     "@amtech/hyper-site": "file:../hyper-site"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "typescript": "5.8.3"
   },
   "scripts": {
