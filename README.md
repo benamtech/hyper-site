@@ -1,6 +1,6 @@
 # Hyper Monorepo
 
-Status: H0/H1 implementation under exact-head CI  
+Status: H0 integration and H1 physical compiler extraction measured PASS; H2 is next  
 Updated: 2026-07-19  
 PR: #3 remains draft and unmerged
 
@@ -25,7 +25,7 @@ consumer
 -> compileSite(SiteSource)
 ```
 
-The content-neutral compiler cluster is now physically owned by `hyper-site/src`:
+The content-neutral compiler cluster is physically owned by `hyper-site/src`:
 
 - `framework-core.ts`;
 - `site-manifest.ts`;
@@ -33,37 +33,59 @@ The content-neutral compiler cluster is now physically owned by `hyper-site/src`
 - `css-modern.ts`;
 - aggregate typed entrypoint `index.ts`.
 
-The matching `reference/src` files are compatibility re-exports that consume the built Hyper Site package output.
+The matching `reference/src` files are compatibility consumers of built Hyper Site output.
 
-## H0/H1 proof
+## H0/H1 measured proof
 
-Run:
+Canonical command:
 
 ```bash
 npm run proof:h0-h1
 ```
 
-The proof executes:
+Measured source commit:
 
-- complete package and compatibility builds;
-- legacy positive and negative tests;
-- clean-room `npm pack` consumers;
-- a clean-room TypeScript declaration consumer;
-- validation tests;
-- a 25-page randomized compiler-limit run;
-- structural checks proving the public entrypoint does not reach `reference/`.
+```text
+af4774e0efc90f1890a977896ac41f87e1452744
+```
 
-Measured outputs:
+Result:
+
+```text
+H0 integrated proof: PASS
+H1 physical extraction: PASS
+decision: advance-to-H2
+```
+
+Exact proof:
+
+- monorepo/package/compatibility build: pass;
+- legacy tests: 80/80;
+- clean-room packed runtime consumer: pass;
+- clean-room invalid-input consumer: pass;
+- clean-room strict TypeScript consumer: pass;
+- randomized 25-page compiler and rejection suite: pass;
+- `reference/src` files classified: 59/59;
+- missing/orphan/duplicate/incomplete ownership records: 0.
+
+Measured authority:
+
+- `validation/reports/2026-07-19-h0-h1-extraction-proof.md`;
+- `memory/2026-07-19-0150-h0-h1-proof-closure.md`;
+- workflow run `29675348346`;
+- artifact `h0-h1-proof-29675348346`.
+
+The generated machine reports remain:
 
 - `validation/reports/h0-h1-proof.json`;
 - `validation/reports/h0-h1-proof.md`;
 - `validation/reports/h0-h1-compiler-limit/`.
 
-A failed proof produces `repair-gate-failures-only`. It does not authorize additional feature work.
+A failed future proof produces `repair-gate-failures-only`. It does not authorize bypassing the compiler boundary.
 
 ## Product thesis
 
-Hyper is not intended to stop at parity with a conventional static framework. The ordinary framework workflow is a minimum validation substrate.
+Hyper is not intended to stop at parity with a conventional static framework. The ordinary framework workflow is a reliability substrate, not the product ceiling.
 
 The intended suite is:
 
@@ -79,39 +101,47 @@ approved source truth
 -> receipts and field feedback
 ```
 
-Hyper Site remains the deterministic semantic and rendering oracle. It is not the product ceiling.
+Hyper Site remains the deterministic semantic and rendering oracle. It is not the complete product.
 
 ## Active hypothesis order
 
 ```text
-H0 integrated proof
--> H1 physical compiler extraction
--> H2 autonomous semantic generation
+H0 integrated proof: PASS
+-> H1 physical compiler extraction: PASS
+-> H2 autonomous semantic generation: NEXT
 -> H3 self-aware multi-surface GenUI
 -> H4 remote bounded agent/browser tasks
 -> H5 SDRT/GNN graph-intelligence comparisons
 -> H6 GPU/Zig/Wasm accelerated-kernel comparisons
 ```
 
-H2-H6 are first-class end-state hypotheses. They may begin bounded research fixtures after H1, but they may not bypass evidence validation, create a second semantic authority or acquire publication/credential authority by default.
+H2-H6 are first-class end-state hypotheses. They may not bypass evidence validation, create a second semantic authority or acquire publication/credential authority by default.
 
-## Immediate next proof after H1
+## H2 next vertical slice
 
-H2 must use one real approved business repository and produce:
+H2 must use one real approved source corpus and produce:
 
 ```text
 source intake
--> evidence and fact ledger
--> bounded model proposal
--> independent approval
--> portable SiteSource
--> five complete static pages
--> 25 noindex generated pages
--> deterministic compiler and browser validation
+-> approved evidence and fact ledger
+-> bounded provider job
+-> schema-constrained semantic proposal
+-> independent semantic/evidence validation
+-> bounded repair or reject
+-> accepted portable SiteSource
+-> deterministic Hyper Site compilation
 -> resumable accepted-work ledger
 ```
 
-Same-model self-acceptance is prohibited.
+Required proof:
+
+- the generating model cannot approve its own output;
+- every accepted claim traces to approved evidence;
+- retries are bounded;
+- accepted work is not regenerated after interruption;
+- invalid output leaves no partially accepted `SiteSource`;
+- provider/model/token/cost evidence is recorded;
+- the accepted result compiles through the H1 package boundary.
 
 ## Advanced tracks
 
@@ -148,6 +178,8 @@ Current H0/H1 testing requires:
 
 No Python, Docker, database, GPU, LLM key, Zig compiler or Wasm runtime is required for H0/H1.
 
+H2 provider execution will additionally require an explicitly configured provider credential and approved source fixture. It does not automatically require local GPU inference.
+
 ## Test the current branch
 
 Manjaro/Arch:
@@ -178,7 +210,8 @@ node scripts/check-doc-system.mjs
 
 ## Current authorities
 
-- H0/H1 and end-state program: `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+- H0/H1 and content-first end-state program: `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+- measured H0/H1 report: `validation/reports/2026-07-19-h0-h1-extraction-proof.md`
 - package architecture: `CODEGRAPH.md`
 - operating contract: `AGENTS.md`
 - documentation system: `docs/README.md`
