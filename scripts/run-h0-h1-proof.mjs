@@ -34,14 +34,13 @@ const checks = [
 ];
 
 const indexText = readFileSync(resolve(root, "hyper-site/index.mjs"), "utf8");
-const referenceWrappers = ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts"].map((name) => ({
-  name,
-  text: readFileSync(resolve(root, "reference/src", name), "utf8"),
-}));
+const typedIndexText = readFileSync(resolve(root, "hyper-site/src/index.ts"), "utf8");
+const referenceWrappers = ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts"].map((name) => ({ name, text: readFileSync(resolve(root, "reference/src", name), "utf8") }));
 const structural = {
-  publicEntrypointUsesPackageDist: indexText.includes("./dist/framework-core.js") && !indexText.includes("../reference"),
+  publicEntrypointUsesPackageDist: indexText.includes("./dist/index.js") && !indexText.includes("../reference"),
+  aggregateTypedEntrypointComplete: ["framework-core", "site-manifest", "browser-targets", "css-modern"].every((name) => typedIndexText.includes(`./${name}.js`)),
   referenceConsumesPackageDist: referenceWrappers.every((item) => item.text.includes("../../hyper-site/dist/")),
-  packageOwnsCompilerSource: ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts"].every((name) => {
+  packageOwnsCompilerSource: ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts", "index.ts"].every((name) => {
     try { return readFileSync(resolve(root, "hyper-site/src", name), "utf8").length > 100; } catch { return false; }
   }),
 };
