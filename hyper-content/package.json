@@ -1,6 +1,6 @@
 {
   "name": "@amtech/hyper-content",
-  "version": "0.2.0-alpha.0",
+  "version": "0.3.0-alpha.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -16,20 +16,15 @@
     "./action-runtime": {
       "types": "./dist/action-runtime.d.ts",
       "import": "./dist/action-runtime.js"
+    },
+    "./durable-pilot": {
+      "types": "./dist/durable-pilot.d.ts",
+      "import": "./dist/durable-pilot.js"
     }
   },
-  "files": [
-    "dist",
-    "index.mjs",
-    "README.md"
-  ],
-  "dependencies": {
-    "@amtech/hyper-site": "file:../hyper-site"
-  },
-  "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "5.8.3"
-  },
+  "files": ["dist", "index.mjs", "README.md"],
+  "dependencies": { "@amtech/hyper-site": "file:../hyper-site" },
+  "devDependencies": { "@types/node": "^22.0.0", "typescript": "5.8.3" },
   "scripts": {
     "build": "tsc -p tsconfig.json && node --check index.mjs",
     "test": "npm run build && node --test test/*.test.mjs"
