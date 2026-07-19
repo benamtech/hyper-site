@@ -326,7 +326,7 @@ function validateProviderResult(result: ProviderProposal): void {
 }
 
 function normalizeText(value: string): string { return value.trim().replace(/\s+/g, " ").toLowerCase(); }
-function uniqueSorted(values: readonly string[]): string[] { return [...new Set(values)].sort(); }
+function uniqueSorted<T extends string>(values: readonly T[]): T[] { return [...new Set(values)].sort(); }
 function byId<T extends { id: string }>(left: T, right: T): number { return left.id.localeCompare(right.id); }
 function hashCanonical(value: unknown): string { return createHash("sha256").update(JSON.stringify(value)).digest("hex"); }
 function errorMessage(error: unknown): string { return error instanceof Error ? error.message : String(error); }
