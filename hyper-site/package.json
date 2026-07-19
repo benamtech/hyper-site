@@ -1,13 +1,48 @@
 {
   "name": "@amtech/hyper-site",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0-alpha.1",
+  "private": false,
   "type": "module",
+  "files": [
+    "dist",
+    "index.mjs",
+    "README.md"
+  ],
+  "main": "./index.mjs",
+  "types": "./dist/framework-core.d.ts",
   "exports": {
-    ".": "./index.mjs"
+    ".": {
+      "types": "./dist/framework-core.d.ts",
+      "import": "./index.mjs"
+    },
+    "./framework-core": {
+      "types": "./dist/framework-core.d.ts",
+      "import": "./dist/framework-core.js"
+    },
+    "./site-manifest": {
+      "types": "./dist/site-manifest.d.ts",
+      "import": "./dist/site-manifest.js"
+    },
+    "./browser-targets": {
+      "types": "./dist/browser-targets.d.ts",
+      "import": "./dist/browser-targets.js"
+    },
+    "./css-modern": {
+      "types": "./dist/css-modern.d.ts",
+      "import": "./dist/css-modern.js"
+    }
   },
   "scripts": {
-    "build": "node --check index.mjs",
-    "test": "node --test test/*.test.mjs"
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "pack:check": "npm run build && npm pack --dry-run",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "5.8.3"
   }
 }
