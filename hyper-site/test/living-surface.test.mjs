@@ -49,8 +49,9 @@ test("public and operator projections enforce data visibility before rendering",
   assert.equal(publicBuild.html.includes("Send estimate"), false);
   assert.match(publicBuild.html, /Estimate ready/);
 
-  assert.equal(operatorBuild.projection.state.nodes.length, 1);
-  assert.equal(operatorBuild.projection.state.actions[0].status, "approval-required");
+  assert.equal(operatorBuild.projection.state.nodes.length, 2);
+  assert.equal(operatorBuild.projection.state.actions.length, 2);
+  assert.equal(operatorBuild.projection.state.actions.find((action) => action.id === "action:send")?.status, "approval-required");
   assert.match(operatorBuild.html, /Delivery gate/);
   assert.match(operatorBuild.html, /Approval required/);
 });
