@@ -11,6 +11,7 @@ const [
   sitePackage,
   contentPackage,
   siteIndex,
+  siteSourceIndex,
   contentIndex,
   frameworkCore,
   siteManifest,
@@ -24,6 +25,7 @@ const [
   readJson("hyper-site/package.json"),
   readJson("hyper-content/package.json"),
   readText("hyper-site/index.mjs"),
+  readText("hyper-site/src/index.ts"),
   readText("hyper-content/index.mjs"),
   readText("hyper-site/src/framework-core.ts"),
   readText("hyper-site/src/site-manifest.ts"),
@@ -51,7 +53,9 @@ const forbiddenSiteSurface = [
   "glm-provider", "pcn-emitter", "articleir-parser", "unfolder", "wasm", "content-program-adapter", "../reference",
 ];
 for (const token of forbiddenSiteSurface) if (siteIndex.includes(token)) errors.push(`hyper-site public facade leaks forbidden content or compatibility token: ${token}`);
-for (const required of ["framework-core", "site-manifest", "browser-targets", "css-modern"]) if (!siteIndex.includes(`./dist/${required}.js`)) errors.push(`hyper-site public facade is missing package-owned ${required}`);
+if (!siteIndex.includes('./dist/index.js')) errors.push("hyper-site public facade must use the aggregate package-owned build");
+for (const required of ["framework-core", "site-manifest", "browser-targets", "css-modern"]) if (!siteSourceIndex.includes(`./${required}.js`)) errors.push(`hyper-site typed source entrypoint is missing ${required}`);
+if (sitePackage.types !== "./dist/index.d.ts") errors.push("hyper-site root types must resolve the aggregate declaration entrypoint");
 
 const forbiddenCoreImports = ['from "./benchmark.js"', 'from "./core.js"', 'from "./manifest.js"', 'from "./wasm.js"', "ontology", "provider", "vectorIdentity", "vectorPrototypes", "packSite"];
 for (const token of forbiddenCoreImports) if (frameworkCore.includes(token)) errors.push(`framework core contains forbidden content dependency or field: ${token}`);
@@ -81,6 +85,7 @@ if (errors.length > 0) {
     dependencyDirection: "hyper-content -> hyper-site; reference -> hyper-site",
     neutralFrameworkSource: "hyper-site/src/framework-core.ts",
     neutralManifestSource: "hyper-site/src/site-manifest.ts",
+    publicTypeAuthority: "hyper-site/dist/index.d.ts",
     compatibilityFrameworkWrapper: "reference/src/framework-core.ts",
     contentProgramAdapterAuthority: "hyper-content/src/content-program-adapter.ts",
     contentProgramCompatibilityWrapper: "reference/src/content-program-adapter.ts",
