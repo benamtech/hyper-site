@@ -6,21 +6,21 @@ import fs from 'node:fs';
 const run = spawnSync(process.execPath, ['scripts/validate-workstreams.mjs', 'status'], { encoding: 'utf8' });
 const report = JSON.parse(run.stdout);
 
-test('current repository cannot falsely pass W1-W3', () => {
+test('current repository cannot falsely pass all legacy W1-W3 gates', () => {
   assert.equal(run.status, 1);
   assert.equal(report.passed, false);
   assert.deepEqual(report.workstreams.map((w) => w.name), ['W1', 'W2', 'W3']);
 });
 
-test('W1 reports concrete physical-extraction blockers', () => {
+test('W1 recognizes compiler ownership while retaining unresolved full-extraction evidence', () => {
   const w1 = report.workstreams.find((w) => w.name === 'W1');
+  assert.equal(w1.failures.includes('hyper-site-owns-compiler-source'), false, 'package-owned compiler source must no longer be reported as missing');
   assert.ok(w1.failures.includes('inventory-covers-reference-src'));
-  assert.ok(w1.failures.includes('hyper-site-owns-compiler-source'));
   assert.ok(w1.failures.includes('two-packed-consumers-pass'));
   assert.ok(w1.failures.includes('legacy-artifact-parity-intact'));
 });
 
-test('later workstreams remain blocked behind signed prior reports', () => {
+test('later legacy workstreams remain blocked behind signed prior reports', () => {
   const w2 = report.workstreams.find((w) => w.name === 'W2');
   const w3 = report.workstreams.find((w) => w.name === 'W3');
   assert.ok(w2.failures.includes('W1-entry-gate'));
