@@ -4,7 +4,7 @@ Status: H0-H4 bounded MVP loop PASS
 Updated: 2026-07-19  
 PR: #3 remains draft and unmerged
 
-## What works now
+## Working loop
 
 ```text
 approved corpus
@@ -21,13 +21,7 @@ approved corpus
 -> completed living-surface state
 ```
 
-### Hyper Site
-
-`@amtech/hyper-site` owns deterministic site and living-surface compilation, evidence/reference rejection, public/operator filtering before rendering, governance decisions and accessible static artifacts.
-
-### Hyper Content
-
-`@amtech/hyper-content` owns approved semantic corpora, bounded provider proposals, independent claim/evidence validation, repair attempts, atomic acceptance/rejection, resumable checkpoints, approved idempotent external actions and immutable receipts.
+`@amtech/hyper-site` owns deterministic site and living-surface compilation. `@amtech/hyper-content` owns bounded semantic proposals, independent validation, checkpoints, approved external actions and receipts.
 
 ```ts
 import { runSemanticGeneration } from "@amtech/hyper-content/semantic-generation";
@@ -61,12 +55,9 @@ H4 approved idempotent-action MVP: PASS
 - immutable receipt replay: PASS;
 - randomized 25-page compiler/rejection suite: PASS.
 
-Measured authorities:
+Measured authority: `validation/reports/2026-07-19-semantic-action-loop-mvp.md`
 
-- `validation/reports/2026-07-19-semantic-action-loop-mvp.md`;
-- `memory/2026-07-19-0410-semantic-action-loop-mvp.md`.
-
-## Run the complete MVP
+## Run it
 
 ```bash
 git clone --single-branch --branch agent/glm-blackwell-vertical-slice https://github.com/benamtech/hyper-site.git
@@ -83,13 +74,11 @@ npm run proof:h0-h1
 Real provider and connector pilot:
 
 1. durable transactional checkpoint and receipt storage;
-2. GLM-compatible provider adapter with schema-constrained output;
+2. GLM-compatible structured-output provider adapter;
 3. one approved real business corpus;
 4. tenant, actor and approval-epoch authorization;
 5. one sandbox or shadow connector;
 6. timeout, retry, duplicate-delivery and process-restart tests;
 7. deterministic post-effect surface and receipt.
 
-## Nonclaims
-
-The current provider and executor are deterministic fixtures. The MVP does not yet prove hosted-model quality, production connector safety, credential custody, multi-tenant authorization, durable leases, dead-letter handling or live browser execution.
+The current provider and executor are deterministic fixtures. Production connector safety, credential custody, durable leases, dead-letter handling and live browser execution are not yet proven.
