@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active  
-updated_at: 2026-07-19T04:20:00-04:00
+updated_at: 2026-07-19T09:50:00-04:00
 
 ## State
 
@@ -9,7 +9,7 @@ branch: agent/glm-blackwell-vertical-slice
 pr: 3  
 draft: true  
 merged: false  
-maturity: H0-H4 bounded MVP loop measured PASS; H5-H6 remain unrun challenger tracks; real provider and durable connector pilot is next
+maturity: H0-H4 bounded MVP PASS; production outbox/reconciliation contract PASS; external provider and infrastructure gates remain
 
 ## Active boundary
 
@@ -18,83 +18,99 @@ Hyper Content -> accepted semantic/runtime state -> Hyper Site
 reference -> Hyper Site compatibility surface
 Hyper Site -X-> Hyper Content
 Hyper Site -X-> reference runtime
-external executor -X-> semantic approval authority
+provider proposal -X-> semantic acceptance authority
+unknown provider outcome -X-> automatic retry
 ```
 
 ## Measured truth
 
-Validated source commit: `cf9e9553637ba1b8f6337735fca3fbc2255ffe30`  
-Workflow run: `29679215879`  
-Artifact: `h0-h1-proof-29679215879`
+Validated production-runtime source commit: `d38b5c6b9ea8991edcf40d094dbdabad138fe489`
 
 ```text
-H0 integration: PASS
-H1 physical extraction: PASS
-H2 bounded semantic-generation MVP: PASS
-H3 living-surface MVP: PASS
-H4 approved idempotent-action MVP: PASS
-H5 SDRT/GNN comparisons: NOT RUN
-H6 GPU/Zig/Wasm comparisons: NOT RUN
+documentation 29682124539 PASS
+integration   29682124534 PASS
+compatibility 29682124533 PASS
+```
+
+Proof artifact:
+
+```text
+h0-h1-proof-29682124534
+sha256:80f0f0f98940367cfc4d4f85391935f2ebf5208c6e7bbfcd7a87d4e98b439391
 ```
 
 ## Physical truth
 
 - `hyper-site/src` owns deterministic site and living-surface compilation.
-- `hyper-content/src/semantic-generation.ts` owns bounded provider proposals, independent validation, repair attempts and checkpoints.
-- `hyper-content/src/action-runtime.ts` owns approval verification, idempotency keys, executor invocation and immutable receipts.
-- Hyper Site tests pass 8/8.
-- Hyper Content tests pass 4/4.
-- legacy compatibility tests pass 80/80.
-- isolated Hyper Site tarball consumers pass.
+- `hyper-content/src/semantic-generation.ts` owns bounded proposals and independent semantic acceptance.
+- `hyper-content/src/action-runtime.ts` owns approval-bound action and receipt projection.
+- `hyper-content/src/durable-pilot.ts` owns the single-host durable/shadow pilot.
+- `hyper-content/src/production-runtime.ts` owns the PostgreSQL/outbox/reconciliation contract.
+- `@amtech/hyper-content` is `0.4.0-alpha.0`.
 
-## Complete bounded loop
+## Production state machine
 
 ```text
-approved corpus
--> provider proposal attempt 1
--> independent UNAPPROVED_CLAIM rejection
--> provider proposal attempt 2
--> independent acceptance
--> SiteSource + LivingSurfaceState checkpoint
--> deterministic site/public/operator builds
--> resume without provider regeneration
--> explicit approval
--> injected external executor
--> immutable receipt
--> idempotent replay
--> completed surface state
+pending
+-> dispatching
+   -> succeeded
+   -> pending only when definitely not sent
+   -> dead-letter when rejected or exhausted
+   -> ambiguous when outcome is unknown
+
+ambiguous
+-> reconciliation
+   -> succeeded when provider confirms success
+   -> ambiguous while provider reports pending
+   -> pending only when provider confirms absence
+   -> dead-letter when reconciliation fails
 ```
 
-Measured hashes:
+## Implemented production controls
 
-- accepted proposal: `ae109f40dcb8e79a45f5cf7187b19ec9a2223219894df3a368aa15b3ab827b29`;
-- site build: `54c4bc9e345b99450d65b014fc94a20eb6700a4f196f2f4eeddd6b4ed36784ca`;
-- public surface: `27c8787f3d99221b10010618f84c1fe50b0313ca62641266d55830673c3ee869`;
-- operator surface: `ce2f7c5eafa572968edea4948f94cba7b77f8823ae17ecd7e3611cd0b426f2b0`;
-- receipt and replay: `66ec407dd9241e1469873aa92beccdd0b74a3ff6f04d92e3aea1585e2b03e9a1`.
+- PostgreSQL migration SQL;
+- serializable transaction wrapper;
+- bounded retry for SQLSTATE `40001` and `40P01`;
+- `FOR UPDATE SKIP LOCKED` claims;
+- outbox/receipt atomic success transaction;
+- immutable content-addressed receipts;
+- operator-visible dead letters;
+- issuer/audience/expiry/authentication-age identity policy;
+- fail-closed secret source;
+- deterministic canonical payload/idempotency hashing;
+- exact optional database-row normalization.
 
-## Authorities
+## Active hypothesis state
 
-- `README.md`
-- `docs/README.md`
-- `docs/planning/50-h0-h1-content-first-reinvention-program.md`
-- `validation/reports/2026-07-19-semantic-action-loop-mvp.md`
-- `memory/2026-07-19-0410-semantic-action-loop-mvp.md`
+```text
+H0 PASS
+H1 PASS
+H2 bounded semantic-generation MVP PASS
+H3 living-surface MVP PASS
+H4 durable authorized outbox/reconciliation contract PASS
+H5 SDRT/GNN comparisons pending
+H6 GPU/Zig/Wasm comparisons pending
+```
 
-## Next gate
+Active program:
 
-Real provider and connector pilot:
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`;
+- `docs/planning/51-durable-provider-connector-pilot.md`.
 
-1. durable transactional checkpoint and receipt store;
-2. GLM-compatible structured-output provider adapter;
-3. approved real business corpus;
-4. tenant, actor and approval-epoch authorization;
-5. one sandbox/shadow connector;
-6. timeout, retry, duplicate-delivery and process-restart proof;
-7. deterministic post-effect projection and immutable receipt.
+## Measured authorities
 
-## Nonclaims
+- `validation/reports/2026-07-19-production-outbox-reconciliation.md`;
+- `memory/2026-07-19-0948-production-outbox-reconciliation.md`.
 
-The provider and executor are fixtures. Current proof does not establish hosted-model quality, production connector safety, credential custody, multi-tenant authorization, durable leases, dead-letter handling, live browser execution or autonomous production publication. H5 and H6 remain separate comparison and promotion programs.
+## External promotion gates
 
-PR #3 remains draft and unmerged.
+The code contracts are present, but production deployment remains blocked until externally measured:
+
+- real PostgreSQL concurrency and process-kill tests;
+- managed secret service;
+- cryptographic OIDC/JWKS verification;
+- live GLM structured-output contract;
+- provider sandbox idempotency and status reconciliation;
+- kill-after-ACK recovery.
+
+These remain fail-closed. PR #3 remains draft and unmerged.
