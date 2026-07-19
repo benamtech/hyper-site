@@ -4,10 +4,11 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ALLOWED_KINDS = new Set(["bootstrap", "intake", "research", "architecture", "planning", "validation-contract", "validation-report", "memory-index", "memory-handoff"]);
 const REQUIRED_ROOT_MARKDOWN = ["README.md", "AGENTS.md", "CODEGRAPH.md", "CONTRIBUTING.md", "identity.md"];
-const REQUIRED_DOCUMENT_IDS = ["docs-system", "research-useful-framework", "architecture-useful-framework", "planning-useful-framework", "validation-useful-framework", "memory-index"];
+const REQUIRED_DOCUMENT_IDS = ["docs-system", "research-useful-framework", "architecture-useful-framework", "architecture-product-taxonomy", "planning-useful-framework", "validation-useful-framework", "memory-index"];
 const REQUIRED_AUTHORITY_PATHS = [
   "docs/research/43-useful-framework-and-agent-first-pipeline-audit.md",
   "docs/architecture/44-useful-framework-and-agent-first-target-architecture.md",
+  "docs/architecture/52-product-taxonomy-and-runtime-boundaries.md",
   "docs/planning/50-h0-h1-content-first-reinvention-program.md",
   "docs/validation/46-useful-framework-and-agent-first-gates.md",
 ];
@@ -45,6 +46,19 @@ export function validateCatalogShape(catalog) {
   return errors;
 }
 
+function validateProductTaxonomy(path, text) {
+  const errors = [];
+  for (const required of ["Hyper Content", "Hyper Site", "Hyper Runtime", "AI Employee"]) if (!text.includes(required)) errors.push(`${path} does not mention canonical product term ${required}`);
+  if (!text.includes("docs/architecture/52-product-taxonomy-and-runtime-boundaries.md") && path !== "docs/architecture/52-product-taxonomy-and-runtime-boundaries.md") errors.push(`${path} does not link the canonical product taxonomy`);
+  for (const forbidden of [
+    "Hyper Site is an AI Employee",
+    "Hyper Site is the AI Employee",
+    "Hyper Content is an AI Employee",
+    "the website IS the employee",
+  ]) if (text.includes(forbidden)) errors.push(`${path} contains forbidden collapsed-taxonomy claim: ${forbidden}`);
+  return errors;
+}
+
 export async function validateDocumentationSystem(root) {
   const errors = [];
   let catalog;
@@ -74,11 +88,34 @@ export async function validateDocumentationSystem(root) {
   }
 
   const readme = await readFile(resolve(root, "README.md"), "utf8");
+  const agents = await readFile(resolve(root, "AGENTS.md"), "utf8");
+  const codegraph = await readFile(resolve(root, "CODEGRAPH.md"), "utf8");
+  const docsReadme = await readFile(resolve(root, "docs/README.md"), "utf8");
   const memory = await readFile(resolve(root, "memory/MEMORY.md"), "utf8");
+  const hyperSiteReadme = await readFile(resolve(root, "hyper-site/README.md"), "utf8");
+  const hyperContentReadme = await readFile(resolve(root, "hyper-content/README.md"), "utf8");
+  const taxonomy = await readFile(resolve(root, "docs/architecture/52-product-taxonomy-and-runtime-boundaries.md"), "utf8");
+
   for (const [path, text] of [["README.md", readme], ["memory/MEMORY.md", memory]]) {
     for (const required of ["H0", "H1", "H2", "H3", "H4", "H5", "H6"]) if (!text.includes(required)) errors.push(`${path} does not mention active hypothesis ${required}`);
     if (!text.includes("docs/planning/50-h0-h1-content-first-reinvention-program.md")) errors.push(`${path} does not link the active H0-H6 program`);
   }
+
+  for (const [path, text] of [
+    ["README.md", readme],
+    ["AGENTS.md", agents],
+    ["CODEGRAPH.md", codegraph],
+    ["docs/README.md", docsReadme],
+    ["memory/MEMORY.md", memory],
+    ["hyper-site/README.md", hyperSiteReadme],
+    ["hyper-content/README.md", hyperContentReadme],
+    ["docs/architecture/52-product-taxonomy-and-runtime-boundaries.md", taxonomy],
+  ]) errors.push(...validateProductTaxonomy(path, text));
+
+  if (!taxonomy.includes("AI Employee") || !taxonomy.includes("product assembled")) errors.push("canonical taxonomy must define AI Employee as a composed product");
+  if (!taxonomy.includes("transitional physical placement") && !taxonomy.includes("transitional physical")) errors.push("canonical taxonomy must document transitional runtime placement");
+  if (!hyperSiteReadme.includes("does not own") || !hyperSiteReadme.includes("connector")) errors.push("Hyper Site README must deny connector/effect ownership");
+  if (!hyperContentReadme.includes("Transitional runtime exports")) errors.push("Hyper Content README must label runtime exports as transitional");
 
   const currentPlan = await readFile(resolve(root, "docs/planning/50-h0-h1-content-first-reinvention-program.md"), "utf8");
   if (!currentPlan.includes("npm run proof:h0-h1")) errors.push("current plan must define the canonical H0/H1 proof command");
@@ -105,6 +142,6 @@ if (invoked === import.meta.url) {
   if (errors.length > 0) { console.error(JSON.stringify({ status: "fail", errors }, null, 2)); process.exitCode = 1; }
   else {
     const catalog = JSON.parse(await readFile(resolve(root, "docs/catalog.json"), "utf8"));
-    console.log(JSON.stringify({ status: "pass", rootMarkdown: REQUIRED_ROOT_MARKDOWN.length, catalogDocuments: catalog.documents.length, currentGate: "H0/H1", activeSequence: ["H0", "H1", "H2", "H3", "H4", "H5", "H6"] }));
+    console.log(JSON.stringify({ status: "pass", rootMarkdown: REQUIRED_ROOT_MARKDOWN.length, catalogDocuments: catalog.documents.length, currentGate: "product-taxonomy", activeSequence: ["H0", "H1", "H2", "H3", "H4", "H5", "H6"] }));
   }
 }
