@@ -1,4 +1,4 @@
-name: Hyper Site Reference
+name: Hyper Site Reference Compatibility
 
 on:
   pull_request:
@@ -19,8 +19,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Build owned Hyper Content source
+      - name: Install and build owned packages
         run: |
+          npm --prefix ../hyper-site install --no-audit --no-fund --no-package-lock
+          npm --prefix ../hyper-site run build
           npm --prefix ../hyper-content install --no-audit --no-fund --no-package-lock
           npm --prefix ../hyper-content run build
       - run: npm install --no-audit --no-fund --no-package-lock
