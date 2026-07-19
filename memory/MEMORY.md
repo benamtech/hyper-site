@@ -1,7 +1,7 @@
 # Hyper Monorepo Durable Memory
 
 status: active  
-updated_at: 2026-07-18T23:00:00-04:00
+updated_at: 2026-07-19T01:35:00-04:00
 
 ## State
 
@@ -9,94 +9,73 @@ branch: agent/glm-blackwell-vertical-slice
 pr: 3  
 draft: true  
 merged: false  
-maturity: working compiler prototype; useful external framework unproven
+maturity: package-owned compiler extraction implemented; exact-head H0/H1 proof required
 
 ## Active boundary
 
 ```text
-Hyper Content (optional later) -> portable SiteSource -> Hyper Site -> static output
+Hyper Content -> portable semantic state -> Hyper Site
+reference -> Hyper Site compatibility surface
 Hyper Site -X-> Hyper Content
+Hyper Site -X-> reference runtime
 ```
-
-Agent runtimes, task surfaces, remote effects, scale programs and low-level acceleration are not active product milestones.
 
 ## Physical truth
 
-- Most canonical implementation still resides under `reference/src`.
-- `hyper-site/index.mjs` delegates compiler behavior to `reference/dist/framework-core.js`.
-- `hyper-site/package.json` is private and has no package-owned compiler build.
-- `hyper-content/src/content-program-adapter.ts` is the first physically extracted stable content adapter.
-- `reference/` remains transitional runtime authority.
+- `hyper-site/src` now owns `framework-core.ts`, `site-manifest.ts`, `browser-targets.ts`, `css-modern.ts` and the aggregate typed entrypoint.
+- `hyper-site/index.mjs` exports `hyper-site/dist/index.js`.
+- `hyper-site/package.json` is packable and exposes package-owned runtime and declaration files.
+- matching `reference/src` modules are compatibility re-exports from built Hyper Site output.
+- most Hyper Content, generation, ontology, graph and experimental source remains under `reference/src` and still requires later ownership classification.
 
-## Verified current capability
+## H0/H1 proof
 
-The compiler validates `SiteSource`, enforces references and evidence thresholds, constructs `PageIR`, emits semantic HTML, metadata, JSON-LD, sitemap and instruction Markdown, generates a reverse dependency index, and computes deterministic page/build hashes.
+Canonical command:
 
-Portable runners verify this behavior for exact commits and fixtures only. They do not establish package ownership or framework usefulness.
-
-## Reality reset
-
-The useful product bar is now:
-
-```text
-install packed package
--> create starter
--> dev
--> build five distinct pages
--> preview built output
--> inspect routes, links, metadata and dependencies
--> publish locally
+```bash
+npm run proof:h0-h1
 ```
 
-The direct controls are typed JSON plus templates and Astro using the same brief and inputs.
+The proof runs complete builds, legacy tests, clean-room runtime/rejection/TypeScript tarball consumers, validation tests and a bounded randomized compiler test. It writes exact-commit reports under `validation/reports/`.
 
-## Execution order
+H0 passes only when all current streams integrate and the clean-room proof runs.
+
+H1 passes only when the public compiler cluster is package-owned and existing accepted artifacts, ordering, hashes and rejection behavior remain coherent.
+
+## Product thesis
+
+The conventional static framework floor is a validation substrate, not the product ceiling.
+
+Intended system:
 
 ```text
-U1 package ownership and isolated consumption
--> U2 ordinary CLI and starter
--> U3 five-page browser-accepted proof
--> U4 maintenance comparison and advance/narrow/stop
--> U5 optional minimal Hyper Content adapter
+approved source truth
+-> Hyper Content semantic compiler
+-> autonomous generation and bounded repair
+-> versioned semantic state
+-> Hyper Site deterministic compiler
+-> static HTML + GenUI + task declarations
+-> remote agent/browser adapters
+-> receipts and field feedback
 ```
 
-Only U1 is unblocked.
+## Active hypothesis order
 
-## U1 scope
+```text
+H0 integrated proof
+-> H1 physical extraction
+-> H2 autonomous semantic generation
+-> H3 self-aware GenUI
+-> H4 remote bounded agent/browser execution
+-> H5 SDRT/GNN graph-intelligence comparisons
+-> H6 GPU/Zig/Wasm accelerated-kernel comparisons
+```
 
-- classify every `reference/src` file by one owner and role;
-- freeze positive and negative compiler fixtures;
-- move the compiler/renderer cluster into `hyper-site/src` without redesign;
-- build `hyper-site/dist` from package-owned source;
-- switch exports away from `reference/dist`;
-- make `reference/` consume Hyper Site;
-- prove two isolated `npm pack` consumers;
-- produce positive and negative parity evidence.
+H2-H6 are active end-state hypotheses, not permanently deferred work. They may begin bounded research fixtures after H1 but cannot bypass the compiler or become a second semantic authority.
 
-## U2-U4 proof
+## Next gate
 
-U2 requires create/dev/build/preview/inspect/local-publish with Node 20+ and no Hyper Content, model, GPU, database or external service.
-
-U3 requires one real five-page site, browser-visible assertions, route/link/metadata validation, automated accessibility scanning and manual review against direct controls.
-
-U4 freezes shared-fact, page-fact, design, retirement and invalid-change scenarios. Pass correctness requires zero missed required changes, no accepted invalid change and no accepted partial output after failure. The result must be `advance`, `narrow` or `stop`.
-
-## Incremental correctness
-
-The dependency index is a hypothesis. Every maintenance test freezes an expected affected set and measures both under-invalidation and over-invalidation.
-
-## Deferred work
-
-Until U4 records `advance`:
-
-- model-backed generation;
-- agent orchestration and task surfaces;
-- remote publication;
-- SDRT/custom graph languages;
-- GNN/GPU/Zig/Wasm promotion;
-- binary LLM prompting;
-- 10K publication;
-- enterprise claims.
+Repair only exact-head H0/H1 failures. On green, begin H2 with one approved real business repository, five complete pages and a 25-page noindex cohort.
 
 ## Active authorities
 
@@ -104,16 +83,11 @@ Until U4 records `advance`:
 - `AGENTS.md`
 - `CODEGRAPH.md`
 - `docs/README.md`
-- `docs/research/43-useful-framework-and-agent-first-pipeline-audit.md`
-- `docs/research/sources/2026-07-18-framework-agent-architecture.sources.json`
-- `docs/architecture/44-useful-framework-and-agent-first-target-architecture.md`
-- `docs/planning/45-depth-first-framework-and-agent-recovery-plan.md`
-- `docs/validation/46-useful-framework-and-agent-first-gates.md`
-
-Low-level documents 47-49 remain subordinate optional research.
+- `docs/planning/50-h0-h1-content-first-reinvention-program.md`
+- `memory/2026-07-19-0135-h0-h1-extraction-content-first-reset.md`
 
 ## Nonclaims
 
-No complete package extraction, normal framework workflow, five-page acceptance, maintenance advantage, complete incremental correctness, content-product value, agent runtime, scale advantage, SEO outcome, production readiness or business result is established.
+No autonomous generation quality, GenUI usefulness, remote task safety, SDRT/GNN advantage, GPU advantage, Zig/Wasm advantage, ranking, conversion, revenue or production readiness is established by H0/H1.
 
-PR #3 stays draft.
+PR #3 stays draft until measured gates and review justify otherwise.
