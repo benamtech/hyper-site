@@ -28,6 +28,13 @@
       "authority": "documentation lifecycle, read order, freshness and write protocol"
     },
     {
+      "id": "memory-index",
+      "path": "memory/MEMORY.md",
+      "kind": "memory-index",
+      "status": "active",
+      "authority": "durable current state, canonical taxonomy and next external gates"
+    },
+    {
       "id": "architecture-product-taxonomy",
       "path": "docs/architecture/52-product-taxonomy-and-runtime-boundaries.md",
       "kind": "architecture",
