@@ -50,9 +50,11 @@ const checkoutCommit = commit.stdoutTail.trim().split("\n").at(-1) ?? "unknown";
 const sourceCommit = resolveSourceCommit(checkoutCommit);
 const checks = [
   run("build-all", "npm", ["run", "build"]),
+  run("hyper-site-tests", "npm", ["--prefix", "hyper-site", "test"]),
   run("legacy-tests", "npm", ["run", "legacy:test"]),
   run("packed-consumers", "npm", ["run", "test:packed-consumers"]),
   run("validation-tests", "npm", ["run", "test:validation"]),
+  run("living-surface-mvp", "npm", ["run", "mvp:living-surface"]),
   run("compiler-limit-25", process.execPath, ["scripts/run-compiler-limit-test-v2.mjs", "--pages", "25", "--seed", `h0-h1-${sourceCommit.slice(0, 12)}`, "--output", "validation/reports/h0-h1-compiler-limit"]),
 ];
 
@@ -81,9 +83,9 @@ const inventoryIncomplete = inventoryRecords.filter((record) =>
 
 const structural = {
   publicEntrypointUsesPackageDist: indexText.includes("./dist/index.js") && !indexText.includes("../reference") && !indexText.includes("reference/dist"),
-  aggregateTypedEntrypointComplete: ["framework-core", "site-manifest", "browser-targets", "css-modern"].every((name) => typedIndexText.includes(`./${name}.js`)),
+  aggregateTypedEntrypointComplete: ["framework-core", "site-manifest", "browser-targets", "css-modern", "living-surface"].every((name) => typedIndexText.includes(`./${name}.js`)),
   referenceConsumesPackageDist: referenceWrappers.every((item) => item.text.includes("../../hyper-site/dist/")),
-  packageOwnsCompilerSource: ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts", "index.ts"].every((name) => {
+  packageOwnsCompilerSource: ["framework-core.ts", "site-manifest.ts", "browser-targets.ts", "css-modern.ts", "living-surface.ts", "index.ts"].every((name) => {
     try { return readFileSync(resolve(root, "hyper-site/src", name), "utf8").length > 100; } catch { return false; }
   }),
   inventoryStatusComplete: inventories.every((inventory) => inventory.status === "complete"),
@@ -94,8 +96,8 @@ const structural = {
 const h0Passed = checks.every((check) => check.passed);
 const h1Passed = h0Passed && Object.values(structural).every(Boolean);
 const report = {
-  schemaVersion: 2,
-  hypothesis: "H0 integration plus H1 compiler extraction",
+  schemaVersion: 3,
+  hypothesis: "H0 integration plus H1 compiler extraction with bounded H3 living-surface MVP",
   startedAt,
   completedAt: new Date().toISOString(),
   checkoutCommit,
@@ -116,15 +118,19 @@ const report = {
       incomplete: inventoryIncomplete.map((record) => record.path),
     },
   },
+  h3Mvp: {
+    passed: checks.find((check) => check.id === "living-surface-mvp")?.passed === true,
+    claim: "typed public/operator living-surface projections compile to deterministic static HTML with explicit agency and governance decisions",
+  },
   checks,
   nonclaims: [
-    "This does not prove a complete external create/dev/preview workflow.",
-    "This does not prove autonomous generation, remote runtime, GenUI, SDRT, GNN, GPU, Zig, or Wasm value.",
-    "Those remain first-class content-first end-state hypotheses with independent promotion gates.",
+    "This does not prove autonomous semantic generation quality.",
+    "This does not prove remote runtime or browser-task safety.",
+    "The continuous field is a deterministic presentation model; PDE, CSG, WebGPU, SDRT, GNN, GPU, Zig and Wasm advantages remain unproven.",
   ],
-  decision: h1Passed ? "advance-to-H2" : "repair-gate-failures-only",
+  decision: h1Passed ? "advance-to-H2-with-H3-mvp-substrate" : "repair-gate-failures-only",
 };
 writeFileSync(resolve(reportDir, "h0-h1-proof.json"), `${JSON.stringify(report, null, 2)}\n`);
-writeFileSync(resolve(reportDir, "h0-h1-proof.md"), `# H0/H1 measured proof\n\n- Source commit: \`${sourceCommit}\`\n- Checkout commit: \`${checkoutCommit}\`\n- H0: **${h0Passed ? "PASS" : "FAIL"}**\n- H1: **${h1Passed ? "PASS" : "FAIL"}**\n- Decision: **${report.decision}**\n\n## Structural checks\n\n${Object.entries(structural).map(([key, value]) => `- ${value ? "PASS" : "FAIL"}: ${key}`).join("\n")}\n\n## Inventory\n\n- Reference source files: ${referenceFiles.length}\n- Inventory records: ${inventoryRecords.length}\n- Missing: ${inventoryMissing.length}\n- Orphans: ${inventoryOrphans.length}\n- Duplicates: ${inventoryDuplicates.length}\n- Incomplete: ${inventoryIncomplete.length}\n\n## Command checks\n\n${checks.map((check) => `- ${check.passed ? "PASS" : "FAIL"}: \`${check.command}\` (${check.durationMs} ms)`).join("\n")}\n\n## Nonclaims\n\n${report.nonclaims.map((item) => `- ${item}`).join("\n")}\n`);
+writeFileSync(resolve(reportDir, "h0-h1-proof.md"), `# H0/H1 measured proof\n\n- Source commit: \`${sourceCommit}\`\n- Checkout commit: \`${checkoutCommit}\`\n- H0: **${h0Passed ? "PASS" : "FAIL"}**\n- H1: **${h1Passed ? "PASS" : "FAIL"}**\n- Living-surface MVP: **${report.h3Mvp.passed ? "PASS" : "FAIL"}**\n- Decision: **${report.decision}**\n\n## Structural checks\n\n${Object.entries(structural).map(([key, value]) => `- ${value ? "PASS" : "FAIL"}: ${key}`).join("\n")}\n\n## Inventory\n\n- Reference source files: ${referenceFiles.length}\n- Inventory records: ${inventoryRecords.length}\n- Missing: ${inventoryMissing.length}\n- Orphans: ${inventoryOrphans.length}\n- Duplicates: ${inventoryDuplicates.length}\n- Incomplete: ${inventoryIncomplete.length}\n\n## Command checks\n\n${checks.map((check) => `- ${check.passed ? "PASS" : "FAIL"}: \`${check.command}\` (${check.durationMs} ms)`).join("\n")}\n\n## Nonclaims\n\n${report.nonclaims.map((item) => `- ${item}`).join("\n")}\n`);
 console.log(JSON.stringify(report, null, 2));
 process.exit(h1Passed ? 0 : 1);
