@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "approval": {
+    "status": "approved-for-shadow-pilot",
+    "approvedBy": "business-owner-supplied-context",
+    "approvedAt": "2026-07-19T00:00:00.000Z",
+    "tenantId": "tenant:smile-a-mile-painting",
+    "limitations": [
+      "This corpus is approved for deterministic and shadow-connector testing only.",
+      "It does not authorize sending customer communications or publishing production content."
+    ]
+  },
+  "corpus": {
+    "id": "smile-a-mile-painting-core",
+    "version": "2026-07-19.1",
+    "baseUrl": "https://example.invalid/smile-a-mile-painting",
+    "evidence": [
+      {
+        "id": "e:business-profile",
+        "level": 4,
+        "summary": "Business-owner supplied company profile: Smile A Mile Painting is based in Bend, Oregon, has operated for more than 30 years, is licensed, insured and bonded, serves locations in Oregon and Washington, and travels within 60 miles of Bend."
+      }
+    ],
+    "facts": [
+      {
+        "id": "f:experience",
+        "statement": "Smile A Mile Painting has been in business for more than 30 years.",
+        "evidenceIds": ["e:business-profile"]
+      },
+      {
+        "id": "f:credentials",
+        "statement": "Smile A Mile Painting is licensed, insured and bonded.",
+        "evidenceIds": ["e:business-profile"]
+      },
+      {
+        "id": "f:service-area",
+        "statement": "Smile A Mile Painting is based in Bend, Oregon and travels within 60 miles of Bend.",
+        "evidenceIds": ["e:business-profile"]
+      },
+      {
+        "id": "f:regional-presence",
+        "statement": "Smile A Mile Painting has locations across Oregon and Washington.",
+        "evidenceIds": ["e:business-profile"]
+      }
+    ]
+  }
+}
