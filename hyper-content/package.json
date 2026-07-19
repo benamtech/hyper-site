@@ -1,6 +1,6 @@
 {
   "name": "@amtech/hyper-content",
-  "version": "0.3.0-alpha.0",
+  "version": "0.4.0-alpha.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -20,6 +20,10 @@
     "./durable-pilot": {
       "types": "./dist/durable-pilot.d.ts",
       "import": "./dist/durable-pilot.js"
+    },
+    "./production-runtime": {
+      "types": "./dist/production-runtime.d.ts",
+      "import": "./dist/production-runtime.js"
     }
   },
   "files": ["dist", "index.mjs", "README.md"],
