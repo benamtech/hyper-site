@@ -232,3 +232,7 @@ No irreversible connector should be enabled until those environment-specific tes
 ## Nonclaims
 
 The repository does not yet claim a deployed AI Employee, live autonomous publication, live browser execution, production credential custody, psychographic inference quality, PDE/CSG/WebGPU advantage, SDRT/GNN advantage or GPU/Zig/Wasm advantage.
+
+## Documentation system
+
+Documentation lifecycle and machine-readable authority are in `docs/README.md` and `docs/catalog.json`.
