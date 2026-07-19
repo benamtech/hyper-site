@@ -1,9 +1,11 @@
-// Hyper Content owns the content compiler and targets the public Hyper Site
+// Hyper Content owns semantic generation and targets the public Hyper Site
 // contract. The remaining reference/dist exports are an explicit compatibility
-// bridge until P1.5 physically migrates the legacy content compiler.
+// bridge while legacy content capabilities are migrated behind package-owned APIs.
 
 export * from "../hyper-site/index.mjs";
 export { adaptContentProgramSiteSource } from "./dist/content-program-adapter.js";
+export * from "./dist/semantic-generation.js";
+export * from "./dist/action-runtime.js";
 export { compileSite, compileSite as compileContentSite, packSite } from "../reference/dist/framework.js";
 export { compileContentProgramManifest } from "../reference/dist/content-program-adapter.js";
 
