@@ -9,9 +9,7 @@ import { fileURLToPath } from "node:url";
 const packageDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const tsc = join(packageDir, "node_modules", ".bin", "tsc");
 
-function run(command, args, options = {}) {
-  return execFileSync(command, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], ...options });
-}
+function run(command, args, options = {}) { return execFileSync(command, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], ...options }); }
 function packPackage(root) {
   const output = JSON.parse(run("npm", ["pack", "--json", "--pack-destination", root], { cwd: packageDir }));
   assert.equal(output.length, 1);
@@ -50,7 +48,7 @@ const second = compileSite(structuredClone(source));
 assert.equal(first.buildHash, second.buildHash);
 assert.equal(first.pages.length, 1);
 assert.match(first.pages[0].html, /Packed Hyper Site/);
-assert.match(first.sitemapXml, /https:\/\/clean-room\.example\//);
+assert.equal(first.sitemapXml.includes("https://clean-room.example/"), true);
 assert.deepEqual(first.dependencyIndex.get("e1"), ["home"]);
 console.log(JSON.stringify({ passed: true, buildHash: first.buildHash, pageHash: first.pages[0].sha256 }));
 `;
