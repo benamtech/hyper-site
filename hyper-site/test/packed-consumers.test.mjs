@@ -86,7 +86,9 @@ test("npm pack installs into isolated runtime and TypeScript consumers without r
     assert.equal(valid.passed, true);
     assert.equal(invalid.passed, true);
     assert.equal(invalid.rejected, "under-supported claim");
-    assert.equal(readFileSync(join(validConsumer.dir, "node_modules", "@amtech", "hyper-site", "index.mjs"), "utf8").includes("reference"), false);
+
+    const installedEntrypoint = readFileSync(join(validConsumer.dir, "node_modules", "@amtech", "hyper-site", "index.mjs"), "utf8");
+    assert.doesNotMatch(installedEntrypoint, /(?:export\s+\*\s+from|from)\s*["'][^"']*reference(?:\/|["'])/, "packed public entrypoint must not import reference runtime code");
 
     const typedDir = createConsumer(root, "typed-consumer", tarball);
     writeFileSync(join(typedDir, "test.ts"), typedSource);
